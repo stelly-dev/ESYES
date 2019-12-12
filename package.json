@@ -1,0 +1,11 @@
+{
+  "name": "esyes",
+  "version": "1.0.0",
+  "description": "website and studio for Boulder County's ESYES initiative. ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kelly Stratton",
+  "license": "ISC"
+}
