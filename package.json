@@ -2,10 +2,14 @@
   "name": "esyes",
   "version": "1.0.0",
   "description": "website and studio for Boulder County's ESYES initiative. ",
-  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "lerna run empty-cache && lerna run start --parallel"
   },
   "author": "Kelly Stratton",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "lerna": "^3.19.0"
+  },
+  "repository": "https://github.com/stelly-dev/ESYES.git",
+  "private": true
 }
