@@ -1,19 +1,22 @@
 export default {
-  name: 'page',
-  title: 'Page',
-  type: 'document',
-  liveEdit: false,
-  __experimental_actions: ['update', 'publish' /*, 'create', 'delete' */],
+  name: "page",
+  title: "Page",
+  type: "document",
   fields: [
     {
-      name: 'title',
-      title: 'Title',
-      type: 'string',
+      name: "pageName",
+      title: "Page Name",
+      type: "string"
     },
     {
-      name: 'body',
-      title: 'Body',
-      type: 'blockContent',
-    },
+      name: "content",
+      title: "Content",
+      type: "blockContent"
+    }
   ],
+  preview: {
+    select: {
+      title: "pageName"
+    }
+  }
 };
