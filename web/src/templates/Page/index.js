@@ -1,7 +1,6 @@
 import React from "react"
 import { graphql } from "gatsby"
-import Layout from './src/Containers/Layout; 
-
+import Layout from "../../Layout"
 
 export const query = graphql`
   query RootPageTemplateQuery($id: String!) {
@@ -16,7 +15,7 @@ export const query = graphql`
 const PageTemplate = props => {
   const { data, errors } = props
   const page = data && data.page
-  return <div>{page && page.pageName}</div>
+  return <Layout>{page && page.pageName}</Layout>
 }
 
 export default PageTemplate
