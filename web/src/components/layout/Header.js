@@ -126,7 +126,7 @@ const StyledNav = styled.nav`
 `
 
 const Search = () => {
-  const [searchTerm, setSearchTerm] = React.useState("")
+  //   const [searchTerm, setSearchTerm] = React.useState("")
 
   return (
     <FiSearch
@@ -153,7 +153,7 @@ const Nav = ({ links }) => (
   </StyledNav>
 )
 
-const Header = ({}) => {
+const Header = () => {
   return (
     <StyledHeader>
       <Container>

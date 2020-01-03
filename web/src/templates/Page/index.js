@@ -15,7 +15,12 @@ export const query = graphql`
 const PageTemplate = props => {
   const { data, errors } = props
   const page = data && data.page
-  return <Layout>{page && page.pageName}</Layout>
+  return (
+    <Layout>
+      {page && page.pageName}
+      {errors ? <pre>{JSON.stringify(errors, null, 2)}</pre> : null}
+    </Layout>
+  )
 }
 
 export default PageTemplate
