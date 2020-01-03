@@ -25,6 +25,10 @@ const CTA = styled.div`
     max-width: 50%;
     margin-bottom: 50px;
   }
+  > div {
+    display: flex;
+    justify-content: center;
+  }
 `
 // fundamnetal linear interpolation:
 // difference_1 = max_1 - min_1
@@ -93,17 +97,21 @@ const italicStyle = css`
 const marginBottom = margin => css`
   margin-bottom: ${margin};
 `
+const fw = weight => css`
+  font-weight: ${weight};
+`
 
 const P = styled.p`
   ${props => (props.small ? smallPStyle : "")};
   ${props => (props.normal ? normalPStyle : "")};
   ${props => (props.medium ? mediumPStyle : "")};
   ${props => (props.big ? bigPStyle : "")};
+  ${props => (props.size ? `font-size: ${props.size}` : "")};
   ${props => (props.italic ? italicStyle : "")};
   ${props => (props.center ? centerStyle : "")};
   ${props => (props.lineHeight ? props.lineHeight : "auto")};
-  ${props => (props.size ? `font-size: ${props.size}` : "")};
-  ${props => (props.mb ? marginBottom(props.mb) : "")}
+  ${props => (props.mb ? marginBottom(props.mb) : "")};
+  ${props => (props.fw ? fw(props.fw) : "")};
 `
 
 export const Home = () => (
@@ -113,10 +121,22 @@ export const Home = () => (
         <CTA>
           <h1>Improving Boulder County One Home at a Time</h1>
           <div>
-            <Button bg="primary" px={2} py={1} width={19} mr={1}>
+            <Button
+              bg="primary"
+              px={"2rem"}
+              py={"1rem"}
+              minWidth={"19rem"}
+              mr={"1rem"}
+            >
               DIY Improvements
             </Button>
-            <Button bg="secondary" px={2} py={1} width={19} ml={1}>
+            <Button
+              bg="secondary"
+              px={"2rem"}
+              py={"1rem"}
+              ml={"1rem"}
+              minWidth={"19rem"}
+            >
               Large Projects
             </Button>
           </div>
@@ -130,7 +150,7 @@ export const Home = () => (
           <br />
           <span>Decrease Your Carbon Footprint</span>
         </H1>
-        <P big italic mb={"3rem"}>
+        <P as="h2" big italic mb={"3rem"} fw="400">
           Assisting Boulder County residents, at no cost, in energy efficiency
           and renewable energy residential Improvements
         </P>

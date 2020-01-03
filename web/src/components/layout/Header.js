@@ -137,7 +137,14 @@ const Header = () => {
             <H1>
               <span>Free </span>Home Energy Advising
             </H1>
-            <Button to="/contact/" uppercase ml={2} bg="primary" px="4" py=".7">
+            <Button
+              to="/contact/"
+              uppercase
+              ml={"2rem"}
+              bg="primary"
+              px="4rem"
+              py=".7rem"
+            >
               Sign Up Today!
             </Button>
           </div>
