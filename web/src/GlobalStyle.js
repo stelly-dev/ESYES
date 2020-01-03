@@ -3,6 +3,9 @@ import { normalize } from "styled-normalize"
 require("typeface-lato")
 const GlobalStyle = createGlobalStyle`
     ${normalize}; 
+    :root {
+        font-size: 16px; 
+    }
     * {
         font-family: Lato;
         margin: 0; 
@@ -12,6 +15,7 @@ const GlobalStyle = createGlobalStyle`
     body {
         font-size: 1em; 
         line-height: 1.4em; 
+        height: 100%: 
     }
 `
 
