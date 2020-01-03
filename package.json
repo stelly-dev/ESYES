@@ -8,6 +8,7 @@
   "author": "Kelly Stratton",
   "license": "ISC",
   "devDependencies": {
+    "husky": "^3.1.0",
     "lerna": "^3.19.0"
   },
   "repository": "https://github.com/stelly-dev/ESYES.git",
