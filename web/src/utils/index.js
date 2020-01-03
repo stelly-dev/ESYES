@@ -56,3 +56,10 @@ export const DevWrapper = styled.div`
   z-index: 1;
   background-color: #e2eff0;
 `
+// fundamnetal linear interpolation:
+// difference_1 = max_1 - min_1
+// let x in [min_1, max_1]
+// then there is a y s.t. min_1 + difference_1 * y = x
+export const interpolateSizes = (min, max, minW, maxW) => css`
+  calc(${min}px + (${max} - ${min}) * ((100vw - ${minW}px) / (${maxW} - ${minW})))
+`

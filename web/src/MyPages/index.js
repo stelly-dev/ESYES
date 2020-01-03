@@ -3,12 +3,15 @@ import { Link } from "gatsby"
 import styled, { css } from "styled-components"
 import Container from "../components/containers/Container"
 import Button from "../components/pieces/Button"
+import HeroH1 from "../components/typography/HeroH1"
+import Hero from "../components/pieces/Hero"
 import bg from "../images/peopletalkingtoahomeenergyadvisor@2x.png"
 import comfortCTA from "../images/comfort365-cta@2x.png"
 import solarCTA from "../images/gosolar-cta@2x.png"
 import teslaCTA from "../images/electricvehicles-cta@2x.png"
 import effiCTA from "../images/virtualadvisor-cta@2x.png"
 import familyTalking from "../images/familytalkingtohomeadvisor@2x.png"
+import { interpolateSizes } from "../utils"
 
 const ImageBackground = styled.div`
   background-image: url(${props => props.image});
@@ -34,31 +37,6 @@ const CTA = styled.div`
 // difference_1 = max_1 - min_1
 // let x in [min_1, max_1]
 // then there is a y s.t. min_1 + difference_1 * y = x
-
-const interpolateSizes = (min, max, minW, maxW) => css`
-  calc(${min}px + (${max} - ${min}) * ((100vw - ${minW}px) / (${maxW} - ${minW})))
-`
-
-const HeroH1 = styled.h1`
-  text-align: center;
-  max-width: 50%;
-  margin: 3rem auto;
-  font-size: ${interpolateSizes(22, 25, 0, 350)};
-  line-height: ${interpolateSizes(30, 35, 0, 350)};
-  @media (min-width: 350px) {
-    font-size: ${interpolateSizes(25, 36, 350, 768)};
-    line-height: ${interpolateSizes(35, 51, 350, 768)};
-  }
-  @media (min-width: 1024px) {
-    font-size: ${interpolateSizes(36, 65, 1024, 2000)};
-    line-height: ${interpolateSizes(51, 82, 1024, 2000)};
-  }
-
-  @media (min-width: 2000px) {
-    font-size: 65px;
-    line-height: 85px;
-  }
-`
 
 const TextSection = styled.section``
 const H1 = styled.h1`
@@ -227,7 +205,7 @@ const StyledImageSection = styled.section`
 
   div {
     h1 {
-      text-align: left;
+      text-align: center;
       color: ${props => props.theme.colors.primary};
     }
     p {
@@ -260,33 +238,7 @@ const ImageSection = ({ left, title, img, children }) => (
 
 export const Home = () => (
   <>
-    <ImageBackground image={bg}>
-      <Container>
-        <CTA>
-          <HeroH1>Improving Boulder County One Home at a Time</HeroH1>
-          <div>
-            <Button
-              bg="primary"
-              px={"2rem"}
-              py={"1rem"}
-              minWidth={"19rem"}
-              mr={"1rem"}
-            >
-              DIY Improvements
-            </Button>
-            <Button
-              bg="secondary"
-              px={"2rem"}
-              py={"1rem"}
-              ml={"1rem"}
-              minWidth={"19rem"}
-            >
-              Large Projects
-            </Button>
-          </div>
-        </CTA>
-      </Container>
-    </ImageBackground>
+    <Hero />
     <TextSection>
       <Container col>
         <H1>
