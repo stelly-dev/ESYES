@@ -9,6 +9,10 @@ const GlobalStyle = createGlobalStyle`
         padding: 0; 
         box-sizing: border-box; 
     }
+    body {
+        font-size: 1em; 
+        line-height: 1.4em; 
+    }
 `
 
 export default GlobalStyle

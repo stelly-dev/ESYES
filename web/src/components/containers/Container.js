@@ -4,6 +4,7 @@ const Container = styled.div`
   max-width: ${props => props.theme.sizes.maxWidth[0]};
   margin: 0 auto;
   display: flex;
+  flex-direction: ${props => (props.col ? "column" : "row")};
   height: 100%;
   align-items: center;
   @media only screen and (min-width: 1024px) {

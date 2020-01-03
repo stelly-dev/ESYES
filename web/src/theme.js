@@ -18,7 +18,7 @@ export default {
     light: 300,
   },
   sizes: {
-    maxWidth: ["1400px", "90vw"],
+    maxWidth: ["100vw", "calc(1000vw / 11)", "90vw"],
   },
   logo: {
     width: [343, 396],
