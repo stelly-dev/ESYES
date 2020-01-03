@@ -4,6 +4,7 @@ import GlobalStyle from "./GlobalStyle"
 import theme from "./theme"
 import { PageWrapper } from "./components/containers/"
 import { Header, Footer } from "./components/layout/"
+import { Home } from "./pages"
 
 const Layout = ({ children }) => {
   return (
@@ -11,7 +12,8 @@ const Layout = ({ children }) => {
       <GlobalStyle />
       <PageWrapper>
         <Header />
-        {children}
+        <Home />
+        {/* {children} */}
         <Footer />
       </PageWrapper>
     </ThemeProvider>
