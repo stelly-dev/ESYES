@@ -83,6 +83,9 @@ const Button = styled(Link)`
   border: none;
   text-transform: ${props => (props.uppercase ? "uppercase" : "capitalize")};
   text-decoration: none;
+  :hover {
+    ${props => (props.hoverBg ? `background: ${props.hoverBg}` : "")}; 
+    ${props => (props.hoverCol ? `color: ${props.hoverCol}` : "")}; 
 `
 
 export default Button

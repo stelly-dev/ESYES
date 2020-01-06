@@ -144,6 +144,7 @@ const Header = () => {
               bg="primary"
               px="4rem"
               py=".7rem"
+              hoverBg=""
             >
               Sign Up Today!
             </Button>

@@ -13,31 +13,6 @@ import effiCTA from "../images/virtualadvisor-cta@2x.png"
 import familyTalking from "../images/familytalkingtohomeadvisor@2x.png"
 import { interpolateSizes } from "../utils"
 
-const ImageBackground = styled.div`
-  background-image: url(${props => props.image});
-  background-size: cover;
-  max-width: 100vw;
-  width: 100%;
-  overflow: hidden;
-  height: calc(100vh - 143px);
-  margin: 0 auto;
-`
-
-const CTA = styled.div`
-  margin-top: 18rem;
-  color: ${props => props.theme.colors.white};
-  width: 100%;
-  text-align: center;
-  > div {
-    display: flex;
-    justify-content: center;
-  }
-`
-// fundamnetal linear interpolation:
-// difference_1 = max_1 - min_1
-// let x in [min_1, max_1]
-// then there is a y s.t. min_1 + difference_1 * y = x
-
 const TextSection = styled.section``
 const H1 = styled.h1`
   font-weight: 300;
