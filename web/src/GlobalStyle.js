@@ -13,9 +13,13 @@ const GlobalStyle = createGlobalStyle`
         box-sizing: border-box; 
     }
     body {
+        width: 100%; 
         font-size: 1em; 
         line-height: 1.4em; 
-        height: 100%: 
+        height: 100%;
+        background: ${props => props.theme.colors.white}; 
+        max-width: 100%; 
+        overflow-x: hidden; 
     }
 `
 
