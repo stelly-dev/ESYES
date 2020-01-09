@@ -3,7 +3,8 @@ import { ThemeProvider } from "styled-components"
 import GlobalStyle from "./GlobalStyle"
 import theme from "./theme"
 import { PageWrapper } from "./components/containers/"
-import { Header, Footer } from "./components/layout/"
+import Footer from "./components/layout/Footer"
+import Header from "./components/layout/Header/"
 import { Home } from "./MyPages"
 
 const Layout = ({ children }) => {
