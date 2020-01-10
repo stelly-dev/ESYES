@@ -1,3 +1,4 @@
+import React from "react"
 import styled, { css } from "styled-components"
 import { Link } from "gatsby"
 
@@ -60,10 +61,15 @@ const minWidthStyle = minWidth => css`
   min-width: ${minWidth};
 `
 
-const Button = styled(Link)`
-  height: 0%; // needed to prevent flex grow
+const underlineStyle = css`
+  text-decoration: underline;
+`
+
+const Button = styled(({ hoverBg, hoverColor, ...props }) => (
+  <Link {...props} />
+))` 
+  height: 0%; 
   border-radius: 4px;
-  text-transform: ${props => (props.uppercase ? "uppercase" : "capitalize")};
   font: bold 22px/30px Lato;
   ${props => (props.px ? paddingX(props.px) : "")};
   ${props => (props.py ? paddingY(props.py) : "")};
@@ -78,14 +84,20 @@ const Button = styled(Link)`
   ${props => (props.mb ? marginDir("bottom", props.mb) : "")};
   ${props => (props.mt ? marginDir("top", props.mt) : "")};
   ${props => (props.minWidth ? minWidthStyle(props.minWidth) : "")};
+  ${props => (props.underline ? underlineStyle : "")}; 
   background-color: ${props => props.theme.colors[props.bg] || "red"};
   color: white;
   border: none;
-  text-transform: ${props => (props.uppercase ? "uppercase" : "capitalize")};
   text-decoration: none;
   :hover {
-    ${props => (props.hoverBg ? `background: ${props.hoverBg}` : "")}; 
-    ${props => (props.hoverCol ? `color: ${props.hoverCol}` : "")}; 
+    ${props =>
+      props.hoverBg
+        ? `background-color: ${props.theme.colors[props.hoverBg]}`
+        : ""}; 
+    ${props =>
+      props.hoverColor
+        ? `color: ${props.theme.colors[props.hoverColor]}`
+        : ""}; 
 `
 
 export default Button
