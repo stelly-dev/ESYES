@@ -13,7 +13,7 @@ const GlobalStyle = createGlobalStyle`
         box-sizing: border-box; 
     }
     body {
-        width: 100%; 
+        overflow-x: hidden; 
         font-size: 1em; 
         line-height: 1.4em; 
         height: 100%;

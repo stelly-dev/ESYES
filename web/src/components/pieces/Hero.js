@@ -13,24 +13,8 @@ const Hero = () => (
       <CTA>
         <HeroH1>Improving Boulder County One Home at a Time</HeroH1>
         <div>
-          <Button
-            bg="primary"
-            px={"2rem"}
-            py={"1rem"}
-            minWidth={"19rem"}
-            mr={"1rem"}
-          >
-            DIY Improvements
-          </Button>
-          <Button
-            bg="secondary"
-            px={"2rem"}
-            py={"1rem"}
-            ml={"1rem"}
-            minWidth={"19rem"}
-          >
-            Large Projects
-          </Button>
+          <Button>DIY Improvements</Button>
+          <Button>Large Projects</Button>
         </div>
       </CTA>
     </Container>

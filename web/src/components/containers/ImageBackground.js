@@ -6,8 +6,13 @@ const ImageBackground = styled.div`
   max-width: 100vw;
   width: 100%;
   overflow: hidden;
-  height: calc(100vh - 143px);
-  margin: 0 auto;
+  height: 321px;
+  @media only screen and (min-width: 768px) {
+    height: 420px;
+  }
+  @media only screen and (min-width: 1024px) {
+    height: calc(100vh - 143px);
+  }
 `
 
 export default ImageBackground

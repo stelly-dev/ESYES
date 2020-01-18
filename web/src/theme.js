@@ -1,4 +1,6 @@
-export default {
+const baseTheme = {
+  space: [0, 2, 4, 8, 16],
+  fontSizes: [14, 16, 18, 24, 32],
   colors: {
     primary: "#F9A33E",
     white: "#FFF",
@@ -8,9 +10,15 @@ export default {
     black: "#333333",
     gray: "#777777",
   },
+  radii: [0, 2, 4, 8],
+  breakPoints: ["350px", "768px", "1024px", "1500px"],
+}
+
+export default {
+  ...baseTheme,
   shadows: {
     small: "0px 3px 6px 0px rgba(0,0,0,1)",
-    large: "0 3px 6px 0px rgba(0,0,0,.16)",
+    large: "0px 3px 6px #00000029",
   },
   fontWeights: {
     bold: 600,
