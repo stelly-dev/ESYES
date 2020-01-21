@@ -11,7 +11,8 @@ export default {
     {
       name: "content",
       title: "Content",
-      type: "blockContent"
+      type: "array",
+      of: [{ type: "block" }, { type: "pageHero" }]
     }
   ],
   preview: {

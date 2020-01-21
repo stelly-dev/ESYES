@@ -7,6 +7,7 @@ import headerLinks from "./headerLinks";
 import button from "./button";
 import siteHeader from "./siteHeader";
 import internalLink from "./internalLink";
+import pageHero from "./pageHero";
 export default createSchema({
   name: "default",
   types: schemaTypes.concat([
@@ -15,6 +16,7 @@ export default createSchema({
     button,
     siteHeader,
     internalLink,
-    blockContent
+    blockContent,
+    pageHero
   ])
 });
