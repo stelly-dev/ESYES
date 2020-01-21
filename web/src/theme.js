@@ -11,7 +11,6 @@ const baseTheme = {
     gray: "#777777",
   },
   radii: [0, 2, 4, 8],
-  breakPoints: ["350px", "768px", "1024px", "1500px"],
 }
 
 export default {
@@ -27,6 +26,7 @@ export default {
   },
   sizes: {
     maxWidth: ["100vw", "calc(1000vw / 11)", "90vw"],
+    headerHeight: ["222px", "152px", "192px"],
   },
   logo: {
     width: [343, 396],
@@ -38,5 +38,5 @@ export default {
       maxHeight: [102, 118, 118],
     },
   },
-  breakpoints: ["350px", "768px", "1024px"],
+  breakpoints: ["350px", "600px", "1024px"],
 }

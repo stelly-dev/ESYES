@@ -12,5 +12,13 @@ export default () =>
             .menuItems(S.documentTypeList("page").getMenuItems())
             .filter("_type == $type && !defined(parents)")
             .params({ type: "page" })
+        ),
+      S.listItem()
+        .title("Header")
+        .child(
+          S.document()
+            .title("Header")
+            .schemaType("header")
+            .documentId("header")
         )
     ]);
