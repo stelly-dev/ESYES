@@ -5,7 +5,7 @@ import theme from "./theme"
 import Footer from "./components/layout/Footer"
 import Main from "./components/layout/Main"
 import Header from "./components/layout/Header/"
-import { Home } from "./MyPages"
+import Home from "./MyPages"
 
 const Layout = ({ children }) => {
   const [menuOpen, setMenuOpen] = useState(false)

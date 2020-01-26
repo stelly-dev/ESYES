@@ -20,14 +20,14 @@ async function createRootPages(graphql, actions, reporter) {
   pageEdges.forEach((edge, index) => {
     const { id, _rawContent, pageName } = edge.node
     const slug = slugify(pageName)
-    const path = slug === "Home-Page" ? "/" : `/${slug}`.toLowerCase()
+    const path = slug === "Home-Page" ? "/" : `/${slug}/`.toLowerCase()
 
     reporter.info(`Creating Page: ${path}`)
 
     createPage({
       path,
       component: require.resolve(`./src/templates/Page`),
-      context: { id },
+      context: { id, _rawContent },
     })
   })
 }
