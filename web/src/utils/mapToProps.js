@@ -1,3 +1,5 @@
+import slugify from "slugify"
+
 export function mapHeroToProps({
   backgroundImage,
   ctaBtnOne,
@@ -7,13 +9,15 @@ export function mapHeroToProps({
 }) {
   return {
     headline: heroText,
-    image: backgroundImage.asset.ref,
+    image: backgroundImage.asset["_id"],
     buttonOne: {
       text: ctaBtnOne.buttonText,
-      to: ctaBtnOne.to,
+      to: slugify(ctaBtnOne.buttonDestination.pageName).toLowerCase(),
     },
-    ctaBtnOne: ctaBtnOne,
-    ctaBtnTwo: ctaBtnTwo,
+    buttonTwo: {
+      text: ctaBtnTwo.buttonText,
+      to: slugify(ctaBtnTwo.buttonDestination.pageName).toLowerCase(),
+    },
     key: _key,
   }
 }

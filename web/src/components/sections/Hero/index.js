@@ -1,26 +1,32 @@
 import React from "react"
-import styled from "styled-components"
+import { getFluidGatsbyImage } from "gatsby-source-sanity"
 import Container from "../../containers/Container"
-
-const HeroTitle = styled.h1``
-const BackgroundImage = styled.div``
-
-// const query = graphql`
-//     query HeroQuery {
-//         sanityPageHero {
-
-//         }
-//     }
-// `
-
-const HeroSection = styled.section`
-  width: 100%;
-  height: 100vh;
-  background-image: url(${props => props.image});
-`
+import clientConfig from "../../../../client-config"
+import { HeroSection, HeroButton, StyledBackgroundImage } from "./styled"
 
 const Hero = props => {
-  return <img src={props.image} />
+  return (
+    <StyledBackgroundImage
+      fluid={getFluidGatsbyImage(
+        props.image,
+        { maxWidth: "2000px" },
+        clientConfig.sanity
+      )}
+      Tag="section"
+    >
+      <Container>
+        <h1>{props.headline}</h1>
+        <div>
+          <HeroButton to={props.buttonOne.to}>
+            {props.buttonOne.text}
+          </HeroButton>
+          <HeroButton secondary="true" to={props.buttonTwo.to}>
+            {props.buttonTwo.text}
+          </HeroButton>
+        </div>
+      </Container>
+    </StyledBackgroundImage>
+  )
 }
 
 export default Hero
