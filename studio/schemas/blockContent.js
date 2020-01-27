@@ -14,7 +14,44 @@ export default {
         { title: "H4", value: "h4" },
         { title: "Quote", value: "blockquote" }
       ],
-      lists: [{ title: "Bullet", value: "bullet" }]
+      lists: [{ title: "Bullet", value: "bullet" }],
+      marks: {
+        annotations: [
+          {
+            name: "internalLink",
+            type: "object",
+            title: "Internal link",
+            fields: [
+              {
+                name: "reference",
+                type: "reference",
+                title: "Reference",
+                to: [
+                  { type: "page" }
+                  // other types if needed
+                ]
+              }
+            ]
+          },
+          {
+            name: "link",
+            type: "object",
+            title: "External link",
+            fields: [
+              {
+                name: "href",
+                type: "url",
+                title: "URL"
+              },
+              {
+                title: "Open in new tab",
+                name: "blank",
+                type: "boolean"
+              }
+            ]
+          }
+        ]
+      }
     }
   ]
 };

@@ -8,6 +8,9 @@ import button from "./button";
 import siteHeader from "./siteHeader";
 import internalLink from "./internalLink";
 import pageHero from "./pageHero";
+import homePageText from "./homePageText";
+import circularCTA from "./circularCTA";
+import circleCTAList from "./circleCTAList";
 export default createSchema({
   name: "default",
   types: schemaTypes.concat([
@@ -17,6 +20,9 @@ export default createSchema({
     siteHeader,
     internalLink,
     blockContent,
-    pageHero
+    pageHero,
+    homePageText,
+    circularCTA,
+    circleCTAList
   ])
 });
