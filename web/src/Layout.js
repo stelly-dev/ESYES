@@ -19,7 +19,6 @@ const Layout = ({ children }) => {
 
       <Header isMenuOpen={menuOpen} toggleMenu={toggleMenu} />
       <Main isMenuOpen={menuOpen}>
-        <Home />
         {children}
         <Footer />
       </Main>
