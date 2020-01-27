@@ -30,8 +30,8 @@ export const StyledHeader = styled.header`
 `
 
 export const LogoContainer = styled(Link)`
-  @media only screen and (min-width: 300px) {
-    padding: 0 2rem;
+  @media only screen and (min-width: 320px) {
+    min-width: 200px;
   }
   @media only screen and (min-width: 375px) {
     padding: 0;
