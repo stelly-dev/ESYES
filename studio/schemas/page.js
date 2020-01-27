@@ -12,7 +12,12 @@ export default {
       name: "content",
       title: "Content",
       type: "array",
-      of: [{ type: "block" }, { type: "pageHero" }]
+      of: [
+        { type: "block" },
+        { type: "pageHero" },
+        { type: "homePageText" },
+        { type: "circleCTAList" }
+      ]
     }
   ],
   preview: {
