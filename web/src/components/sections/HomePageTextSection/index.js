@@ -3,11 +3,12 @@ import Container from "../../containers/Container"
 import { HPTextSection, H1, H2, TextLink } from "./styled"
 import BlockContent from "@sanity/block-content-to-react"
 import clientConfig from "../../../../client-config"
+import slugify from "slugify"
 
 const internalLink = ({ mark, children }) => {
   console.log("mark from internalLink", mark)
-  const { slug = {} } = mark
-  const to = `/${slug.current}/`
+  const { reference = {} } = mark
+  const to = `/${slugify(reference.pageName).toLowerCase()}/`
   return <TextLink to={to}>{children}</TextLink>
 }
 
