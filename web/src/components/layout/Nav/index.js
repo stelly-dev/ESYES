@@ -29,7 +29,7 @@ const Nav = ({ toggleMenu, isMenuOpen, navLinks, ctaButton, tagLine }) => {
           <BlockContent blocks={tagLine} />
         </TagLine>
         <Button
-          to={slugify(ctaButton.buttonDestination.pageName).toLowerCase()}
+          to={`/${slugify(ctaButton.buttonDestination.pageName).toLowerCase()}`}
         >
           {ctaButton.buttonText}
         </Button>
@@ -38,7 +38,9 @@ const Nav = ({ toggleMenu, isMenuOpen, navLinks, ctaButton, tagLine }) => {
         <NavList>
           {navLinks.map(link => (
             <NavListItem key={link.linkName}>
-              <Link to={slugify(link.linkDestination.pageName).toLowerCase()}>
+              <Link
+                to={`/${slugify(link.linkDestination.pageName).toLowerCase()}`}
+              >
                 {link.linkName}
               </Link>
             </NavListItem>
