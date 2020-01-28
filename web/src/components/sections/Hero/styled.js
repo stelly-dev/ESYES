@@ -9,6 +9,7 @@ export const StyledBackgroundImage = styled(BackgroundImage)`
   background-position: 25% 50%;
   height: 320px;
   position: relative;
+  z-index: 10;
   ${Container} {
     display: flex;
     justify-content: center;
@@ -19,6 +20,7 @@ export const StyledBackgroundImage = styled(BackgroundImage)`
     bottom: 50px;
     min-width: 100%;
   }
+
   h1 {
     color: white;
     text-align: center;
@@ -57,10 +59,13 @@ export const StyledBackgroundImage = styled(BackgroundImage)`
 `
 
 export const HeroButton = styled(Button)`
+  position: relative;
+  z-index: 10000;
   display: inline-flex;
   max-width: calc(156px - 2rem);
   margin: 0 0.2rem;
   font-size: 13px;
+  cursor: pointer;
   background: ${props =>
     props.secondary == "true"
       ? props.theme.colors.secondary
