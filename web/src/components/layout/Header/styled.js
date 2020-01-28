@@ -5,6 +5,8 @@ export const StyledHeader = styled.header`
   box-shadow: 0px 3px 6px #00000029;
   box-sizing: border-box;
   height: 222px;
+  position: relative;
+  z-index: 1;
   > div {
     box-sizing: border-box;
     display: flex;
