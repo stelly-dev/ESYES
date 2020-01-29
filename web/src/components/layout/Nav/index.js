@@ -11,6 +11,7 @@ import {
   NavCtaWrapper,
   TagLine,
   NavContentContainer,
+  StyledButton,
 } from "./styled"
 import MenuButton from "./MenuButton"
 import Search from "./Search"
@@ -28,11 +29,11 @@ const Nav = ({ toggleMenu, isMenuOpen, navLinks, ctaButton, tagLine }) => {
         <TagLine>
           <BlockContent blocks={tagLine} />
         </TagLine>
-        <Button
+        <StyledButton
           to={`/${slugify(ctaButton.buttonDestination.pageName).toLowerCase()}`}
         >
           {ctaButton.buttonText}
-        </Button>
+        </StyledButton>
       </NavCtaWrapper>
       <StyledNav>
         <NavList>

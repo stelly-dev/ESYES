@@ -1,5 +1,5 @@
 import styled from "styled-components"
-
+import Button from "../../pieces/Button"
 export const NavContainer = styled.div`
   display: flex;
   width: 100%;
@@ -15,6 +15,15 @@ export const NavContainer = styled.div`
 export const NavMenuButtonWrapper = styled.div`
   @media only screen and (min-width: 600px) {
     display: none;
+  }
+`
+
+export const StyledButton = styled(Button)`
+  border: 1px solid ${props => props.theme.colors.primary};
+  transition: all 250ms ease-in;
+  :hover {
+    background-color: white;
+    color: ${props => props.theme.colors.primary};
   }
 `
 
