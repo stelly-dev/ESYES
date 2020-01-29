@@ -18,7 +18,8 @@ export default {
         { type: "homePageText" },
         { type: "circleCTAList" },
         { type: "imageLeftSection" },
-        { type: "reviewSection" }
+        { type: "reviewSection" },
+        { type: "staffList" }
       ]
     }
   ],

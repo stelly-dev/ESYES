@@ -16,7 +16,8 @@ import imageLeftSection from "./imageLeftSection";
 import reviewSection from "./reviewSection";
 import homePageQuote from "./homePageQuote";
 import reviewCounter from "./reviewCounter";
-
+import staffCard from "./staffCard";
+import staffList from "./staffList";
 export default createSchema({
   name: "default",
   types: schemaTypes.concat([
@@ -34,7 +35,8 @@ export default createSchema({
     imageLeftSection,
     reviewSection,
     homePageQuote,
-
+    staffCard,
+    staffList,
     reviewCounter
   ])
 });
