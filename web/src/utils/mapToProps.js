@@ -1,5 +1,12 @@
 import slugify from "slugify"
 
+export function mapCircleCTASectionToProps({ _key, ctaList }) {
+  return {
+    ctaList: ctaList,
+    key: _key,
+  }
+}
+
 export function mapHeroToProps({
   backgroundImage,
   ctaBtnOne,
