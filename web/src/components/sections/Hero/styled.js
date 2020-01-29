@@ -66,10 +66,23 @@ export const HeroButton = styled(Button)`
   margin: 0 0.2rem;
   font-size: 13px;
   cursor: pointer;
+  transition: all 250ms ease-in;
+  border: 1px solid
+    ${props =>
+      props.secondary == "true"
+        ? props.theme.colors.secondary
+        : props.theme.colors.primary};
   background: ${props =>
     props.secondary == "true"
       ? props.theme.colors.secondary
       : props.theme.colors.primary};
+  :hover {
+    color: ${props =>
+      props.secondary == "true"
+        ? props.theme.colors.secondary
+        : props.theme.colors.primary};
+    background-color: white;
+  }
   @media only screen and (min-width: 350px) {
     max-width: 150px;
   }
