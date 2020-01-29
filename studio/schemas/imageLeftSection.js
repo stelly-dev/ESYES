@@ -14,19 +14,9 @@ export default {
       type: "string"
     },
     {
-      name: "title",
-      title: "Title",
-      type: "string"
-    },
-    {
       name: "features",
       title: "Features",
-      type: "array",
-      of: [
-        {
-          type: "featureText"
-        }
-      ]
+      type: "blockContent"
     }
   ]
 };
