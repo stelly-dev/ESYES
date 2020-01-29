@@ -6,11 +6,13 @@ import Hero from "../../components/sections/Hero/"
 import HomePageTextSection from "../../components/sections/HomePageTextSection/"
 import CircleCTASection from "../../components/sections/CircleCTASection/"
 import ImageLeftSection from "../../components/sections/ImageLeftSection/"
+import ReviewSection from "../../components/sections/ReviewSection/"
 import {
   mapHeroToProps,
   mapHomePageTextSectionToProps,
   mapCircleCTASectionToProps,
   mapImageLeftSectionToProps,
+  mapReviewSectionToProps,
 } from "../../utils/mapToProps"
 
 export const query = graphql`
@@ -42,8 +44,14 @@ const PageTemplate = props => {
                   key={section._key}
                 />
               )
-            case "pageHero":
-              return <Hero {...mapHeroToProps(section)} key={section._key} />
+            case "reviewSection":
+              return (
+                <ReviewSection
+                  {...mapReviewSectionToProps(section)}
+                  key={section._key}
+                />
+              )
+            // return <pre>{JSON.stringify(section, null, 2)}</pre>
             case "homePageText":
               return (
                 <HomePageTextSection
@@ -51,14 +59,16 @@ const PageTemplate = props => {
                   key={section._key}
                 />
               )
+
             case "imageLeftSection":
               return (
-                // <pre>{JSON.stringify(section, null, 2)}</pre>
                 <ImageLeftSection
                   {...mapImageLeftSectionToProps(section)}
                   key={section._key}
                 />
               )
+            case "pageHero":
+              return <Hero {...mapHeroToProps(section)} key={section._key} />
             default:
               return (
                 <div key={Math.random()}>

@@ -60,3 +60,21 @@ export function mapImageLeftSectionToProps({
     altText: altText,
   }
 }
+
+export function mapReviewSectionToProps({
+  altText,
+  button,
+  image,
+  quote,
+  reviewCounters,
+}) {
+  return {
+    altText: altText,
+    buttonText: button.buttonText,
+    buttonTo: `/${slugify(button.buttonDestination.pageName).toLowerCase()}/`,
+    image: image.asset["_id"],
+    quoteAuthor: quote.name,
+    quote: quote.quote,
+    reviewCounters: reviewCounters,
+  }
+}
