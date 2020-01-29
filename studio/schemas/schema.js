@@ -11,6 +11,9 @@ import pageHero from "./pageHero";
 import homePageText from "./homePageText";
 import circularCTA from "./circularCTA";
 import circleCTAList from "./circleCTAList";
+import featureText from "./featureText";
+import imageLeftSection from "./imageLeftSection";
+
 export default createSchema({
   name: "default",
   types: schemaTypes.concat([
@@ -23,6 +26,8 @@ export default createSchema({
     pageHero,
     homePageText,
     circularCTA,
-    circleCTAList
+    circleCTAList,
+    featureText,
+    imageLeftSection
   ])
 });

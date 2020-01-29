@@ -16,7 +16,8 @@ export default {
         { type: "block" },
         { type: "pageHero" },
         { type: "homePageText" },
-        { type: "circleCTAList" }
+        { type: "circleCTAList" },
+        { type: "imageLeftSection" }
       ]
     }
   ],
