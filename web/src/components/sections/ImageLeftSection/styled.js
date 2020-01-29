@@ -11,7 +11,7 @@ export const StyledSection = styled.section`
   ${Container} {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: 1fr auto;
     grid-gap: 40px;
   }
   @media only screen and (min-width: 720px) {
