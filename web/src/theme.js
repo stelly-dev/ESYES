@@ -38,5 +38,5 @@ export default {
       maxHeight: [102, 118, 118],
     },
   },
-  breakpoints: ["350px", "600px", "1024px"],
+  breakpoints: ["350px", "600px", "1310px"],
 }
