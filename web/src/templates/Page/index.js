@@ -7,12 +7,15 @@ import HomePageTextSection from "../../components/sections/HomePageTextSection/"
 import CircleCTASection from "../../components/sections/CircleCTASection/"
 import ImageLeftSection from "../../components/sections/ImageLeftSection/"
 import ReviewSection from "../../components/sections/ReviewSection/"
+import Block from "../../components/sections/Block/"
+import StaffList from "../../components/sections/StaffList/"
 import {
   mapHeroToProps,
   mapHomePageTextSectionToProps,
   mapCircleCTASectionToProps,
   mapImageLeftSectionToProps,
   mapReviewSectionToProps,
+  mapStaffListToProps,
 } from "../../utils/mapToProps"
 
 export const query = graphql`
@@ -69,6 +72,16 @@ const PageTemplate = props => {
               )
             case "pageHero":
               return <Hero {...mapHeroToProps(section)} key={section._key} />
+            case "block":
+              return <Block {...section} key={section._key} />
+            // return <pre>{JSON.stringify(section, null, 2)}</pre>
+            case "staffList":
+              return (
+                <StaffList
+                  {...mapStaffListToProps(section)}
+                  key={section._key}
+                />
+              )
             default:
               return (
                 <div key={Math.random()}>
