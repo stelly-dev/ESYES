@@ -44,3 +44,19 @@ export function mapHomePageTextSectionToProps({
     key: _key,
   }
 }
+
+export function mapImageLeftSectionToProps({
+  title,
+  image,
+  features,
+  altText,
+  _key,
+}) {
+  return {
+    title: title,
+    image: image.asset["_id"],
+    features: features,
+    key: _key,
+    altText: altText,
+  }
+}

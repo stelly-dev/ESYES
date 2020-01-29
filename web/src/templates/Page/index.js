@@ -5,10 +5,12 @@ import Layout from "../../Layout"
 import Hero from "../../components/sections/Hero/"
 import HomePageTextSection from "../../components/sections/HomePageTextSection/"
 import CircleCTASection from "../../components/sections/CircleCTASection/"
+import ImageLeftSection from "../../components/sections/ImageLeftSection/"
 import {
   mapHeroToProps,
   mapHomePageTextSectionToProps,
   mapCircleCTASectionToProps,
+  mapImageLeftSectionToProps,
 } from "../../utils/mapToProps"
 
 export const query = graphql`
@@ -46,6 +48,14 @@ const PageTemplate = props => {
               return (
                 <HomePageTextSection
                   {...mapHomePageTextSectionToProps(section)}
+                  key={section._key}
+                />
+              )
+            case "imageLeftSection":
+              return (
+                // <pre>{JSON.stringify(section, null, 2)}</pre>
+                <ImageLeftSection
+                  {...mapImageLeftSectionToProps(section)}
                   key={section._key}
                 />
               )
