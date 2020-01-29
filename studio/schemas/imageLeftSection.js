@@ -9,6 +9,11 @@ export default {
       type: "image"
     },
     {
+      name: "altText",
+      title: "Alt Text",
+      type: "string"
+    },
+    {
       name: "title",
       title: "Title",
       type: "string"
