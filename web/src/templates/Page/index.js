@@ -4,9 +4,11 @@ import { graphql } from "gatsby"
 import Layout from "../../Layout"
 import Hero from "../../components/sections/Hero/"
 import HomePageTextSection from "../../components/sections/HomePageTextSection/"
+import CircleCTASection from "../../components/sections/CircleCTASection/"
 import {
   mapHeroToProps,
   mapHomePageTextSectionToProps,
+  mapCircleCTASectionToProps,
 } from "../../utils/mapToProps"
 
 export const query = graphql`
@@ -31,6 +33,13 @@ const PageTemplate = props => {
           console.log(section)
           const { _type } = section
           switch (_type) {
+            case "circleCTAList":
+              return (
+                <CircleCTASection
+                  {...mapCircleCTASectionToProps(section)}
+                  key={section._key}
+                />
+              )
             case "pageHero":
               return <Hero {...mapHeroToProps(section)} key={section._key} />
             case "homePageText":
