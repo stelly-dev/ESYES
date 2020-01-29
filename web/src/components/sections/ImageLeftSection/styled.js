@@ -1,6 +1,8 @@
 import styled from "styled-components"
 import Container from "../../containers/Container"
 import Img from "gatsby-image"
+import { Link } from "gatsby"
+import { FaChevronRight } from "react-icons/fa"
 
 export const StyledImage = styled(Img)`
   width: 100%;
@@ -23,15 +25,20 @@ export const StyledSection = styled.section`
 `
 
 export const Article = styled.article`
-  h3 {
+  h3,
+  h4 {
     color: ${props => props.theme.colors.primary};
+  }
+  h4 {
+    font-style: italic;
+  }
+  h3 {
     font-size: 21px;
     line-height: 28px;
   }
   strong {
     color: ${props => props.theme.colors.secondary};
   }
-  p,
   strong {
     font-size: 16px;
     line-height: 25.6px;
@@ -40,10 +47,15 @@ export const Article = styled.article`
   div {
     margin-top: 33px;
   }
+  p {
+    line-height: 25.6px;
+    color: ${props => props.theme.colors.black};
+  }
   @media only screen and (min-width: 1310px) {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    margin-left: 42px;
     p,
     strong {
       font-size: 20px;
@@ -53,5 +65,29 @@ export const Article = styled.article`
       font-size: 45px;
       line-height: 58px;
     }
+    h4 {
+      font-size: 35px;
+      line-height: 57px;
+    }
   }
+`
+
+export const ArticleLink = styled(Link)`
+  text-decoration: none;
+  color: ${props => props.theme.colors.secondary};
+  font-weight: 800;
+  font-size: 18px;
+  line-height: 23px;
+  :visited {
+    color: ${props => props.theme.colors.secondary};
+  }
+  @media only screen and (min-width: 1310px) {
+    font-size: 27px;
+    line-height: 33px;
+  }
+`
+
+export const StyledChevron = styled(FaChevronRight)`
+  vertical-align: center;
+  padding-top: 4px;
 `

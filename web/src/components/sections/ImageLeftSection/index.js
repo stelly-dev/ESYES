@@ -2,9 +2,28 @@ import React from "react"
 import Img from "gatsby-image"
 import { getFluidGatsbyImage } from "gatsby-source-sanity"
 import Container from "../../containers/Container"
-import { StyledSection, StyledImage, Article } from "./styled"
+import {
+  StyledSection,
+  StyledImage,
+  Article,
+  ArticleLink,
+  StyledChevron,
+} from "./styled"
 import clientConfig from "../../../../client-config"
 import BlockContent from "@sanity/block-content-to-react"
+import slugify from "slugify"
+
+const internalLink = ({ mark, children }) => {
+  console.log("mark from internalLink", mark)
+  const { reference = {} } = mark
+  const to = `/${slugify(reference.pageName).toLowerCase()}/`
+  return (
+    <ArticleLink to={to}>
+      {children}
+      <StyledChevron />
+    </ArticleLink>
+  )
+}
 
 const ImageLeftSection = props => {
   return (
@@ -19,11 +38,14 @@ const ImageLeftSection = props => {
           alt={props.altText}
         />
         <Article>
-          <h3>{props.title}</h3>
           {props.features.map((feature, i) => (
             <div key={feature["_key"]}>
-              <strong>{feature.title}: </strong>
-              <BlockContent blocks={feature.description} />
+              {/* <pre>{JSON.stringify(feature, null, 2)}</pre> */}
+              <BlockContent
+                blocks={feature}
+                serializers={{ marks: { internalLink } }}
+                {...clientConfig.sanity}
+              />
             </div>
           ))}
         </Article>
