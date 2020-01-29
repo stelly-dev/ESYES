@@ -17,7 +17,8 @@ export default {
         { type: "pageHero" },
         { type: "homePageText" },
         { type: "circleCTAList" },
-        { type: "imageLeftSection" }
+        { type: "imageLeftSection" },
+        { type: "reviewSection" }
       ]
     }
   ],

@@ -13,7 +13,9 @@ import circularCTA from "./circularCTA";
 import circleCTAList from "./circleCTAList";
 import featureText from "./featureText";
 import imageLeftSection from "./imageLeftSection";
-
+import reviewSection from "./reviewSection";
+import homePageQuote from "./homePageQuote";
+import reviewCounter from "./reviewCounter";
 export default createSchema({
   name: "default",
   types: schemaTypes.concat([
@@ -28,6 +30,9 @@ export default createSchema({
     circularCTA,
     circleCTAList,
     featureText,
-    imageLeftSection
+    imageLeftSection,
+    reviewSection,
+    homePageQuote,
+    reviewCounter
   ])
 });
