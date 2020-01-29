@@ -21,6 +21,7 @@ export const StyledSection = styled.section`
       display: grid;
       grid-template-columns: 1fr 1fr;
       grid-template-rows: 1fr;
+      grid-gap: 40px;
     }
   }
 `
@@ -36,6 +37,7 @@ export const StyledImage = styled(Img)`
   }
   @media only screen and (min-width: 1310px) {
     max-height: none;
+    margin-left: 42px;
   }
 `
 
@@ -116,11 +118,14 @@ export const LeftQuote = styled(FaQuoteLeft)`
 
 export const CountersContainer = styled.div`
   margin-top: 145px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   @media only screen and (min-width: 1310px) {
-    display: flex;
     justify-content: space-between;
+    flex-direction: row;
     margin-top: calc(50% + 70px);
-    padding-right: 30px;
+    margin-right: -80px;
   }
 `
 
