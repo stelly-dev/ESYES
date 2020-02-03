@@ -3,6 +3,7 @@ import Img from "gatsby-image"
 export const StyledStaffList = styled.div`
   margin-bottom: 50px;
   padding-bottom: 100px;
+  margin-top: 73px;
 `
 
 export const BioContainer = styled.div`
@@ -31,8 +32,10 @@ export const BioContainer = styled.div`
 
 export const StyledStaffCard = styled.div`
   display: grid;
-  grid-template-columns: 180px 1fr;
+  grid-template-columns: 1fr;
+  /* grid-template-columns: 180px 1fr; */
   margin-top: 50px;
+  grid-gap: 10px;
 
   h3 {
     color: ${props => props.theme.colors.secondary};
@@ -44,14 +47,15 @@ export const StyledStaffCard = styled.div`
 `
 
 export const CircleContainer = styled.div`
-  width: 165px;
-  height: 165px;
+  width: 249px;
+  height: 249px;
   border-radius: 50%;
   background: transparent linear-gradient(90deg, #f9a33e 0%, #fee006 100%) 0% 0%
     no-repeat padding-box;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 0 auto;
   @media only screen and (min-width: 1310px) {
     width: 396px;
     height: 396px;
@@ -59,8 +63,8 @@ export const CircleContainer = styled.div`
 `
 
 export const StyledCircleImage = styled(Img)`
-  width: 149px;
-  height: 149px;
+  width: 225px;
+  height: 225px;
   border-radius: 50%;
   @media only screen and (min-width: 1310px) {
     width: 357px;

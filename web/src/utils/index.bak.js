@@ -11,7 +11,7 @@ import solarCTA from "../images/gosolar-cta@2x.png"
 import teslaCTA from "../images/electricvehicles-cta@2x.png"
 import effiCTA from "../images/virtualadvisor-cta@2x.png"
 import familyTalking from "../images/familytalkingtohomeadvisor@2x.png"
-import { interpolateSizes } from "../utils"
+import { interpolateSizes } from "./index.bak2."
 
 const TextSection = styled.section``
 const H1 = styled.h1`

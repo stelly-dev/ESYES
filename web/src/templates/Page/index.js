@@ -9,6 +9,8 @@ import ImageLeftSection from "../../components/sections/ImageLeftSection/"
 import ReviewSection from "../../components/sections/ReviewSection/"
 import Block from "../../components/sections/Block/"
 import StaffList from "../../components/sections/StaffList/"
+import Banner from "../../components/sections/Banner/"
+import SimpleCTA from "../../components/sections/SimpleCTA"
 import {
   mapHeroToProps,
   mapHomePageTextSectionToProps,
@@ -16,6 +18,8 @@ import {
   mapImageLeftSectionToProps,
   mapReviewSectionToProps,
   mapStaffListToProps,
+  mapBannerToProps,
+  mapSimpleCTAToProps,
 } from "../../utils/mapToProps"
 
 export const query = graphql`
@@ -40,6 +44,11 @@ const PageTemplate = props => {
           console.log(section)
           const { _type } = section
           switch (_type) {
+            case "banner":
+              return (
+                // <pre>{JSON.stringify(section, null, 2)}</pre>
+                <Banner {...mapBannerToProps(section)} key={section._key} />
+              )
             case "circleCTAList":
               return (
                 <CircleCTASection
@@ -54,6 +63,14 @@ const PageTemplate = props => {
                   key={section._key}
                 />
               )
+
+            case "simpleCTA":
+              return (
+                <SimpleCTA
+                  {...mapSimpleCTAToProps(section)}
+                  key={section._key}
+                />
+              )
             // return <pre>{JSON.stringify(section, null, 2)}</pre>
             case "homePageText":
               return (
@@ -62,7 +79,6 @@ const PageTemplate = props => {
                   key={section._key}
                 />
               )
-
             case "imageLeftSection":
               return (
                 <ImageLeftSection
@@ -74,7 +90,6 @@ const PageTemplate = props => {
               return <Hero {...mapHeroToProps(section)} key={section._key} />
             case "block":
               return <Block {...section} key={section._key} />
-            // return <pre>{JSON.stringify(section, null, 2)}</pre>
             case "staffList":
               return (
                 <StaffList

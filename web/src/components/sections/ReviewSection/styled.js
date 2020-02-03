@@ -12,6 +12,12 @@ export const ReviewButton = styled(Button)`
   @media only screen and (min-width: 1310px) {
     bottom: 30.5px;
   }
+  border: 1px solid ${props => props.theme.colors.secondary};
+  transition: all 250ms ease-in;
+  :hover {
+    background: white;
+    color: ${props => props.theme.colors.secondary};
+  }
 `
 
 export const StyledSection = styled.section`

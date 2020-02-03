@@ -12,6 +12,8 @@ import {
   TagLine,
   NavContentContainer,
   StyledButton,
+  DropDownContainer,
+  DropDown,
 } from "./styled"
 import MenuButton from "./MenuButton"
 import Search from "./Search"
@@ -19,7 +21,6 @@ import BlockContent from "@sanity/block-content-to-react"
 const slugify = require("slugify")
 
 const Nav = ({ toggleMenu, isMenuOpen, navLinks, ctaButton, tagLine }) => {
-  console.log(tagLine, "This is the tagline")
   return (
     <NavContainer>
       <NavMenuButtonWrapper>
@@ -38,7 +39,7 @@ const Nav = ({ toggleMenu, isMenuOpen, navLinks, ctaButton, tagLine }) => {
       <StyledNav>
         <NavList>
           {navLinks.map(link => (
-            <NavListItem key={link.linkName}>
+            <NavListItem key={link.pageName}>
               <Link
                 to={`/${slugify(link.linkDestination.pageName).toLowerCase()}`}
               >

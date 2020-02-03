@@ -78,8 +78,12 @@ export const ArticleLink = styled(Link)`
   font-weight: 800;
   font-size: 18px;
   line-height: 23px;
+  transition: color 250ms ease-in;
   :visited {
     color: ${props => props.theme.colors.secondary};
+  }
+  :hover {
+    color: ${props => props.theme.colors.primary};
   }
   @media only screen and (min-width: 1310px) {
     font-size: 27px;

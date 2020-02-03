@@ -4,6 +4,8 @@ import { graphql, StaticQuery } from "gatsby"
 import { StyledHeader, LogoContainer } from "./styled"
 import Nav from "../Nav"
 import Img from "gatsby-image"
+import HeadRoom from "react-headroom"
+import "./styles.css"
 
 const query = graphql`
   query HeaderQuery {
@@ -47,23 +49,25 @@ const Header = props => {
           )
         }
         return (
-          <StyledHeader>
-            <Container>
-              <LogoContainer to="/" alt="Link Home">
-                <Img
-                  fluid={data.sanityHeader.logo.asset.fluid}
-                  alt={data.sanityHeader.logoAlt}
+          <HeadRoom disableInlineStyles>
+            <StyledHeader>
+              <Container>
+                <LogoContainer to="/" alt="Link Home">
+                  <Img
+                    fluid={data.sanityHeader.logo.asset.fluid}
+                    alt={data.sanityHeader.logoAlt}
+                  />
+                </LogoContainer>
+                <Nav
+                  tagLine={data.sanityHeader._rawTagLine}
+                  ctaButton={data.sanityHeader.ctaBtn}
+                  isMenuOpen={isMenuOpen}
+                  toggleMenu={toggleMenu}
+                  navLinks={data.sanityHeader.headerLinks.linkList}
                 />
-              </LogoContainer>
-              <Nav
-                tagLine={data.sanityHeader._rawTagLine}
-                ctaButton={data.sanityHeader.ctaBtn}
-                isMenuOpen={isMenuOpen}
-                toggleMenu={toggleMenu}
-                navLinks={data.sanityHeader.headerLinks.linkList}
-              />
-            </Container>
-          </StyledHeader>
+              </Container>
+            </StyledHeader>
+          </HeadRoom>
         )
       }}
     />

@@ -34,9 +34,11 @@ export default {
   },
   variants: {
     headerLogo: {
-      maxWidth: [343, 396, 396],
-      maxHeight: [102, 118, 118],
+      maxWidth: [343, 343, 343, 396, 396, 396],
+      maxHeight: [102, 102, 102, 118, 118, 118],
     },
   },
-  breakpoints: ["350px", "600px", "1310px"],
+  fonts: {},
+  fontSizes: {},
+  breakpoints: ["350px", "600px", "992px", "1200px", "1600px", "2000px"],
 }

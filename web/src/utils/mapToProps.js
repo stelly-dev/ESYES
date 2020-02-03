@@ -71,3 +71,32 @@ export function mapReviewSectionToProps({
     reviewCounters: reviewCounters,
   }
 }
+
+export function mapBlockContentToProps(props) {
+  return props
+}
+
+export function mapStaffListToProps({ _key, members }) {
+  return {
+    key: _key,
+    members: members,
+  }
+}
+
+export function mapBannerToProps({ _key, asset }) {
+  return {
+    key: _key,
+    image: asset["_id"],
+  }
+}
+
+export function mapSimpleCTAToProps({ _key, content, ctaButton }) {
+  return {
+    key: _key,
+    content: content,
+    buttonTo: `/${slugify(
+      ctaButton.buttonDestination.pageName
+    ).toLowerCase()}/`,
+    buttonText: ctaButton.buttonText,
+  }
+}

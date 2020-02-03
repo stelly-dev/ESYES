@@ -18,6 +18,8 @@ import homePageQuote from "./homePageQuote";
 import reviewCounter from "./reviewCounter";
 import staffCard from "./staffCard";
 import staffList from "./staffList";
+import banner from "./banner";
+import simpleCTA from "./simpleCTA";
 export default createSchema({
   name: "default",
   types: schemaTypes.concat([
@@ -37,6 +39,8 @@ export default createSchema({
     homePageQuote,
     staffCard,
     staffList,
-    reviewCounter
+    reviewCounter,
+    banner,
+    simpleCTA
   ])
 });

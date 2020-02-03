@@ -1,5 +1,4 @@
 import styled, { css } from "styled-components"
-
 export const clearfix = css`
   ::after {
     content: "";
