@@ -6,6 +6,7 @@ import {
   StyledContactForm,
   ContactFormSection,
   Input,
+  PrivacyLink,
 } from "./styled"
 
 const useInput = (placeHolder, isRequired = false) => {
@@ -108,6 +109,9 @@ const ContactForm = () => {
           <Input type="submit" value="Contact EnergySmart" />
         </StyledContactForm>
       </Container>
+      <PrivacyLink href="https://www.bouldercounty.org/privacy-policy/">
+        Privacy Policy
+      </PrivacyLink>
     </ContactFormSection>
   )
 }

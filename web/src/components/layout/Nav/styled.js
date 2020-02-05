@@ -20,11 +20,19 @@ export const NavMenuButtonWrapper = styled.div`
 `
 
 export const StyledButton = styled(Button)`
+  font-size: 18px !important;
   border: 1px solid ${props => props.theme.colors.primary};
   transition: all 250ms ease-in;
   :hover {
     background-color: white;
     color: ${props => props.theme.colors.primary};
+  }
+  @media only screen and (min-width: 1600px) {
+    font-size: 20px;
+  }
+
+  @media only screen and (min-width: 2000px) {
+    font-size: 22px;
   }
 `
 
@@ -32,9 +40,17 @@ export const StyledNav = styled.nav`
   @media only screen and (min-width: 600px) {
     width: 75px;
   }
-  @media only screen and (min-width: 1650px) {
+  @media only screen and (min-width: 1200px) {
     width: 100%;
-    max-width: 1105px;
+    max-width: 800px;
+  }
+
+  @media only screen and (min-width: 1600px) {
+    max-width: 900px;
+  }
+
+  @media only screen and (min-width: 2000px) {
+    max-width: 1310px;
   }
 `
 
@@ -54,7 +70,7 @@ export const NavList = styled.ul`
     justify-content: space-between;
     align-items: center;
   }
-  @media only screen and (min-width: 1650px) {
+  @media only screen and (min-width: 1200px) {
     li:not(:nth-last-child(-n + 2)) {
       display: block;
     }
@@ -68,7 +84,7 @@ export const NavListItem = styled.li`
   a {
     color: ${props => props.theme.colors.black};
     text-decoration: none;
-    font-size: 22px;
+    font-size: 18px;
     position: relative;
   }
   a:visited {
@@ -89,16 +105,36 @@ export const NavListItem = styled.li`
   a:hover:after {
     width: 100%;
   }
+
+  @media only screen and (min-width: 1600px) {
+    a {
+      font-size: 20px;
+    }
+  }
+
+  @media only screen and (min-width: 2000px) {
+    a {
+      font-size: 22px;
+    }
+  }
 `
 export const TagLine = styled.div`
   display: none;
-  @media only screen and (min-width: 1650px) {
+  @media only screen and (min-width: 1200px) {
     display: block;
+    font-size: 18px;
+  }
+  @media only screen and (min-width: 1600px) {
+    font-size: 20px;
+  }
+
+  @media only screen and (min-width: 2000px) {
+    font-size: 22px;
   }
 `
 
 export const NavCtaWrapper = styled.div`
-  @media only screen and (min-width: 1650px) {
+  @media only screen and (min-width: 1200px) {
     display: flex;
     align-items: center;
     font-size: 27px;

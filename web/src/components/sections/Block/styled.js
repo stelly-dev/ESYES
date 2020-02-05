@@ -3,16 +3,29 @@ import { Link } from "gatsby"
 
 export const TextLink = styled(Link)``
 
-export const BlockSection = styled.section`
+export const BlockSection = styled.div`
+  /* margin-bottom: 0 ;
+  padding-top: 0 ;
+  margin-top: 0 ;  */
+  :first-of-type {
+    margin-top: 50px ; 
+  }
+
+  @media only screen and (min-width: 1200px){
+    :first-of-type {
+      margin-top: 100px ; 
+    }
+  }
+
   color: ${props => props.theme.colors.black};
-  font-size: 16px; 
+  font-size: 18px; 
   ul {
     list-style: none; 
     margin-left: 3ch; 
   }
   ul li:before {
 
-  content:"•"; font-size:8px;
+  content:"·"; 
   margin-right: 1ch; 
   padding-bottom: 200px;  
   vertical-align: center; 

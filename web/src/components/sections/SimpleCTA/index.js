@@ -1,12 +1,14 @@
 import React from "react"
-import { SimpleCTAContainer, SimpleCTASection } from "./styled"
+import { SimpleCTAContainer, SimpleCTASection, StyledButton } from "./styled"
 import Button from "../../pieces/Button"
-
+import Container from "../../containers/Container"
 const SimpleCTA = props => (
-  <SimpleCTAContainer>
-    <SimpleCTASection>{props.content}</SimpleCTASection>
-    <Button to={props.buttonTo}>{props.buttonText}</Button>
-  </SimpleCTAContainer>
+  <Container>
+    <SimpleCTAContainer>
+      <SimpleCTASection>{props.content}</SimpleCTASection>
+      <StyledButton to={props.buttonTo}>{props.buttonText}</StyledButton>
+    </SimpleCTAContainer>
+  </Container>
 )
 
 export default SimpleCTA

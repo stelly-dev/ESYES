@@ -20,47 +20,95 @@ const query = graphql`
   }
 `
 const LogoContainer = styled(Link)`
+  box-sizing: border-box;
   display: block;
+  max-width: 343px;
   margin: 0 auto;
-  height: 102px;
-  border: 1px solid red;
-  min-width: 320px;
-  max-width: 543px;
-  width: 100%;
+  margin-bottom: 50px;
+  @media only screen and (min-width: 600px) {
+    margin-right: auto;
+    * {
+      display: block;
+      height: 102px;
+      width: 343px;
+      overflow: hidden;
+    }
+  }
 `
 
 const StyledFooter = styled.footer`
-  height: 620px;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr 1fr;
   margin-top: 50px;
-  @media only screen and (min-width: 1310px) {
-    margin-top: 100px;
-  }
 `
 const TopFooter = styled.section`
+  padding: 50px 0 44px 0;
   background-color: ${props => props.theme.colors.black};
-  ${Container} {
-    height: 100%;
-    border: 1px solid red;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  color: white;
+  @media only screen and (min-width: 600px) {
+    ${Container} {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      align-items: center;
+    }
   }
 `
 
-const BottomFooter = styled.section``
-
-const CTAContainer = styled.div``
-
-const Title = styled.h5`
-  text-decoration: underline;
-  text-transform: uppercase;
-  font-weight: 700;
+const BottomFooter = styled.section`
+  text-align: center;
+  padding: 47px 0 41px 0;
+  color: ${props => props.theme.colors.secondary};
+  font-weight: bold;
+  div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    span {
+      padding: 0 0.7ch;
+    }
+  }
+  a {
+    text-transform: uppercase;
+    color: ${props => props.theme.colors.secondary};
+    font-size: 22px;
+    line-height: 33px;
+    font-weight: bold;
+    text-decoration: none;
+  }
+  p {
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 25.6px;
+    color: ${props => props.theme.colors.black};
+    padding-top: 25px;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
 `
 
-const StyledPhoneLogo = styled(FaPhone)``
+const CTAContainer = styled.div`
+  p:first-of-type {
+    padding: 20px 0;
+    font-size: 22px;
+    line-height: 33px;
+  }
+  p:last-of-type {
+    font-size: 35px;
+    line-height: 45px;
+  }
+  grid-column: 3 / span 1;
+`
+
+const Title = styled.a`
+  font-size: 27px;
+  line-height: 33px;
+  text-transform: uppercase;
+  text-decoration: underline;
+  font-weight: bold;
+`
+
+const StyledPhoneLogo = styled(FaPhone)`
+  transform: scaleX(-1);
+  font-size: 24px;
+`
 
 const Footer = () => {
   return (
@@ -85,11 +133,23 @@ const Footer = () => {
                 <CTAContainer>
                   <Title>Get In Touch</Title>
                   <p>Boulder County Energy Advisers</p>
-                  <StyledPhoneLogo /> <p>303-544-1000</p>
+                  <p>
+                    {" "}
+                    <StyledPhoneLogo /> 303-544-1000
+                  </p>
                 </CTAContainer>
               </Container>
             </TopFooter>
-            <BottomFooter></BottomFooter>
+            <BottomFooter>
+              <div>
+                <Link>CONTACT </Link>
+                <span>{" | "}</span> <Link> SITE MAP</Link>
+              </div>
+              <p>
+                Copyright © 2019. Boulder County EnergySmart. All Rights
+                Reserved. Privacy Policy and Legal Information
+              </p>
+            </BottomFooter>
           </StyledFooter>
         )
       }}

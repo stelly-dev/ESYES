@@ -6,18 +6,22 @@ import { FaChevronRight } from "react-icons/fa"
 
 export const StyledImage = styled(Img)`
   width: 100%;
+  max-height: 275px;
+  @media only screen and (min-width: 992px) {
+    max-height: 600px;
+    padding-top: calc(770 / 600);
+  }
 `
 
 export const StyledSection = styled.section`
-  margin-top: 50px;
   ${Container} {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr auto;
-    grid-gap: 40px;
   }
-  @media only screen and (min-width: 720px) {
+  @media only screen and (min-width: 600px) {
     ${Container} {
+      grid-gap: 40px;
       grid-template-columns: 1fr 1fr;
       grid-template-rows: 1fr;
     }
@@ -47,6 +51,11 @@ export const Article = styled.article`
   div {
     margin-top: 33px;
   }
+  @media only screen and (min-width: 600px) {
+    div:first-of-type {
+      margin-top: 0px;
+    }
+  }
   p {
     line-height: 25.6px;
     color: ${props => props.theme.colors.black};
@@ -58,15 +67,15 @@ export const Article = styled.article`
     margin-left: 42px;
     p,
     strong {
-      font-size: 20px;
-      line-height: 34px;
+      font-size: 18px;
+      line-height: 1.7;
     }
     h3 {
-      font-size: 45px;
+      font-size: 31px;
       line-height: 58px;
     }
     h4 {
-      font-size: 35px;
+      font-size: 25px;
       line-height: 57px;
     }
   }
@@ -75,7 +84,7 @@ export const Article = styled.article`
 export const ArticleLink = styled(Link)`
   text-decoration: none;
   color: ${props => props.theme.colors.secondary};
-  font-weight: 800;
+  font-weight: bold;
   font-size: 18px;
   line-height: 23px;
   transition: color 250ms ease-in;
@@ -86,7 +95,7 @@ export const ArticleLink = styled(Link)`
     color: ${props => props.theme.colors.primary};
   }
   @media only screen and (min-width: 1310px) {
-    font-size: 27px;
+    font-size: 18px;
     line-height: 33px;
   }
 `

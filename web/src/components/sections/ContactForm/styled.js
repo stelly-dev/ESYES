@@ -41,7 +41,7 @@ export const StyledContactForm = styled.form`
     }
   }
   input[type="submit"] {
-    max-width: 270px;
+    max-width: 270px !important;
     height: 60px;
     background-color: ${props => props.theme.colors.secondary};
     border: 1px solid ${props => props.theme.colors.secondary};
@@ -49,6 +49,8 @@ export const StyledContactForm = styled.form`
     transition: all 200ms ease-in;
     margin: 0 auto;
     margin-top: 40px;
+    align-self: center;
+
     cursor: pointer;
     :hover {
       background-color: white;
@@ -89,8 +91,7 @@ export const StyledContactForm = styled.form`
 
 export const ContactFormSection = styled.section`
   border-top: 3px solid ${props => props.theme.colors.primary};
-  padding-top: 42.5px;
-  margin-top: 42.6px;
+  margin-top: 50.6px;
 `
 
 export const Brand = () => (
@@ -122,4 +123,14 @@ export const Title = styled.h1`
   @media only screen and (min-width: 1310px) {
     font-size: 65px;
   }
+`
+
+export const PrivacyLink = styled.a`
+  color: ${props => props.theme.colors.gray};
+  font-size: 14px;
+  text-align: center;
+  margin: 0 auto;
+  width: 100%;
+  display: block;
+  margin-top: 10px;
 `

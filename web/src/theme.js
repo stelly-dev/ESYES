@@ -26,7 +26,7 @@ export default {
   },
   sizes: {
     maxWidth: ["100vw", "calc(1000vw / 11)", "90vw"],
-    headerHeight: ["222px", "152px", "192px"],
+    headerHeight: ["222px", "152px", "192px", "192px", "192px", "192px"],
   },
   logo: {
     width: [343, 396],

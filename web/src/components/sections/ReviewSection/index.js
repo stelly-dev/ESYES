@@ -11,7 +11,7 @@ import {
   ContentWrapper,
   CountersContainer,
   QuoteContainer,
-} from "./styled"
+} from "./styled.js"
 import Counter from "./Counter"
 import { getFluidGatsbyImage } from "gatsby-source-sanity"
 import clientConfig from "../../../../client-config"
@@ -27,29 +27,27 @@ const ReviewSection = props => (
         )}
         alt={props.altText}
       />
-      <ContentWrapper>
-        <BlockQuote>
-          <LeftQuote />
-          <QuoteContainer>
-            <BlockContent blocks={props.quote} />
-            <QuoteFooter>{props.quoteAuthor}</QuoteFooter>
-            <ReviewButton to={props.buttonTo}>{props.buttonText}</ReviewButton>
-          </QuoteContainer>
-        </BlockQuote>
-        <CountersContainer>
-          {props.reviewCounters.map((counter, i) => {
-            return (
-              <Counter
-                key={counter["_key"]}
-                prefix={counter.numberType === "DollarValue" ? "$" : ""}
-                value={counter.counter}
-                title={counter.title}
-              />
-              // <pre>{JSON.stringify(counter, null, 2)}</pre>
-            )
-          })}
-        </CountersContainer>
-      </ContentWrapper>
+      <BlockQuote>
+        <LeftQuote />
+        <QuoteContainer>
+          <BlockContent blocks={props.quote} />
+          <QuoteFooter>{props.quoteAuthor}</QuoteFooter>
+        </QuoteContainer>
+        <ReviewButton to={props.buttonTo}>{props.buttonText}</ReviewButton>
+      </BlockQuote>
+      <CountersContainer>
+        {props.reviewCounters.map((counter, i) => {
+          return (
+            <Counter
+              key={counter["_key"]}
+              prefix={counter.numberType === "DollarValue" ? "$" : ""}
+              value={counter.counter}
+              title={counter.title}
+            />
+            // <pre>{JSON.stringify(counter, null, 2)}</pre>
+          )
+        })}
+      </CountersContainer>
     </Container>
   </StyledSection>
 )

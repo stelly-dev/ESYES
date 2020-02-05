@@ -1,13 +1,13 @@
-.headroom {
+/* .headroom {
   top: 0;
   left: 0;
   right: 0;
   z-index: 2000;
 }
 .headroom--unfixed {
-  position: relative;
-  /* transform: translateY(0); */
-}
+  position: relative; */
+/* transform: translateY(0); */
+/* }
 .headroom--scrolled {
   transition: transform 200ms ease-in-out;
 }
@@ -21,13 +21,13 @@
 .headroom.headroom--unpinned header {
   height: 120px;
   transition: all 250ms ease-in;
-}
+} */
 
-@media only screen and (min-width: 1310px) {
+/* @media only screen and (min-width: 1310px) {
   .headroom.headroom--unpinned header {
     height: 140px;
   }
   .headroom.headroom--unpinned header div:first-of-type > a:first-of-type {
     margin-top: -10px;
   }
-}
+} */

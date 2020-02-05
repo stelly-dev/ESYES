@@ -14,7 +14,6 @@ export const HPTextSection = styled.section`
     margin-top: 43px;
   }
   @media only screen and (min-width: 1310px) {
-    margin-top: 95px;
     font-size: 20px;
     line-height: 34px;
     max-width: 1390px;

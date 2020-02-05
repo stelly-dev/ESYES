@@ -46,7 +46,10 @@ export const LogoContainer = styled(Link)`
   max-height: 102px;
   min-height: 102px;
   min-width: 343px;
-  @media only screen and (min-width: 1310px) {
+  @media only screen and (min-width: 1200px) {
+    max-width: 300px;
+  }
+  @media only screen and (min-width: 1400px) {
     max-width: 396px;
     max-height: 118px;
     margin-right: 50px;

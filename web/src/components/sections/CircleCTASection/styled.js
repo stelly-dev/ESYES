@@ -12,11 +12,10 @@ export const CircleLink = styled(Link)`
 `
 
 export const CircleSection = styled.section`
-  margin-top: 50px;
   ${Container} {
     display: grid;
-    grid-template-columns: 165px 165px;
-    grid-template-rows: 165px 165px;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
     grid-gap: 12px;
     text-align: center;
     justify-content: center;
@@ -53,11 +52,16 @@ export const CircleContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  ::after {
+    content: "";
+    padding-bottom: 100%;
+  }
 `
 
 export const CircleBackgroundImage = styled(BackgroundImage)`
-  width: 150px;
-  height: 150px;
+  width: calc(100% - 20px);
+  height: calc(100% - 20px);
+  border-radius: 50%;
   color: white;
   div {
     width: 100%;
@@ -89,26 +93,33 @@ export const CircleBackgroundImage = styled(BackgroundImage)`
   @media only screen and (min-width: 720px) {
     width: calc(100% - 20px);
     height: calc(100% - 20px);
+    h1 {
+      font-size: 2vw;
+      line-height: 1.8;
+    }
+    p {
+      font-size: 1.4vw;
+    }
   }
   @media only screen and (min-width: 1310px) {
     max-width: 358px;
     max-height: 358px;
     h1 {
-      font-size: 2.4vw;
+      font-size: calc(2.4vw - 4px);
       line-height: 52px;
     }
     p {
-      font-size: 1.5vw;
-      line-height: 27px;
+      font-size: calc(1.5vw - 4px);
+      line-height: 1.8;
     }
   }
   @media only screen and (min-width: 2000px) {
     h1 {
-      font-size: 42px;
+      font-size: 38px;
       line-height: 52px;
     }
     p {
-      font-size: 22px;
+      font-size: 18px;
       line-height: 27px;
     }
   }
