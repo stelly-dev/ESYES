@@ -9,9 +9,11 @@ export default {
       title: "Content"
     },
     {
-      type: "button",
-      title: "CTA Button",
-      name: "ctaButton"
+      type: "array",
+      title: "CTA Buttons",
+      name: "ctaButtons",
+      description: "Add up to two buttons",
+      of: [{ type: "button" }]
     }
   ]
 };

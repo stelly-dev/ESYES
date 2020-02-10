@@ -79,6 +79,19 @@ export default {
                     type: "boolean"
                   }
                 ]
+              },
+              {
+                name: "chevronLink",
+                type: "object",
+                title: "Chevron Link",
+                fields: [
+                  {
+                    name: "reference",
+                    type: "reference",
+                    title: "Reference",
+                    to: [{ type: "page" }]
+                  }
+                ]
               }
             ]
           }
@@ -90,7 +103,12 @@ export default {
         { type: "reviewSection" },
         { type: "staffList" },
         { type: "banner" },
-        { type: "simpleCTA" }
+        { type: "simpleCTA" },
+        { type: "blockButton" },
+        { type: "youtube" },
+        { type: "vimeo" },
+        { type: "youtubeLeftSection" },
+        { type: "twoColumn" }
       ]
     }
   ],

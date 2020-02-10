@@ -16,11 +16,45 @@ export const Input = styled.input`
     height: 60px;
   }
 `
+export const FormContainer = styled.div`
+  background-color: ${props =>
+    props.location == "/contact/"
+      ? props.theme.colors.primary
+      : props.theme.colors.white};
+  padding: ${props => (props.location == "/contact/" ? "30px 0" : 0)};
+  form input,
+  form div select,
+  form div div {
+    border: ${props =>
+      props.location == "/contact/"
+        ? "none"
+        : `1px solid ` + props.theme.colors.black};
+  }
+  h1 {
+    margin-bottom: 100px;
+    color: ${props =>
+      props.location == "/contact/"
+        ? props.theme.colors.white
+        : props.theme.colors.black};
+    span {
+      color: ${props =>
+        props.location == "/contact/"
+          ? props.theme.colors.white
+          : props.theme.colors.primary};
+    }
+    span span {
+      color: ${props =>
+        props.location == "/contact/"
+          ? props.theme.colors.white
+          : props.theme.colors.secondary};
+    }
+  }
+`
+
 export const StyledContactForm = styled.form`
   display: grid;
   grid-gap: 11px;
   width: 100%;
-
   div {
     display: grid;
     grid-template-columns: auto 85px;
@@ -90,8 +124,11 @@ export const StyledContactForm = styled.form`
 `
 
 export const ContactFormSection = styled.section`
-  border-top: 3px solid ${props => props.theme.colors.primary};
-  margin-top: 50.6px;
+  border-top: ${props =>
+    props.location == "/contact/"
+      ? "none"
+      : "3px solid" + props.theme.colors.primary};
+  margin-top: ${props => (props.location == "/contact/" ? "none" : "50.6px")};
 `
 
 export const Brand = () => (

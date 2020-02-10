@@ -51,9 +51,25 @@ export default {
                 type: "boolean"
               }
             ]
+          },
+          {
+            name: "chevronLink",
+            type: "object",
+            title: "Chevron Link",
+            fields: [
+              {
+                name: "reference",
+                type: "reference",
+                title: "Reference",
+                to: [{ type: "page" }]
+              }
+            ]
           }
         ]
       }
-    }
+    },
+    { type: "youtube" },
+    { type: "vimeo" },
+    { type: "image" }
   ]
 };

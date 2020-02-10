@@ -4,10 +4,10 @@ export default {
   name: "headerLinks",
   fields: [
     {
-      name: "linkList",
       title: "Link List",
+      name: "linkList",
       type: "array",
-      of: [{ type: "internalLink" }]
+      of: [{ type: "headerLink" }]
     }
   ]
 };

@@ -25,11 +25,25 @@ const query = graphql`
         }
       }
       _rawTagLine
-      headerLinks {
-        linkList {
-          linkName
-          linkDestination {
-            pageName
+    }
+
+    allSanityHeader {
+      nodes {
+        headerLinks {
+          linkList {
+            linkChildren {
+              _key
+              linkName
+              linkDestination {
+                pageName
+              }
+            }
+            linkName {
+              linkName
+              linkDestination {
+                pageName
+              }
+            }
           }
         }
       }
@@ -48,6 +62,12 @@ const Header = props => {
             'Missing "Site Logo". Open the studio and add "Site Logo" Data'
           )
         }
+        if (!data.allSanityHeader.nodes) {
+          throw new Error(
+            'Missing "Header Links" Open the studio and add at least one Header Link'
+          )
+        }
+        console.log("headerData", data)
         return (
           <HeadRoom disableInlineStyles>
             <StyledHeader>
@@ -63,7 +83,7 @@ const Header = props => {
                   ctaButton={data.sanityHeader.ctaBtn}
                   isMenuOpen={isMenuOpen}
                   toggleMenu={toggleMenu}
-                  navLinks={data.sanityHeader.headerLinks.linkList}
+                  navLinks={data.allSanityHeader.nodes[0].headerLinks}
                 />
               </Container>
             </StyledHeader>

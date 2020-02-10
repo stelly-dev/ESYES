@@ -1,7 +1,8 @@
 export default {
-  name: "internalLink",
-  title: "Internal Link",
+  name: "chevroninternalLink",
+  title: "Chevron Internal Link",
   type: "object",
+  description: "e.g. 'READ MORE >'",
   fields: [
     { type: "string", name: "linkName", title: "Link Text" },
     {

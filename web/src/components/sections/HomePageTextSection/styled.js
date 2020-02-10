@@ -54,4 +54,7 @@ export const H2 = styled.h2`
 export const TextLink = styled(Link)`
   color: ${props => props.theme.colors.secondary};
   cursor: pointer;
+  :hover {
+    color: ${props => props.theme.colors.black};
+  }
 `

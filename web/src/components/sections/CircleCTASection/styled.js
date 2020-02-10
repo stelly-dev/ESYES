@@ -62,6 +62,7 @@ export const CircleBackgroundImage = styled(BackgroundImage)`
   width: calc(100% - 20px);
   height: calc(100% - 20px);
   border-radius: 50%;
+  overflow: hidden;
   color: white;
   div {
     width: 100%;

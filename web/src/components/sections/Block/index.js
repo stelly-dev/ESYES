@@ -1,11 +1,12 @@
 import React from "react"
+import { Link } from "gatsby"
 import BlockContent from "@sanity/block-content-to-react"
 import Container from "../../containers/Container"
 import { BlockSection, TextLink } from "./styled"
 import styled from "styled-components"
 import { typography } from "styled-system"
 import slugify from "slugify"
-import { FaQuoteLeft } from "react-icons/fa"
+import { FaQuoteLeft, FaChevronRight } from "react-icons/fa"
 
 const LeftQuote = styled(FaQuoteLeft)`
   font-size: 61px;
@@ -22,10 +23,43 @@ const LeftQuote = styled(FaQuoteLeft)`
 `
 
 const internalLink = ({ mark, children }) => {
-  console.log("mark from internalLink", mark)
   const { reference = {} } = mark
   const to = `/${slugify(reference.pageName).toLowerCase()}/`
   return <TextLink to={to}>{children}</TextLink>
+}
+
+export const ArticleLink = styled(Link)`
+  text-decoration: none;
+  color: ${props => props.theme.colors.secondary};
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 23px;
+  transition: color 250ms ease-in;
+  :visited {
+    color: ${props => props.theme.colors.secondary};
+  }
+  :hover {
+    color: ${props => props.theme.colors.primary};
+  }
+  @media only screen and (min-width: 1310px) {
+    font-size: 18px;
+    line-height: 33px;
+  }
+`
+
+export const StyledChevron = styled(FaChevronRight)`
+  vertical-align: center;
+  padding-top: 4px;
+`
+const chevronLink = ({ mark, children }) => {
+  const { reference = {} } = mark
+  const to = `/${slugify(reference.pageName).toLowerCase()}/`
+  return (
+    <ArticleLink to={to}>
+      {children}
+      <StyledChevron />
+    </ArticleLink>
+  )
 }
 
 const H1 = styled.h1`
@@ -197,7 +231,7 @@ const Block = props => {
         <BlockContent
           blocks={props}
           serializers={{
-            marks: { center, internalLink },
+            marks: { center, internalLink, chevronLink },
             types: { block: BlockRenderer },
           }}
         />

@@ -21,4 +21,13 @@ export default () =>
             .schemaType("header")
             .documentId("header")
         )
+      // S.listItem()
+      //   .title("Navigation")
+      //   .child(
+      //     S.documentList()
+      //       .title("All Navigation")
+      //       .menuItems(S.documentTypeList("siteNavigation").getMenuItems())
+      //       .filter("_type == $type && !defined(parents)")
+      //       .params({ type: "siteNavigation" })
+      //   )
     ]);

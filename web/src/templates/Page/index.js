@@ -11,7 +11,10 @@ import Block from "../../components/sections/Block/"
 import StaffList from "../../components/sections/StaffList/"
 import Banner from "../../components/sections/Banner/"
 import SimpleCTA from "../../components/sections/SimpleCTA"
+import BlockButton from "../../components/sections/BlockButton/"
+import TwoColumn from "../../components/sections/TwoColumn/"
 import {
+  mapBlockButtonToProps,
   mapHeroToProps,
   mapHomePageTextSectionToProps,
   mapCircleCTASectionToProps,
@@ -20,6 +23,7 @@ import {
   mapStaffListToProps,
   mapBannerToProps,
   mapSimpleCTAToProps,
+  mapTwoColumnToProps,
 } from "../../utils/mapToProps"
 
 export const query = graphql`
@@ -44,6 +48,22 @@ const PageTemplate = props => {
           console.log(section)
           const { _type } = section
           switch (_type) {
+            case "twoColumn":
+              return (
+                <TwoColumn
+                  key={section._key}
+                  {...mapTwoColumnToProps(section)}
+                />
+              )
+            // return <pre>{JSON.stringify(section, null, 2)}</pre>
+            case "blockButton":
+              return (
+                <BlockButton
+                  {...mapBlockButtonToProps(section)}
+                  key={section._key}
+                />
+              )
+            // return <pre>{JSON.stringify(section, null, 2)}</pre>
             case "banner":
               return (
                 // <pre>{JSON.stringify(section, null, 2)}</pre>

@@ -1,6 +1,36 @@
 import React from "react"
 import styled from "styled-components"
 import Button from "../../pieces/Button"
+// import HoverLink from "./HoverLink"
+export const Box = styled.div`
+  display: none;
+  transition: all 0.3s ease-in-out;
+`
+
+export const BoxTriangle = styled.div`
+  width: 60px;
+  height: 15px;
+  /* border: 1px solid red; */
+  position: absolute;
+  left: 50%;
+  top: -17px;
+  transform: translateX(-50%);
+`
+
+export const SvgTriangle = props => (
+  <BoxTriangle>
+    <svg width="60px" height="15px" viewBox="0 0 60 15">
+      <polygon
+        points="30,0 60,15 0,15 30,0"
+        fill="white"
+        strokeDasharray="33.541019 60 33.541019"
+        stroke="#0ea6c6"
+        strokeWidth="1px"
+      />
+    </svg>
+  </BoxTriangle>
+)
+
 export const NavContainer = styled.div`
   display: flex;
   width: 100%;
@@ -20,7 +50,7 @@ export const NavMenuButtonWrapper = styled.div`
 `
 
 export const StyledButton = styled(Button)`
-  font-size: 18px !important;
+  font-size: 16px !important;
   border: 1px solid ${props => props.theme.colors.primary};
   transition: all 250ms ease-in;
   :hover {
@@ -56,14 +86,14 @@ export const StyledNav = styled.nav`
 
 export const NavList = styled.ul`
   list-style: none;
-  li:not(:last-of-type) {
+  > li:not(:last-of-type) {
     display: none;
   }
   @media only screen and (min-width: 600px) {
-    li:nth-last-child(-n + 2) {
+    > li:nth-last-child(-n + 2) {
       display: inline-block;
     }
-    li:not(:nth-last-child(-n + 2)) {
+    > li:not(:nth-last-child(-n + 2)) {
       display: none;
     }
     display: flex;
@@ -71,21 +101,23 @@ export const NavList = styled.ul`
     align-items: center;
   }
   @media only screen and (min-width: 1200px) {
-    li:not(:nth-last-child(-n + 2)) {
+    > li:not(:nth-last-child(-n + 2)) {
       display: block;
     }
-    li:nth-last-child(2) {
+    > li:nth-last-child(2) {
       display: none;
     }
   }
 `
 
 export const NavListItem = styled.li`
+  position: relative;
   a {
     color: ${props => props.theme.colors.black};
     text-decoration: none;
     font-size: 18px;
     position: relative;
+    z-index: 1;
   }
   a:visited {
     color: ${props => props.theme.colors.black};
@@ -94,7 +126,7 @@ export const NavListItem = styled.li`
   a::after {
     content: "";
     position: absolute;
-    top: calc(100% + 8px);
+    top: calc(100% + 4px);
     left: 50%;
     transform: translateX(-50%);
     height: 5px;
@@ -104,6 +136,67 @@ export const NavListItem = styled.li`
   }
   a:hover:after {
     width: 100%;
+  }
+  :hover {
+    a:after {
+      width: 100%;
+    }
+    ${Box} {
+      /* display: flex; */
+      display: block;
+      ${BoxTriangle} {
+        position: absolute;
+        left: 50%;
+        /* transform: translateX(-50%); */
+      }
+      position: relative;
+      padding: 20px;
+      justify-content: center;
+      align-items: center;
+      background-color: white;
+      color: ${props => props.theme.colors.black};
+      min-width: 13.75vw;
+      width: 13.75vw;
+      /* padding-top: 48px; */
+      top: 3px;
+      z-index: 100;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 1px solid ${props => props.theme.colors.secondary};
+      font-size: 16px;
+      ul {
+        list-style: none;
+        display: block;
+
+        li {
+          display: block;
+          text-align: left;
+          min-width: 100%;
+          margin: 20px 0;
+        }
+        li:first-of-type {
+          margin-top: 0;
+        }
+        li:last-of-type {
+          margin-bottom: 0;
+        }
+        li a {
+          display: block;
+          font-size: 18px;
+          line-height: 24px;
+          color: ${props => props.theme.colors.black};
+          min-width: 100%;
+          margin-right: auto;
+        }
+        li a:hover {
+          text-decoration: underline;
+          color: ${props => props.theme.colors.secondary};
+        }
+        li a:after {
+          display: none;
+        }
+      }
+    }
   }
 
   @media only screen and (min-width: 1600px) {

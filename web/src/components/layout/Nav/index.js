@@ -1,7 +1,9 @@
 import React from "react"
-import { Link } from "gatsby"
+import { Link, graphql, StaticQuery } from "gatsby"
+
 import { FiSearch } from "react-icons/fi"
 import Button from "../../pieces/Button"
+import HoverLink from "./HoverLink"
 import {
   NavContainer,
   NavMenuButtonWrapper,
@@ -21,6 +23,7 @@ import BlockContent from "@sanity/block-content-to-react"
 const slugify = require("slugify")
 
 const Nav = ({ toggleMenu, isMenuOpen, navLinks, ctaButton, tagLine }) => {
+  console.log("NavLinks!", navLinks)
   return (
     <NavContainer>
       <NavMenuButtonWrapper>
@@ -31,22 +34,44 @@ const Nav = ({ toggleMenu, isMenuOpen, navLinks, ctaButton, tagLine }) => {
           <BlockContent blocks={tagLine} />
         </TagLine>
         <StyledButton
-          to={`/${slugify(ctaButton.buttonDestination.pageName).toLowerCase()}`}
+          to={`/${slugify(
+            ctaButton.buttonDestination.pageName
+          ).toLowerCase()}/`}
         >
           {ctaButton.buttonText}
         </StyledButton>
       </NavCtaWrapper>
       <StyledNav>
         <NavList>
-          {navLinks.map(link => (
-            <NavListItem key={link.pageName}>
-              <Link
-                to={`/${slugify(link.linkDestination.pageName).toLowerCase()}`}
-              >
-                {link.linkName}
-              </Link>
-            </NavListItem>
-          ))}
+          {navLinks &&
+            navLinks.linkList.map(navItem => (
+              <NavListItem key={navItem.linkName.linkName}>
+                <Link
+                  to={`/${slugify(
+                    navItem.linkName.linkDestination.pageName
+                  ).toLowerCase()}/`}
+                >
+                  {navItem.linkName.linkName}
+                </Link>
+                {navItem.linkChildren.length > 0 ? (
+                  <HoverLink>
+                    <ul>
+                      {navItem.linkChildren.map((child, i) => (
+                        <li key={child._key}>
+                          <Link
+                            to={`/${slugify(
+                              child.linkDestination.pageName
+                            ).toLowerCase()}/`}
+                          >
+                            {child.linkName}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </HoverLink>
+                ) : null}
+              </NavListItem>
+            ))}
           <NavListItem>
             <MenuButton isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
           </NavListItem>

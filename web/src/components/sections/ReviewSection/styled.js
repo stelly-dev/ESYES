@@ -8,6 +8,7 @@ import Container from "../../containers/Container"
 export const ReviewButton = styled(Button)`
   background-color: ${props => props.theme.colors.secondary};
   text-transform: uppercase;
+  font-style: normal;
   margin: 0 auto;
   font-size: 18px;
   margin-top: 30px;

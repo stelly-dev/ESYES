@@ -1,5 +1,21 @@
 import slugify from "slugify"
 
+export function mapBlockButtonToProps({
+  _key,
+  btnColor,
+  btnText,
+  btnTo,
+  orientation,
+}) {
+  return {
+    color: btnColor,
+    orientation: orientation,
+    text: btnText,
+    to: `/${slugify(btnTo.pageName).toLowerCase()}/`,
+    key: _key,
+  }
+}
+
 export function mapCircleCTASectionToProps({ _key, ctaList }) {
   return {
     ctaList: ctaList,
@@ -90,13 +106,18 @@ export function mapBannerToProps({ _key, asset }) {
   }
 }
 
-export function mapSimpleCTAToProps({ _key, content, ctaButton }) {
+export function mapSimpleCTAToProps({ _key, content, ctaButtons }) {
   return {
     key: _key,
     content: content,
-    buttonTo: `/${slugify(
-      ctaButton.buttonDestination.pageName
-    ).toLowerCase()}/`,
-    buttonText: ctaButton.buttonText,
+    buttons: ctaButtons,
+  }
+}
+
+export function mapTwoColumnToProps({ _key, col1, col2 }) {
+  return {
+    key: _key,
+    leftCol: col1,
+    rightCol: col2,
   }
 }
