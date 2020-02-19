@@ -1,5 +1,5 @@
 import createSchema from "part:@sanity/base/schema-creator";
-
+import files from "./files";
 import schemaTypes from "all:part:@sanity/base/schema-type";
 import page from "./page";
 import blockContent from "./blockContent";
@@ -28,12 +28,15 @@ import youtube from "./youtube";
 import youtubeLeftSection from "./youtubeLeftSection";
 import linkName from "./linkName";
 import chevronInternalLink from "./chevronInternalLink";
+import fileLink from "./fileLink";
+import linebreak from "./linebreak";
 // import siteNavigation from "./siteNavigation";
 import twoColumn from "./twoColumn";
 import vimeo from "./vimeo";
 export default createSchema({
   name: "default",
   types: schemaTypes.concat([
+    linebreak,
     linkName,
     page,
     headerLinks,
@@ -63,6 +66,8 @@ export default createSchema({
     youtube,
     youtubeLeftSection,
     vimeo,
-    chevronInternalLink
+    chevronInternalLink,
+    files,
+    fileLink
   ])
 });

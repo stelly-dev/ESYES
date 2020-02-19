@@ -7,6 +7,31 @@ import styled from "styled-components"
 import { typography } from "styled-system"
 import slugify from "slugify"
 import { FaQuoteLeft, FaChevronRight } from "react-icons/fa"
+import clientConfig from "../../../../client-config"
+import { getFluidGatsbyImage } from "gatsby-source-sanity"
+import YouTube from "react-youtube"
+import Vimeo from "@u-wave/react-vimeo"
+import getVideoId from "get-video-id"
+import getYoutubeId from "get-youtube-id"
+import Img from "gatsby-image"
+import { H1, H2, H3, H4, H5, H6, P } from "./TextStyles"
+
+export const StyledImage = styled(Img)`
+  /* max-width: 300px; */
+`
+export const VideoWrapper = styled.div`
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  margin-bottom: 20px;
+  iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+`
 
 const LeftQuote = styled(FaQuoteLeft)`
   font-size: 61px;
@@ -14,10 +39,10 @@ const LeftQuote = styled(FaQuoteLeft)`
   position: absolute;
   color: ${props => props.theme.colors.secondary};
   opacity: 0.15;
-  @media only screen and (min-width: 992px) {
-    font-size: 84px;
+  @media only screen and (min-width: 1024px) {
+    font-size: 5.8vw;
   }
-  @media only screen and (min-width: 1600px) {
+  @media only screen and (min-width: 2000px) {
     font-size: 124px;
   }
 `
@@ -26,6 +51,23 @@ const internalLink = ({ mark, children }) => {
   const { reference = {} } = mark
   const to = `/${slugify(reference.pageName).toLowerCase()}/`
   return <TextLink to={to}>{children}</TextLink>
+}
+
+const link = ({ mark, children }) => {
+  const { href = "" } = mark
+  return (
+    <TextLink as="a" href={href}>
+      {children}
+    </TextLink>
+  )
+}
+
+const Slim = styled.span`
+  font-weight: 300;
+`
+
+const slim = props => {
+  return <Slim>{props.children}</Slim>
 }
 
 export const ArticleLink = styled(Link)`
@@ -41,7 +83,7 @@ export const ArticleLink = styled(Link)`
   :hover {
     color: ${props => props.theme.colors.primary};
   }
-  @media only screen and (min-width: 1310px) {
+  @media only screen and (min-width: 1200px) {
     font-size: 18px;
     line-height: 33px;
   }
@@ -62,51 +104,6 @@ const chevronLink = ({ mark, children }) => {
   )
 }
 
-const H1 = styled.h1`
-  ${typography};
-  text-align: center;
-  font-weight: 400;
-`
-const H2 = styled.h2`
-  ${typography}
-  font-weight: 400;
-  text-align: center;
-  font-style: italic;
-`
-
-const H3 = styled.h3`
-  ${typography};
-  margin-top: 2.4375rem;
-  line-height: 1.75rem;
-  font-weight: bold;
-  color: ${props => props.theme.colors.primary};
-`
-
-const H4 = styled.h4`
-  ${typography};
-  color: ${props => props.theme.colors.primary};
-  font-style: italic;
-  a {
-    color: ${props => props.theme.colors.primary};
-  }
-  a:hover {
-    color: ${props => props.theme.colors.secondary};
-  }
-`
-
-const H5 = styled.h5`
-  ${typography};
-`
-
-const H6 = styled.h6`
-  ${typography};
-`
-
-const P = styled.p`
-  ${typography};
-  margin-top: 35px;
-`
-
 const QuoteSection = styled.section``
 
 const QuoteText = styled.blockquote`
@@ -116,21 +113,31 @@ const QuoteText = styled.blockquote`
   font-style: italic;
   line-height: 25.6px;
   a {
-    color: ${props => props.theme.colors.black};
+    color: ${props => props.theme.colors.secondary};
+    text-decoration: underline;
   }
   a:hover {
-    color: ${props => props.theme.colors.secondary};
+    color: ${props => props.theme.colors.primary};
   }
-  @media only screen and (min-width: 992px) {
-    padding-left: 65px;
-    padding-top: 55px;
-    font-size: 1.333rem;
+  @media only screen and (min-width: 1024px) {
+    font-size: 20.4px;
+    padding-left: 3.6vw;
+    padding-top: 3.1vw;
+    margin-bottom: 1.7vw;
+    margin-top: 0.25vw;
   }
-  @media only screen and (min-width: 1600px) {
-    font-size: 2.124rem;
-    line-height: 1.4;
-    padding-top: 70px;
-    padding-left: 80px;
+  @media only screen and (min-width: 1200px) {
+    line-height: 1.4857;
+    font-size: 1.7vw;
+  }
+
+  @media only screen and (min-width: 2000px) {
+    margin-top: 5px;
+    margin-bottom: 34px;
+    max-width: 1316px;
+    font-size: 34px;
+    padding-top: 62px;
+    padding-left: 72px;
   }
 `
 
@@ -142,9 +149,12 @@ const Quote = props => {
     </QuoteSection>
   )
 }
+const Centered = styled.p`
+  text-align: center;
+`
 
 const center = props => {
-  return <span style={{ textAlign: center }}>{props.children}</span>
+  return <Centered>{props.children}</Centered>
 }
 
 const BlockRenderer = props => {
@@ -152,23 +162,15 @@ const BlockRenderer = props => {
   switch (style) {
     case "h1":
       return (
-        <H1
-          fontSize={[
-            "1.414rem",
-            "1.414rem",
-            "1.999rem",
-            "1.999rem",
-            "2.827rem",
-            "3.998rem",
-          ]}
-        >
+        <H1 fontSize={["5.91vw", "5.91vw", "40px", "39px", "3.25vw", "65px"]}>
           {props.children}
         </H1>
       )
     case "h2":
       return (
         <H2
-          fontSize={[".875rem", ".875rem", "1rem", "1rem", "1.2rem", "1.2rem"]}
+          fontSize={["14px", "3.76vw", "1.82vw", "13.2px", "1.1vw", "22px"]}
+          lineHeight={["1.22"]}
         >
           {props.children}
         </H2>
@@ -176,14 +178,8 @@ const BlockRenderer = props => {
     case "h3":
       return (
         <H3
-          fontSize={[
-            "1.333rem",
-            "1.333rem",
-            "1.777rem",
-            "1.777rem",
-            "1.777rem",
-            "2.5rem",
-          ]}
+          fontSize={["5.65vw", "5.65vw", "2.7vw", "27px", "2.25vw", "35px"]}
+          lineHeight={["1.333"]}
         >
           {props.children}
         </H3>
@@ -191,15 +187,8 @@ const BlockRenderer = props => {
     case "h4":
       return (
         <H4
-          fontSize={[
-            "1.2rem",
-            "1.2rem",
-            "1.333rem",
-            "1.333rem",
-            "1.333rem",
-            "2.124rem",
-          ]}
-          lineHeight={["1.425"]}
+          fontSize={["1.2rem", "1.2rem", "2.21vw", "20.4px", "1.7vw", "35px"]}
+          lineHeight={["1.485714"]}
         >
           {props.children}
         </H4>
@@ -213,15 +202,51 @@ const BlockRenderer = props => {
     case "normal":
       return (
         <P
-          lineHeight={"1.625"}
-          fontSize={["18px", "18px", "18px", "18px", "18px", "20px"]}
+          lineHeight={"1.7"}
+          fontSize={["4.3vw", "4.3vw", "2.08vw", "12px", "1vw", "20px"]}
         >
           {props.children}
         </P>
       )
+
     default:
       return BlockContent.defaultSerializers.types.block(props)
   }
+}
+
+const serializers = {
+  types: {
+    youtube: ({ node }) => {
+      const { url } = node
+      const id = getYoutubeId(url)
+      return (
+        <VideoWrapper>
+          <YouTube videoId={id} key={node._key} />
+        </VideoWrapper>
+      )
+    },
+    vimeo: ({ node }) => {
+      const { url } = node
+      const id = getVideoId(url)
+      return (
+        <VideoWrapper>
+          <Vimeo video={url} key={node._key} />
+        </VideoWrapper>
+      )
+    },
+    image: ({ node }) => {
+      const { asset } = node
+      const imageId = asset["_id"]
+      const fluidProps = getFluidGatsbyImage(
+        asset["_id"],
+        { maxWidth: "300px" },
+        clientConfig.sanity
+      )
+      return (
+        <StyledImage objectFit="contain" fluid={fluidProps} key={node._key} />
+      )
+    },
+  },
 }
 
 const Block = props => {
@@ -229,13 +254,13 @@ const Block = props => {
     <BlockSection>
       <Container>
         <BlockContent
-          blocks={props}
+          blocks={props.blocks || props}
           serializers={{
-            marks: { center, internalLink, chevronLink },
-            types: { block: BlockRenderer },
+            marks: { slim, center, link, internalLink, chevronLink },
+            types: { block: BlockRenderer, ...serializers.types },
           }}
         />
-        {/* {JSON.stringify(props, null, 2)} */}
+        {/* <pre>{JSON.stringify(props, null, 2)}</pre> */}
       </Container>
     </BlockSection>
   )

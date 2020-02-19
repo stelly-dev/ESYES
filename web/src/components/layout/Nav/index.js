@@ -23,7 +23,6 @@ import BlockContent from "@sanity/block-content-to-react"
 const slugify = require("slugify")
 
 const Nav = ({ toggleMenu, isMenuOpen, navLinks, ctaButton, tagLine }) => {
-  console.log("NavLinks!", navLinks)
   return (
     <NavContainer>
       <NavMenuButtonWrapper>

@@ -1,53 +1,84 @@
 import styled from "styled-components"
 import { Link } from "gatsby"
+import Container from "../../containers/Container"
 
-export const TextLink = styled(Link)``
+export const TextLink = styled(Link)`
+  color: ${props => props.theme.colors.secondary};
+  text-decoration: underline;
+  /* font-size: 18px; */
+  :hover {
+    color: ${props => props.theme.colors.black};
+  }
+`
 
 export const BlockSection = styled.div`
-  /* margin-bottom: 0 ;
-  padding-top: 0 ;
-  margin-top: 0 ;  */
-  :first-of-type {
-    margin-top: 50px ; 
-  }
-
-  @media only screen and (min-width: 1200px){
-    :first-of-type {
-      margin-top: 100px ; 
-    }
-  }
-
   color: ${props => props.theme.colors.black};
-  font-size: 18px; 
   ul {
-    list-style: none; 
-    margin-left: 3ch; 
+    list-style: none;
+  }
+  ul li {
+  font-size: 4.3vw; 
+   @media only screen and (min-width: 768px){
+   font-size: 2.08vw;   
+ } 
+    /* font-size: 1vw; */
+    @media only screen and (min-width:1024px){
+   
+ }
+    /* margin-left: 3ch; */
+    @media only screen and (min-width:2000px){
+   
+ }
+    line-height: 1.7;
   }
   ul li:before {
+    content: "·";
+    margin-right: 1ch;
+    /* padding-bottom: 200px; */
+    vertical-align: center;
+  }
+  ul {
+    li {
+      margin-left: 3ch; 
+      text-indent: -1.5ch; 
+      padding-left: 1.5ch; ; 
+    }
+  }
+ @media only screen and (min-width: 1024px){
 
-  content:"·"; 
-  margin-right: 1ch; 
-  padding-bottom: 200px;  
-  vertical-align: center; 
+   ul,
+   h3,
+   h4,
+   h5,
+   h6,
+   section,
+   p {
+     max-width: 834px; 
+     margin: 0 auto;
+    }
+  } 
+  @media only screen and (min-width: 1200px) {
+    ul,
+    h3,
+    h4,
+    h5,
+    h6,
+    section,
+    p {
+      max-width: 69.5vw;
+      margin: 0 auto;
+    }
+    /* ${Container} ul :first-of-type {
+      margin-top: 1.45vw;
+      margin-bottom: 2.5vw;
+    } */
+   } 
   }
-  /* h1 {
-    font-size: 65px;
-    line-height: 85px;
-    text-align: center;
-  } */
-  /* h2 {
-    color: ${props => props.theme.colors.primary};
-    font-size: 45px;
-    line-height: 58px;
-    margin: 50px 0;
-  } */
-  /* p {
-    font-size: 20px;
-    line-height: 34px;
+
+  @media only screen and (min-width: 2000px) {
+    ${Container} ul:first-of-type {
+      margin-top: 29px;
+      margin-bottom: 50px;
+    }
   }
-  em {
-    width: 100%;
-    display: block;
-    margin-bottom: 50px;
-  } */
 `

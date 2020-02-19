@@ -64,6 +64,19 @@ export default {
                 to: [{ type: "page" }]
               }
             ]
+          },
+          {
+            name: "fileLink",
+            type: "object",
+            title: "File Link",
+            fields: [
+              {
+                name: "reference",
+                type: "reference",
+                title: "File Reference",
+                to: [{ type: "files" }]
+              }
+            ]
           }
         ]
       }

@@ -1,5 +1,5 @@
 import S from "@sanity/desk-tool/structure-builder";
-
+import PDFPreview from "./components/PDFPreview/";
 export default () =>
   S.list()
     .title("Content")
@@ -20,6 +20,26 @@ export default () =>
             .title("Header")
             .schemaType("header")
             .documentId("header")
+        ),
+      // S.listItem()
+      //   .title("Files")
+      //   .schemaType("files")
+      //   .child(S.documentTypeList("files").title("All Files"))
+      S.listItem()
+        .title("Files")
+        .schemaType("files")
+        .child(
+          S.documentTypeList("files")
+            .title("Files")
+            .child(documentId =>
+              S.document()
+                .documentId(documentId)
+                .schemaType("files")
+                .views([
+                  S.view.form(),
+                  S.view.component(PDFPreview).title("PDF Preview")
+                ])
+            )
         )
       // S.listItem()
       //   .title("Navigation")

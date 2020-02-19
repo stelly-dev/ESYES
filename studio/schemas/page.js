@@ -1,8 +1,14 @@
+import React from "react";
 import {
   AiOutlineAlignCenter,
   AiOutlineAlignLeft,
   AiOutlineAlignRight
 } from "react-icons/ai";
+
+import { FiExternalLink, FiLink, FiChevronRight } from "react-icons/fi";
+
+import { MdAttachFile } from "react-icons/md";
+
 export default {
   name: "page",
   title: "Page",
@@ -38,12 +44,20 @@ export default {
               {
                 title: "Centered",
                 value: "center",
-                icon: AiOutlineAlignCenter
+                blockEditor: {
+                  icon: () => <AiOutlineAlignCenter />
+                }
               },
               {
                 title: "Right Aligned",
                 value: "right",
-                icon: AiOutlineAlignRight
+                blockEditor: {
+                  icon: () => <AiOutlineAlignRight />
+                }
+              },
+              {
+                title: "Slim",
+                value: "slim"
               }
             ],
             annotations: [
@@ -61,7 +75,8 @@ export default {
                       // other types if needed
                     ]
                   }
-                ]
+                ],
+                icon: FiLink
               },
               {
                 name: "link",
@@ -78,7 +93,8 @@ export default {
                     name: "blank",
                     type: "boolean"
                   }
-                ]
+                ],
+                icon: FiExternalLink
               },
               {
                 name: "chevronLink",
@@ -91,7 +107,22 @@ export default {
                     title: "Reference",
                     to: [{ type: "page" }]
                   }
-                ]
+                ],
+                icon: FiChevronRight
+              },
+              {
+                name: "fileLink",
+                type: "object",
+                title: "File Link",
+                fields: [
+                  {
+                    name: "reference",
+                    type: "reference",
+                    title: "File Reference",
+                    to: [{ type: "files" }]
+                  }
+                ],
+                icon: MdAttachFile
               }
             ]
           }
@@ -108,7 +139,9 @@ export default {
         { type: "youtube" },
         { type: "vimeo" },
         { type: "youtubeLeftSection" },
-        { type: "twoColumn" }
+        { type: "twoColumn" },
+        { type: "fileLink" },
+        { type: "linebreak" }
       ]
     }
   ],

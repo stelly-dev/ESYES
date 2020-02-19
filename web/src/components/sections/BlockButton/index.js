@@ -6,9 +6,21 @@ import Container from "../../containers/Container"
 const StyledContainer = styled(Container)`
   display: flex;
   justify-content: ${props => props.orientation};
+  padding: 0 !important;
+  margin: 0 auto;
+
+  @media only screen and (min-width: 1024px) {
+    max-width: 69.5vw;
+    /* border: 2px solid red; */
+  }
 `
 
 const StyledButton = styled(Button)`
+  height: 3.5vw !important;
+  width: 16.1vw !important;
+  font-size: 1.35vw !important;
+  margin-top: 1.6vw;
+  margin-bottom: 2.5vw;
   background-color: ${props => props.color};
   text-align: ${props => props.orientation};
   border: 1px solid ${props => props.color};

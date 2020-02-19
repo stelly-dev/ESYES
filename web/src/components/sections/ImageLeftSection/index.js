@@ -1,6 +1,7 @@
 import React from "react"
 import Img from "gatsby-image"
 import { getFluidGatsbyImage } from "gatsby-source-sanity"
+import Block from "../Block/"
 import Container from "../../containers/Container"
 import {
   StyledSection,
@@ -14,11 +15,20 @@ import BlockContent from "@sanity/block-content-to-react"
 import slugify from "slugify"
 
 const internalLink = ({ mark, children }) => {
-  console.log("mark from internalLink", mark)
   const { reference = {} } = mark
   const to = `/${slugify(reference.pageName).toLowerCase()}/`
   return (
     <ArticleLink to={to}>
+      {children}
+      <StyledChevron />
+    </ArticleLink>
+  )
+}
+
+const fileLink = ({ mark, children }) => {
+  const { reference = {} } = mark
+  return (
+    <ArticleLink as="a" href={mark.reference.file.asset.url}>
       {children}
       <StyledChevron />
     </ArticleLink>
@@ -32,7 +42,7 @@ const ImageLeftSection = props => {
         <StyledImage
           fluid={getFluidGatsbyImage(
             props.image,
-            { maxWidth: "770px" },
+            { maxWidth: 600 },
             clientConfig.sanity
           )}
           alt={props.altText}
@@ -41,11 +51,11 @@ const ImageLeftSection = props => {
           {props.features.map((feature, i) => (
             <div key={feature["_key"]}>
               {/* <pre>{JSON.stringify(feature, null, 2)}</pre> */}
-              <BlockContent
+              {/* <BlockContent
                 blocks={feature}
-                serializers={{ marks: { internalLink } }}
-                {...clientConfig.sanity}
-              />
+                serializers={{ marks: { internalLink, fileLink } }}
+                {...clientConfig.sanity} */}
+              <Block blocks={feature} />
             </div>
           ))}
         </Article>

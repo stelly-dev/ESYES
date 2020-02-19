@@ -13,7 +13,7 @@ export const HPTextSection = styled.section`
   @media only screen and (min-width: 600px) {
     margin-top: 43px;
   }
-  @media only screen and (min-width: 1310px) {
+  @media only screen and (min-width: 1200px) {
     font-size: 20px;
     line-height: 34px;
     max-width: 1390px;
@@ -33,7 +33,7 @@ export const H1 = styled.h1`
     font-size: 30px;
     line-height: 41px;
   }
-  @media only screen and (min-width: 1310px) {
+  @media only screen and (min-width: 1200px) {
     font-size: 65px;
     line-height: 85px;
   }
@@ -45,7 +45,7 @@ export const H2 = styled.h2`
   font-weight: 500;
   font-size: 14px;
   line-height: 20px;
-  @media only screen and (min-width: 1310px) {
+  @media only screen and (min-width: 1200px) {
     font-size: 22px;
     line-height: 27px;
   }

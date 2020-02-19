@@ -22,7 +22,7 @@ const CircleCTASection = props => {
                 alt={cta.altText}
                 fluid={getFluidGatsbyImage(
                   cta.backgroundImage.asset["_id"],
-                  { maxWidth: "165px" },
+                  { maxWidth: 165 },
                   clientConfig.sanity
                 )}
               >

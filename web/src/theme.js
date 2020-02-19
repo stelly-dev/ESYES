@@ -1,6 +1,6 @@
 const baseTheme = {
   space: [0, 2, 4, 8, 16],
-  fontSizes: [14, 16, 18, 24, 32],
+  // fontSizes: [14, 16, 18, 24, 32],
   colors: {
     primary: "#F9A33E",
     white: "#FFF",
@@ -40,5 +40,5 @@ export default {
   },
   fonts: {},
   fontSizes: {},
-  breakpoints: ["350px", "600px", "992px", "1200px", "1600px", "2000px"],
+  breakpoints: ["350px", "768px", "1024px", "1200px", "2000px"],
 }

@@ -67,7 +67,6 @@ const Header = props => {
             'Missing "Header Links" Open the studio and add at least one Header Link'
           )
         }
-        console.log("headerData", data)
         return (
           <HeadRoom disableInlineStyles>
             <StyledHeader>

@@ -37,24 +37,26 @@ const LogoContainer = styled(Link)`
 `
 
 const StyledFooter = styled.footer`
-  margin-top: 50px;
+  /* margin-top: 50px; */
 `
 const TopFooter = styled.section`
-  padding: 50px 0 44px 0;
+  /* padding: 50px 0 44px 0; */
   background-color: ${props => props.theme.colors.black};
   color: white;
   @media only screen and (min-width: 600px) {
     ${Container} {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      align-items: center;
+      @supports (display: grid) {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        align-items: center;
+      }
     }
   }
 `
 
 const BottomFooter = styled.section`
   text-align: center;
-  padding: 47px 0 41px 0;
+  /* padding: 47px 0 41px 0; */
   color: ${props => props.theme.colors.secondary};
   font-weight: bold;
   div {
@@ -124,7 +126,7 @@ const Footer = () => {
           <StyledFooter>
             <TopFooter>
               <Container>
-                <LogoContainer>
+                <LogoContainer to="/">
                   <Img
                     fluid={data.sanityHeader.logo.asset.fluid}
                     alt={data.sanityHeader.logoAlt}
@@ -142,8 +144,8 @@ const Footer = () => {
             </TopFooter>
             <BottomFooter>
               <div>
-                <Link>CONTACT </Link>
-                <span>{" | "}</span> <Link> SITE MAP</Link>
+                <Link to="/contact/">CONTACT</Link>
+                <span>{" | "}</span> <Link>SITE MAP</Link>
               </div>
               <p>
                 Copyright © 2019. Boulder County EnergySmart. All Rights

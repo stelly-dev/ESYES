@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import Accordion from "./Accordion"
 import styled from "styled-components"
 import { StaticQuery, graphql, Link } from "gatsby"
 import slugify from "slugify"
@@ -112,10 +113,10 @@ const MobileNav = ({ isMenuOpen }) => (
     render={data => {
       const { headerLinks } = data.allSanityHeader.nodes[0]
       const { linkList } = headerLinks
-      console.log("Data from mobileNav", linkList)
       return (
         <StyledMenuContainer isMenuOpen={isMenuOpen}>
-          <StyledMenu>
+          <Accordion links={linkList} />
+          {/* <StyledMenu>
             {linkList.map(topLevelLink => (
               <li key={topLevelLink._key}>
                 <Link
@@ -143,7 +144,7 @@ const MobileNav = ({ isMenuOpen }) => (
                 </Link>
               </li>
             ))}
-          </StyledMenu>
+          </StyledMenu> */}
         </StyledMenuContainer>
       )
     }}

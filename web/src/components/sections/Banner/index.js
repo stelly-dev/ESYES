@@ -8,7 +8,7 @@ const Banner = props => (
     <StyledBackgroundImage
       fluid={getFluidGatsbyImage(
         props.image,
-        { maxWidth: "2000px" },
+        { maxWidth: 2000 },
         clientConfig.sanity
       )}
     ></StyledBackgroundImage>

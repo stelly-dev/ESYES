@@ -1,14 +1,14 @@
 import styled from "styled-components"
-import BackgroundImage from "gatsby-background-image"
+import Img from "gatsby-image"
 
 export const BannerContainer = styled.section``
 
-export const StyledBackgroundImage = styled(BackgroundImage)`
-  height: 0;
+export const StyledBackgroundImage = styled(Img)`
+  width: 100%;
   display: none;
-  background-position: center 25%;
+  background-position: bottom center;
+  background-size: contain;
   @media only screen and (min-width: 996px) {
     display: block;
-    height: 550px;
   }
 `

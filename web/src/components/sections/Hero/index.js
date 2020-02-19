@@ -9,7 +9,7 @@ const Hero = props => {
     <StyledBackgroundImage
       fluid={getFluidGatsbyImage(
         props.image,
-        { maxWidth: "2000px" },
+        { maxWidth: 1000 },
         clientConfig.sanity
       )}
       Tag="section"

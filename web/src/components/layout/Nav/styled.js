@@ -1,16 +1,15 @@
 import React from "react"
 import styled from "styled-components"
 import Button from "../../pieces/Button"
-// import HoverLink from "./HoverLink"
+
+// Hover Menu Styles
 export const Box = styled.div`
   display: none;
   transition: all 0.3s ease-in-out;
 `
-
 export const BoxTriangle = styled.div`
   width: 60px;
   height: 15px;
-  /* border: 1px solid red; */
   position: absolute;
   left: 50%;
   top: -17px;
@@ -31,6 +30,7 @@ export const SvgTriangle = props => (
   </BoxTriangle>
 )
 
+// Nav Menu Styles
 export const NavContainer = styled.div`
   display: flex;
   width: 100%;
@@ -50,19 +50,25 @@ export const NavMenuButtonWrapper = styled.div`
 `
 
 export const StyledButton = styled(Button)`
-  font-size: 16px !important;
+  /* font-size: 16px !important; */
+  border-radius: 0.2vw;
+  @media only screen and (min-width: 1024px) {
+    font-size: 1.1vw;
+    width: 12.7vw;
+    height: 2.75vw;
+  }
   border: 1px solid ${props => props.theme.colors.primary};
   transition: all 250ms ease-in;
   :hover {
     background-color: white;
     color: ${props => props.theme.colors.primary};
   }
-  @media only screen and (min-width: 1600px) {
-    font-size: 20px;
-  }
 
   @media only screen and (min-width: 2000px) {
     font-size: 22px;
+    width: 254px;
+    border-radius: 4px;
+    height: 55px;
   }
 `
 
@@ -70,17 +76,11 @@ export const StyledNav = styled.nav`
   @media only screen and (min-width: 600px) {
     width: 75px;
   }
-  @media only screen and (min-width: 1200px) {
-    width: 100%;
-    max-width: 800px;
+  @media only screen and (min-width: 1024px) {
+    width: 55.25vw;
   }
-
-  @media only screen and (min-width: 1600px) {
-    max-width: 900px;
-  }
-
   @media only screen and (min-width: 2000px) {
-    max-width: 1310px;
+    max-width: 1105px;
   }
 `
 
@@ -100,7 +100,7 @@ export const NavList = styled.ul`
     justify-content: space-between;
     align-items: center;
   }
-  @media only screen and (min-width: 1200px) {
+  @media only screen and (min-width: 1024px) {
     > li:not(:nth-last-child(-n + 2)) {
       display: block;
     }
@@ -115,7 +115,7 @@ export const NavListItem = styled.li`
   a {
     color: ${props => props.theme.colors.black};
     text-decoration: none;
-    font-size: 18px;
+    /* font-size: 18px; */
     position: relative;
     z-index: 1;
   }
@@ -150,7 +150,7 @@ export const NavListItem = styled.li`
         /* transform: translateX(-50%); */
       }
       position: relative;
-      padding: 20px;
+      padding: 1vw;
       justify-content: center;
       align-items: center;
       background-color: white;
@@ -172,7 +172,7 @@ export const NavListItem = styled.li`
           display: block;
           text-align: left;
           min-width: 100%;
-          margin: 20px 0;
+          margin: 0.1vw 0;
         }
         li:first-of-type {
           margin-top: 0;
@@ -182,8 +182,8 @@ export const NavListItem = styled.li`
         }
         li a {
           display: block;
-          font-size: 18px;
-          line-height: 24px;
+          font-size: 0.9vw;
+          line-height: 1.333;
           color: ${props => props.theme.colors.black};
           min-width: 100%;
           margin-right: auto;
@@ -198,12 +198,14 @@ export const NavListItem = styled.li`
       }
     }
   }
-
-  @media only screen and (min-width: 1600px) {
+  @media only screen and (min-width: 1024px) {
+    font-size: 1.1vw;
+  }
+  /* @media only screen and (min-width: 1600px) {
     a {
       font-size: 20px;
     }
-  }
+  } */
 
   @media only screen and (min-width: 2000px) {
     a {
@@ -213,23 +215,26 @@ export const NavListItem = styled.li`
 `
 export const TagLine = styled.div`
   display: none;
-  @media only screen and (min-width: 1200px) {
+  @media only screen and (min-width: 1024px) {
     display: block;
-    font-size: 18px;
-  }
-  @media only screen and (min-width: 1600px) {
-    font-size: 20px;
+    font-size: 1.35vw;
   }
 
   @media only screen and (min-width: 2000px) {
-    font-size: 22px;
+    font-size: 27px;
   }
 `
 
 export const NavCtaWrapper = styled.div`
-  @media only screen and (min-width: 1200px) {
+  @media only screen and (min-width: 1024px) {
     display: flex;
     align-items: center;
+    font-size: 1.35vw;
+    p {
+      margin-right: 1.35vw;
+    }
+  }
+  @media only screen and (min-width: 2000px) {
     font-size: 27px;
     p {
       margin-right: 27px;

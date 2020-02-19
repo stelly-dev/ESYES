@@ -6,7 +6,6 @@ import clientConfig from "../../../../client-config"
 import slugify from "slugify"
 
 const internalLink = ({ mark, children }) => {
-  console.log("mark from internalLink", mark)
   const { reference = {} } = mark
   const to = `/${slugify(reference.pageName).toLowerCase()}/`
   return <TextLink to={to}>{children}</TextLink>

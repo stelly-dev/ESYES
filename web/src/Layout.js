@@ -9,6 +9,7 @@ import Header from "./components/layout/Header/"
 import MobileNav from "./components/layout/MobileNav/"
 import ContactForm from "./components/sections/ContactForm/"
 import Effi from "./components/sections/Effi/"
+
 const Layout = ({ children }) => {
   const [menuOpen, setMenuOpen] = useState(false)
   const toggleMenu = e => {
@@ -18,7 +19,6 @@ const Layout = ({ children }) => {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
-
       <Header isMenuOpen={menuOpen} toggleMenu={toggleMenu} />
       <MobileNav isMenuOpen={menuOpen} />
       <Main isMenuOpen={menuOpen}>

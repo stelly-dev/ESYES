@@ -1,5 +1,4 @@
 import React from "react"
-import Img from "gatsby-image"
 import { graphql } from "gatsby"
 import Layout from "../../Layout"
 import Hero from "../../components/sections/Hero/"
@@ -13,6 +12,7 @@ import Banner from "../../components/sections/Banner/"
 import SimpleCTA from "../../components/sections/SimpleCTA"
 import BlockButton from "../../components/sections/BlockButton/"
 import TwoColumn from "../../components/sections/TwoColumn/"
+import VimeoSection from "../../components/sections/VimeoSection/"
 import {
   mapBlockButtonToProps,
   mapHeroToProps,
@@ -24,7 +24,9 @@ import {
   mapBannerToProps,
   mapSimpleCTAToProps,
   mapTwoColumnToProps,
+  mapVimeoSectionToProps,
 } from "../../utils/mapToProps"
+import YoutubeSection from "../../components/sections/YoutubeSection"
 
 export const query = graphql`
   query RootPageTemplateQuery($id: String!) {
@@ -45,9 +47,12 @@ const PageTemplate = props => {
       {errors ? <pre>{JSON.stringify(errors, null, 2)}</pre> : null}
       {content &&
         content.map((section, i) => {
-          console.log(section)
           const { _type } = section
           switch (_type) {
+            case "linebreak":
+              return <br />
+            case "vimeo":
+              return <VimeoSection key={section._key} url={section.url} />
             case "twoColumn":
               return (
                 <TwoColumn
@@ -55,7 +60,6 @@ const PageTemplate = props => {
                   {...mapTwoColumnToProps(section)}
                 />
               )
-            // return <pre>{JSON.stringify(section, null, 2)}</pre>
             case "blockButton":
               return (
                 <BlockButton
@@ -63,10 +67,8 @@ const PageTemplate = props => {
                   key={section._key}
                 />
               )
-            // return <pre>{JSON.stringify(section, null, 2)}</pre>
             case "banner":
               return (
-                // <pre>{JSON.stringify(section, null, 2)}</pre>
                 <Banner {...mapBannerToProps(section)} key={section._key} />
               )
             case "circleCTAList":
@@ -83,7 +85,6 @@ const PageTemplate = props => {
                   key={section._key}
                 />
               )
-
             case "simpleCTA":
               return (
                 <SimpleCTA
@@ -91,7 +92,6 @@ const PageTemplate = props => {
                   key={section._key}
                 />
               )
-            // return <pre>{JSON.stringify(section, null, 2)}</pre>
             case "homePageText":
               return (
                 <HomePageTextSection
@@ -117,17 +117,17 @@ const PageTemplate = props => {
                   key={section._key}
                 />
               )
+            case "youtube":
+              return <YoutubeSection url={section.url} key={section._key} />
             default:
-              return (
-                <div key={Math.random()}>
-                  <span style={{ color: "red" }}>
-                    No resolver for type "{_type}" found.
-                  </span>
-                </div>
-              )
+              return null
+            // <div key={Math.random()}>
+            //   <span style={{ color: "red" }}>
+            //     No resolver for type "{_type}" found.
+            //   </span>
+            // </div>
           }
         })}
-      {/* {content && <pre>{JSON.stringify(content, null, 2)}</pre>} */}
     </Layout>
   )
 }

@@ -17,7 +17,7 @@ export const ReviewButton = styled(Button)`
     min-height: 40px;
     min-width: 156px;
   }
-  @media only screen and (min-width: 992px) {
+  @media only screen and (min-width: 1024px) {
     min-width: 200px;
     max-height: 45px;
     font-size: 18px;
@@ -39,7 +39,7 @@ export const StyledSection = styled.section`
     }
   }
 
-  @media only screen and (min-width: 992px){
+  @media only screen and (min-width: 1024px){
     ${Container}{
     grid-template-columns: 1fr 40px 1fr; 
     grid-template-rows: 45px 1fr 70px 9.75vw 45px; 
@@ -47,7 +47,7 @@ export const StyledSection = styled.section`
     }
   }
 
-  @media only screen and (min-width: 1310px){
+  @media only screen and (min-width: 1200px){
     ${Container}{
     grid-template-columns: 1fr 117px 1fr; 
 
@@ -84,7 +84,7 @@ export const StyledImage = styled(Img)`
     /* max-height: 691px;
     max-width: 822px; */
   }
-  @media only screen and (min-width: 992px) {
+  @media only screen and (min-width: 1024px) {
     grid-column: 3 / span 1;
     grid-row: 1 / span 5;
     padding-left: 20px;
@@ -92,7 +92,7 @@ export const StyledImage = styled(Img)`
     height: 100%;
   }
 
-  @media only screen and (min-width: 1310px) {
+  @media only screen and (min-width: 1200px) {
     /* padding-left: 81px; */
   }
 `
@@ -116,7 +116,7 @@ export const BlockQuote = styled.blockquote`
     max-height: 337px;
     z-index: 1; */
   }
-  @media only screen and (min-width: 992px) {
+  @media only screen and (min-width: 1024px) {
     grid-column: 1 / span 1;
     grid-row: 2;
     margin-right: -10vw;
@@ -127,7 +127,7 @@ export const BlockQuote = styled.blockquote`
     padding-left: 20px;
     padding-top: 30px;
   }
-  @media only screen and (min-width: 1310px) {
+  @media only screen and (min-width: 1200px) {
     margin-right: -12vw;
   }
 `
@@ -153,7 +153,7 @@ export const QuoteContainer = styled.div`
     font-size: 16px;
   }
 
-  @media only screen and (min-width: 992px) {
+  @media only screen and (min-width: 1024px) {
     font-size: 1.75vw;
     padding-left: 2.65vw;
     padding-top: 1.5vw;
@@ -180,7 +180,7 @@ export const LeftQuote = styled(FaQuoteLeft)`
   color: ${props => props.theme.colors.secondary};
   opacity: 0.15;
   z-index: -1;
-  @media only screen and (min-width: 992px) {
+  @media only screen and (min-width: 1024px) {
     font-size: 3.25vw;
   }
 `
@@ -219,7 +219,7 @@ grid-gap: 30px;
     max-height: 168px; 
   }
 }
-@media only screen and (min-width: 992px){
+@media only screen and (min-width: 1024px){
   grid-template-columns: 1fr 1fr; 
   grid-template-rows: 1fr; 
   > div {

@@ -7,7 +7,7 @@ export const StyledBackgroundImage = styled(BackgroundImage)`
   width: 100%;
   background-size: cover;
   background-position: 25% 50%;
-  height: 320px;
+  height: 86.2vw;
   position: relative;
   z-index: 10;
   ${Container} {
@@ -17,7 +17,7 @@ export const StyledBackgroundImage = styled(BackgroundImage)`
     align-items: center;
     height: auto;
     position: absolute;
-    bottom: 50px;
+    bottom: 13.71vw;
     min-width: 100%;
   }
 
@@ -30,30 +30,41 @@ export const StyledBackgroundImage = styled(BackgroundImage)`
   }
   @media only screen and (min-width: 350px) {
     h1 {
-      font-size: 25px;
-      max-width: 342px;
+      font-size: 6.72vw;
+      line-height: 1.4;
+      max-width: 91.49vw;
     }
   }
-  @media only screen and (min-width: 600px) {
-    height: 420px;
+  @media only screen and (min-width: 768px) {
+    height: 54.69vw;
     h1 {
       font-size: 36px;
       line-height: 51px;
       max-width: 426px;
     }
     ${Container} {
-      bottom: 45px;
+      bottom: 5.86vw;
     }
   }
-  @media only screen and (min-width: 1310px) {
-    height: calc(100vh - 195px);
+  @media only screen and (min-width: 1024px) {
+    height: 42.5vw;
     h1 {
-      font-size: 65px;
-      line-height: 82px;
-      max-width: 800px;
+      font-size: 3.25vw;
+      line-height: 1.26;
+      max-width: 45vw;
     }
     ${Container} {
-      bottom: 80px;
+      bottom: 5.9vw;
+    }
+  }
+
+  @media only screen and (min-width: 2000px) {
+    h1 {
+      font-size: 65px;
+      max-width: 900px;
+    }
+    ${Container} {
+      bottom: 118px;
     }
   }
 `
@@ -62,7 +73,7 @@ export const HeroButton = styled(Button)`
   position: relative;
   z-index: 10000;
   display: inline-flex;
-  max-width: calc(156px - 2rem);
+  /* max-width: calc(156px - 2rem); */
   margin: 0 0.2rem;
   font-size: 13px;
   cursor: pointer;
@@ -93,11 +104,19 @@ export const HeroButton = styled(Button)`
     margin: 0 1rem;
   }
   @media only screen and (min-width: 1024px) {
-    max-width: 322px;
+    min-width: 16.1vw;
+    height: 3.75vw;
+    font-weight: bold;
+    font-size: 1.3vw !important;
+    border-radius: 0.2vw;
   }
-  @media only screen and (min-width: 1310px) {
+  @media only screen and (min-width: 2000px) {
+    min-width: 322px;
     height: 70px;
-    width: 322px;
+    font-size: 27px;
+    border-radius: 4px;
+    /* height: 70px; */
+    /* width: 322px; */
   }
 `
 

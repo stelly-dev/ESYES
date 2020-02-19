@@ -15,8 +15,8 @@ export const StyledHeader = styled.header`
     justify-content: space-between;
     align-items: center;
     height: 100%;
-    padding-top: 25px;
-    padding-bottom: 25px;
+    padding-top: 1.75vw;
+    padding-bottom: 1.75vw;
   }
   @media only screen and (min-width: 600px) {
     height: 152px;
@@ -24,34 +24,30 @@ export const StyledHeader = styled.header`
       flex-direction: row;
     }
   }
-  @media only screen and (min-width: 1310px) {
-    height: 195px;
+  @media only screen and (min-width: 1024px) {
+    height: 9.75vw;
     > div {
       flex-direction: row;
+    }
+  }
+  @media only screen and (min-width: 2000px) {
+    height: 195px;
+    > div {
+      padding: 35px 0;
     }
   }
 `
 
 export const LogoContainer = styled(Link)`
-  @media only screen and (min-width: 320px) {
-    min-width: 200px;
-  }
-  @media only screen and (min-width: 375px) {
-    padding: 0;
-  }
-  display: block;
-  height: 100%;
-  width: 100%;
-  max-width: 343px;
-  max-height: 102px;
-  min-height: 102px;
   min-width: 343px;
-  @media only screen and (min-width: 1200px) {
-    max-width: 300px;
+  @media only screen and (min-width: 1024px) {
+    min-width: 19.8vw;
+    margin-right: 8.6vw;
+    max-height: auto;
   }
-  @media only screen and (min-width: 1400px) {
+  @media only screen and (min-width: 2000px) {
     max-width: 396px;
     max-height: 118px;
-    margin-right: 50px;
+    min-width: 396px;
   }
 `

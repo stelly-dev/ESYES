@@ -17,7 +17,7 @@ export const BioContainer = styled.div`
     font-size: 16px;
     line-height: 27px;
   }
-  @media only screen and (min-width: 1310px) {
+  @media only screen and (min-width: 1200px) {
     grid-gap: 27px;
     p {
       font-size: 20px;
@@ -41,7 +41,7 @@ export const StyledStaffCard = styled.div`
     color: ${props => props.theme.colors.secondary};
     text-transform: uppercase;
   }
-  @media only screen and (min-width: 1310px) {
+  @media only screen and (min-width: 1200px) {
     grid-template-columns: 420px 1fr;
   }
 `
@@ -56,7 +56,7 @@ export const CircleContainer = styled.div`
   justify-content: center;
   align-items: center;
   margin: 0 auto;
-  @media only screen and (min-width: 1310px) {
+  @media only screen and (min-width: 1200px) {
     width: 396px;
     height: 396px;
   }
@@ -66,7 +66,7 @@ export const StyledCircleImage = styled(Img)`
   width: 225px;
   height: 225px;
   border-radius: 50%;
-  @media only screen and (min-width: 1310px) {
+  @media only screen and (min-width: 1200px) {
     width: 357px;
     height: 357px;
   }

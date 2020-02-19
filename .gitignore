@@ -1,2 +1,4 @@
 node_modules/
 .env
+studio/dist/
+backup.txt

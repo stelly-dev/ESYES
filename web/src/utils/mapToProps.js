@@ -121,3 +121,7 @@ export function mapTwoColumnToProps({ _key, col1, col2 }) {
     rightCol: col2,
   }
 }
+
+export function mapVimeoSectionToProps({ props }) {
+  return props
+}
