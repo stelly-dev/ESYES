@@ -1,3 +1,6 @@
+import React from "react";
+import { AiOutlineAlignCenter, AiOutlineAlignRight } from "react-icons/ai";
+import { FiPhone } from "react-icons/fi";
 export default {
   name: "blockContent",
   title: "Block Content",
@@ -18,6 +21,28 @@ export default {
       ],
       lists: [{ title: "Bullet", value: "bullet" }],
       marks: {
+        decorators: [
+          { title: "Strong", value: "strong" },
+          { title: "Emphasis", value: "em" },
+          {
+            title: "Centered",
+            value: "center",
+            blockEditor: {
+              icon: () => <AiOutlineAlignCenter />
+            }
+          },
+          {
+            title: "Right Aligned",
+            value: "right",
+            blockEditor: {
+              icon: () => <AiOutlineAlignRight />
+            }
+          },
+          {
+            title: "Slim",
+            value: "slim"
+          }
+        ],
         annotations: [
           {
             name: "internalLink",
@@ -77,12 +102,27 @@ export default {
                 to: [{ type: "files" }]
               }
             ]
+          },
+          {
+            name: "telephone",
+            type: "object",
+            title: "Telephone number",
+            fields: [
+              {
+                name: "number",
+                type: "string",
+                title: "Telephone Number",
+                description: "Must be of the form x-xxx-xxx-xxxx"
+              }
+            ],
+            icon: FiPhone
           }
         ]
       }
     },
     { type: "youtube" },
     { type: "vimeo" },
-    { type: "image" }
+    { type: "image" },
+    { type: "linebreak" }
   ]
 };

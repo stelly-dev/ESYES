@@ -47,6 +47,10 @@ const LeftQuote = styled(FaQuoteLeft)`
   }
 `
 
+const linebreak = ({ mark, children }) => {
+  return <br />
+}
+
 const internalLink = ({ mark, children }) => {
   const { reference = {} } = mark
   const to = `/${slugify(reference.pageName).toLowerCase()}/`
@@ -54,6 +58,24 @@ const internalLink = ({ mark, children }) => {
 }
 
 const link = ({ mark, children }) => {
+  const { href = "" } = mark
+  return (
+    <TextLink as="a" href={href}>
+      {children}
+    </TextLink>
+  )
+}
+
+const phone = ({ mark, children }) => {
+  const { number = "" } = mark
+  return (
+    <TextLink as="a" href={`tel:${number}`}>
+      {children}
+    </TextLink>
+  )
+}
+
+const fileLink = ({ mark, children }) => {
   const { href = "" } = mark
   return (
     <TextLink as="a" href={href}>
@@ -71,21 +93,17 @@ const slim = props => {
 }
 
 export const ArticleLink = styled(Link)`
+  ${typography}
   text-decoration: none;
   color: ${props => props.theme.colors.secondary};
   font-weight: bold;
-  font-size: 18px;
-  line-height: 23px;
   transition: color 250ms ease-in;
+  display: inline-block;
   :visited {
     color: ${props => props.theme.colors.secondary};
   }
   :hover {
     color: ${props => props.theme.colors.primary};
-  }
-  @media only screen and (min-width: 1200px) {
-    font-size: 18px;
-    line-height: 33px;
   }
 `
 
@@ -97,10 +115,15 @@ const chevronLink = ({ mark, children }) => {
   const { reference = {} } = mark
   const to = `/${slugify(reference.pageName).toLowerCase()}/`
   return (
-    <ArticleLink to={to}>
-      {children}
-      <StyledChevron />
-    </ArticleLink>
+    <>
+      <ArticleLink
+        to={to}
+        fontSize={["4.3vw", "4.3vw", "2.08vw", "14px", "1.25vw", "20px"]}
+      >
+        {children}
+        <StyledChevron />
+      </ArticleLink>
+    </>
   )
 }
 
@@ -179,7 +202,7 @@ const BlockRenderer = props => {
       return (
         <H3
           fontSize={["5.65vw", "5.65vw", "2.7vw", "27px", "2.25vw", "35px"]}
-          lineHeight={["1.333"]}
+          lineHeight={["1.5882", "1.333"]}
         >
           {props.children}
         </H3>
@@ -187,7 +210,7 @@ const BlockRenderer = props => {
     case "h4":
       return (
         <H4
-          fontSize={["1.2rem", "1.2rem", "2.21vw", "20.4px", "1.7vw", "35px"]}
+          fontSize={["4.57vw", "4.57vw", "2.21vw", "20.4px", "1.7vw", "35px"]}
           lineHeight={["1.485714"]}
         >
           {props.children}
@@ -239,12 +262,15 @@ const serializers = {
       const imageId = asset["_id"]
       const fluidProps = getFluidGatsbyImage(
         asset["_id"],
-        { maxWidth: "300px" },
+        { maxWidth: 768 },
         clientConfig.sanity
       )
       return (
         <StyledImage objectFit="contain" fluid={fluidProps} key={node._key} />
       )
+    },
+    linebreak: ({ node }) => {
+      return <br />
     },
   },
 }
@@ -256,7 +282,15 @@ const Block = props => {
         <BlockContent
           blocks={props.blocks || props}
           serializers={{
-            marks: { slim, center, link, internalLink, chevronLink },
+            marks: {
+              slim,
+              center,
+              link,
+              internalLink,
+              chevronLink,
+              phone,
+              fileLink,
+            },
             types: { block: BlockRenderer, ...serializers.types },
           }}
         />

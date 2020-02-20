@@ -35,7 +35,12 @@ export const StyledSection = styled.section`
   }
 `
 export const Article = styled.article`
+  margin-bottom: 13.44vw;
+  ${Container} {
+    padding: 0;
+  }
   @media only screen and (min-width: 768px) {
+    margin-bottom: 6.58vw;
     width: 46.22vw;
     h3 {
       margin-top: 0;
@@ -43,6 +48,7 @@ export const Article = styled.article`
   }
 
   @media only screen and (min-width: 1024px) {
+    margin-bottom: ;
   }
 
   @media only screen and (min-width: 2000px) {

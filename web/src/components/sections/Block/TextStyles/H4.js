@@ -12,6 +12,13 @@ export const H4 = styled.h4`
   a:hover {
     color: ${props => props.theme.colors.secondary};
   }
+  margin-top: 5.9vw; 
+  margin-bottom: 6.18vw; 
+
+  @media only screen and (min-width: 768px){
+    margin-top: 
+    margin-bottom: 
+  }
 
   @media only screen and (min-width: 1024px) {
     margin-top: 1.3vw !important;

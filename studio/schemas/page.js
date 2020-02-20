@@ -5,7 +5,12 @@ import {
   AiOutlineAlignRight
 } from "react-icons/ai";
 
-import { FiExternalLink, FiLink, FiChevronRight } from "react-icons/fi";
+import {
+  FiExternalLink,
+  FiLink,
+  FiChevronRight,
+  FiPhone
+} from "react-icons/fi";
 
 import { MdAttachFile } from "react-icons/md";
 
@@ -95,6 +100,20 @@ export default {
                   }
                 ],
                 icon: FiExternalLink
+              },
+              {
+                name: "telephone",
+                type: "object",
+                title: "Telephone number",
+                fields: [
+                  {
+                    name: "number",
+                    type: "string",
+                    title: "Telephone Number",
+                    description: "Must be of the form x-xxx-xxx-xxxx"
+                  }
+                ],
+                icon: FiPhone
               },
               {
                 name: "chevronLink",

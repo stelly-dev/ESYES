@@ -6,6 +6,10 @@ import BackgroundImage from "gatsby-background-image"
 export const CircleLink = styled(Link)`
   color: white;
   text-decoration: none;
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+  border: 1px solid red;
   :visited {
     color: white;
   }
@@ -15,12 +19,14 @@ export const CircleLink = styled(Link)`
     margin: 0;
     margin-bottom: 0.81vw;
     margin-top: -8vw;
+    text-align: center;
   }
   p {
     font-size: 3.23vw;
-    line-height: 0.75;
+    line-height: 1.3;
     font-weight: bold;
     font-style: italic;
+    text-align: center;
   }
 
   @media only screen and (min-width: 768px) {
@@ -54,23 +60,20 @@ export const CircleLink = styled(Link)`
       font-size: 18px;
       line-height: 27px;
     }
-    /* width: calc(100% - 20px); */
-    /* height: calc(100% - 20px); */
   }
 `
 
 export const CircleContainer = styled.div`
   background: transparent linear-gradient(90deg, #f9a33e 0%, #fee006 100%) 0% 0%
     no-repeat padding-box;
-  /* border-radius: 50%; */
-  width: 44.35vw;
-  height: 44.35vw;
-  max-width: 44.35vw;
-  max-height: 44.35vw;
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 43.35vw;
+  height: 43.35vw;
+  max-width: 43.35vw;
+  max-height: 43.35vw;
   @media only screen and (min-width: 768px) {
     max-width: 21.48vw;
     max-height: 21.48vw;
@@ -130,14 +133,14 @@ export const CircleSection = styled.section`
 export const CircleBackgroundImage = styled(BackgroundImage)`
   border-radius: 50%;
   overflow: hidden;
-  height: 41.2vw;
-  width: 41.2vw;
+  height: 40.2vw;
+  width: 40.2vw;
   display: flex;
   justify-content: center;
   align-items: center;
   div {
-    width: 41.2vw;
-    height: 41.2vw;
+    width: 40.2vw;
+    height: 40.2vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -177,114 +180,3 @@ export const CircleBackgroundImage = styled(BackgroundImage)`
     }
   }
 `
-
-// export const CircleLink = styled(Link)`
-//   text-decoration: none;
-//   color: inherit;
-//   :visited {
-//     color: inherit;
-//   }
-// `
-
-// export const CircleSection = styled.section`
-//   ${Container} {
-//     display: flex;
-//     flex-wrap: wrap;
-//     justify-content: space-between;
-//     text-align: center;
-//   }
-//   @supports (display: grid) {
-//     ${Container} {
-//       display: grid;
-//       grid-template-columns: 1fr 1fr;
-//       grid-template-rows: 1fr 1fr;
-//       grid-gap: 12px;
-//       justify-content: center;
-//       margin: 0 auto;
-//     }
-//   }
-//   @media only screen and (min-width: 720px) {
-//     @supports (display: grid) {
-//       ${Container} {
-//         grid-template-columns: repeat(4, 20vw);
-//         grid-template-rows: 20vw;
-//         justify-content: space-around;
-//       }
-//     }
-//   }
-
-// `
-
-// export const CircleContainer = styled.div`
-//   display: flex;
-//   width: calc(50vw - 2rem - 20px);
-//   height: calc(50vw - 2rem - 20px);
-//   justify-content: center;
-//   align-items: center;
-
-//   @media only screen and (min-width: 768px) {
-//     width: calc(25vw - 2rem - 20px);
-//     height: calc(25vw - 2rem - 20px);
-//   }
-
-//   @supports (display: grid) {
-//     width: 100%;
-//     height: 100%;
-//     border-radius: 50%;
-//     background: transparent linear-gradient(90deg, #f9a33e 0%, #fee006 100%) 0%
-//       0% no-repeat padding-box;
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-//     ::after {
-//       content: "";
-//       padding-bottom: 100%;
-//     }
-//   }
-// `
-
-// export const CircleBackgroundImage = styled(BackgroundImage)`
-//   width: calc(50vw - 2rem);
-//   height: calc(50vw - 2rem);
-//   border-radius: 50%;
-//   overflow: hidden;
-//   color: white;
-//   div {
-//     width: 100%;
-//     height: 100%;
-//     display: flex;
-//     flex-direction: column;
-//     justify-content: center;
-//     align-items: center;
-//     /* padding-bottom: 1.5rem; */
-//     text-shadow: 0px 3px 6px #00000029;
-//     background-color: rgba(0, 0, 0, 0.4);
-//     border-radius: 50%;
-//     transition: all 0.3s ease-in;
-//     :hover {
-//       background-color: transparent;
-//     }
-//   }
-
-//   h1 {
-//     font-size: 18px;
-//     margin: 0;
-//   }
-//   p {
-//     font-size: 12px;
-//     line-height: 16px;
-//     font-weight: 700;
-//     font-style: italic;
-//   }
-//   @media only screen and (min-width: 720px) {
-//     width: calc(100% - 20px);
-//     height: calc(100% - 20px);
-//     h1 {
-//       font-size: 2vw;
-//       line-height: 1.8;
-//     }
-//     p {
-//       font-size: 1.4vw;
-//     }
-//   }
-// `
