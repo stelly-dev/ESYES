@@ -1,3 +1,5 @@
+require("dotenv").config()
+
 module.exports = {
   sanity: {
     projectId: process.env.SANITY_PROJECT_ID,
