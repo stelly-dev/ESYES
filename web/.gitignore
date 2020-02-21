@@ -55,7 +55,7 @@ typings/
 .env*
 
 # config file referencing Sanity Secrets
-client-config.js
+# client-config.js
 
 # gatsby files
 .cache/
