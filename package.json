@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "website and studio for Boulder County's ESYES initiative. ",
   "scripts": {
-    "start": "lerna run empty-cache && lerna run start --parallel"
+    "start": "lerna run empty-cache && lerna run start --parallel",
+    "build": "cd web && gatsby build"
   },
   "author": "Kelly Stratton",
   "license": "ISC",

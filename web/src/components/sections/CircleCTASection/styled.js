@@ -20,6 +20,7 @@ export const CircleLink = styled(Link)`
     margin-bottom: 0.81vw;
     margin-top: -8vw;
     text-align: center;
+    max-width: 36.82vw;
   }
   p {
     font-size: 3.23vw;
@@ -27,6 +28,7 @@ export const CircleLink = styled(Link)`
     font-weight: bold;
     font-style: italic;
     text-align: center;
+    max-width: 40.32vw;
   }
 
   @media only screen and (min-width: 768px) {
@@ -34,9 +36,11 @@ export const CircleLink = styled(Link)`
       font-size: 2.34vw;
       line-height: 1;
       margin-top: -3.5vw;
+      max-width: 17.18vw;
     }
     p {
       font-size: 1.56vw;
+      max-width: 19.53vw;
     }
   }
   @media only screen and (min-width: 1024px) {
@@ -44,10 +48,12 @@ export const CircleLink = styled(Link)`
       font-size: 2.1vw;
       margin-top: -3vw;
       line-height: 1.238;
+      max-width: 15.4vw;
     }
     p {
       font-size: 1.1vw;
       line-height: 1.2273;
+      max-width: 17.9vw;
     }
   }
   @media only screen and (min-width: 2000px) {
@@ -55,10 +61,12 @@ export const CircleLink = styled(Link)`
       margin-top: -60px;
       font-size: 38px;
       line-height: 52px;
+      max-width: 308px;
     }
     p {
       font-size: 18px;
       line-height: 27px;
+      max-width: 358px;
     }
   }
 `

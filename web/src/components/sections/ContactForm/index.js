@@ -70,16 +70,16 @@ const ContactForm = ({ location }) => {
             />
             <div>
               <select>
-                <option value="city of boulder">City Of Boulder</option>
-                <option value="town of Erie">Town of Erie</option>
-                <option value="town of Jamestown">Town of Jamestown</option>
-                <option value="city of Lafayette">City of Lafayette</option>
-                <option value="city of Longmont">City of Longmont</option>
-                <option value="city of Louisville">City of Louisville</option>
-                <option value="town of Lyons">Town of Lyons</option>
-                <option value="town of Nederland">Town of Nederland</option>
-                <option value="town of Superior">Town of Superior</option>
-                <option value="town of Ward">Town of Ward</option>
+                <option value="boulder">Boulder</option>
+                <option value="Erie">Erie</option>
+                <option value="Jamestown">Jamestown</option>
+                <option value="Lafayette">Lafayette</option>
+                <option value="Longmont">Longmont</option>
+                <option value="Louisville">Louisville</option>
+                <option value="Lyons">Lyons</option>
+                <option value="Nederland">Nederland</option>
+                <option value="Superior">Superior</option>
+                <option value="Ward">Ward</option>
                 <option value="Allenspark">Allenspark</option>
                 <option value="Coal Creek Canyon">Coal Creek Canyon</option>
                 <option value="Eldora">Eldora</option>

@@ -1341,6 +1341,12 @@ abab@^2.0.0:
   version "2.0.3"
   resolved "https://registry.npmjs.org/abab/-/abab-2.0.3.tgz#623e2075e02eb2d3f2475e49f99c91846467907a"
 
+abort-controller@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.npmjs.org/abort-controller/-/abort-controller-2.0.3.tgz#b174827a732efadff81227ed4b8d1cc569baf20a"
+  dependencies:
+    event-target-shim "^5.0.0"
+
 accepts@~1.3.7:
   version "1.3.7"
   resolved "https://registry.npmjs.org/accepts/-/accepts-1.3.7.tgz#531bc726517a3b2b41f850021c6cc15eaab507cd"
@@ -1973,7 +1979,6 @@ camelcase@^4.1.0:
 camelcase@^5.0.0:
   version "5.3.1"
   resolved "https://registry.yarnpkg.com/camelcase/-/camelcase-5.3.1.tgz#e3c9b31569e106811df242f715725a1f4c494320"
-  integrity sha512-L28STB170nwWS63UjtlEOE3dldQApaJXZkOI1uMFfzf3rRuPegHaHesyee+YxQ+W6SvRDQV6UrdOdRiR153wJg==
 
 caniuse-api@^2.0.0:
   version "2.0.0"
@@ -3097,6 +3102,10 @@ event-emitter@~0.3.5:
   dependencies:
     d "1"
     es5-ext "~0.10.14"
+
+event-target-shim@^5.0.0:
+  version "5.0.1"
+  resolved "https://registry.npmjs.org/event-target-shim/-/event-target-shim-5.0.1.tgz#5d4d3ebdf9583d63a5333ce2deb7480ab2b05789"
 
 events@^3.0.0:
   version "3.1.0"
@@ -4577,7 +4586,6 @@ lodash.memoize@^4.1.2:
 lodash.once@^4.1.1:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/lodash.once/-/lodash.once-4.1.1.tgz#0dd3971213c7c56df880977d504c88fb471a97ac"
-  integrity sha1-DdOXEhPHxW34gJd9UEyI+0cal6w=
 
 lodash.sortby@^4.7.0:
   version "4.7.0"
@@ -4667,7 +4675,6 @@ make-error@^1.3.0:
 make-event-props@^1.1.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/make-event-props/-/make-event-props-1.2.0.tgz#96b87d88919533b8f8934b58b4c3d5679459a0cf"
-  integrity sha512-BmWFkm/jZzVH9A0tEBdkjAARUz/eha+5IRyfOndeSMKRadkgR5DawoBHoRwLxkYmjJOI5bHkXKpaZocxj+dKgg==
 
 map-cache@^0.2.2:
   version "0.2.2"
@@ -4731,7 +4738,6 @@ memory-fs@^0.4.0, memory-fs@~0.4.1:
 merge-class-names@^1.1.1:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/merge-class-names/-/merge-class-names-1.3.0.tgz#c4cdc1a981a81dd9afc27aa4287e912a337c5dee"
-  integrity sha512-k0Qaj36VBpKgdc8c188LEZvo6v/zzry/FUufwopWbMSp6/knfVFU/KIB55/hJjeIpg18IH2WskXJCRnM/1BrdQ==
 
 merge-descriptors@1.0.1:
   version "1.0.1"
@@ -4939,7 +4945,6 @@ nice-try@^1.0.4:
 node-ensure@^0.0.0:
   version "0.0.0"
   resolved "https://registry.yarnpkg.com/node-ensure/-/node-ensure-0.0.0.tgz#ecae764150de99861ec5c810fd5d096b183932a7"
-  integrity sha1-7K52QVDemYYexcgQ/V0Jaxg5Mqc=
 
 node-fetch@^1.0.1:
   version "1.7.3"
@@ -5355,7 +5360,6 @@ pbkdf2@^3.0.3:
 pdfjs-dist@2.1.266:
   version "2.1.266"
   resolved "https://registry.yarnpkg.com/pdfjs-dist/-/pdfjs-dist-2.1.266.tgz#cded02268b389559e807f410d2a729db62160026"
-  integrity sha512-Jy7o1wE3NezPxozexSbq4ltuLT0Z21ew/qrEiAEeUZzHxMHGk4DUV1D7RuCXg5vJDvHmjX1YssN+we9QfRRgXQ==
   dependencies:
     node-ensure "^0.0.0"
     worker-loader "^2.0.0"
@@ -6314,7 +6318,6 @@ react-icons@^2.2.7:
 react-icons@^3.8.0:
   version "3.8.0"
   resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-3.8.0.tgz#229de5904809696c9f46932bd9b6126b2522866e"
-  integrity sha512-rA/8GRKjPulft8BSBSMsHkE1AGPqJ7LjNsyk0BE7XjG70Iz62zOled2SJk7LDo8x9z86a3xOstDlKlMZ4pAy7A==
   dependencies:
     camelcase "^5.0.0"
 
@@ -6387,7 +6390,6 @@ react-onclickoutside@^6.7.1:
 react-pdf@^4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/react-pdf/-/react-pdf-4.1.0.tgz#fcb874f28050fe9593c4e04652c7bff94bb1acf9"
-  integrity sha512-SYwkWc+vRQHfrpDls3DOgn4G+wT0mYGJRor20e28GPRW8VB+6o8WqZ4QZxsl50z+dKM7UscXFnK/02eN3NXi2g==
   dependencies:
     "@babel/runtime" "^7.0.0"
     lodash.once "^4.1.1"
@@ -6820,6 +6822,13 @@ sanity-plugin-color-list@^1.2.1:
   resolved "https://registry.npmjs.org/sanity-plugin-color-list/-/sanity-plugin-color-list-1.2.1.tgz#2f2f1c35b11055453f5eb202bb6cb162eecf7985"
   dependencies:
     "@ctrl/tinycolor" "^2.5.4"
+
+sanity-plugin-dashboard-widget-netlify@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.npmjs.org/sanity-plugin-dashboard-widget-netlify/-/sanity-plugin-dashboard-widget-netlify-1.0.1.tgz#e510e40e05b9bcfdf11a4a2affed590e191bb93b"
+  dependencies:
+    abort-controller "^2.0.3"
+    react-props-stream "^1.0.0"
 
 sax@~1.2.4:
   version "1.2.4"
@@ -7965,7 +7974,6 @@ wordwrap@0.0.2:
 worker-loader@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/worker-loader/-/worker-loader-2.0.0.tgz#45fda3ef76aca815771a89107399ee4119b430ac"
-  integrity sha512-tnvNp4K3KQOpfRnD20m8xltE3eWh89Ye+5oj7wXEEHKac1P4oZ6p9oTj8/8ExqoSBnk9nu5Pr4nKfQ1hn2APJw==
   dependencies:
     loader-utils "^1.0.0"
     schema-utils "^0.4.0"

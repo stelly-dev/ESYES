@@ -135,7 +135,7 @@ export const ContactFormSection = styled.section`
 
 export const Brand = () => (
   <span>
-    energy<span>smart</span>
+    energy<span>SMART</span>
   </span>
 )
 
@@ -152,6 +152,7 @@ export const Title = styled.h1`
   font-weight: 400;
   text-align: center;
   /* margin-bottom: 50px; */
+  line-height: 1.5;
   span {
     color: ${props => props.theme.colors.primary};
     font-weight: 800;

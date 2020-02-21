@@ -12,7 +12,7 @@ const query = graphql`
     sanityHeader {
       logo {
         asset {
-          fluid(maxWidth: 396) {
+          fluid(maxWidth: 792) {
             ...GatsbySanityImageFluid_noBase64
           }
         }

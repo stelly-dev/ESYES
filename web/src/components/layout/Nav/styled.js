@@ -36,7 +36,7 @@ export const NavContainer = styled.div`
   width: 100%;
   justify-content: space-between;
   align-items: center;
-  @media only screen and (min-width: 600px) {
+  @media only screen and (min-width: 768px) {
     flex-direction: column;
     align-items: flex-end;
     height: 100%;
@@ -44,7 +44,7 @@ export const NavContainer = styled.div`
 `
 
 export const NavMenuButtonWrapper = styled.div`
-  @media only screen and (min-width: 600px) {
+  @media only screen and (min-width: 768px) {
     display: none;
   }
 `
@@ -73,7 +73,7 @@ export const StyledButton = styled(Button)`
 `
 
 export const StyledNav = styled.nav`
-  @media only screen and (min-width: 600px) {
+  @media only screen and (min-width: 768px) {
     width: 75px;
   }
   @media only screen and (min-width: 1024px) {
@@ -89,7 +89,7 @@ export const NavList = styled.ul`
   > li:not(:last-of-type) {
     display: none;
   }
-  @media only screen and (min-width: 600px) {
+  @media only screen and (min-width: 768px) {
     > li:nth-last-child(-n + 2) {
       display: inline-block;
     }

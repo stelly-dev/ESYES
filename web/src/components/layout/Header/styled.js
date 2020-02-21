@@ -18,7 +18,7 @@ export const StyledHeader = styled.header`
     padding-top: 1.75vw;
     padding-bottom: 1.75vw;
   }
-  @media only screen and (min-width: 600px) {
+  @media only screen and (min-width: 768px) {
     height: 152px;
     > div {
       flex-direction: row;

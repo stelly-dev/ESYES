@@ -14,13 +14,12 @@
     "@sanity/default-login",
     "@sanity/desk-tool",
     "@sanity/color-input",
-    "color-list"
+    "color-list",
+    "dashboard-widget-netlify"
   ],
   "env": {
     "development": {
-      "plugins": [
-        "@sanity/vision"
-      ]
+      "plugins": ["@sanity/vision"]
     }
   },
   "parts": [
@@ -35,6 +34,10 @@
     {
       "implements": "part:@sanity/base/brand-logo",
       "path": "./logo/energySmartLogo.js"
+    },
+    {
+      "implements": "part:@sanity/dashboard/config",
+      "path": "src/dashboardConfig.js"
     }
   ]
 }

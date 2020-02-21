@@ -30,6 +30,7 @@ module.exports = {
         watchMode: true,
       },
     },
+    "gatsby-source-sanity-transform-images",
     {
       resolve: `gatsby-plugin-styled-components`,
       options: {},
