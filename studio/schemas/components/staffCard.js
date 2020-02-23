@@ -23,6 +23,7 @@ export default {
       name: "jobPosition",
       title: "Job Position"
     },
+
     {
       type: "blockContent",
       name: "bio",
