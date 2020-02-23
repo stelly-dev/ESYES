@@ -37,10 +37,9 @@ export const query = graphql`
     }
   }
 `
-
+// prettier-ignore
 const PageTemplate = props => {
   const { data, errors } = props
-
   const content = data && data.page && data.page["_rawContent"]
   return (
     <Layout>
@@ -54,78 +53,31 @@ const PageTemplate = props => {
             case "vimeo":
               return <VimeoSection key={section._key} url={section.url} />
             case "twoColumn":
-              return (
-                <TwoColumn
-                  key={section._key}
-                  {...mapTwoColumnToProps(section)}
-                />
-              )
+               return <TwoColumn key={section._key} {...mapTwoColumnToProps(section)} />
             case "blockButton":
-              return (
-                <BlockButton
-                  {...mapBlockButtonToProps(section)}
-                  key={section._key}
-                />
-              )
+               return  <BlockButton {...mapBlockButtonToProps(section)} key={section._key} />
             case "banner":
-              return (
-                <Banner {...mapBannerToProps(section)} key={section._key} />
-              )
+               return  <Banner {...mapBannerToProps(section)} key={section._key} />
             case "circleCTAList":
-              return (
-                <CircleCTASection
-                  {...mapCircleCTASectionToProps(section)}
-                  key={section._key}
-                />
-              )
+               return  <CircleCTASection {...mapCircleCTASectionToProps(section)} key={section._key} />
             case "reviewSection":
-              return (
-                <ReviewSection
-                  {...mapReviewSectionToProps(section)}
-                  key={section._key}
-                />
-              )
+               return  <ReviewSection {...mapReviewSectionToProps(section)} key={section._key} />
             case "simpleCTA":
-              return (
-                <SimpleCTA
-                  {...mapSimpleCTAToProps(section)}
-                  key={section._key}
-                />
-              )
+               return <SimpleCTA {...mapSimpleCTAToProps(section)} key={section._key} />
             case "homePageText":
-              return (
-                <HomePageTextSection
-                  {...mapHomePageTextSectionToProps(section)}
-                  key={section._key}
-                />
-              )
+               return <HomePageTextSection {...mapHomePageTextSectionToProps(section)} key={section._key} />
             case "imageLeftSection":
-              return (
-                <ImageLeftSection
-                  {...mapImageLeftSectionToProps(section)}
-                  key={section._key}
-                />
-              )
+               return <ImageLeftSection {...mapImageLeftSectionToProps(section)} key={section._key} />
             case "pageHero":
-              return <Hero {...mapHeroToProps(section)} key={section._key} />
+              return <Hero {...mapHeroToProps(section)} key={section._key} section={section} id={section.backgroundImage.asset["_id"]}/>
             case "block":
               return <Block {...section} key={section._key} />
             case "staffList":
-              return (
-                <StaffList
-                  {...mapStaffListToProps(section)}
-                  key={section._key}
-                />
-              )
+              return <StaffList {...mapStaffListToProps(section)} key={section._key} />
             case "youtube":
               return <YoutubeSection url={section.url} key={section._key} />
             default:
-              return null
-            // <div key={Math.random()}>
-            //   <span style={{ color: "red" }}>
-            //     No resolver for type "{_type}" found.
-            //   </span>
-            // </div>
+              return <div key={Math.random()}> <span style={{ color: "red" }}> No resolver for type "{_type}" found. </span> </div>
           }
         })}
     </Layout>

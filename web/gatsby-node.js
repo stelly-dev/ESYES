@@ -1,5 +1,32 @@
 const slugify = require("slugify")
 
+const isArray = o => {
+  return Object.prototype.toString.call(o) === "[object Array]"
+}
+
+const traverseObject = obj => {
+  for (let key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      traverse(obj[key])
+    }
+  }
+}
+
+const traverseArray = arr => {
+  arr.forEach(x => {
+    traverse(x)
+  })
+}
+// sanity.imageAsset
+const traverse = x => {
+  if (isArray(x)) {
+    traverseArray(x)
+  } else if (typeof x === "object" && x !== null) {
+    traverseObject(x)
+  } else {
+  }
+}
+
 async function createRootPages(graphql, actions, reporter) {
   const { createPage } = actions
   const result = await graphql(`
@@ -9,7 +36,7 @@ async function createRootPages(graphql, actions, reporter) {
           node {
             id
             pageName
-            _rawContent(resolveReferences: { maxDepth: 5 })
+            _rawContent(resolveReferences: { maxDepth: 10 })
           }
         }
       }
@@ -23,7 +50,12 @@ async function createRootPages(graphql, actions, reporter) {
     const path = slug === "Home-Page" ? "/" : `/${slug}/`.toLowerCase()
 
     reporter.info(`Creating Page: ${path}`)
-
+    /*
+     *reporter.info(`Raw Content: ${_rawContent}`)
+     */
+    /*
+     *traverse(_rawContent)
+     */
     createPage({
       path,
       component: require.resolve(`./src/templates/Page`),
