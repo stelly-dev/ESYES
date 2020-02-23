@@ -12,7 +12,7 @@ export default {
       name: "buttonDestination",
       title: "Destination Page",
       type: "reference",
-      to: [{ type: "page" }, { type: "files" }]
+      to: [{ type: "page" }]
     }
   ]
 };
