@@ -22,6 +22,12 @@ module.exports = {
     `gatsby-plugin-react-helmet`,
     // `gatsby-plugin-sitemap`,
     {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        icon: `src/images/favicon.png`,
+      },
+    },
+    {
       resolve: `gatsby-source-sanity`,
       options: {
         projectId: process.env.SANITY_PROJECT_ID,
