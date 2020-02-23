@@ -28,6 +28,7 @@
     "react-icons": "^3.8.0",
     "react-pdf": "^4.1.0",
     "sanity-plugin-color-list": "^1.2.1",
+    "sanity-plugin-content-model-graph": "^1.1.0",
     "sanity-plugin-dashboard-widget-netlify": "^1.0.1"
   },
   "devDependencies": {}

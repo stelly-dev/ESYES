@@ -15,11 +15,14 @@
     "@sanity/desk-tool",
     "@sanity/color-input",
     "color-list",
-    "dashboard-widget-netlify"
+    "dashboard-widget-netlify",
+    "content-model-graph"
   ],
   "env": {
     "development": {
-      "plugins": ["@sanity/vision"]
+      "plugins": [
+        "@sanity/vision"
+      ]
     }
   },
   "parts": [
