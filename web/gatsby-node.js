@@ -1,31 +1,31 @@
 const slugify = require("slugify")
 
-const isArray = o => {
-  return Object.prototype.toString.call(o) === "[object Array]"
-}
+// const isArray = o => {
+//   return Object.prototype.toString.call(o) === "[object Array]"
+// }
 
-const traverseObject = obj => {
-  for (let key in obj) {
-    if (obj.hasOwnProperty(key)) {
-      traverse(obj[key])
-    }
-  }
-}
+// const traverseObject = obj => {
+//   for (let key in obj) {
+//     if (obj.hasOwnProperty(key)) {
+//       traverse(obj[key])
+//     }
+//   }
+// }
 
-const traverseArray = arr => {
-  arr.forEach(x => {
-    traverse(x)
-  })
-}
-// sanity.imageAsset
-const traverse = x => {
-  if (isArray(x)) {
-    traverseArray(x)
-  } else if (typeof x === "object" && x !== null) {
-    traverseObject(x)
-  } else {
-  }
-}
+// const traverseArray = arr => {
+//   arr.forEach(x => {
+//     traverse(x)
+//   })
+// }
+// // _type === sanity.imageAsset
+// const traverse = x => {
+//   if (isArray(x)) {
+//     traverseArray(x)
+//   } else if (typeof x === "object" && x !== null) {
+//     traverseObject(x)
+//   } else {
+//   }
+// }
 
 async function createRootPages(graphql, actions, reporter) {
   const { createPage } = actions
@@ -42,20 +42,18 @@ async function createRootPages(graphql, actions, reporter) {
       }
     }
   `)
+
   if (result.errors) throw result.errors
+
   const pageEdges = (result.data.allSanityPage || {}).edges || []
+
   pageEdges.forEach((edge, index) => {
     const { id, _rawContent, pageName } = edge.node
     const slug = slugify(pageName)
     const path = slug === "Home-Page" ? "/" : `/${slug}/`.toLowerCase()
 
     reporter.info(`Creating Page: ${path}`)
-    /*
-     *reporter.info(`Raw Content: ${_rawContent}`)
-     */
-    /*
-     *traverse(_rawContent)
-     */
+
     createPage({
       path,
       component: require.resolve(`./src/templates/Page`),
