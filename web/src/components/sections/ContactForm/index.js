@@ -3,12 +3,12 @@ import Container from "../../containers/Container"
 import {
   FormContainer,
   Title,
-  EnergySmart,
   StyledContactForm,
   ContactFormSection,
   Input,
   PrivacyLink,
 } from "./styled"
+import EnergySmart from "./EnergySmart"
 
 const useInput = (placeHolder, isRequired = false) => {
   const [value, setValue] = useState("")
@@ -40,7 +40,7 @@ const ContactForm = ({ location }) => {
       <FormContainer location={location}>
         {/* <pre>{JSON.stringify(location, null, 2)}</pre> */}
         <Title>
-          Contact <EnergySmart /> Today!
+          <EnergySmart before={"Contact"} after={"Today!"} />
         </Title>
         <Container>
           <StyledContactForm location={location}>
