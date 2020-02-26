@@ -13,19 +13,17 @@ const StyledImg = styled(Img)`
 
   padding-top: calc((132px / 983px) * 100%);
   width: 100%;
-  max-width: 22.6vw;
+  max-width: 28.4vw;
   display: block;
-  margin: 11px 8px 0 8px;
+  margin: 1.8vw 1vw 0 1vw;
 `
 
 const Container = styled.div`
-  border: 1px solid red;
   display: flex;
-  flex-direction: column;
   height: 74px;
-  /* justify-content: space-around; */
-  justify-content: center;
-  align-items: space-around;
+  justify-content: space-around;
+  /* justify-content: center; */
+  align-items: center;
   > div {
     display: flex;
     flex: 1 1 auto;
@@ -33,7 +31,7 @@ const Container = styled.div`
     align-items: center;
   }
   > div > div {
-    border: 1px dashed blue;
+    /* border: 1px dashed blue; */
   }
 `
 

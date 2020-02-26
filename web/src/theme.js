@@ -13,8 +13,27 @@ const baseTheme = {
   radii: [0, 2, 4, 8],
 }
 
+const flexboxgrid = {
+  gridSize: 12, // columns
+  gutterWidth: 1, // rem
+  outerMargin: 2, // rem
+  mediaQuery: "only screen",
+  container: {
+    sm: 46, // rem,
+    md: 61, // rem
+    lg: 76, // rem
+  },
+  breakpoints: {
+    xs: 0, // em,
+    sm: "768px", // em,
+    md: "1024px", // em,
+    lg: 75, // em
+  },
+}
+
 export default {
   ...baseTheme,
+  ...flexboxgrid,
   shadows: {
     small: "0px 3px 6px 0px rgba(0,0,0,1)",
     large: "0px 3px 6px #00000029",

@@ -8,6 +8,7 @@ import Main from "./components/layout/Main"
 import Header from "./components/layout/Header/"
 import MobileNav from "./components/layout/MobileNav/"
 import ContactForm from "./components/sections/ContactForm/"
+import Contact from "./components/sections/Contact"
 import Effi from "./components/sections/Effi/"
 
 const Layout = ({ children }) => {
@@ -27,7 +28,8 @@ const Layout = ({ children }) => {
           {({ location }) => <Effi location={location.pathname} />}
         </Location>
         <Location>
-          {({ location }) => <ContactForm location={location.pathname} />}
+          {({ location }) => <Contact location={location.pathname} />}
+          {/* {({ location }) => <ContactForm location={location.pathname} />} */}
         </Location>
         <Footer />
       </Main>
