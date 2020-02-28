@@ -61,7 +61,7 @@ export function mapHomePageTextSectionToProps({
   }
 }
 
-export function mapImageLeftSectionToProps({ image, features, altText, _key }) {
+export function mapTwoColGridToProps({ image, features, altText, _key }) {
   return {
     image: image.asset["_id"],
     features: features,

@@ -4,7 +4,7 @@ import Grid from "../../containers/Grid"
 import Img from "gatsby-image"
 import { getFluidGatsbyImage } from "gatsby-source-sanity"
 import clientConfig from "../../../../client-config"
-import Block from "@sanity/block-content-to-react"
+import BlockContent from "@sanity/block-content-to-react"
 
 const TwoColGrid = props => {
   console.log(props)
@@ -23,7 +23,7 @@ const TwoColGrid = props => {
           />
         </Grid.Col>
         <Grid.Col flexBasis={["50%"]}>
-          <Block blocks={props.features} />
+          <BlockContent blocks={props.features} />
         </Grid.Col>
       </Grid.Row>
     </Grid.Container>
