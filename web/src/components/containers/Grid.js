@@ -1,0 +1,31 @@
+import React from "react"
+import styled from "styled-components"
+import { space, layout, flexbox } from "styled-system"
+
+const Col = styled.div`
+  ${space}
+  ${layout}
+  ${flexbox}
+`
+
+const Row = styled.div`
+  ${space}
+  ${layout}
+  ${flexbox}
+`
+
+const Container = styled.div`
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 0 1rem;
+`
+
+const Grid = ({ children }) => <>{children}</>
+
+Grid.Col = Col
+Grid.Row = Row
+Grid.Container = Container
+
+export default Grid
