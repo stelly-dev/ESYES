@@ -34,4 +34,9 @@ class Counter extends Component {
   }
 }
 
+Counter.propTypes = {
+  prefix: PropTypes.string.isRequired,
+  title: PropTypes.number.isRequired,
+}
+
 export default Counter
