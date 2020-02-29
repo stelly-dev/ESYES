@@ -1,5 +1,4 @@
 import React from "react"
-import BackgroundImage from "gatsby-background-image"
 import styled from "styled-components"
 import Grid from "../../containers/Grid"
 import CTACircle from "./CTACircle"
