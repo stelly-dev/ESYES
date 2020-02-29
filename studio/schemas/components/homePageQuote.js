@@ -6,7 +6,7 @@ export default {
     {
       name: "quote",
       title: "Quote",
-      type: "blockContent"
+      type: "string"
     },
     {
       name: "name",
