@@ -1,6 +1,6 @@
 import React from "react"
 import styled from "styled-components"
-import { space, layout, flexbox } from "styled-system"
+import { space, layout, flexbox, position } from "styled-system"
 
 const Col = styled.div`
   ${space}
@@ -12,6 +12,7 @@ const Row = styled.div`
   ${space}
   ${layout}
   ${flexbox}
+  ${position}
 `
 
 const Container = styled.div`
