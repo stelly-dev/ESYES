@@ -2,7 +2,7 @@ import React, { Component } from "react"
 import PropTypes from "prop-types"
 import CountUp from "react-countup"
 import VizSensor from "react-visibility-sensor"
-import { CounterBackground } from "./styled.js"
+// import { CounterBackground } from "./styled.js"
 
 class Counter extends Component {
   constructor(props) {
@@ -21,15 +21,16 @@ class Counter extends Component {
   render() {
     return (
       <VizSensor onChange={this.onVizChange} delayedCall>
-        <CounterBackground>
+        <div>
           <CountUp
+            className="counter_value"
             prefix={this.props.prefix}
             end={this.state.viz ? this.props.value : 0}
             start={0}
             separator=","
           />
-          <div>{this.props.title}</div>
-        </CounterBackground>
+          <div className="counter_title">{this.props.title}</div>
+        </div>
       </VizSensor>
     )
   }

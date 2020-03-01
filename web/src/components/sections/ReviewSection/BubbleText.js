@@ -52,6 +52,8 @@ const BubbleWrapper = styled.div`
   align-items: center;
   position: relative;
   margin-top: 2rem;
+  @media only screen and (min-width: 1024px) {
+  }
 `
 
 const BubbleTextWrapper = styled.div`
@@ -61,7 +63,44 @@ const BubbleTextWrapper = styled.div`
   transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
+  text-align: center;
+
+  .counter_value {
+    width: 100%;
+    font-size: calc(15.5vw);
+    line-height: 1.25;
+  }
+  .counter_title {
+    white-space: nowrap;
+    color: ${props => props.theme.colors.secondary};
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: calc(6.3vw);
+    line-height: 2.25;
+  }
+
+  @media only screen and (min-width: 768px) {
+    .counter_value {
+      font-size: 3.75rem;
+      line-height: 1.25;
+    }
+
+    .counter_title {
+      font-size: 1.55rem;
+      line-height: 2.25;
+    }
+  }
+
+  @media only screen and (min-width: 1024px) {
+    .counter_value {
+      font-size: 2.4rem;
+    }
+    .counter_title {
+      font-size: 1rem;
+    }
+  }
 `
 
 const BubbleText = ({ children }) => (
