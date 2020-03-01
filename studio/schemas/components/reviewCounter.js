@@ -17,9 +17,10 @@ export default {
         "Number the animation will count up to. (must be an integer value, e.g. 1729)"
     },
     {
-      title: "Number Type",
-      name: "numberType",
-      type: "numberType"
+      name: "prefix",
+      title: "Prefix",
+      type: "string",
+      description: "$, #, etc"
     }
   ]
 };
