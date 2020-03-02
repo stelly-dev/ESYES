@@ -1,16 +1,16 @@
 import React from "react"
 import styled from "styled-components"
-import { Link, StaticQuery } from "gatsby"
+import Grid from "../containers/Grid"
 import Img from "gatsby-image"
+import { Link, graphql, StaticQuery } from "gatsby"
 import { FaPhone } from "react-icons/fa"
-import Container from "../containers/Container"
 
 const query = graphql`
   query FooterQuery {
     sanityHeader {
       logo {
         asset {
-          fluid(maxWidth: 396) {
+          fluid(maxWidth: 768) {
             ...GatsbySanityImageFluid_noBase64
           }
         }
@@ -19,144 +19,161 @@ const query = graphql`
     }
   }
 `
-const LogoContainer = styled(Link)`
-  box-sizing: border-box;
-  display: block;
-  max-width: 343px;
-  margin: 0 auto;
-  margin-bottom: 50px;
-  @media only screen and (min-width: 600px) {
-    margin-right: auto;
-    * {
-      display: block;
-      height: 102px;
-      width: 343px;
-      overflow: hidden;
-    }
-  }
-`
-
 const StyledFooter = styled.footer`
-  /* margin-top: 50px; */
-`
-const TopFooter = styled.section`
-  /* padding: 50px 0 44px 0; */
-  background-color: ${props => props.theme.colors.black};
-  color: white;
-  @media only screen and (min-width: 600px) {
-    ${Container} {
-      @supports (display: grid) {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        align-items: center;
-      }
-    }
+  .dark {
+    background-color: ${props => props.theme.colors.black};
+    color: white;
   }
-`
+  .light {
+    color: ${props => props.theme.colors.black};
+  }
 
-const BottomFooter = styled.section`
-  text-align: center;
-  /* padding: 47px 0 41px 0; */
-  color: ${props => props.theme.colors.secondary};
-  font-weight: bold;
-  div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    span {
-      padding: 0 0.7ch;
-    }
+  .dark,
+  .light {
+    padding: 3rem 0;
   }
-  a {
-    text-transform: uppercase;
-    color: ${props => props.theme.colors.secondary};
-    font-size: 22px;
-    line-height: 33px;
+
+  .footer-cta {
+    text-align: right;
+  }
+  .text {
+    color: white;
+    font-size: 1.4rem;
+    line-height: 1.5;
+  }
+  .phone-layout {
+  }
+  .phone-link {
+    color: white;
+    font-size: 1.75rem;
     font-weight: bold;
+    line-height: 1.75;
     text-decoration: none;
   }
-  p {
-    font-weight: normal;
-    font-size: 16px;
-    line-height: 25.6px;
-    color: ${props => props.theme.colors.black};
-    padding-top: 25px;
-    padding-left: 1rem;
-    padding-right: 1rem;
+  .phone-link:visited {
+    color: white;
+  }
+  .phone-link:hover {
+    color: ${props => props.theme.colors.secondary};
+  }
+  .phone-icon {
+    vertical-align: middle;
+    font-size: 1.2rem;
+    margin-right: 1rem;
+    margin-bottom: 0.2rem;
+    transform: rotate(90deg);
+  }
+  .logo {
+    max-width: 396px;
+  }
+  .footer-link_wrapper {
+    text-align: center;
+  }
+
+  .footer-link {
+    color: ${props => props.theme.colors.secondary};
+    font-size: 1.5rem;
+    line-height: 2;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+
+  .footer-link:visited {
+    color: ${props => props.theme.colors.secondary};
+  }
+
+  .footer-link:hover {
+    color: ${props => props.theme.colors.primary};
+  }
+
+  .separator {
+    font-size: 1.5rem;
+    margin: 0 0.5rem;
+    font-weight: bold;
+    color: ${props => props.theme.colors.secondary};
+  }
+
+  .copyright {
+    font-size: 1rem;
+    line-height: 1.5;
+    text-align: center;
+    margin-top: 1.5rem;
+  }
+
+  .policy-link,
+  .policy-link:visited {
+    color: ${props => props.theme.colors.gray};
+  }
+
+  @media only screen and (min-width: 768px) {
+    .footer-cta {
+      margin-top: 1.25rem;
+    }
   }
 `
 
-const CTAContainer = styled.div`
-  p:first-of-type {
-    padding: 20px 0;
-    font-size: 22px;
-    line-height: 33px;
-  }
-  p:last-of-type {
-    font-size: 35px;
-    line-height: 45px;
-  }
-  grid-column: 3 / span 1;
-`
-
-const Title = styled.a`
-  font-size: 27px;
-  line-height: 33px;
-  text-transform: uppercase;
-  text-decoration: underline;
-  font-weight: bold;
-`
-
-const StyledPhoneLogo = styled(FaPhone)`
-  transform: scaleX(-1);
-  font-size: 24px;
-`
-
-const Footer = () => {
-  return (
-    <StaticQuery
-      query={query}
-      render={data => {
-        if (!data.sanityHeader.logo) {
-          throw new Error(
-            'Missing "Site Logo". Open the studio and add "Site Logo" Data'
-          )
-        }
-        return (
-          <StyledFooter>
-            <TopFooter>
-              <Container>
-                <LogoContainer to="/">
+const Footer = () => (
+  <StyledFooter>
+    <section className="dark">
+      <Grid.Container>
+        <Grid.Row
+          display={["flex"]}
+          flexDirection={["column", "column", "row"]}
+        >
+          <Grid.Col
+            marginBottom={["3rem", "3rem", "0"]}
+            flexBasis={["100%", "100%", "50%"]}
+          >
+            <StaticQuery
+              query={query}
+              render={data => (
+                <Link to="/">
                   <Img
+                    className="logo"
                     fluid={data.sanityHeader.logo.asset.fluid}
                     alt={data.sanityHeader.logoAlt}
                   />
-                </LogoContainer>
-                <CTAContainer>
-                  <Title>Get In Touch</Title>
-                  <p>Boulder County Energy Advisers</p>
-                  <p>
-                    {" "}
-                    <StyledPhoneLogo /> 303-544-1000
-                  </p>
-                </CTAContainer>
-              </Container>
-            </TopFooter>
-            <BottomFooter>
-              <div>
-                <Link to="/contact/">CONTACT</Link>
-                <span>{" | "}</span> <Link>SITE MAP</Link>
+                </Link>
+              )}
+            />
+          </Grid.Col>
+          <Grid.Col flexBasis={["100%", "100%", "50%"]}>
+            <div className="footer-cta">
+              <div className="text">Your EnergySmart Advisor</div>
+              <div className="phone-layout">
+                <a className="phone-link" href="tel:303-544-1000">
+                  <FaPhone className="phone-icon" />
+                  303-544-1000
+                </a>
               </div>
-              <p>
-                Copyright © 2019. Boulder County EnergySmart. All Rights
-                Reserved. Privacy Policy and Legal Information
-              </p>
-            </BottomFooter>
-          </StyledFooter>
-        )
-      }}
-    />
-  )
-}
+            </div>
+          </Grid.Col>
+        </Grid.Row>
+      </Grid.Container>
+    </section>
+    <section className="light">
+      <div className="footer-link_wrapper">
+        <Link className="footer-link" to="/contact">
+          Contact
+        </Link>
+        <span className="separator">|</span>
+        <Link className="footer-link" to="/site-map">
+          Site map
+        </Link>
+      </div>
+      <p className="copyright">
+        Copyright © {new Date().getFullYear()}. Boulder County EnergySmart. All
+        Rights Reserved.{" "}
+        <a
+          className="policy-link"
+          href="https://www.bouldercounty.org/privacy-policy/"
+        >
+          Privacy Policy and Legal Information
+        </a>
+      </p>
+    </section>
+  </StyledFooter>
+)
 
 export default Footer
