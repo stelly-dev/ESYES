@@ -1,7 +1,6 @@
 import React from "react"
 import styled from "styled-components"
-import Button from "../../pieces/Button"
-
+import { Link } from "gatsby"
 // Hover Menu Styles
 export const Box = styled.div`
   display: none;
@@ -38,8 +37,15 @@ export const NavContainer = styled.div`
   align-items: center;
   @media only screen and (min-width: 768px) {
     flex-direction: column;
+    flex: 1 0 auto;
     align-items: flex-end;
-    height: 100%;
+    height: calc(150px - 3.5rem);
+    padding-top: ${props => (props.scrolled ? "1rem" : 0)};
+    margin-top: -1.25rem;
+  }
+  @media only screen and (min-width: 1024px) {
+    height: ${props => (props.scrolled ? "6rem" : "7rem")};
+    margin-top: -1rem;
   }
 `
 
@@ -49,38 +55,34 @@ export const NavMenuButtonWrapper = styled.div`
   }
 `
 
-export const StyledButton = styled(Button)`
-  /* font-size: 16px !important; */
-  border-radius: 0.2vw;
-  @media only screen and (min-width: 1024px) {
-    font-size: 1.1vw;
-    width: 12.7vw;
-    height: 2.75vw;
-  }
+export const StyledButton = styled(Link)`
+  text-decoration: none;
+  background-color: ${props => props.theme.colors.primary};
+  color: white;
+  font-weight: bold;
+  border-radius: 4px;
+  font-size: ${props => (props.scrolled ? ".9rem" : "1rem")};
+  padding: ${props => (props.scrolled ? "0.3rem 1.1rem" : "0.5rem 1.5rem")};
   border: 1px solid ${props => props.theme.colors.primary};
-  transition: all 250ms ease-in;
+  transition: all 300ms ease-in-out;
+  :visited {
+    color: white;
+  }
   :hover {
     background-color: white;
     color: ${props => props.theme.colors.primary};
   }
-
-  @media only screen and (min-width: 2000px) {
-    font-size: 22px;
-    width: 254px;
-    border-radius: 4px;
-    height: 55px;
+  @media only screen and (min-width: 768px) {
+    padding: ${props => (props.scrolled ? ".4rem 1.1rem" : "0.5rem 1.5rem")};
   }
 `
-
 export const StyledNav = styled.nav`
+  transition: width 300ms ease-in-out;
   @media only screen and (min-width: 768px) {
     width: 75px;
   }
   @media only screen and (min-width: 1024px) {
-    width: 55.25vw;
-  }
-  @media only screen and (min-width: 2000px) {
-    max-width: 1105px;
+    width: ${props => (props.scrolled ? "700px" : "800px")};
   }
 `
 
@@ -113,14 +115,22 @@ export const NavList = styled.ul`
 export const NavListItem = styled.li`
   position: relative;
   a {
-    color: ${props => props.theme.colors.black};
+    color: ${props =>
+      props.onPage ? props.theme.colors.secondary : props.theme.colors.black};
     text-decoration: none;
-    /* font-size: 18px; */
+    font-size: ${props => (props.scrolled ? ".9rem" : "1.1rem")};
     position: relative;
+    font-weight: ${props => (props.onPage ? "bold" : "normal")};
     z-index: 1;
+    outline: none;
   }
   a:visited {
-    color: ${props => props.theme.colors.black};
+    color: ${props =>
+      props.onPage ? props.theme.colors.secondary : props.theme.colors.black};
+  }
+
+  a:focus:after {
+    width: 100%;
   }
 
   a::after {
@@ -129,7 +139,7 @@ export const NavListItem = styled.li`
     top: calc(100% + 4px);
     left: 50%;
     transform: translateX(-50%);
-    height: 5px;
+    height: 4px;
     background-color: ${props => props.theme.colors.secondary};
     width: 0%;
     transition: all 250ms ease-in-out;
@@ -150,13 +160,14 @@ export const NavListItem = styled.li`
         /* transform: translateX(-50%); */
       }
       position: relative;
-      padding: 1vw;
+      padding: 1rem;
       justify-content: center;
       align-items: center;
       background-color: white;
       color: ${props => props.theme.colors.black};
-      min-width: 13.75vw;
-      width: 13.75vw;
+      min-width: 15rem;
+      /* min-width: 13.75vw;
+      width: 13.75vw; */
       /* padding-top: 48px; */
       top: 3px;
       z-index: 100;
@@ -172,7 +183,6 @@ export const NavListItem = styled.li`
           display: block;
           text-align: left;
           min-width: 100%;
-          margin: 0.1vw 0;
         }
         li:first-of-type {
           margin-top: 0;
@@ -182,11 +192,12 @@ export const NavListItem = styled.li`
         }
         li a {
           display: block;
-          font-size: 0.9vw;
+          font-size: 1rem;
           line-height: 1.333;
           color: ${props => props.theme.colors.black};
           min-width: 100%;
           margin-right: auto;
+          padding: 0.5rem 0;
         }
         li a:hover {
           text-decoration: underline;
@@ -199,29 +210,20 @@ export const NavListItem = styled.li`
     }
   }
   @media only screen and (min-width: 1024px) {
-    font-size: 1.1vw;
+    font-size: 1rem;
   }
   /* @media only screen and (min-width: 1600px) {
     a {
       font-size: 20px;
     }
   } */
-
-  @media only screen and (min-width: 2000px) {
-    a {
-      font-size: 22px;
-    }
-  }
 `
 export const TagLine = styled.div`
   display: none;
+  transition: font-size 300ms ease-in-out;
   @media only screen and (min-width: 1024px) {
     display: block;
-    font-size: 1.35vw;
-  }
-
-  @media only screen and (min-width: 2000px) {
-    font-size: 27px;
+    font-size: ${props => (props.scrolled ? "1rem" : "1.25rem")};
   }
 `
 
@@ -229,15 +231,8 @@ export const NavCtaWrapper = styled.div`
   @media only screen and (min-width: 1024px) {
     display: flex;
     align-items: center;
-    font-size: 1.35vw;
     p {
-      margin-right: 1.35vw;
-    }
-  }
-  @media only screen and (min-width: 2000px) {
-    font-size: 27px;
-    p {
-      margin-right: 27px;
+      margin-right: 1rem;
     }
   }
 `

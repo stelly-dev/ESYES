@@ -1,7 +1,7 @@
 import React from "react"
 import { Link } from "gatsby"
 import BlockContent from "@sanity/block-content-to-react"
-import Container from "../../containers/Container"
+import Grid from "../../containers/Grid"
 import { BlockSection, TextLink } from "./styled"
 import styled from "styled-components"
 import { typography } from "styled-system"
@@ -185,34 +185,29 @@ const BlockRenderer = props => {
   switch (style) {
     case "h1":
       return (
-        <H1 fontSize={["5.91vw", "5.91vw", "40px", "39px", "3.25vw", "65px"]}>
+        <H1
+          margin={[".67em 0"]}
+          fontSize={["1.6rem", "1.5rem", "3rem"]}
+          lineHeight={[1.6]}
+        >
           {props.children}
         </H1>
       )
     case "h2":
       return (
-        <H2
-          fontSize={["14px", "3.76vw", "1.82vw", "13.2px", "1.1vw", "22px"]}
-          lineHeight={["1.22"]}
-        >
+        <H2 fontSize={["1.2rem"]} lineHeight={[1.6]}>
           {props.children}
         </H2>
       )
     case "h3":
       return (
-        <H3
-          fontSize={["5.65vw", "5.65vw", "2.7vw", "27px", "2.25vw", "35px"]}
-          lineHeight={["1.5882", "1.333"]}
-        >
+        <H3 fontSize={["1.4rem"]} lineHeight={[1.6]}>
           {props.children}
         </H3>
       )
     case "h4":
       return (
-        <H4
-          fontSize={["4.57vw", "4.57vw", "2.21vw", "20.4px", "1.7vw", "35px"]}
-          lineHeight={["1.485714"]}
-        >
+        <H4 fontSize={["1.5rem"]} lineHeight={["1.485714"]}>
           {props.children}
         </H4>
       )
@@ -224,10 +219,7 @@ const BlockRenderer = props => {
       return <Quote>{props.children}</Quote>
     case "normal":
       return (
-        <P
-          lineHeight={"1.7"}
-          fontSize={["4.3vw", "4.3vw", "2.08vw", "12px", "1vw", "20px"]}
-        >
+        <P lineHeight={"1.7"} fontSize={["1rem"]}>
           {props.children}
         </P>
       )
@@ -278,7 +270,7 @@ const serializers = {
 const Block = props => {
   return (
     <BlockSection>
-      <Container>
+      <Grid.Container>
         <BlockContent
           blocks={props.blocks || props}
           serializers={{
@@ -295,7 +287,7 @@ const Block = props => {
           }}
         />
         {/* <pre>{JSON.stringify(props, null, 2)}</pre> */}
-      </Container>
+      </Grid.Container>
     </BlockSection>
   )
 }

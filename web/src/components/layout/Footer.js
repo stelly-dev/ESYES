@@ -26,6 +26,7 @@ const StyledFooter = styled.footer`
   }
   .light {
     color: ${props => props.theme.colors.black};
+    background-color: #f7f7f7;
   }
 
   .dark,
@@ -99,6 +100,7 @@ const StyledFooter = styled.footer`
     line-height: 1.5;
     text-align: center;
     margin-top: 1.5rem;
+    padding: 0 1rem;
   }
 
   .policy-link,

@@ -59,7 +59,7 @@ const AccordionItem = ({ linkTo, linkName, subNav }) => {
   return (
     <StyledAccordionItem open={open}>
       <div>
-        <Link to={linkTo}>{linkName}</Link>
+        <Link to={`/${slugify(linkTo).toLowerCase()}/`}>{linkName}</Link>
         {subNav.length > 0 ? (
           <TriangleWrapper onClick={() => setOpen(!open)}>
             <Triangle open={open} />
@@ -71,7 +71,7 @@ const AccordionItem = ({ linkTo, linkName, subNav }) => {
           {subNav.map((link, i) => (
             <li key={link._key}>
               <Link
-                to={`${slugify(link.linkDestination.pageName).toLowerCase()}/`}
+                to={`/${slugify(link.linkDestination.pageName).toLowerCase()}/`}
               >
                 {link.linkName}
               </Link>

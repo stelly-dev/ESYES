@@ -1,11 +1,11 @@
 import React from "react"
-import Container from "../../containers/Container"
+import Grid from "../../containers/Grid"
 import StaffCard from "./StaffCard"
 import { StyledStaffList } from "./styled"
 const StaffList = props => {
   return (
     <StyledStaffList>
-      <Container>
+      <Grid.Container>
         {props.members.map((member, i) => (
           <StaffCard
             image={member.image.asset["_id"]}
@@ -16,7 +16,7 @@ const StaffList = props => {
             key={member["_key"]}
           />
         ))}
-      </Container>
+      </Grid.Container>
     </StyledStaffList>
   )
 }

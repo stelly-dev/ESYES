@@ -10,7 +10,7 @@ const Main = styled.main`
   left: ${props => (props.isMenuOpen ? "100%" : 0)};
   z-index: 0;
 
-  @media only screen and (min-width: 600px) {
+  @media only screen and (min-width: 768px) {
     left: ${props => (props.isMenuOpen ? "450px" : 0)};
   }
 
@@ -40,7 +40,7 @@ const Main = styled.main`
   }
 
   @media only screen and (min-width: 1024px) {
-    margin-top: 195px;
+    margin-top: 10rem;
     > ${SimpleCTAContainer} {
       margin-top: 1.6vw !important;
       margin-bottom: 2.5vw !important;

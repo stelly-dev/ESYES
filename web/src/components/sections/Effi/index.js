@@ -32,6 +32,9 @@ const Effi = ({ location }) => {
   } else if (location == "/effi-app/") {
     return (
       <Container>
+        <p style={{ color: "red" }}>
+          Please note that Kelly is still working on getting the effi app ready
+        </p>
         <IframeResizer
           checkOrigin={false}
           forwardRef={ref}

@@ -41,14 +41,14 @@ const Hero = props => {
     >
       <Container>
         <h1>{props.headline}</h1>
-        <div>
+        {/* <div>
           <HeroButton to={props.buttonOne.to}>
             {props.buttonOne.text}
           </HeroButton>
           <HeroButton secondary="true" to={props.buttonTwo.to}>
             {props.buttonTwo.text}
           </HeroButton>
-        </div>
+        </div> */}
       </Container>
     </StyledBackgroundImage>
   )

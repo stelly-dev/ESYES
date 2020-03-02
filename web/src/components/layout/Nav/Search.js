@@ -7,15 +7,11 @@ const StyledSearchIcon = styled(FiSearch)`
   width: 22px;
   height: 20px;
   @media only screen and (min-width: 1024px) {
-    width: 1.1vw;
-    height: 1.1vw;
-  }
-  @media only screen and (min-width: 2000px) {
-    width: 22px;
-    height: 20px;
+    width: ${props => (props.scrolled ? "1rem" : "1.2rem")};
+    height: ${props => (props.scrolled ? "1rem" : "1.2rem")};
   }
 `
 
-const Search = () => <StyledSearchIcon />
+const Search = ({ scrolled }) => <StyledSearchIcon scrolled={scrolled} />
 
 export default Search

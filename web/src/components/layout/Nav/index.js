@@ -22,17 +22,26 @@ import Search from "./Search"
 import BlockContent from "@sanity/block-content-to-react"
 const slugify = require("slugify")
 
-const Nav = ({ toggleMenu, isMenuOpen, navLinks, ctaButton, tagLine }) => {
+const Nav = ({
+  scrolled,
+  toggleMenu,
+  isMenuOpen,
+  navLinks,
+  ctaButton,
+  tagLine,
+  location,
+}) => {
   return (
-    <NavContainer>
+    <NavContainer scrolled={scrolled}>
       <NavMenuButtonWrapper>
         <MenuButton isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
       </NavMenuButtonWrapper>
       <NavCtaWrapper>
-        <TagLine>
+        <TagLine scrolled={scrolled}>
           <BlockContent blocks={tagLine} />
         </TagLine>
         <StyledButton
+          scrolled={scrolled}
           to={`/${slugify(
             ctaButton.buttonDestination.pageName
           ).toLowerCase()}/`}
@@ -40,11 +49,20 @@ const Nav = ({ toggleMenu, isMenuOpen, navLinks, ctaButton, tagLine }) => {
           {ctaButton.buttonText}
         </StyledButton>
       </NavCtaWrapper>
-      <StyledNav>
+      <StyledNav scrolled={scrolled}>
         <NavList>
           {navLinks &&
             navLinks.linkList.map(navItem => (
-              <NavListItem key={navItem.linkName.linkName}>
+              <NavListItem
+                onPage={
+                  location ==
+                  `/${slugify(
+                    navItem.linkName.linkDestination.pageName
+                  )}/`.toLowerCase()
+                }
+                scrolled={scrolled}
+                key={navItem.linkName.linkName}
+              >
                 <Link
                   to={`/${slugify(
                     navItem.linkName.linkDestination.pageName
@@ -75,7 +93,7 @@ const Nav = ({ toggleMenu, isMenuOpen, navLinks, ctaButton, tagLine }) => {
             <MenuButton isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
           </NavListItem>
           <NavListItem>
-            <Search />
+            <Search scrolled={scrolled} />
           </NavListItem>
         </NavList>
       </StyledNav>

@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react"
-import Container from "../../containers/Container"
+import Grid from "../../containers/Grid"
 import { graphql, StaticQuery } from "gatsby"
 import { StyledHeader, LogoContainer } from "./styled"
 import Nav from "../Nav"
 import Img from "gatsby-image"
+import slugify from "slugify"
 import "./styles.css"
 
 const query = graphql`
@@ -46,26 +47,8 @@ const query = graphql`
 `
 
 const Header = props => {
-  const [state, setState] = useState({
-    scrolled: false,
-  })
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const isScrolled = window.scrollY > 10
-      if (isScrolled !== state.scrolled) {
-        setState({
-          scrolled: !state.scrolled,
-        })
-      }
-    }
-    document.addEventListener("scroll", handleScroll, { passive: true })
-    return () => {
-      document.removeEventListener("scroll", handleScroll)
-    }
-  }, [state.scrolled])
-
-  const { toggleMenu, isMenuOpen } = props
+  const { toggleMenu, isMenuOpen, scrolled, location } = props
+  console.log(location)
   return (
     <StaticQuery
       query={query}
@@ -75,23 +58,35 @@ const Header = props => {
             'Missing "Site Logo". Open the studio and add "Site Logo" Data'
           )
         }
+        const testLink =
+          data.sanityHeader.headerLinks.linkList[0].linkName.linkDestination
+            .pageName
+
+        console.log(`/${slugify(testLink)}/`)
+        // console.log(
+        //   `/${slugify(
+        //     data.sanityHeader.headerLinks.linkList[0].linkName.linkDestination
+        //   )}/`
+        // )
         return (
-          <StyledHeader scrolled={state.scrolled} id="header">
-            <Container>
-              <LogoContainer to="/" alt="Link Home" scrolled={state.scrolled}>
+          <StyledHeader scrolled={scrolled} id="header">
+            <Grid.Container>
+              <LogoContainer to="/" alt="Link Home" scrolled={scrolled}>
                 <Img
                   fluid={data.sanityHeader.logo.asset.fluid}
                   alt={data.sanityHeader.logoAlt}
                 />
               </LogoContainer>
               <Nav
+                location={location}
+                scrolled={scrolled}
                 tagLine={data.sanityHeader._rawTagLine}
                 ctaButton={data.sanityHeader.ctaBtn}
                 isMenuOpen={isMenuOpen}
                 toggleMenu={toggleMenu}
                 navLinks={data.sanityHeader.headerLinks}
               />
-            </Container>
+            </Grid.Container>
           </StyledHeader>
         )
       }}

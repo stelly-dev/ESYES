@@ -7,7 +7,7 @@ export const StyledHeader = styled.header`
   box-sizing: border-box;
   height: ${props => (props.scrolled ? "60px" : "222px")};
   position: fixed;
-  transition: height 200ms ease-in;
+  transition: all 300ms ease-in-out;
   top: 0;
   left: 0;
   right: 0;
@@ -20,43 +20,40 @@ export const StyledHeader = styled.header`
     justify-content: space-between;
     align-items: center;
     height: 100%;
-    padding-top: 1.75vw;
-    padding-bottom: 1.75vw;
+    padding-top: ${props => (props.scrolled ? ".5rem" : "1.5rem")};
+    padding-bottom: ${props => (props.scrolled ? "1rem" : "1.5rem")};
   }
   @media only screen and (min-width: 768px) {
+    padding-top: ${props => (props.scrolled ? ".5rem" : "1.5rem")};
     height: ${props => (props.scrolled ? "120px" : "152px")};
     > div {
       flex-direction: row;
     }
   }
   @media only screen and (min-width: 1024px) {
-    height: ${props => (props.scrolled ? "150px" : "195px")};
+    height: ${props => (props.scrolled ? "7rem" : "10rem")};
     > div {
       flex-direction: row;
-    }
-  }
-  @media only screen and (min-width: 2000px) {
-    height: 195px;
-    > div {
-      padding: 35px 0;
     }
   }
 `
 
 export const LogoContainer = styled(Link)`
-  transition: min-width 200ms ease-in;
+  transition: all 300ms ease-in-out;
+  opacity: ${props => (props.scrolled ? 0.5 : 1)};
   min-width: ${props => (props.scrolled ? 0 : "343px")};
   @media only screen and (min-width: 768px) {
-    min-width: ${props => (props.scrolled ? "200px" : "343px")};
+    opacity: 1;
+    min-width: ${props => (props.scrolled ? "300px" : "343px")};
+    position: absolute;
+    top: ${props => (props.scrolled ? "1rem" : "1.5rem")};
   }
   @media only screen and (min-width: 1024px) {
-    min-width: ${props => (props.scrolled ? "17vw" : "19.8vw")};
-    margin-right: 8.6vw;
+    top: ${props => (props.scrolled ? "1.3rem" : "1rem")};
+    min-width: ${props => (props.scrolled ? "15rem" : "17rem")};
     max-height: auto;
   }
-  @media only screen and (min-width: 2000px) {
-    max-width: 396px;
-    max-height: 118px;
-    min-width: 396px;
+  @media only screen and (min-width: 1150px) {
+    top: ${props => (props.scrolled ? "1.3rem" : "2rem")};
   }
 `

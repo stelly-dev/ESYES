@@ -19,7 +19,6 @@ export const BlockSection = styled.div`
   ul li {
   font-size: 4.3vw; 
    @media only screen and (min-width: 768px){
-   font-size: 2.08vw;   
  } 
     /* font-size: 1vw; */
     @media only screen and (min-width:1024px){

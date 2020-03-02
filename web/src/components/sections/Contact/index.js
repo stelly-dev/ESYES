@@ -56,6 +56,7 @@ const FormButton = styled("input").attrs({
   margin: 0 auto;
   display: block;
   border-radius: 4px;
+  cursor: pointer;
   :hover {
     background-color: white;
     color: ${props => props.theme.colors.secondary};
@@ -335,8 +336,9 @@ const Contact = ({ location }) => {
                   isError={error.city}
                   required
                   onChange={e => setCity(e.target.value)}
+                  defaultValue=""
                 >
-                  <option value="" disabled selected>
+                  <option value="" disabled>
                     City*
                   </option>
                   {cities.map(city => (

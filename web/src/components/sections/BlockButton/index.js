@@ -16,11 +16,6 @@ const StyledContainer = styled(Container)`
 `
 
 const StyledButton = styled(Button)`
-  height: 3.5vw !important;
-  width: 16.1vw !important;
-  font-size: 1.35vw !important;
-  margin-top: 1.6vw;
-  margin-bottom: 2.5vw;
   background-color: ${props => props.color};
   text-align: ${props => props.orientation};
   border: 1px solid ${props => props.color};

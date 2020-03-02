@@ -53,12 +53,7 @@ const PageTemplate = props => {
             case "block": return <Block {...section} key={section._key} />
             case "blockButton": return ( <BlockButton {...mapBlockButtonToProps(section)} key={section._key} />)
             case "circleCTAList": return ( <CircleCTASection {...mapCircleCTASectionToProps(section)} key={section._key} />)
-            /*
-             *case "imageLeftSection": return ( <ImageLeftSection {...mapImageLeftSectionToProps(section)} key={section._key} />)
-             */
-            case "imageLeftSection": return (
-              <TwoColGrid {...mapTwoColGridToProps(section)} key={section._key} />
-            )
+            case "imageLeftSection": return ( <TwoColGrid {...mapTwoColGridToProps(section)} key={section._key} />)
             case "linebreak": return <br />
             case "pageHero": return ( <Hero {...mapHeroToProps(section)} key={section._key} section={section} id={section.backgroundImage.asset["_id"]} />)
             case "reviewSection": return ( <ReviewSection {...mapReviewSectionToProps(section)} key={section._key} />)

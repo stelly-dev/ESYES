@@ -32,15 +32,20 @@ const query = graphql`
 
 const StyledMenuContainer = styled.nav`
   width: ${props => (props.isMenuOpen ? "100%" : 0)};
-  position: absolute;
+  position: fixed;
+  top: ${props => (props.scrolled ? "60px" : "222px")};
   left: ${props => (props.isMenuOpen ? 0 : "-100%")};
   padding: 20px;
-  /* background-color: red; */
+  max-width: 100vw;
   height: 100vh;
   right: 0;
   transition: all 340ms ease-in-out;
-  @media only screen and (min-width: 600px) {
+  @media only screen and (min-width: 768px) {
     width: ${props => (props.isMenuOpen ? "450px" : 0)};
+    top: ${props => (props.scrolled ? "120px" : "152px")};
+  }
+  @media only screen and (min-width: 1024px) {
+    top: ${props => (props.scrolled ? "150px" : "195px")};
   }
   z-index: 1;
 `
@@ -107,44 +112,15 @@ const MenuItem = ({ childList, to, pageName }) => {
   }
 }
 
-const MobileNav = ({ isMenuOpen }) => (
+const MobileNav = ({ isMenuOpen, scrolled }) => (
   <StaticQuery
     query={query}
     render={data => {
       const { headerLinks } = data.allSanityHeader.nodes[0]
       const { linkList } = headerLinks
       return (
-        <StyledMenuContainer isMenuOpen={isMenuOpen}>
+        <StyledMenuContainer isMenuOpen={isMenuOpen} scrolled={scrolled}>
           <Accordion links={linkList} />
-          {/* <StyledMenu>
-            {linkList.map(topLevelLink => (
-              <li key={topLevelLink._key}>
-                <Link
-                  to={`/${slugify(
-                    topLevelLink.linkName.linkDestination.pageName
-                  ).toLowerCase()}/`}
-                >
-                  {topLevelLink.linkChildren.length > 0 ? (
-                    <>
-                      <div>
-                        {topLevelLink.linkName.linkName}
-                        <Triangle />
-                      </div>
-                      <div>
-                        <ul>
-                          {topLevelLink.linkChildren.map(child => (
-                            <li>{child.linkName}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    </>
-                  ) : (
-                    topLevelLink.linkName.linkName
-                  )}
-                </Link>
-              </li>
-            ))}
-          </StyledMenu> */}
         </StyledMenuContainer>
       )
     }}

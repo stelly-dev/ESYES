@@ -40,7 +40,20 @@ export default () =>
                   S.view.component(PDFPreview).title("PDF Preview")
                 ])
             )
+        ),
+      S.listItem()
+        .title("Contractors")
+        .schemaType("contractor")
+        .child(
+          S.documentTypeList("contractor")
+            .title("All Contractors")
+            .child(documentId =>
+              S.document()
+                .documentId(documentId)
+                .schemaType("contractor")
+            )
         )
+
       // S.listItem()
       //   .title("Navigation")
       //   .child(
