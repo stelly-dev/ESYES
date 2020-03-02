@@ -3,6 +3,7 @@ import Container from "../containers/Container"
 import { SimpleCTAContainer } from "../sections/SimpleCTA/styled"
 
 const Main = styled.main`
+  margin-top: 222px;
   max-width: 100%;
   position: relative;
   transition: all 340ms ease-in-out;
@@ -26,6 +27,7 @@ const Main = styled.main`
   }
 
   @media only screen and (min-width: 768px) {
+    margin-top: 152px;
     div ul li {
       margin-top: 4.56vw;
       margin-bottom: 4.56vw;
@@ -38,6 +40,7 @@ const Main = styled.main`
   }
 
   @media only screen and (min-width: 1024px) {
+    margin-top: 195px;
     > ${SimpleCTAContainer} {
       margin-top: 1.6vw !important;
       margin-bottom: 2.5vw !important;
