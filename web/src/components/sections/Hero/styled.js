@@ -24,48 +24,19 @@ export const StyledBackgroundImage = styled(BackgroundImage)`
   h1 {
     color: white;
     text-align: center;
-    font-size: 23px;
-    line-height: 35px;
+    font-size: 2.8125rem;
+    line-height: 3.25rem;
     text-shadow: 0px 3px 6px #00000033;
-  }
-  @media only screen and (min-width: 350px) {
-    h1 {
-      font-size: 6.72vw;
-      line-height: 1.4;
-      max-width: 91.49vw;
-    }
+    max-width: 23ch;
   }
   @media only screen and (min-width: 768px) {
     height: 54.69vw;
-    h1 {
-      font-size: 36px;
-      line-height: 51px;
-      max-width: 426px;
-    }
-    ${Container} {
-      bottom: 5.86vw;
-    }
   }
   @media only screen and (min-width: 1024px) {
     height: 42.5vw;
-    h1 {
-      font-size: 3.25vw;
-      line-height: 1.26;
-      max-width: 45vw;
-    }
-    ${Container} {
-      bottom: 5.9vw;
-    }
   }
 
   @media only screen and (min-width: 2000px) {
-    h1 {
-      font-size: 65px;
-      max-width: 900px;
-    }
-    ${Container} {
-      bottom: 118px;
-    }
   }
 `
 

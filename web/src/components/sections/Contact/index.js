@@ -5,6 +5,7 @@ import EnergySmart from "./EnergySmart"
 import { navigate } from "@reach/router"
 import { FiAlertTriangle, FiChevronDown } from "react-icons/fi"
 import { IoMdInformationCircleOutline } from "react-icons/io"
+
 const cities = [
   "boulder",
   "erie",
@@ -128,6 +129,12 @@ const FormGrid = styled(Grid.Container)`
 const FormContainer = styled.section`
   padding: 3rem 0;
   border-top: 3px solid ${props => props.theme.colors.primary};
+  background-color: ${props =>
+    props.location === "/contact/" ? props.theme.colors.primary : "white"};
+  max-width: ${props =>
+    props.location === "/contact/" ? "calc((100% / 12) * 10)" : "none"};
+  margin: ${props =>
+    props.location === "/contact/" ? "0 auto calc((100vw / 12)) auto" : "auto"};
 `
 
 const PrivacyLink = styled.a`
@@ -268,8 +275,8 @@ const Contact = ({ location }) => {
   }
 
   return (
-    <FormContainer>
-      <EnergySmart before={"Contact"} after={"Today!"} />
+    <FormContainer location={location}>
+      <EnergySmart location={location} before={"Contact"} after={"Today!"} />
       {/* <Error error={error.message} /> */}
       <Form>
         <FormGrid>

@@ -16,20 +16,6 @@ export const BlockSection = styled.div`
   ul {
     list-style: none;
   }
-  ul li {
-  font-size: 4.3vw; 
-   @media only screen and (min-width: 768px){
- } 
-    /* font-size: 1vw; */
-    @media only screen and (min-width:1024px){
-   
- }
-    /* margin-left: 3ch; */
-    @media only screen and (min-width:2000px){
-   
- }
-    line-height: 1.7;
-  }
   ul li:before {
     content: "·";
     margin-right: 1ch;
@@ -45,7 +31,7 @@ export const BlockSection = styled.div`
   }
  @media only screen and (min-width: 1024px){
 
-   ul,
+   /* ul,
    h3,
    h4,
    h5,
@@ -55,9 +41,9 @@ export const BlockSection = styled.div`
      max-width: 834px; 
      margin: 0 auto;
     }
-  } 
+  }  */
   @media only screen and (min-width: 1200px) {
-    ul,
+    /* ul,
     h3,
     h4,
     h5,
@@ -66,7 +52,7 @@ export const BlockSection = styled.div`
     p {
       max-width: 69.5vw;
       margin: 0 auto;
-    }
+    } */
     /* ${Container} ul :first-of-type {
       margin-top: 1.45vw;
       margin-bottom: 2.5vw;

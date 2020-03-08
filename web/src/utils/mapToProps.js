@@ -16,6 +16,18 @@ export function mapBlockButtonToProps({
   }
 }
 
+export function mapContractorAccordionToProps({
+  _key,
+  listOfContractors,
+  title,
+}) {
+  return {
+    key: _key,
+    contractors: listOfContractors,
+    title: title,
+  }
+}
+
 export function mapCircleCTASectionToProps({ _key, ctaList }) {
   return {
     ctaList: ctaList,
@@ -124,4 +136,12 @@ export function mapTwoColumnToProps({ _key, col1, col2 }) {
 
 export function mapVimeoSectionToProps({ props }) {
   return props
+}
+
+export function mapBlockImageToProps({ alt, image }) {
+  return {
+    alt: alt,
+    img: image.asset["_id"],
+    url: image.asset.url,
+  }
 }

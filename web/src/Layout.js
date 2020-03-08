@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useLayoutEffect } from "react"
 import { ThemeProvider } from "styled-components"
 import { Location } from "@reach/router"
 import GlobalStyle from "./GlobalStyle"
@@ -10,7 +10,7 @@ import MobileNav from "./components/layout/MobileNav/"
 import Contact from "./components/sections/Contact"
 import Effi from "./components/sections/Effi/"
 import styled from "styled-components"
-
+import { FaChevronUp } from "react-icons/fa"
 const SizeOverlay = styled.div`
   position: fixed;
   font-size: 4rem;
@@ -23,6 +23,53 @@ const SizeOverlay = styled.div`
 `
 
 const headerHeights = [222, 152, 195]
+
+const RhythmOverlayWrapper = styled.div`
+  position: absolute;
+  top: 9px;
+  left: 0;
+  right: 0;
+  /* bottom: -1000vh; */
+  z-index: 100000;
+  display: flex;
+  height: calc(25.6px * 1000);
+  flex-direction: column;
+  display: none;
+`
+
+const LineMarker = styled.div`
+  max-height: calc(1em * 1.6);
+  height: 100%;
+  box-sizing: border-box;
+  border-bottom: 1px solid #2f227f8a;
+  /* background-color: ${props =>
+    props.index % 2 === 0 ? "#a020a05a" : "#d050a08a"}; */
+  width: 100%;
+`
+
+const RhythmOverlay = () => {
+  return (
+    <RhythmOverlayWrapper>
+      {Array.from({ length: 1000 }).map((_, i) => (
+        <LineMarker key={i} index={i} />
+      ))}
+    </RhythmOverlayWrapper>
+  )
+}
+
+const ToTopButton = styled.button`
+  position: fixed;
+  right: 20px;
+  bottom: 3rem;
+  padding: 1rem 1.4rem;
+  background-color: #000000a2;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  z-index: 10000;
+`
 
 const getHeaderHeightFromScreenWidth = width => {
   if (width < 768) {
@@ -39,6 +86,7 @@ const Layout = ({ children }) => {
     scrolled: false,
     menuOpen: false,
     width: null,
+    toTopVisible: false,
   })
 
   useEffect(() => {
@@ -61,6 +109,17 @@ const Layout = ({ children }) => {
     const handleScroll = () => {
       const isScrolled =
         window.scrollY > getHeaderHeightFromScreenWidth(state.width)
+      if (window.scrollY > 300) {
+        setState({
+          ...state,
+          toTopVisible: true,
+        })
+      } else if (window.scrollY <= 300) {
+        setState({
+          ...state,
+          toTopVisible: false,
+        })
+      }
       if (isScrolled !== state.scrolled) {
         setState({
           ...state,
@@ -68,9 +127,9 @@ const Layout = ({ children }) => {
         })
       }
     }
-    document.addEventListener("scroll", handleScroll, { passive: true })
+    window.addEventListener("scroll", handleScroll, { passive: true })
     return () => {
-      document.removeEventListener("scroll", handleScroll)
+      window.removeEventListener("scroll", handleScroll)
     }
   }, [state])
 
@@ -82,21 +141,36 @@ const Layout = ({ children }) => {
     })
   }
 
+  const scrollToTop = () => {
+    if (typeof window !== "undefined") {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      })
+      if (window.scrollY === 0) {
+        setState({
+          ...state,
+          toTopVisible: false,
+        })
+      }
+    }
+  }
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
+      <RhythmOverlay />
       <Location>
         {({ location }) => (
           <Header
             isMenuOpen={state.menuOpen}
             toggleMenu={toggleMenu}
-            scrolled={state.scrolled}
+            scrolled={state.scrolled || false}
             location={location.pathname}
           />
         )}
       </Location>
       <MobileNav isMenuOpen={state.menuOpen} scrolled={state.scrolled} />
-      <Main isMenuOpen={state.menuOpen}>
+      <Main isMenuOpen={state.menuOpen} toTopVisible={state.toTopVisible}>
         {children}
         <Location>
           {({ location }) => <Effi location={location.pathname} />}
@@ -106,6 +180,11 @@ const Layout = ({ children }) => {
           {/* {({ location }) => <ContactForm location={location.pathname} />} */}
         </Location>
         <Footer />
+        {state.toTopVisible ? (
+          <ToTopButton onClick={() => scrollToTop()}>
+            <FaChevronUp />
+          </ToTopButton>
+        ) : null}
       </Main>
     </ThemeProvider>
   )

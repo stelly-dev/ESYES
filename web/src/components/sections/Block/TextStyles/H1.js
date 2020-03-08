@@ -6,7 +6,6 @@ export const H1 = styled.h1`
   ${typography};
   text-align: center;
   font-weight: 400;
-  margin: 0 auto;
   strong,
   span {
     display: block;

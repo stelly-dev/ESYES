@@ -102,7 +102,7 @@ const Accordion = ({ links }) => {
     <StyledAccordion>
       {links.map((link, i) => (
         <AccordionItem
-          key={link._key}
+          key={`${link}-${i}`}
           linkTo={`/${slugify(
             link.linkName.linkDestination.pageName
           ).toLowerCase()}/`}

@@ -3,7 +3,6 @@ import React from "react"
 
 const MessageData = props => {
   const { data } = props
-  console.log(data)
   return data ? (
     data.message ? (
       <span>
@@ -18,9 +17,7 @@ const MessageData = props => {
         <b>Event type:</b> {data.type}
       </span>
     )
-  ) : (
-    <div>hello</div>
-  )
+  ) : null
 }
 
 MessageData.defaultProps = {

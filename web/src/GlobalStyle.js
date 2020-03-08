@@ -15,7 +15,7 @@ const GlobalStyle = createGlobalStyle`
     body {
         overflow-x: hidden; 
         font-size: 1em; 
-        line-height: 1.4em; 
+        line-height: 1.6; 
         height: 100%;
         min-height: 100vh; 
         background: ${props => props.theme.colors.white}; 

@@ -10,3 +10,7 @@ export { default as staffList } from "./staffList";
 export { default as twoColumn } from "./twoColumn";
 export { default as vimeo } from "./vimeo";
 export { default as youtube } from "./youtube";
+export { default as contractorList } from "./contractorList";
+export { default as contractorAccordion } from "./contractorAccordion";
+export { default as contractorRef } from "./contractorRef";
+export { default as blockImage } from "./blockImage";

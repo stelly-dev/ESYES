@@ -7,10 +7,10 @@ const StyledContainer = styled(Container)`
   display: flex;
   justify-content: ${props => props.orientation};
   padding: 0 !important;
-  margin: 0 auto;
+  margin: 1.7rem auto !important;
 
   @media only screen and (min-width: 1024px) {
-    max-width: 69.5vw;
+    max-width: 1200px;
     /* border: 2px solid red; */
   }
 `

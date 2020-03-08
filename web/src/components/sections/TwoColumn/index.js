@@ -2,6 +2,9 @@ import React from "react"
 import styled from "styled-components"
 import Container from "../../containers/Container"
 import Block, { StyledImage, VideoWrapper } from "../Block"
+import Grid from "../../containers/Grid"
+
+const Text = styled.div``
 
 const ColumnContainer = styled(Container)`
   padding: 0 1rem !important;
@@ -67,7 +70,7 @@ const StyledTwoColumnSection = styled.section`
   }
 
   ${VideoWrapper}:first-of-type{
-    margin-top: 7vw; 
+    margin-top: 1.7rem;  
   }
 
 @media only screen and (min-width: 768px){
@@ -103,21 +106,32 @@ const StyledTwoColumnSection = styled.section`
   @media only screen and (min-width: 1200px){
   }
   @media only screen and (min-width: 2000px){
-    width: 1390px; 
   }
 
 `
 
 const TwoColumn = props => (
-  <StyledTwoColumnSection>
-    <ColumnContainer>
-      <div>
-        {/* <pre>{JSON.stringify(props, null, 2)}</pre> */}
-        {props.leftCol && <Block blocks={props.leftCol} />}
-      </div>
-      <div>{props.rightCol && <Block blocks={props.rightCol} />}</div>
-    </ColumnContainer>
-  </StyledTwoColumnSection>
+  <Grid.Container margin={["3rem auto", "3rem auto", "4rem auto"]}>
+    <Grid.Row display={[null, null, "flex"]}>
+      <Grid.Col flexBasis={["50%"]} marginRight={[null, null, "2rem"]}>
+        <Block blocks={props.leftCol} />
+      </Grid.Col>
+      <Grid.Col flexBasis={["50%"]}>
+        <Text>
+          <Block blocks={props.rightCol} />
+        </Text>
+      </Grid.Col>
+    </Grid.Row>
+  </Grid.Container>
+  // <StyledTwoColumnSection>
+  //   <ColumnContainer>
+  //     <div>
+  //       {/* <pre>{JSON.stringify(props, null, 2)}</pre> */}
+  //       {props.leftCol && <Block blocks={props.leftCol} />}
+  //     </div>
+  //     <div>{props.rightCol && <Block blocks={props.rightCol} />}</div>
+  //   </ColumnContainer>
+  // </StyledTwoColumnSection>
 )
 
 export default TwoColumn

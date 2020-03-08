@@ -17,7 +17,7 @@ import Img from "gatsby-image"
 import { H1, H2, H3, H4, H5, H6, P } from "./TextStyles"
 
 export const StyledImage = styled(Img)`
-  /* max-width: 300px; */
+  max-width: 300px;
 `
 export const VideoWrapper = styled.div`
   position: relative;
@@ -66,7 +66,7 @@ const link = ({ mark, children }) => {
   )
 }
 
-const phone = ({ mark, children }) => {
+const telephone = ({ mark, children }) => {
   const { number = "" } = mark
   return (
     <TextLink as="a" href={`tel:${number}`}>
@@ -76,9 +76,8 @@ const phone = ({ mark, children }) => {
 }
 
 const fileLink = ({ mark, children }) => {
-  const { href = "" } = mark
   return (
-    <TextLink as="a" href={href}>
+    <TextLink as="a" href={mark.reference.file.asset.url}>
       {children}
     </TextLink>
   )
@@ -116,10 +115,7 @@ const chevronLink = ({ mark, children }) => {
   const to = `/${slugify(reference.pageName).toLowerCase()}/`
   return (
     <>
-      <ArticleLink
-        to={to}
-        fontSize={["4.3vw", "4.3vw", "2.08vw", "14px", "1.25vw", "20px"]}
-      >
+      <ArticleLink to={to}>
         {children}
         <StyledChevron />
       </ArticleLink>
@@ -186,22 +182,27 @@ const BlockRenderer = props => {
     case "h1":
       return (
         <H1
-          margin={[".67em 0"]}
-          fontSize={["1.6rem", "1.5rem", "3rem"]}
-          lineHeight={[1.6]}
+          fontSize={["2.8125rem"]}
+          lineHeight={["3.25rem"]}
+          marginTop={["2.7rem", "2.7rem"]}
+          marginBottom={["2.7rem"]}
         >
           {props.children}
         </H1>
       )
     case "h2":
       return (
-        <H2 fontSize={["1.2rem"]} lineHeight={[1.6]}>
+        <H2
+          fontSize={["1.2rem"]}
+          lineHeight={[1.3333]}
+          marginBottom={[null, null, null, "1.6rem"]}
+        >
           {props.children}
         </H2>
       )
     case "h3":
       return (
-        <H3 fontSize={["1.4rem"]} lineHeight={[1.6]}>
+        <H3 fontSize={["1.4rem"]} lineHeight={[1.6]} marginTop={["1.6rem"]}>
           {props.children}
         </H3>
       )
@@ -219,7 +220,12 @@ const BlockRenderer = props => {
       return <Quote>{props.children}</Quote>
     case "normal":
       return (
-        <P lineHeight={"1.7"} fontSize={["1rem"]}>
+        <P
+          lineHeight={"1.6"}
+          fontSize={["1em"]}
+          marginTop="1.6em"
+          marginBottom="1.6em"
+        >
           {props.children}
         </P>
       )
@@ -258,7 +264,12 @@ const serializers = {
         clientConfig.sanity
       )
       return (
-        <StyledImage objectFit="contain" fluid={fluidProps} key={node._key} />
+        <StyledImage
+          style={{ margin: "0 auto 1.7rem auto" }}
+          objectFit="contain"
+          fluid={fluidProps}
+          key={node._key}
+        />
       )
     },
     linebreak: ({ node }) => {
@@ -280,7 +291,7 @@ const Block = props => {
               link,
               internalLink,
               chevronLink,
-              phone,
+              telephone,
               fileLink,
             },
             types: { block: BlockRenderer, ...serializers.types },

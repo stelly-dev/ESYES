@@ -22,7 +22,6 @@ const Effi = ({ location }) => {
   const onResized = data => setMessageData(data)
 
   const onMessage = data => {
-    console.log("hello")
     setMessageData(data)
     ref.current.sendMessage("Hello back from parent page")
   }

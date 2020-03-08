@@ -6,6 +6,19 @@ import { getFluidGatsbyImage } from "gatsby-source-sanity"
 import clientConfig from "../../../../client-config"
 import Block from "../Block/"
 
+const Text = styled.div`
+  @media only screen and (min-width: 768px) {
+    h3 {
+      margin-top: 0;
+    }
+  }
+  @media only screen and (min-width: 1024px) {
+    h3 {
+      margin-top: inherit;
+    }
+  }
+`
+
 const TwoColGrid = props => {
   return (
     <Grid.Container margin={["3rem auto", "3rem auto", "4rem auto"]}>
@@ -21,7 +34,9 @@ const TwoColGrid = props => {
           />
         </Grid.Col>
         <Grid.Col flexBasis={["50%"]}>
-          <Block blocks={props.features} />
+          <Text>
+            <Block blocks={props.features} />
+          </Text>
         </Grid.Col>
       </Grid.Row>
     </Grid.Container>

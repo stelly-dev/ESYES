@@ -36,7 +36,7 @@ async function createRootPages(graphql, actions, reporter) {
           node {
             id
             pageName
-            _rawContent(resolveReferences: { maxDepth: 10 })
+            _rawContent(resolveReferences: { maxDepth: 20 })
           }
         }
       }

@@ -54,7 +54,7 @@ const Nav = ({
           {navLinks &&
             navLinks.linkList.map(navItem => (
               <NavListItem
-                onPage={
+                isOnPage={
                   location ==
                   `/${slugify(
                     navItem.linkName.linkDestination.pageName

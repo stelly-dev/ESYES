@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import Grid from "../../containers/Grid"
 import { graphql, StaticQuery } from "gatsby"
-import { StyledHeader, LogoContainer } from "./styled"
+import { StyledHeader, LogoContainer, LogoLink } from "./styled"
 import Nav from "../Nav"
 import Img from "gatsby-image"
 import slugify from "slugify"
@@ -48,7 +48,6 @@ const query = graphql`
 
 const Header = props => {
   const { toggleMenu, isMenuOpen, scrolled, location } = props
-  console.log(location)
   return (
     <StaticQuery
       query={query}
@@ -62,21 +61,17 @@ const Header = props => {
           data.sanityHeader.headerLinks.linkList[0].linkName.linkDestination
             .pageName
 
-        console.log(`/${slugify(testLink)}/`)
-        // console.log(
-        //   `/${slugify(
-        //     data.sanityHeader.headerLinks.linkList[0].linkName.linkDestination
-        //   )}/`
-        // )
         return (
           <StyledHeader scrolled={scrolled} id="header">
             <Grid.Container>
-              <LogoContainer to="/" alt="Link Home" scrolled={scrolled}>
-                <Img
-                  fluid={data.sanityHeader.logo.asset.fluid}
-                  alt={data.sanityHeader.logoAlt}
-                />
-              </LogoContainer>
+              <LogoLink to="/" alt="Home">
+                <LogoContainer scrolled={scrolled}>
+                  <Img
+                    fluid={data.sanityHeader.logo.asset.fluid}
+                    alt={data.sanityHeader.logoAlt}
+                  />
+                </LogoContainer>
+              </LogoLink>
               <Nav
                 location={location}
                 scrolled={scrolled}

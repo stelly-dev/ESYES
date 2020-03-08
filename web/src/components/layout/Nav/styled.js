@@ -4,14 +4,14 @@ import { Link } from "gatsby"
 // Hover Menu Styles
 export const Box = styled.div`
   display: none;
-  transition: all 0.3s ease-in-out;
+  /* transition: all 0.3s ease-in-out; */
 `
 export const BoxTriangle = styled.div`
   width: 60px;
   height: 15px;
   position: absolute;
   left: 50%;
-  top: -17px;
+  top: -19px;
   transform: translateX(-50%);
 `
 
@@ -64,7 +64,7 @@ export const StyledButton = styled(Link)`
   font-size: ${props => (props.scrolled ? ".9rem" : "1rem")};
   padding: ${props => (props.scrolled ? "0.3rem 1.1rem" : "0.5rem 1.5rem")};
   border: 1px solid ${props => props.theme.colors.primary};
-  transition: all 300ms ease-in-out;
+  transition: background-color 300ms ease-in-out;
   :visited {
     color: white;
   }
@@ -116,17 +116,17 @@ export const NavListItem = styled.li`
   position: relative;
   a {
     color: ${props =>
-      props.onPage ? props.theme.colors.secondary : props.theme.colors.black};
+      props.isOnPage ? props.theme.colors.secondary : props.theme.colors.black};
     text-decoration: none;
     font-size: ${props => (props.scrolled ? ".9rem" : "1.1rem")};
     position: relative;
-    font-weight: ${props => (props.onPage ? "bold" : "normal")};
+    font-weight: ${props => (props.isOnPage ? "bold" : "normal")};
     z-index: 1;
     outline: none;
   }
   a:visited {
     color: ${props =>
-      props.onPage ? props.theme.colors.secondary : props.theme.colors.black};
+      props.isOnPage ? props.theme.colors.secondary : props.theme.colors.black};
   }
 
   a:focus:after {

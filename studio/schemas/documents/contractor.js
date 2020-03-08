@@ -42,5 +42,11 @@ export default {
       type: "array",
       of: [{ type: "block" }]
     }
-  ]
+  ],
+  preview: {
+    select: {
+      title: "name",
+      subtitle: "contractorType"
+    }
+  }
 };

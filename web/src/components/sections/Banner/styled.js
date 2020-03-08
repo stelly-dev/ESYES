@@ -8,7 +8,7 @@ export const StyledBackgroundImage = styled(Img)`
   display: none;
   background-position: bottom center;
   background-size: contain;
-  @media only screen and (min-width: 996px) {
+  @media only screen and (min-width: 768px) {
     display: block;
   }
 `

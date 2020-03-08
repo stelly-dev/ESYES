@@ -7,12 +7,12 @@ export const StyledHeader = styled.header`
   box-sizing: border-box;
   height: ${props => (props.scrolled ? "60px" : "222px")};
   position: fixed;
-  transition: all 300ms ease-in-out;
   top: 0;
   left: 0;
-  right: 0;
+  width: 100%;
   max-width: 100vw;
-  z-index: 1;
+  z-index: 20;
+  will-change: height, padding;
   > div {
     box-sizing: border-box;
     display: flex;
@@ -22,6 +22,7 @@ export const StyledHeader = styled.header`
     height: 100%;
     padding-top: ${props => (props.scrolled ? ".5rem" : "1.5rem")};
     padding-bottom: ${props => (props.scrolled ? "1rem" : "1.5rem")};
+    will-change: padding;
   }
   @media only screen and (min-width: 768px) {
     padding-top: ${props => (props.scrolled ? ".5rem" : "1.5rem")};
@@ -37,9 +38,10 @@ export const StyledHeader = styled.header`
     }
   }
 `
+export const LogoLink = styled(Link)``
 
-export const LogoContainer = styled(Link)`
-  transition: all 300ms ease-in-out;
+export const LogoContainer = styled.div`
+  /* transition: all 400ms ease-in-out; */
   opacity: ${props => (props.scrolled ? 0.5 : 1)};
   min-width: ${props => (props.scrolled ? 0 : "343px")};
   @media only screen and (min-width: 768px) {

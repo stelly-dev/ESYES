@@ -160,7 +160,9 @@ export default {
         { type: "youtubeLeftSection" },
         { type: "twoColumn" },
         { type: "fileLink" },
-        { type: "linebreak" }
+        { type: "linebreak" },
+        { type: "contractorAccordion" },
+        { type: "blockImage" }
       ]
     }
   ],

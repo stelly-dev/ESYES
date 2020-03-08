@@ -18,7 +18,8 @@ const Row = styled.div`
 const Container = styled.div`
   box-sizing: border-box;
   width: 100%;
-  margin: 0 auto;
+  margin-left: auto;
+  margin-right: auto;
   max-width: 1200px;
   padding: 0 1rem;
   ${space};
