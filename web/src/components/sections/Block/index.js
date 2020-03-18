@@ -115,6 +115,7 @@ const chevronLink = ({ mark, children }) => {
   const to = `/${slugify(reference.pageName).toLowerCase()}/`
   return (
     <>
+      <br />
       <ArticleLink to={to}>
         {children}
         <StyledChevron />

@@ -5,6 +5,7 @@ import Hero from "../../components/sections/Hero/"
 import HomePageTextSection from "../../components/sections/HomePageTextSection/"
 import CircleCTASection from "../../components/sections/CircleCTASection/"
 import TwoColGrid from "../../components/sections/TwoColGrid/"
+import FileLink from "../../components/sections/FileLink/"
 import ImageLeftSection from "../../components/sections/ImageLeftSection/"
 import ReviewSection from "../../components/sections/ReviewSection/"
 import Block from "../../components/sections/Block/"
@@ -30,6 +31,7 @@ import {
   mapTwoColumnToProps,
   mapVimeoSectionToProps,
   mapBlockImageToProps,
+  mapFileLinkToProps,
 } from "../../utils/mapToProps"
 import YoutubeSection from "../../components/sections/YoutubeSection"
 
@@ -54,6 +56,8 @@ const PageTemplate = props => {
           const { _type } = section
           switch (_type) {
             // case "contractorAccordion": return (<pre>{JSON.stringify(section, null, 2)}</pre>)
+            case "fileLink": return (<FileLink {...mapFileLinkToProps(section)}  key={section._key} />)
+
             case "blockImage": return (<BlockImage {...mapBlockImageToProps(section)} key={section._key} />)
           case "contractorAccordion": return (<ContractorAccordion {...mapContractorAccordionToProps(section)} key={section._key}/>)
             case "banner": return ( <Banner {...mapBannerToProps(section)} key={section._key} />)

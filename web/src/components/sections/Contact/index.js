@@ -127,14 +127,18 @@ const FormGrid = styled(Grid.Container)`
 `
 
 const FormContainer = styled.section`
-  padding: 3rem 0;
+  padding: ${props =>
+    props.location === "/contact/" ? "3rem 6rem" : "3rem 0rem"};
   border-top: 3px solid ${props => props.theme.colors.primary};
   background-color: ${props =>
     props.location === "/contact/" ? props.theme.colors.primary : "white"};
-  max-width: ${props =>
-    props.location === "/contact/" ? "calc((100% / 12) * 10)" : "none"};
-  margin: ${props =>
-    props.location === "/contact/" ? "0 auto calc((100vw / 12)) auto" : "auto"};
+  @media only screen and (min-width: 1200px) {
+    max-width: ${props => (props.location === "/contact/" ? "1200px" : "none")};
+    margin: ${props =>
+      props.location === "/contact/"
+        ? "0 auto calc((100vw / 12)  ) auto"
+        : "auto"};
+  }
 `
 
 const PrivacyLink = styled.a`

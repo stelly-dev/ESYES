@@ -145,3 +145,11 @@ export function mapBlockImageToProps({ alt, image }) {
     url: image.asset.url,
   }
 }
+
+export function mapFileLinkToProps({ linkName, linkedFile, _key }) {
+  return {
+    linkName: linkName,
+    url: linkedFile.file.asset.url,
+    key: _key,
+  }
+}
