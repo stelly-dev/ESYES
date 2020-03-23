@@ -1,6 +1,7 @@
 import React from "react"
-import styled, { css } from "styled-components"
+import styled, { css, keyframes } from "styled-components"
 import Grid from "../../containers/Grid"
+
 export const SelectWrapper = styled.div`
   position: relative;
   select {
@@ -65,8 +66,22 @@ export const formElementStyles = css`
   background-color: ${props => props.theme.colors.white};
   position: relative;
   :focus {
-    border: 2px solid ${props => props.theme.colors.secondary};
+    border: ${props =>
+      props.error
+        ? "3px solid red"
+        : `2px solid ${props.theme.colors.secondary}`};
   }
+`
+
+const shake = keyframes`
+  0% { margin-left: 0rem; }
+  25% { margin-left: 0.5rem; }
+  75% { margin-left: -0.5rem; }
+  100% { margin-left: 0rem; }
+`
+// prettier-ignore
+const animation = css`
+  ${shake} 300ms ease-in-out 0s 2; 
 `
 
 export const Input = styled.input`
@@ -77,24 +92,29 @@ export const Input = styled.input`
   }
   ${autofillMixin};
   border: ${props =>
-    props.isError && props.isError == true
-      ? "3px solid red"
+    props.error
+      ? "3px solid #ff22255a"
       : `1px solid ${props => props.theme.colors.gray}`};
-  @media only screen and (min-width: 768px) {
-    /* TODO: change max-width here */
-  }
+  animation: ${props => (props.error ? animation : "none")};
+  background-color: ${props => (props.error ? "#ff222220" : "white")};
 `
 
 export const Select = styled.select`
   ${formElementStyles}
   background-color: ${props => props.theme.colors.white};
-  option:first-of-type {
-    color: ${props => props.theme.colors.gray};
+  
+  :required:invalid {
+    color: ${props => props.theme.colors.gray}; 
   }
-  :invalid {
-    color: ${props => props.theme.colors.gray};
+  option[disabled]{
+    color: ${props => props.theme.colors.gray}; 
   }
+
   ${autofillMixin}; 
+  border: ${props =>
+    props.error
+      ? "3px solid red"
+      : `1px solid ${props => props.theme.colors.gray}`};
 `
 // prettier-ignore
 export const FormGrid = styled(Grid.Container)`

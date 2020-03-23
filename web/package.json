@@ -19,6 +19,7 @@
     "babel-plugin-styled-components": "^1.10.6",
     "browser-monads": "^1.0.0",
     "dotenv": "^8.2.0",
+    "formik": "^2.1.4",
     "gatsby": "^2.18.12",
     "gatsby-background-image": "^0.9.13",
     "gatsby-image": "^2.2.39",
@@ -49,7 +50,8 @@
     "styled-components": "^4.4.1",
     "styled-normalize": "^8.0.6",
     "styled-system": "^5.1.4",
-    "typeface-lato": "^0.0.75"
+    "typeface-lato": "^0.0.75",
+    "yup": "^0.28.3"
   },
   "devDependencies": {
     "prettier": "^1.19.1"
