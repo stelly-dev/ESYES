@@ -1,4 +1,5 @@
 import React from "react"
+import { navigate } from "@reach/router"
 import { Formik, Form, useField } from "formik"
 import { FiChevronDown } from "react-icons/fi"
 import * as Yup from "yup"
@@ -87,6 +88,44 @@ const cities = [
   "niwot",
 ]
 
+const salesForce = {
+  url: "https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8",
+  oid: "00DA0000000aMYj",
+  retURL: "http://",
+  first_name: "",
+  last_name: "",
+  name: "",
+  email: "",
+  phone: "",
+  street: "",
+  city: "",
+  lead_source: "",
+  "00NF0000008M7i9": "home priority 1",
+  "00NF0000008M7iE": "home priority 2",
+  "00NF0000008M7iO": "home priority 3",
+  "00NA00000050eil": "year built",
+}
+
+const salesForceFormData = {
+  oid: "00DA0000000aMYj",
+  retURL:
+    "http://energysmartyes.com/index.php?option=com_content&view=article&id=213:sign-up-success&catid=88:for-homes",
+  first_name: "test",
+  last_name: "test",
+  email: "test@test.com",
+  phone: "8675309",
+  street: "test address 123",
+  city: "Test City",
+  zip: "Colorado",
+  lead_source: "Contractor",
+  "00NF0000008M7i9": "test",
+  "00NF0000008M7iE": "test",
+  "00NF0000008M7iO": "",
+  "00NA00000050eil": "1999",
+  "submit.x": 104,
+  "submit.y": 32,
+}
+
 // capWord: str -> str : capWord foo bar -> Foo Bar
 const capWord = str => {
   str = str.split(" ")
@@ -102,9 +141,9 @@ const initialValues = {
   phone: "",
   address: "",
   city: "",
-  priority_1: "",
-  priority_2: "",
-  priority_3: "",
+  "00NF0000008M7i9": "",
+  "00NF0000008M7iE": "",
+  "00NF0000008M7iO": "",
 }
 
 const phoneRegEx = /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)$/
@@ -121,9 +160,9 @@ const validationSchema = Yup.object({
   city: Yup.string()
     .oneOf(cities, "Invalid City")
     .required("Where are you located?"),
-  priority_1: Yup.string(),
-  priority_2: Yup.string(),
-  priority_3: Yup.string(),
+  "00NF0000008M7i9": Yup.string(),
+  "00NF0000008M7iE": Yup.string(),
+  "00NF0000008M7iO": Yup.string(),
 })
 
 const Contact = ({ location }) => {
@@ -134,8 +173,21 @@ const Contact = ({ location }) => {
         initialValues={initialValues}
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(() => {
+            fetch(salesForce.url, {
+              method: "POST",
+              headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                ...values,
+                oid: salesForce.oid,
+                // unused in current form but necessary for now
+              }),
+            })
             alert(JSON.stringify(values, null, 2))
             setSubmitting(false)
+            navigate("/thank-you")
           }, 700)
         }}
         validationSchema={validationSchema}
@@ -224,7 +276,7 @@ const Contact = ({ location }) => {
             <Grid.Row display={[null, null, null, "flex"]}>
               <MyInput
                 label="Home Priority One"
-                name="priority_1"
+                name="00NF0000008M7i9"
                 type="text"
                 placeholder="Home Priority 1"
                 gridProps={{
@@ -234,7 +286,7 @@ const Contact = ({ location }) => {
               />
               <MyInput
                 label="Home Priority Two"
-                name="priority_2"
+                name="00NF0000008M7iE"
                 type="text"
                 placeholder="Home Priority 2"
                 gridProps={{
@@ -244,7 +296,7 @@ const Contact = ({ location }) => {
               />
               <MyInput
                 label="Home Priority Three"
-                name="priority_3"
+                name="00NF0000008M7iO"
                 type="text"
                 placeholder="Home Priority 3"
                 gridProps={{

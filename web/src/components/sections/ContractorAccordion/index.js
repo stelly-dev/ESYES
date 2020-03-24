@@ -102,7 +102,9 @@ const Contractor = ({ contractor }) => {
             </div>
           </ContactInfo>
           <div>
-            <Block blocks={contractor.description} />
+            {contractor && contractor.description && (
+              <Block blocks={contractor.description} />
+            )}
           </div>
         </InfoBox>
       </TitleBox>

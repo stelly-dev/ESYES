@@ -162,7 +162,8 @@ export default {
         { type: "fileLink" },
         { type: "linebreak" },
         { type: "contractorAccordion" },
-        { type: "blockImage" }
+        { type: "blockImage" },
+        { type: "listBanner" }
       ]
     }
   ],

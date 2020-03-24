@@ -19,12 +19,19 @@ const Text = styled.div`
   }
 `
 
+const StyledImage = styled(Img)`
+  max-height: 442px;
+  picture img {
+    object-fit: contain;
+  }
+`
+
 const TwoColGrid = props => {
   return (
     <Grid.Container margin={["3rem auto", "3rem auto", "4rem auto"]}>
       <Grid.Row display={[null, null, "flex"]}>
         <Grid.Col flexBasis={["50%"]} marginRight={[null, null, "2rem"]}>
-          <Img
+          <StyledImage
             fluid={getFluidGatsbyImage(
               props.image,
               { maxWidth: 1200 },

@@ -31,10 +31,7 @@ const Effi = ({ location }) => {
   } else if (location == "/effi-app/") {
     return (
       <Container>
-        <p style={{ color: "red" }}>
-          Please note that Kelly is still working on getting the effi app ready
-        </p>
-        <IframeResizer
+        {/* <IframeResizer
           checkOrigin={false}
           forwardRef={ref}
           onMessage={onMessage}
@@ -45,7 +42,11 @@ const Effi = ({ location }) => {
           }}
           src="https://zingtree.com/deploy/tree.php?z=embed&tree_id=796651432000&style=buttons&notitle=1&embed_breadcrumbs=1&persist_names=Restart+App|Submit+Question+or+Feedback&persist_node_ids=1|214&keep_vars_on_back=1"
         />
-        <MessageData data={messageData} />
+        <MessageData data={messageData} /> */}
+        <iframe
+          style={{ width: "1px", minWidth: "100%", minHeight: "960px" }}
+          src="https://zingtree.com/deploy/tree.php?z=embed&tree_id=796651432000&style=buttons&notitle=1&embed_breadcrumbs=1&persist_names=Restart+App|Submit+Question+or+Feedback&persist_node_ids=1|214&keep_vars_on_back=1"
+        />
       </Container>
     )
   }

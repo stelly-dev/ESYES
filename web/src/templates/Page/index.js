@@ -1,6 +1,7 @@
 import React from "react"
 import { graphql } from "gatsby"
 import Layout from "../../Layout"
+import BannerList from "../../components/sections/BannerList"
 import Hero from "../../components/sections/Hero/"
 import HomePageTextSection from "../../components/sections/HomePageTextSection/"
 import CircleCTASection from "../../components/sections/CircleCTASection/"
@@ -57,7 +58,7 @@ const PageTemplate = props => {
           switch (_type) {
             // case "contractorAccordion": return (<pre>{JSON.stringify(section, null, 2)}</pre>)
             case "fileLink": return (<FileLink {...mapFileLinkToProps(section)}  key={section._key} />)
-
+            case "listBanner": return (<BannerList image={section.image.asset._id} key={section._key} />)
             case "blockImage": return (<BlockImage {...mapBlockImageToProps(section)} key={section._key} />)
           case "contractorAccordion": return (<ContractorAccordion {...mapContractorAccordionToProps(section)} key={section._key}/>)
             case "banner": return ( <Banner {...mapBannerToProps(section)} key={section._key} />)
