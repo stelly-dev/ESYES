@@ -1,4 +1,12 @@
 [[headers]]
     for = "/*"
     [headers.values]
-    Access-Control-Allow-Origin = ""
+        X-Frame-Options = "DENY"
+        X-XSS-Protection = "1; mode=block"
+        Access-Control-Allow-Origin = ""
+        cache-control = '''
+            max-age=0, 
+            no-cache, 
+            no-store, 
+            must-revalidate'''
+            
