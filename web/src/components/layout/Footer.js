@@ -162,12 +162,12 @@ const Footer = () => (
           Contact
         </Link>
         <span className="separator">|</span>
-        <Link
+        <a
           className="footer-link"
           href="https://energy-smart.netlify.com/sitemap.xml"
         >
           Site map
-        </Link>
+        </a>
       </div>
       <p className="copyright">
         Copyright © {new Date().getFullYear()}. Boulder County EnergySmart. All
