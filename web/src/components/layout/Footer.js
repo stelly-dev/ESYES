@@ -162,7 +162,10 @@ const Footer = () => (
           Contact
         </Link>
         <span className="separator">|</span>
-        <Link className="footer-link" to="/sitemap.xml">
+        <Link
+          className="footer-link"
+          href="https://energy-smart.netlify.com/sitemap.xml"
+        >
           Site map
         </Link>
       </div>
