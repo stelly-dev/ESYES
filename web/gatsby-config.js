@@ -16,11 +16,10 @@ module.exports = {
   siteMetadata: {
     title: `Energy Smart`,
     author: `@stelly.dev`,
-    // siteUrl: `https://energysmartyes.com`,
+    siteUrl: `https://energy-smart.netlify.com`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
-    // `gatsby-plugin-sitemap`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
@@ -50,5 +49,6 @@ module.exports = {
     },
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`,
+    `gatsby-plugin-advanced-sitemap`,
   ],
 }

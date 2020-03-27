@@ -162,7 +162,7 @@ const Footer = () => (
           Contact
         </Link>
         <span className="separator">|</span>
-        <Link className="footer-link" to="/site-map">
+        <Link className="footer-link" to="/sitemap.xml">
           Site map
         </Link>
       </div>
