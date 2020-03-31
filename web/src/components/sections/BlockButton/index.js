@@ -38,6 +38,7 @@ const mapOrientationToFlex = orientation => {
 }
 
 const BlockButton = props => {
+
   return (
     <StyledContainer orientation={mapOrientationToFlex(props.orientation)}>
       <StyledButton color={props.color} to={props.to}>

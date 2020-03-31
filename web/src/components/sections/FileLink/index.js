@@ -19,9 +19,10 @@ const StyledFileLink = styled.a`
 `
 
 const FileLink = props => {
+  const tabProps = props.newTab ? {target: "_blank"} : null
   return (
     <Grid.Container>
-      <StyledFileLink href={props.url}>{props.linkName}</StyledFileLink>
+      <StyledFileLink href={props.url} {...tabProps}>{props.linkName}</StyledFileLink>
     </Grid.Container>
   )
 }

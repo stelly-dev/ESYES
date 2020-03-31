@@ -2,15 +2,6 @@ require("dotenv").config()
 
 const path = require("path")
 
-/* TODO 
-  Determine if we need to use 
-  gatsby plugin sharp or gatsby transformer sharp
-
-  gatsby source filesystem?
-
-  gatsby plugin manifest?
-
-*/
 
 module.exports = {
   siteMetadata: {
@@ -50,5 +41,13 @@ module.exports = {
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-advanced-sitemap`,
+    {
+      resolve: `gatsby-plugin-google-tagmanager`, 
+      options: {
+        id: `GTM-KBWWQ75`, 
+        defaultDataLayer: {playform: `gatsby`}
+      }
+    }, 
+
   ],
 }

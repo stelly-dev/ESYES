@@ -51,7 +51,8 @@ async function createRootPages(graphql, actions, reporter) {
     const { id, _rawContent, pageName } = edge.node
     const slug = slugify(pageName)
     const path = slug === "Home-Page" ? "/" : `/${slug}/`.toLowerCase()
-
+    reporter.info("edges: ")
+    reporter.info(Object.keys(_rawContent))
     reporter.info(`Creating Page: ${path}`)
 
     createPage({

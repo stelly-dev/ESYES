@@ -175,6 +175,7 @@ const Footer = () => (
         <a
           className="policy-link"
           href="https://www.bouldercounty.org/privacy-policy/"
+          target="_blank"
         >
           Privacy Policy and Legal Information
         </a>

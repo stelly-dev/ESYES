@@ -146,10 +146,11 @@ export function mapBlockImageToProps({ alt, image }) {
   }
 }
 
-export function mapFileLinkToProps({ linkName, linkedFile, _key }) {
+export function mapFileLinkToProps({ linkName, newTab,  linkedFile, _key }) {
   return {
     linkName: linkName,
     url: linkedFile.file.asset.url,
     key: _key,
+    newTab: newTab, 
   }
 }

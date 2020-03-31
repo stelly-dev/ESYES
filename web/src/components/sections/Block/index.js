@@ -59,8 +59,9 @@ const internalLink = ({ mark, children }) => {
 
 const link = ({ mark, children }) => {
   const { href = "" } = mark
+  const tabProps = mark.newTab ? {target: "_blank"} : null; 
   return (
-    <TextLink as="a" href={href}>
+    <TextLink as="a" href={href} {...tabProps}>
       {children}
     </TextLink>
   )
@@ -75,9 +76,10 @@ const telephone = ({ mark, children }) => {
   )
 }
 
-const fileLink = ({ mark, children }) => {
+const fileLink = ({ mark, children  }) => {
+  const tabProps = mark.newTab ? {target: "_blank"} : null; 
   return (
-    <TextLink as="a" href={mark.reference.file.asset.url}>
+    <TextLink as="a" href={mark.reference.file.asset.url} {...tabProps}>
       {children}
     </TextLink>
   )

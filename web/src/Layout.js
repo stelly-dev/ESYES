@@ -173,7 +173,7 @@ const Layout = ({ children }) => {
       <Main isMenuOpen={state.menuOpen} toTopVisible={state.toTopVisible}>
         {children}
         <Location>
-          {({ location }) => <Effi location={location.pathname} />}
+          {({ location }) => <Effi location={location} />}
         </Location>
         <Location>
           {({ location }) => <Contact location={location.pathname} />}

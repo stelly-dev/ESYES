@@ -15,14 +15,18 @@ const VideoWrapper = styled.div`
   }
 `
 const YoutubeSection = props => {
+  const [playing, setPlaying] = React.useState(false); 
   return (
     <Grid.Container marginTop={["3.7rem"]} marginBottom={["3.7rem"]}>
       <VideoWrapper>
         <ReactPlayer
           url={props.url}
+          playing={playing}
+          onClick={() => setPlaying(!playing)} 
           width="100%"
           height="100%"
           className="react-player"
+          light={props.image}
           config={{
             youtube: {
               embedOptions: {

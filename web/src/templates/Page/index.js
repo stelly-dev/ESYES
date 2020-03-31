@@ -60,7 +60,7 @@ const PageTemplate = props => {
             case "fileLink": return (<FileLink {...mapFileLinkToProps(section)}  key={section._key} />)
             case "listBanner": return (<BannerList image={section.image.asset._id} key={section._key} />)
             case "blockImage": return (<BlockImage {...mapBlockImageToProps(section)} key={section._key} />)
-          case "contractorAccordion": return (<ContractorAccordion {...mapContractorAccordionToProps(section)} key={section._key}/>)
+            case "contractorAccordion": return (<ContractorAccordion {...mapContractorAccordionToProps(section)} key={section._key}/>)
             case "banner": return ( <Banner {...mapBannerToProps(section)} key={section._key} />)
             case "block": return <Block {...section} key={section._key} />
             case "blockButton": return ( <BlockButton {...mapBlockButtonToProps(section)} key={section._key} />)
@@ -72,8 +72,8 @@ const PageTemplate = props => {
             case "simpleCTA": return ( <SimpleCTA {...mapSimpleCTAToProps(section)} key={section._key} />)
             case "staffList": return ( <StaffList {...mapStaffListToProps(section)} key={section._key} />)
             case "twoColumn": return ( <TwoColumn key={section._key} {...mapTwoColumnToProps(section)} />)
-            case "vimeo": return <VimeoSection key={section._key} url={section.url} />
-            case "youtube": return <YoutubeSection url={section.url} key={section._key} />
+            case "vimeo": return <VimeoSection key={section._key} url={section.url} image={section.image && section.image.asset.url}/>
+            case "youtube": return <YoutubeSection url={section.url} key={section._key} image={section.image && section.image.asset.url}/>
             case "homePageText": return ( <HomePageTextSection {...mapHomePageTextSectionToProps(section)} key={section._key} />)
             default:
               return (

@@ -21,24 +21,23 @@ const VideoWrapper = styled.div`
   }
 `
 
-const VimeoSection = ({ url }) => {
+const VimeoSection = ({ url, image }) => {
+  const [playing, setPlaying] = React.useState(false); 
   return (
     <Grid.Container marginTop={["3.7rem"]} marginBottom={["3.7rem"]}>
       <VideoWrapper>
         <ReactPlayer
           className="react-player"
           url={url}
+          playing={playing}
+          onClick={() => setPlaying(!playing)}
+          light={image}
           controls={true}
           width="100%"
           height="100%"
         />
       </VideoWrapper>
     </Grid.Container>
-    // <Container>
-    //   <StyledVimeoSection>
-    //     <Vimeo video={url} />
-    //   </StyledVimeoSection>
-    // </Container>
   )
 }
 

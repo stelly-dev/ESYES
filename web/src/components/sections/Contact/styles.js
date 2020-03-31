@@ -148,6 +148,10 @@ export const FormContainer = styled.section`
         ? "0 auto calc((100vw / 12)  ) auto"
         : "auto"};
   }
+
+  @media only screen and (max-width: 768px){
+    padding: 3rem 0rem;  
+  }
 `
 
 export const PrivacyLink = styled.a`
