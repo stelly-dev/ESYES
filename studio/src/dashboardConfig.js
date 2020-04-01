@@ -7,9 +7,9 @@ export default {
         sites: [
           {
             title: "EnergySmart",
-            buildHookId: "5e7a6a5f0ea17cfc93051d10",
-            name: "determined-brahmagupta-4a5f06",
-            apiId: "a5ce0756-b60a-422b-9324-28a33f944e4d"
+            buildHookId: "5e84f54043933d05daebeece",
+            name: "energy-smart",
+            apiId: "490dd574-467f-409f-8782-0700d37333eb"
           }
         ]
       }

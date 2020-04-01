@@ -23,8 +23,6 @@ module.exports = {
         projectId: process.env.SANITY_PROJECT_ID,
         dataset: process.env.SANITY_DATASET,
         token: process.env.SANITY_TOKEN,
-        watchMode: true,
-        overlayDrafts: true,
       },
     },
     "gatsby-source-sanity-transform-images",
@@ -46,7 +44,7 @@ module.exports = {
       resolve: `gatsby-plugin-google-tagmanager`,
       options: {
         id: `GTM-KBWWQ75`,
-        defaultDataLayer: { playform: `gatsby` },
+        defaultDataLayer: { platform: `gatsby` },
       },
     },
 
