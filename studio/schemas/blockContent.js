@@ -100,6 +100,11 @@ export default {
                 type: "reference",
                 title: "File Reference",
                 to: [{ type: "files" }]
+              },
+              {
+                name: "newTab",
+                type: "boolean",
+                title: "Open in new tab?"
               }
             ]
           },

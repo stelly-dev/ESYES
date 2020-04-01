@@ -6,9 +6,19 @@ export default () =>
     .items([
       S.listItem()
         .title("Pages")
+        .schemaType("page")
         .child(
-          S.documentList()
+          S.documentTypeList("page")
             .title("All Pages")
+            .child(documentId => 
+              S.document()
+              .documentId(documentId)
+              .schemaType("page")
+              .views([
+                S.view.form(), 
+                S.
+              ])
+              )
             .menuItems(S.documentTypeList("page").getMenuItems())
             .filter("_type == $type && !defined(parents)")
             .params({ type: "page" })

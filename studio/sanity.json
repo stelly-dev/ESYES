@@ -16,7 +16,11 @@
     "@sanity/color-input",
     "color-list",
     "dashboard-widget-netlify",
-    "content-model-graph"
+    "content-model-graph",
+    "@sanity/dashboard",
+    "seo-tools",
+    "tabs",
+    "intl-input"
   ],
   "env": {
     "development": {

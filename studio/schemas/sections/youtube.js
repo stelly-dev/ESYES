@@ -7,6 +7,11 @@ export default {
       name: "url",
       type: "url",
       title: "YouTube video URL"
+    },
+    {
+      name: "image",
+      type: "image",
+      title: "Image for thumbnail"
     }
   ]
 };

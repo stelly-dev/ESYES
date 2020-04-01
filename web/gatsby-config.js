@@ -2,7 +2,6 @@ require("dotenv").config()
 
 const path = require("path")
 
-
 module.exports = {
   siteMetadata: {
     title: `Energy Smart`,
@@ -24,6 +23,7 @@ module.exports = {
         dataset: process.env.SANITY_DATASET,
         token: process.env.SANITY_TOKEN,
         watchMode: true,
+        overlayDrafts: true,
       },
     },
     "gatsby-source-sanity-transform-images",
@@ -42,12 +42,44 @@ module.exports = {
     `gatsby-transformer-sharp`,
     `gatsby-plugin-advanced-sitemap`,
     {
-      resolve: `gatsby-plugin-google-tagmanager`, 
+      resolve: `gatsby-plugin-google-tagmanager`,
       options: {
-        id: `GTM-KBWWQ75`, 
-        defaultDataLayer: {playform: `gatsby`}
-      }
-    }, 
+        id: `GTM-KBWWQ75`,
+        defaultDataLayer: { playform: `gatsby` },
+      },
+    },
 
+    // {
+    //   resolve: `@gatsby-contrib/gatsby-plugin-elasticlunr-search`,
+    //   options: {
+    //     // Fields to index
+    //     fields: [`title`, `content`],
+    //     // How to resolve each fields value for a supported node type
+    //     resolvers: {
+
+    //     }
+    //   }
+    // }
+    {
+      resolve: `gatsby-plugin-local-search`,
+      options: {
+        name: `pages`,
+        engine: `flexsearch`,
+        engineOptions: `speed`,
+        query: `
+    {
+      allSanityPage {
+        edges {
+          node {
+            id
+            pageName
+            _rawContent(resolveReferences: { maxDepth: 20 })
+          }
+        }
+      }
+    }
+        `,
+      },
+    },
   ],
 }

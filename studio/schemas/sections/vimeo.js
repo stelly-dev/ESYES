@@ -7,6 +7,11 @@ export default {
       name: "url",
       type: "url",
       title: "Vimeo video URL"
+    },
+    {
+      name: "image",
+      type: "image",
+      title: "Image for thumbnail"
     }
   ]
 };

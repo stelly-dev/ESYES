@@ -13,6 +13,11 @@ export default {
       type: "reference",
       name: "linkedFile",
       to: [{ type: "files" }]
+    },
+    {
+      title: "Open in new tab?",
+      name: "newTab",
+      type: "boolean"
     }
   ]
 };
