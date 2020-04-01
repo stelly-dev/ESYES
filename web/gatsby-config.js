@@ -1,6 +1,7 @@
 require("dotenv").config()
 
 const path = require("path")
+const blocksToText = require("./utils/blocksToText.js")
 
 module.exports = {
   siteMetadata: {
@@ -67,18 +68,42 @@ module.exports = {
         engine: `flexsearch`,
         engineOptions: `speed`,
         query: `
-    {
-      allSanityPage {
-        edges {
-          node {
-            id
-            pageName
-            _rawContent(resolveReferences: { maxDepth: 20 })
-          }
+        {
+          allSanityPage {
+              nodes {
+                id 
+                pageName
+                _rawLocalePage(resolveReferences: {maxDepth: 20})
+              }
+            }
         }
-      }
-    }
         `,
+        ref: `id`,
+        index: [`title`, `es`, `en`],
+        store: [`id`, `title`],
+        normalizer: ({ data }) => {
+          const defaults = { es: [], en: [] }
+
+          return data.allSanityPage.nodes.map(sanityPage => {
+            const translations = {}
+            if (sanityPage._rawLocalePage && sanityPage._rawLocalePage.en) {
+              translations.en = blocksToText(
+                sanityPage._rawLocalePage.en.content
+              )
+            }
+            if (sanityPage._rawLocalePage && sanityPage._rawLocalePage.es) {
+              translations.es = blocksToText(
+                sanityPage._rawLocalePage.es.content
+              )
+            }
+            return {
+              id: sanityPage.id,
+              title: sanityPage.pageName,
+              es: translations.es || defaults.es,
+              en: translations.en || defaults.en,
+            }
+          })
+        },
       },
     },
   ],

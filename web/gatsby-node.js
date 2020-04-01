@@ -36,30 +36,48 @@ async function createRootPages(graphql, actions, reporter) {
           node {
             id
             pageName
-            _rawContent(resolveReferences: { maxDepth: 20 })
+            _rawLocalePage(resolveReferences: { maxDepth: 20 })
           }
         }
       }
     }
   `)
 
+  reporter.info("starting ---------------------------")
   if (result.errors) throw result.errors
 
   const pageEdges = (result.data.allSanityPage || {}).edges || []
-
+  createPage({
+    path: "/effi-app/",
+    component: require.resolve(`./src/templates/Page`),
+  })
   pageEdges.forEach((edge, index) => {
-    const { id, _rawContent, pageName } = edge.node
-    const slug = slugify(pageName)
-    const path = slug === "Home-Page" ? "/" : `/${slug}/`.toLowerCase()
-    reporter.info("edges: ")
-    reporter.info(Object.keys(_rawContent))
-    reporter.info(`Creating Page: ${path}`)
+    const { id, _rawLocalePage, pageName } = edge.node
 
-    createPage({
-      path,
-      component: require.resolve(`./src/templates/Page`),
-      context: { id, _rawContent },
-    })
+    if (_rawLocalePage && "en" in _rawLocalePage) {
+      reporter.info("Creating English Language Pages")
+      reporter.info("-------------------------------")
+      const slug = slugify(pageName)
+      const path = slug === "Home-Page" ? "/" : `/${slug.toLowerCase()}/`
+      reporter.info(`-----------------------------------   ${path}`)
+      createPage({
+        path,
+        component: require.resolve(`./src/templates/Page`),
+        context: { id, content: _rawLocalePage["en"] },
+      })
+    }
+    if (_rawLocalePage && "es" in _rawLocalePage) {
+      reporter.info("Creating Spanish Language Pages")
+      reporter.info("-------------------------------")
+      const slug = slugify(pageName)
+      const path = slug === "Home-Page" ? "/es/" : `/es/${slug.toLowerCase()}`
+      reporter.info(`-----------------------------------   ${path}`)
+      createPage({
+        path,
+        component: require.resolve(`./src/templates/Page`),
+        context: { id, content: _rawLocalePage["es"] },
+      })
+    }
   })
 }
 

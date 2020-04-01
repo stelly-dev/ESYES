@@ -6,19 +6,9 @@ export default () =>
     .items([
       S.listItem()
         .title("Pages")
-        .schemaType("page")
         .child(
-          S.documentTypeList("page")
+          S.documentList()
             .title("All Pages")
-            .child(documentId => 
-              S.document()
-              .documentId(documentId)
-              .schemaType("page")
-              .views([
-                S.view.form(), 
-                S.
-              ])
-              )
             .menuItems(S.documentTypeList("page").getMenuItems())
             .filter("_type == $type && !defined(parents)")
             .params({ type: "page" })
@@ -31,10 +21,6 @@ export default () =>
             .schemaType("header")
             .documentId("header")
         ),
-      // S.listItem()
-      //   .title("Files")
-      //   .schemaType("files")
-      //   .child(S.documentTypeList("files").title("All Files"))
       S.listItem()
         .title("Files")
         .schemaType("files")

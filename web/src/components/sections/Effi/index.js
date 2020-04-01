@@ -15,35 +15,28 @@ const Container = styled.section`
   }
 `
 
-const iframeResizerOptions = {checkOrigin: false}; 
+const iframeResizerOptions = { checkOrigin: false }
 
 const Effi = ({ location }) => {
-
-
-  const iframeRef = useRef(null); 
+  const iframeRef = useRef(null)
 
   if (location && location.pathname !== "/effi-app/") {
     return null
   } else if (location.pathname === "/effi-app/") {
     return (
       <Container>
-         <IframeResizer
-           forwardRef={iframeRef}
-           id="effi"
-           inPageLinks
-           heightCalculationMethod="lowestElement"
+        <IframeResizer
+          forwardRef={iframeRef}
+          id="effi"
+          inPageLinks
+          heightCalculationMethod="lowestElement"
           style={{
             width: "1px",
             minWidth: "100%",
-            minHeight: '960px'
+            minHeight: "960px",
           }}
           src="https://zingtree.com/deploy/tree.php?z=embed&tree_id=796651432000&style=buttons&notitle=1&embed_breadcrumbs=1&persist_names=Restart+App|Submit+Question+or+Feedback&persist_node_ids=1|214"
         />
-        {/* <iframe */}
-        {/*   style={{ width: "1px", minWidth: "100%", minHeight: "960px" }} */}
-        {/*   src="https://zingtree.com/deploy/tree.php?&tree_id=796651432000&style=buttons&notitle=1&embed_breadcrumbs=1&persist_names=Restart+App|Submit+Question+or+Feedback&persist_node_ids=1|214&keep_vars_on_back=1" */}
-        {/*   ref={ref} */}
-        {/* /> */}
       </Container>
     )
   }

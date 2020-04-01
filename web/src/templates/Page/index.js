@@ -36,19 +36,19 @@ import {
 } from "../../utils/mapToProps"
 import YoutubeSection from "../../components/sections/YoutubeSection"
 
-export const query = graphql`
-  query RootPageTemplateQuery($id: String!) {
-    page: sanityPage(id: { eq: $id }) {
-      id
-      pageName
-      _rawContent(resolveReferences: { maxDepth: 20 })
-    }
-  }
-`
+// export const query = graphql`
+//   query RootPageTemplateQuery($id: String!) {
+//     page: sanityPage(id: { eq: $id }) {
+//       id
+//       pageName
+//       _rawContent(resolveReferences: { maxDepth: 20 })
+//     }
+//   }
+// `
 // prettier-ignore
 const PageTemplate = props => {
-  const { data, errors } = props
-  const content = data && data.page && data.page["_rawContent"]
+  const { errors, pageContext } = props
+  const content = pageContext && pageContext.content && pageContext.content.content; 
   return (
     <Layout>
       {errors ? <pre>{JSON.stringify(errors, null, 2)}</pre> : null}
@@ -78,11 +78,9 @@ const PageTemplate = props => {
             default:
               return (
                 <div key={Math.random()}>
-                  {" "}
                   <span style={{ color: "red" }}>
-                    {" "}
-                    No resolver for type "{_type}" found.{" "}
-                  </span>{" "}
+                    No resolver for type "{_type}" found.
+                  </span>
                 </div>
               )
           }

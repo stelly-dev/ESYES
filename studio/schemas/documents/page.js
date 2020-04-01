@@ -20,33 +20,13 @@ export default {
   type: "document",
   fields: [
     {
-      type: "localePage",
-      name: "localePage"
-    },
-    {
-      name: "localePageName",
-      title: "Page Name",
-      type: "localeString"
-    },
-
-    {
       name: "pageName",
       title: "Page Name",
       type: "string"
     },
-
     {
-      type: "content",
-      name: "content"
-    },
-    {
-      type: "localeContent",
-      name: "pageContent"
-    },
-    {
-      name: "seo",
-      title: "SEO",
-      type: "siteSEO"
+      type: "localePage",
+      name: "localePage"
     }
   ],
   preview: {
