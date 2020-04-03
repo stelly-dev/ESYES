@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from "react"
-import getYouTubeId from "get-youtube-id"
+import React  from "react"
 import styled from "styled-components"
 import ReactPlayer from "react-player"
-import YouTube from "react-youtube"
 import Grid from "../../containers/Grid"
 
 const VideoWrapper = styled.div`

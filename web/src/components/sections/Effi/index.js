@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react"
+import React, { useRef } from "react"
 import IframeResizer from "iframe-resizer-react"
 import styled from "styled-components"
 const Container = styled.section`
@@ -15,7 +15,6 @@ const Container = styled.section`
   }
 `
 
-const iframeResizerOptions = { checkOrigin: false }
 
 const Effi = ({ location }) => {
   const iframeRef = useRef(null)

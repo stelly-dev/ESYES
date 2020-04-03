@@ -40,7 +40,6 @@ const StyledErrorMessage = styled.div`
   text-align: right;
 `
 
-const StyledLabel = styled.label``
 
 const MySelect = ({ children, label, gridProps, ...props }) => {
   const [field, meta] = useField(props)
@@ -106,25 +105,25 @@ const salesForce = {
   "00NA00000050eil": "year built",
 }
 
-const salesForceFormData = {
-  oid: "00DA0000000aMYj",
-  retURL:
-    "http://energysmartyes.com/index.php?option=com_content&view=article&id=213:sign-up-success&catid=88:for-homes",
-  first_name: "test",
-  last_name: "test",
-  email: "test@test.com",
-  phone: "8675309",
-  street: "test address 123",
-  city: "Test City",
-  zip: "Colorado",
-  lead_source: "Contractor",
-  "00NF0000008M7i9": "test",
-  "00NF0000008M7iE": "test",
-  "00NF0000008M7iO": "",
-  "00NA00000050eil": "1999",
-  "submit.x": 104,
-  "submit.y": 32,
-}
+// const salesForceFormData = {
+//   oid: "00DA0000000aMYj",
+//   retURL:
+//     "http://energysmartyes.com/index.php?option=com_content&view=article&id=213:sign-up-success&catid=88:for-homes",
+//   first_name: "test",
+//   last_name: "test",
+//   email: "test@test.com",
+//   phone: "8675309",
+//   street: "test address 123",
+//   city: "Test City",
+//   zip: "Colorado",
+//   lead_source: "Contractor",
+//   "00NF0000008M7i9": "test",
+//   "00NF0000008M7iE": "test",
+//   "00NF0000008M7iO": "",
+//   "00NA00000050eil": "1999",
+//   "submit.x": 104,
+//   "submit.y": 32,
+// }
 
 // capWord: str -> str : capWord foo bar -> Foo Bar
 const capWord = str => {

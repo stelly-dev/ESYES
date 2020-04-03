@@ -1,5 +1,4 @@
 import styled from "styled-components"
-import Container from "../containers/Container"
 import { SimpleCTAContainer } from "../sections/SimpleCTA/styled"
 
 const Main = styled.main`

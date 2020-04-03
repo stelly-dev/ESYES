@@ -1,5 +1,4 @@
 import React from "react"
-import { graphql } from "gatsby"
 import Layout from "../../Layout"
 import BannerList from "../../components/sections/BannerList"
 import Hero from "../../components/sections/Hero/"
@@ -7,7 +6,6 @@ import HomePageTextSection from "../../components/sections/HomePageTextSection/"
 import CircleCTASection from "../../components/sections/CircleCTASection/"
 import TwoColGrid from "../../components/sections/TwoColGrid/"
 import FileLink from "../../components/sections/FileLink/"
-import ImageLeftSection from "../../components/sections/ImageLeftSection/"
 import ReviewSection from "../../components/sections/ReviewSection/"
 import Block from "../../components/sections/Block/"
 import StaffList from "../../components/sections/StaffList/"
@@ -30,21 +28,11 @@ import {
   mapBannerToProps,
   mapSimpleCTAToProps,
   mapTwoColumnToProps,
-  mapVimeoSectionToProps,
   mapBlockImageToProps,
   mapFileLinkToProps,
 } from "../../utils/mapToProps"
 import YoutubeSection from "../../components/sections/YoutubeSection"
 
-// export const query = graphql`
-//   query RootPageTemplateQuery($id: String!) {
-//     page: sanityPage(id: { eq: $id }) {
-//       id
-//       pageName
-//       _rawContent(resolveReferences: { maxDepth: 20 })
-//     }
-//   }
-// `
 // prettier-ignore
 const PageTemplate = props => {
   const { errors, pageContext } = props

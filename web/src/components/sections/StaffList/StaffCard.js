@@ -1,17 +1,15 @@
 import React from "react"
-import Img from "gatsby-image"
-import { FaLinkedinIn, FaPaperPlane } from "react-icons/fa"
 import { getFluidGatsbyImage } from "gatsby-source-sanity"
 import clientConfig from "../../../../client-config"
 import Grid from "../../containers/Grid"
 import {
-  IconContainer,
   CircleContainer,
   StyledStaffCard,
   StyledCircleImage,
   BioContainer,
 } from "./styled"
 import BlockContent from "@sanity/block-content-to-react"
+
 const StaffCard = props => {
   return (
     <StyledStaffCard>
@@ -42,14 +40,6 @@ const StaffCard = props => {
             <article>
               <BlockContent blocks={props.bio} />
             </article>
-            <IconContainer>
-              <a href="#">
-                <FaLinkedinIn />
-              </a>
-              <a href="#">
-                <FaPaperPlane />
-              </a>
-            </IconContainer>
           </BioContainer>
         </Grid.Col>
       </Grid.Row>

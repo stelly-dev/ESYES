@@ -1,7 +1,6 @@
 import React from "react"
 import styled from "styled-components"
 import Grid from "../../containers/Grid"
-import BlockButton from "../BlockButton/"
 
 const StyledFileLink = styled.a`
   padding: 1rem 2rem;

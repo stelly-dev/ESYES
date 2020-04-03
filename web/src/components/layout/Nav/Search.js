@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState  } from "react"
 import styled, {css} from "styled-components"
 import { FiSearch } from "react-icons/fi"
 import {useFlexSearch} from 'react-use-flexsearch'; 

@@ -34,6 +34,8 @@ const mapOrientationToFlex = orientation => {
       return "center"
     case "right":
       return "flex-end"
+    default: 
+      return "center"
   }
 }
 

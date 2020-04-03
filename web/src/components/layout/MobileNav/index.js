@@ -1,8 +1,7 @@
-import React, { useState } from "react"
+import React  from "react"
 import Accordion from "./Accordion"
 import styled from "styled-components"
-import { StaticQuery, graphql, Link } from "gatsby"
-import slugify from "slugify"
+import { StaticQuery, graphql } from "gatsby"
 
 const query = graphql`
   query MenuQuery {
@@ -49,68 +48,6 @@ const StyledMenuContainer = styled.nav`
   }
   z-index: 1;
 `
-const Triangle = styled.div`
-  width: 0;
-  height: 0;
-  border-left: 5px solid transparent;
-  border-right: 5px solid transparent;
-`
-
-const StyledMenu = styled.ul`
-  list-style: none;
-  li {
-    margin: 20px 0;
-  }
-  li:first-of-type {
-    margin-top: 36px;
-  }
-  li:last-of-type {
-    margin-bottom: 0;
-  }
-  li a div {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    ${Triangle} {
-      border-bottom: 5px solid ${props => props.theme.colors.black};
-      transform: rotate(180deg);
-    }
-    ul {
-      display: ${props => (props.open ? "block" : "block")};
-      list-style: none;
-      li:first-of-type {
-        margin-top: 20px;
-      }
-      li {
-        margin-left: 2ch;
-      }
-    }
-  }
-
-  li a {
-    color: ${props => props.theme.colors.secondary};
-  }
-
-  li a:hover {
-    color: ${props => props.theme.colors.black};
-  }
-`
-
-const MenuItem = ({ childList, to, pageName }) => {
-  if (childList.length > 0) {
-    return (
-      <ul>
-        {childList.map(child => (
-          <li key={child._key}>
-            <div>
-              <Link to={`/${slugify(to).toLowerCase()}/`}>child.pageName</Link>
-            </div>
-          </li>
-        ))}
-      </ul>
-    )
-  }
-}
 
 const MobileNav = ({ isMenuOpen, scrolled }) => (
   <StaticQuery

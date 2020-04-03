@@ -1,7 +1,6 @@
 import React from "react"
 import styled from "styled-components"
-import { Link } from "gatsby"
-import { Box, BoxTriangle, SvgTriangle } from "./styled"
+import { Box, SvgTriangle } from "./styled"
 
 const BoxContainer = styled.div`
   position: absolute;

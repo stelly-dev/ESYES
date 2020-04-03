@@ -5,9 +5,9 @@ import {
   SimpleCTASection,
   StyledButton,
 } from "./styled"
-import Button from "../../pieces/Button"
 import Container from "../../containers/Container"
 import slugify from 'slugify'; 
+
 const SimpleCTA = props => {
   console.log(props)
   return (

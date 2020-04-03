@@ -1,8 +1,6 @@
 import React from "react"
-import { Link, graphql, StaticQuery } from "gatsby"
+import { Link  } from "gatsby"
 
-import { FiSearch } from "react-icons/fi"
-import Button from "../../pieces/Button"
 import HoverLink from "./HoverLink"
 import {
   NavContainer,
@@ -12,10 +10,7 @@ import {
   NavListItem,
   NavCtaWrapper,
   TagLine,
-  NavContentContainer,
   StyledButton,
-  DropDownContainer,
-  DropDown,
 } from "./styled"
 import MenuButton from "./MenuButton"
 import Search from "./Search"
@@ -55,7 +50,7 @@ const Nav = ({
             navLinks.linkList.map(navItem => (
               <NavListItem
                 isOnPage={
-                  location ==
+                  location ===
                   `/${slugify(
                     navItem.linkName.linkDestination.pageName
                   )}/`.toLowerCase()

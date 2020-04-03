@@ -1,36 +1,11 @@
 import React from "react"
-import { graphql, StaticQuery } from "gatsby"
 import { getFluidGatsbyImage } from "gatsby-source-sanity"
 import Container from "../../containers/Container"
 import clientConfig from "../../../../client-config"
-import { HeroSection, HeroButton, StyledBackgroundImage } from "./styled"
+import {  StyledBackgroundImage } from "./styled"
 
 const Hero = props => {
-  // const query = graphql`
-  //   query HeroImageQuery = {
-  //     allSanityImageAsset(filter: {_id: {eq: ${props.image}}}){
-  //       nodes {
-  //         url
-  //         localFile(width:2000){
-  //           publicURL
-  //           childImageSharp {
-  //             fluid {
-  //               tracedSVG
-  //             }
-  //           }
-  //         }
-  //       }
-  //     }
-  //   }
-  // `
   return (
-    // <StaticQuery
-    //   query={}
-    //   render={data => (
-    //     <StyledBackgroundImage
-    //       fluid={data.}
-    //   )}
-    //   />
     <StyledBackgroundImage
       fluid={getFluidGatsbyImage(
         props.image,

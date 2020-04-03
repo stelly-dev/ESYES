@@ -134,10 +134,6 @@ export function mapTwoColumnToProps({ _key, col1, col2 }) {
   }
 }
 
-export function mapVimeoSectionToProps({ props }) {
-  return props
-}
-
 export function mapBlockImageToProps({ alt, image }) {
   return {
     alt: alt,

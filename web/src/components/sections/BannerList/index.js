@@ -1,11 +1,10 @@
 import React from "react"
 import styled from "styled-components"
 import { getFluidGatsbyImage } from "gatsby-source-sanity"
-import BackgroundImage from "gatsby-background-image"
 import Img from "gatsby-image"
-import { Link } from "gatsby"
 import Grid from "../../containers/Grid"
 import clientConfig from "../../../../client-config"
+
 function Banner({ textArray, ...props }) {
   return (
     <svg viewBox="0 0 263.16 99.389" {...props}>

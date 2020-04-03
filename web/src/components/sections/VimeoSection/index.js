@@ -1,14 +1,8 @@
 import React from "react"
 import styled from "styled-components"
-import Vimeo from "@u-wave/react-vimeo"
 import ReactPlayer from "react-player"
-import getVideoId from "get-video-id"
 import Grid from "../../containers/Grid"
 
-const StyledVimeoSection = styled.section`
-  display: flex;
-  justify-content: center;
-`
 
 const VideoWrapper = styled.div`
   /* margin: 0 auto; */

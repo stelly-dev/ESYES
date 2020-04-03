@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useLayoutEffect } from "react"
+import React, { useState, useEffect } from "react"
 import { ThemeProvider } from "styled-components"
 import { Location } from "@reach/router"
 import GlobalStyle from "./GlobalStyle"
@@ -11,18 +11,18 @@ import Contact from "./components/sections/Contact"
 import Effi from "./components/sections/Effi/"
 import styled from "styled-components"
 import { FaChevronUp } from "react-icons/fa"
-const SizeOverlay = styled.div`
-  position: fixed;
-  font-size: 4rem;
-  bottom: 1rem;
-  right: 0;
-  padding: 2rem 1rem;
-  background-color: #333;
-  color: white;
-  z-index: 1000;
-`
 
-const headerHeights = [222, 152, 195]
+// const SizeOverlay = styled.div`
+//   position: fixed;
+//   font-size: 4rem;
+//   bottom: 1rem;
+//   right: 0;
+//   padding: 2rem 1rem;
+//   background-color: #333;
+//   color: white;
+//   z-index: 1000;
+// `
+
 
 const RhythmOverlayWrapper = styled.div`
   position: absolute;

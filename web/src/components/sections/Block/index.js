@@ -11,7 +11,6 @@ import clientConfig from "../../../../client-config"
 import { getFluidGatsbyImage } from "gatsby-source-sanity"
 import YouTube from "react-youtube"
 import Vimeo from "@u-wave/react-vimeo"
-import getVideoId from "get-video-id"
 import getYoutubeId from "get-youtube-id"
 import Img from "gatsby-image"
 import { H1, H2, H3, H4, H5, H6, P } from "./TextStyles"
@@ -47,9 +46,6 @@ const LeftQuote = styled(FaQuoteLeft)`
   }
 `
 
-const linebreak = ({ mark, children }) => {
-  return <br />
-}
 
 const internalLink = ({ mark, children }) => {
   const { reference = {} } = mark
@@ -251,7 +247,6 @@ const serializers = {
     },
     vimeo: ({ node }) => {
       const { url } = node
-      const id = getVideoId(url)
       return (
         <VideoWrapper>
           <Vimeo video={url} key={node._key} />
@@ -260,7 +255,6 @@ const serializers = {
     },
     image: ({ node }) => {
       const { asset } = node
-      const imageId = asset["_id"]
       const fluidProps = getFluidGatsbyImage(
         asset["_id"],
         { maxWidth: 768 },

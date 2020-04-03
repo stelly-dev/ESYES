@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from "react"
+import React, { useState } from "react"
 import styled from "styled-components"
 import Grid from "../../containers/Grid"
 import Block from "../Block"
@@ -37,8 +37,6 @@ const TitleBox = styled(Grid.Row)`
   font-weight: bold;
   transition: all 500ms ease-in-out;
 `
-
-const ContractorBox = styled(Grid.Container)``
 
 const IconWrapper = styled.div`
   vertical-align: middle;

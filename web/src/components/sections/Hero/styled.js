@@ -51,16 +51,16 @@ export const HeroButton = styled(Button)`
   transition: all 250ms ease-in;
   border: 1px solid
     ${props =>
-      props.secondary == "true"
+      props.secondary === "true"
         ? props.theme.colors.secondary
         : props.theme.colors.primary};
   background: ${props =>
-    props.secondary == "true"
+    props.secondary === "true"
       ? props.theme.colors.secondary
       : props.theme.colors.primary};
   :hover {
     color: ${props =>
-      props.secondary == "true"
+      props.secondary === "true"
         ? props.theme.colors.secondary
         : props.theme.colors.primary};
     background-color: white;

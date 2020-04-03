@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react"
+import React from "react"
 import Grid from "../../containers/Grid"
 import { graphql, StaticQuery } from "gatsby"
 import { StyledHeader, LogoContainer, LogoLink } from "./styled"
 import Nav from "../Nav"
 import Img from "gatsby-image"
-import slugify from "slugify"
 import "./styles.css"
 
 const query = graphql`
@@ -57,9 +56,6 @@ const Header = props => {
             'Missing "Site Logo". Open the studio and add "Site Logo" Data'
           )
         }
-        const testLink =
-          data.sanityHeader.headerLinks.linkList[0].linkName.linkDestination
-            .pageName
 
         return (
           <StyledHeader scrolled={scrolled} id="header">
