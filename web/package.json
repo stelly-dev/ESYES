@@ -10,7 +10,7 @@
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
     "start": "npm run develop",
     "serve": "gatsby serve",
-    "serve-preview": "NODE_ENV=development gatsby develop --host 0.0.0.0 --p $PORT", 
+    "serve-preview": "NODE_ENV=development gatsby develop --host 0.0.0.0 --p $PORT",
     "clean": "gatsby clean",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
   },
@@ -30,6 +30,7 @@
     "gatsby-plugin-google-tagmanager": "^2.2.1",
     "gatsby-plugin-local-search": "^1.1.1",
     "gatsby-plugin-manifest": "^2.2.41",
+    "gatsby-plugin-netlify": "^2.2.1",
     "gatsby-plugin-react-helmet": "^3.1.18",
     "gatsby-plugin-sharp": "^2.5.3",
     "gatsby-plugin-sitemap": "^2.2.27",

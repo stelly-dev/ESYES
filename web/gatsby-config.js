@@ -106,5 +106,25 @@ module.exports = {
         },
       },
     },
+    {
+      resolve: `gatsby-plugin-netlify`, 
+      options: {
+        headers: {
+          "/*": [
+            "X-Frame-Options: 'DENY'", 
+            "X-XSS-Protection: '1; mode=block'", 
+            "Access-Control-Allow-Origin: '*'", 
+            "cache-control: ```max-age: 0 no-cache no-store must-revalidate```"
+          ]
+        }, 
+        allPageHeaders: [], 
+        mergeSecurityHeaders: true, 
+        mergeLinkHeaders: true, 
+        mergeCachingHeaders: true, 
+        transformHeaders: (headers, path) => headers, 
+        generateMatchPathRewrites: true
+      }
+
+    }
   ],
 }
