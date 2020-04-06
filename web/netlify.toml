@@ -1,3 +1,13 @@
+[[redirects]]
+  from = "/*"
+  to = "/404"
+  status = 404
+
+[[redirects]]
+  from = "/es/*"
+  to = "/es/404"
+  status = 404
+
 [[headers]]
     for = "/*"
     [headers.values]

@@ -50,7 +50,7 @@ const LeftQuote = styled(FaQuoteLeft)`
 const internalLink = ({ mark, children }) => {
   const { reference = {} } = mark
   const to = `/${slugify(reference.pageName).toLowerCase()}/`
-  return <TextLink to={to}>{children}</TextLink>
+  return <TextLink to={to === '/home-page/' ? '/' : to}>{children}</TextLink>
 }
 
 const link = ({ mark, children }) => {
@@ -167,7 +167,7 @@ const Quote = props => {
     </QuoteSection>
   )
 }
-const Centered = styled.p`
+const Centered = styled.span`
   text-align: center;
 `
 
@@ -269,9 +269,6 @@ const serializers = {
         />
       )
     },
-    linebreak: ({ node }) => {
-      return <br />
-    },
   },
 }
 
@@ -294,7 +291,6 @@ const Block = props => {
             types: { block: BlockRenderer, ...serializers.types },
           }}
         />
-        {/* <pre>{JSON.stringify(props, null, 2)}</pre> */}
       </Grid.Container>
     </BlockSection>
   )

@@ -1,9 +1,9 @@
 import React, { useState  } from "react"
 import styled, {css} from "styled-components"
 import { FiSearch } from "react-icons/fi"
-import {useFlexSearch} from 'react-use-flexsearch'; 
-import {graphql, StaticQuery} from 'gatsby'; 
-import {Formik, Form, Field} from 'formik'; 
+import {useFlexSearch} from 'react-use-flexsearch' 
+import {graphql, StaticQuery} from 'gatsby' 
+import {Formik, Form, Field} from 'formik' 
 
 
 export const searchQuery = graphql`
@@ -20,9 +20,9 @@ const SearchQueryComponent = ({data, searchActive, scrolled}) => {
   // see https://github.com/angeloashmore/gatsby-plugin-local-search/issues/18
   // for why we're parsing return from gatsby. 
   const results = useFlexSearch(searchTerm, data.localSearchPages.index, JSON.parse(data.localSearchPages.store)); 
-  console.log(results)
+
   return (
-    <SearchForm scrolled={scrolled} searchActive={searchActive}>
+    <SearchForm scrolled={scrolled} searchActive={searchActive ? 1 : 0}>
           <Formik
             initialValues={{searchTerm: ''}}
             onSubmit={(values, {setSubmitting}) => {
@@ -45,10 +45,10 @@ const Search = props => {
   const {scrolled} = props; 
   return (
     <>
-      <Input searchActive={searchActive}>
+      <Input searchActive={searchActive ? 1 : 0}>
       <StaticQuery 
         query={searchQuery}
-        render={(data) => data && data.localSearchPages ? <SearchQueryComponent data={data} searchActive={searchActive} scrolled={scrolled}/> : null}
+        render={(data) => data && data.localSearchPages ? <SearchQueryComponent data={data} searchActive={searchActive ? 1 : 0} scrolled={scrolled}/> : null}
       />
       </Input>
       <SearchIconContainer>
@@ -57,7 +57,6 @@ const Search = props => {
           setSearchActive(!searchActive)
         }
         scrolled={scrolled}
-        searchActive={searchActive}
       />
       </SearchIconContainer >
 

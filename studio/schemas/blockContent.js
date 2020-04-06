@@ -127,7 +127,6 @@ export default {
     },
     { type: "youtube" },
     { type: "vimeo" },
-    { type: "image" },
-    { type: "linebreak" }
+    { type: "image" }
   ]
 };

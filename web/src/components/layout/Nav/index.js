@@ -36,7 +36,7 @@ const Nav = ({
           <BlockContent blocks={tagLine} />
         </TagLine>
         <StyledButton
-          scrolled={scrolled}
+          scrolled={scrolled ? 1 : 0}
           to={`/${slugify(
             ctaButton.buttonDestination.pageName
           ).toLowerCase()}/`}
@@ -55,7 +55,7 @@ const Nav = ({
                     navItem.linkName.linkDestination.pageName
                   )}/`.toLowerCase()
                 }
-                scrolled={scrolled}
+                scrolled={scrolled ? 1 : 0}
                 key={navItem.linkName.linkName}
               >
                 <Link
@@ -88,7 +88,7 @@ const Nav = ({
             <MenuButton isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
           </NavListItem>
           <NavListItem>
-            <Search scrolled={scrolled} />
+            <Search scrolled={scrolled ? 1 : 0} />
           </NavListItem>
         </NavList>
       </StyledNav>

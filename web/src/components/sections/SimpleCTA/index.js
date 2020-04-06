@@ -9,7 +9,6 @@ import Container from "../../containers/Container"
 import slugify from 'slugify'; 
 
 const SimpleCTA = props => {
-  console.log(props)
   return (
   <SimpleCTAContainer>
     <Container>
@@ -17,7 +16,7 @@ const SimpleCTA = props => {
       <ButtonWrapper count={props.buttons && props.buttons.length}>
         {props.buttons &&
           props.buttons.map(button => (
-            <StyledButton to={`${slugify(button.buttonDestination.pageName).toLowerCase()}/`} key={button._key}>
+            <StyledButton to={`/${slugify(button.buttonDestination.pageName).toLowerCase()}/`} key={button._key}>
               {button.buttonText}
             </StyledButton>
           ))}
