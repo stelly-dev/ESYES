@@ -93,14 +93,10 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   createRedirect({
     fromPath: "https://energy-smart.netlify.com/es/*", 
     toPath: "https://energy-smart.netlify.com/es/404/", 
-    isPermanent: true, 
-    force: true
   })
   createRedirect({
     fromPath: "https://energy-smart.netlify.com/*", 
     toPath: "https://energy-smart.netlify.com/404/", 
-    isPermanent: true, 
-    force: true
   })
 }
 
