@@ -28,7 +28,7 @@ const slugify = require("slugify")
 // }
 
 async function createRootPages(graphql, actions, reporter) {
-  const { createPage,  } = actions
+  const { createPage } = actions
   const result = await graphql(`
     {
       allSanityPage {
@@ -45,30 +45,21 @@ async function createRootPages(graphql, actions, reporter) {
 
   if (result.errors) throw result.errors
   
-  reporter.info("\u001b[37;1m### # #- \u001b[32;1mGENERATING PAGES\u001b[37;1m  -# # ###")
-  reporter.info("                                    ")
   const pageEdges = (result.data.allSanityPage || {}).edges || []
-  reporter.info("------------------------ Defaults")
   createPage({
     path: "/effi-app/",
     component: require.resolve(`./src/templates/Page`),
   })
-  reporter.info("------------------------ \u001b[32;1msuccess \u001b[33;1m/effi-app/")
   createPage({
     path: "/es/effi-app/",
     component: require.resolve(`./src/templates/Page`),
   })
-  reporter.info("------------------------ \u001b[32;1msuccess \u001b[33;1m/es/effi-app/")
-  reporter.info("------------------------ /Defaults")
-  reporter.info("")
-  reporter.info("------------------------ Pages")
   pageEdges.forEach((edge, index) => {
     const { id, _rawLocalePage, pageName } = edge.node
 
     if (_rawLocalePage && "es" in _rawLocalePage) {
       const slug = slugify(pageName)
       const path = slug === "Home-Page" ? "/es/" : `/es/${slug.toLowerCase()}/`
-      reporter.info(`The path is: ------------------------------------>   ${path}` )
       reporter.info(`------------------------ \u001b[32;1msuccess \u001b[36;1m/es/\u001b[34;1m${slug.toLowerCase()}`)
       createPage({
         path,
@@ -83,7 +74,6 @@ async function createRootPages(graphql, actions, reporter) {
       
       const slug = slugify(pageName)
       const path = slug === "Home-Page" ? "/" : `/${slug.toLowerCase()}/`
-      reporter.info(`The path is: ------------------------------------>   ${path}` )
       reporter.info(`------------------------ \u001b[32;1msuccess\u001b[34m ${path}`)
       createPage({
         path,
@@ -94,13 +84,24 @@ async function createRootPages(graphql, actions, reporter) {
     }
 
   })
-  reporter.info("------------------------ /Pages")
-  reporter.info("")
   
 }
 
 exports.createPages = async ({ graphql, actions, reporter }) => {
+  const { createRedirect} = actions; 
   await createRootPages(graphql, actions, reporter)
+  createRedirect({
+    fromPath: "https://energy-smart.netlify.com/es/*", 
+    toPath: "https://energy-smart.netlify.com/es/404/", 
+    isPermanent: true, 
+    force: true
+  })
+  createRedirect({
+    fromPath: "https://energy-smart.netlify.com/*", 
+    toPath: "https://energy-smart.netlify.com/404/", 
+    isPermanent: true, 
+    force: true
+  })
 }
 
 
