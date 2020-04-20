@@ -7,7 +7,7 @@ module.exports = {
   siteMetadata: {
     title: `Energy Smart`,
     author: `@stelly.dev`,
-    siteUrl: `https://energy-smart.netlify.com`,
+    siteUrl: `https://energysmartyes.com`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
