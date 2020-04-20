@@ -14,6 +14,7 @@ import Vimeo from "@u-wave/react-vimeo"
 import getYoutubeId from "get-youtube-id"
 import Img from "gatsby-image"
 import { H1, H2, H3, H4, H5, H6, P } from "./TextStyles"
+import {Location} from '@reach/router'
 
 export const StyledImage = styled(Img)`
   max-width: 300px;
@@ -50,7 +51,27 @@ const LeftQuote = styled(FaQuoteLeft)`
 const internalLink = ({ mark, children }) => {
   const { reference = {} } = mark
   const to = `/${slugify(reference.pageName).toLowerCase()}/`
-  return <TextLink to={to === '/home-page/' ? '/' : to}>{children}</TextLink>
+  return (
+    <Location>
+      {
+        ({location}) => <LocaleTextLink 
+                          location={location} 
+                          to={to === '/home-page/' ? '/' : to}
+                          >
+                          {children}
+                          </LocaleTextLink>
+      }
+    </Location>
+  )
+}
+
+const LocaleTextLink = ({to, children, location}) => {
+  if(location.pathname.match(/\/es\//)){
+    console.log("MATCH", to)
+    return <TextLink to={`/es/${to}`}>{children}</TextLink>
+  } else {
+    return <TextLink to={to}>{children}</TextLink>
+  }
 }
 
 const link = ({ mark, children }) => {

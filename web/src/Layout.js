@@ -9,6 +9,7 @@ import Header from "./components/layout/Header/"
 import MobileNav from "./components/layout/MobileNav/"
 import Contact from "./components/sections/Contact"
 import Effi from "./components/sections/Effi/"
+// import SearchResults from './components/sections/SearchResults' 
 import styled from "styled-components"
 import { FaChevronUp } from "react-icons/fa"
 
@@ -22,7 +23,6 @@ import { FaChevronUp } from "react-icons/fa"
 //   color: white;
 //   z-index: 1000;
 // `
-
 
 const RhythmOverlayWrapper = styled.div`
   position: absolute;
@@ -172,9 +172,8 @@ const Layout = ({ children }) => {
       <MobileNav isMenuOpen={state.menuOpen} scrolled={state.scrolled} />
       <Main isMenuOpen={state.menuOpen} toTopVisible={state.toTopVisible}>
         {children}
-        <Location>
-          {({ location }) => <Effi location={location} />}
-        </Location>
+        {/* <Location>{({ location }) => <SearchResults location={location} />}</Location> */} 
+        <Location>{({ location }) => <Effi location={location} />}</Location>
         <Location>
           {({ location }) => <Contact location={location.pathname} />}
           {/* {({ location }) => <ContactForm location={location.pathname} />} */}

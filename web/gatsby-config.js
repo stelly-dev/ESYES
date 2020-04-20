@@ -11,6 +11,7 @@ module.exports = {
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-recaptcha`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
@@ -83,7 +84,6 @@ module.exports = {
         store: [`id`, `title`],
         normalizer: ({ data }) => {
           const defaults = { es: [], en: [] }
-
           return data.allSanityPage.nodes.map(sanityPage => {
             const translations = {}
             if (sanityPage._rawLocalePage && sanityPage._rawLocalePage.en) {

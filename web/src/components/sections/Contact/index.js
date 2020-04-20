@@ -105,25 +105,6 @@ const salesForce = {
   "00NA00000050eil": "year built",
 }
 
-// const salesForceFormData = {
-//   oid: "00DA0000000aMYj",
-//   retURL:
-//     "http://energysmartyes.com/index.php?option=com_content&view=article&id=213:sign-up-success&catid=88:for-homes",
-//   first_name: "test",
-//   last_name: "test",
-//   email: "test@test.com",
-//   phone: "8675309",
-//   street: "test address 123",
-//   city: "Test City",
-//   zip: "Colorado",
-//   lead_source: "Contractor",
-//   "00NF0000008M7i9": "test",
-//   "00NF0000008M7iE": "test",
-//   "00NF0000008M7iO": "",
-//   "00NA00000050eil": "1999",
-//   "submit.x": 104,
-//   "submit.y": 32,
-// }
 
 // capWord: str -> str : capWord foo bar -> Foo Bar
 const capWord = str => {
@@ -143,6 +124,7 @@ const initialValues = {
   "00NF0000008M7i9": "",
   "00NF0000008M7iE": "",
   "00NF0000008M7iO": "",
+  language: "", 
 }
 
 const phoneRegEx = /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)$/
@@ -162,6 +144,7 @@ const validationSchema = Yup.object({
   "00NF0000008M7i9": Yup.string(),
   "00NF0000008M7iE": Yup.string(),
   "00NF0000008M7iO": Yup.string(),
+  language: Yup.string().oneOf(["English", "Espanol"], "Invalid Language").required()
 })
 
 const Contact = ({ location }) => {
@@ -184,7 +167,6 @@ const Contact = ({ location }) => {
                 // unused in current form but necessary for now
               }),
             })
-            alert(JSON.stringify(values, null, 2))
             setSubmitting(false)
             navigate("/thank-you")
           }, 700)

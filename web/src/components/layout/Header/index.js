@@ -23,7 +23,7 @@ const query = graphql`
           pageName
         }
       }
-      _rawTagLine
+      _rawTagLine(resolveReferences: { maxDepth: 1 })
       headerLinks {
         linkList {
           linkChildren {
@@ -51,6 +51,9 @@ const Header = props => {
     <StaticQuery
       query={query}
       render={data => {
+        if (!data) {
+          throw new Error("Missing everything")
+        }
         if (!data.sanityHeader.logo) {
           throw new Error(
             'Missing "Site Logo". Open the studio and add "Site Logo" Data'

@@ -4,7 +4,7 @@ import { FiSearch } from "react-icons/fi"
 import {useFlexSearch} from 'react-use-flexsearch' 
 import {graphql, StaticQuery} from 'gatsby' 
 import {Formik, Form, Field} from 'formik' 
-
+import {navigate, Location} from "@reach/router"
 
 export const searchQuery = graphql`
     query SearchQuery {
@@ -15,26 +15,34 @@ export const searchQuery = graphql`
   }
 `
 
+const checkLocale = location => {
+  return location.pathname.match(/\/es\//)
+}
+
 const SearchQueryComponent = ({data, searchActive, scrolled}) => {
   const [searchTerm, setSearchTerm] = useState(null); 
   // see https://github.com/angeloashmore/gatsby-plugin-local-search/issues/18
   // for why we're parsing return from gatsby. 
   const results = useFlexSearch(searchTerm, data.localSearchPages.index, JSON.parse(data.localSearchPages.store)); 
-
+  console.log(results); 
   return (
     <SearchForm scrolled={scrolled} searchActive={searchActive ? 1 : 0}>
+      <Location>
+        {({location}) => 
           <Formik
             initialValues={{searchTerm: ''}}
             onSubmit={(values, {setSubmitting}) => {
               setSearchTerm(values.searchTerm)
               setSubmitting(false)
+              checkLocale(location) ? navigate('/es/search/', {state: {results}}) : navigate('/search/', {state: {results}});  
             }}
          > 
             <Form>
               <StyledField name="searchTerm" placeholder="SEARCH" />
           </Form>
           </Formik>
-          
+        }
+      </Location>
     </SearchForm>
   )
 }
