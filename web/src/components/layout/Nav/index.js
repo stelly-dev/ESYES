@@ -87,9 +87,9 @@ const Nav = ({
           <NavListItem>
             <MenuButton isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
           </NavListItem>
-          <NavListItem>
-            <Search scrolled={scrolled ? 1 : 0} />
-          </NavListItem>
+          {/* <NavListItem> */}
+          {/*   <Search scrolled={scrolled ? 1 : 0} /> */}
+          {/* </NavListItem> */}
         </NavList>
       </StyledNav>
     </NavContainer>
