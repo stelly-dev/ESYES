@@ -91,7 +91,7 @@ export const SimpleCTASection = styled.section`
   font-size: 4.3vw;
   line-height: 1.5;
   font-weight: bold;
-
+  text-align: center; 
   @media only screen and (min-width: 768px) {
     font-size: 2.08vw;
     line-height: 1.29;
