@@ -188,10 +188,22 @@ const Contact = ({ location }) => {
         <Formik
           initialValues={initialValues}
           onSubmit={(values, { setSubmitting }) => {
-            setTimeout(() => {
-              console.log("submitting!")
+            fetch(salesForce.url, {
+              method: "post",
+              headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                ...values,
+                oid: salesForce.oid,
+                "00N2I00000Dqoqv": "English",
+              }),
+            }).then(response => {
               setSubmitting(false)
-            }, 500)
+              console.log(response)
+              navigate("/thank-you/")
+            })
           }}
           validationSchema={validationSchema}
         >
