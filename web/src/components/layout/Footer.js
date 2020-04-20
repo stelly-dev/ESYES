@@ -164,7 +164,7 @@ const Footer = () => (
         <span className="separator">|</span>
         <a
           className="footer-link"
-          href="https://energy-smart.netlify.com/sitemap.xml"
+          href="https://energysmartyes.com/sitemap.xml"
         >
           Site map
         </a>
