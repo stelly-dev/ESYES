@@ -87,9 +87,11 @@ const Nav = ({
           <NavListItem>
             <MenuButton isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
           </NavListItem>
-          {/* <NavListItem> */}
-          {/*   <Search scrolled={scrolled ? 1 : 0} /> */}
-          {/* </NavListItem> */}
+          <NavListItem>
+            <div style={{display: 'none'}}>
+            <Search scrolled={scrolled ? 1 : 0} />
+            </div>
+          </NavListItem>
         </NavList>
       </StyledNav>
     </NavContainer>
