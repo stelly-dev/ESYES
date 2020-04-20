@@ -6,9 +6,7 @@ import * as Yup from "yup"
 import EnergySmart from "./EnergySmart"
 import styled from "styled-components"
 import Grid from "../../containers/Grid"
-import {Helmet} from 'react-helmet'
-
-
+import { Helmet } from "react-helmet"
 import {
   SelectWrapper,
   FormButton,
@@ -42,7 +40,6 @@ const StyledErrorMessage = styled.div`
   color: red;
   text-align: right;
 `
-
 
 const MySelect = ({ children, label, gridProps, ...props }) => {
   const [field, meta] = useField(props)
@@ -95,18 +92,16 @@ const salesForce = {
   oid: "00DA0000000aMYj",
   first_name: "",
   last_name: "",
-  name: "",
   email: "",
   phone: "",
   street: "",
   city: "",
-  lead_source: "",
-  "00NF0000008M7i9": "home priority 1",
-  "00NF0000008M7iE": "home priority 2",
-  "00NF0000008M7iO": "home priority 3",
-  "00NA00000050eil": "year built",
+  zip: "",
+  "00NF0000008M7i9": "",
+  "00NF0000008M7iE": "",
+  "00NF0000008M7iO": "",
+  "00N2I00000Dqoqv": "",
 }
-
 
 // capWord: str -> str : capWord foo bar -> Foo Bar
 const capWord = str => {
@@ -126,7 +121,7 @@ const initialValues = {
   "00NF0000008M7i9": "",
   "00NF0000008M7iE": "",
   "00NF0000008M7iO": "",
-  "00N2U99999Dqoqv": "", 
+  "00N2I00000Dqoqv": "",
 }
 
 const phoneRegEx = /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)$/
@@ -146,34 +141,28 @@ const validationSchema = Yup.object({
   "00NF0000008M7i9": Yup.string(),
   "00NF0000008M7iE": Yup.string(),
   "00NF0000008M7iO": Yup.string(),
-  "00N2U99999Dqoqv": Yup.string().oneOf(["English", "Espanol"], "Invalid Language").required()
 })
-
-const HiddenInputs = () => {
-  return (
-    <>
-<input type="hidden" name='captcha_settings' value='{"keyname":"ESWebsite","fallback":"true","orgId":"00DA0000000aMYj","ts":""}'/>
-<input type="hidden" name="oid" value="00DA0000000aMYj"/>
-</> 
-          
-  )
-}
 
 const Captcha = () => (
   <>
-    <input type="hidden" name='captcha_settings' value='{"keyname":"ESWebsite","fallback":"true","orgId":"00DA0000000aMYj","ts":""}'/>
-    <div className="g-recaptcha" data-sitekey="LfDf-gUAAAAADmj72yTU6ANmCy0a4q1Ea7uh4Gn"/>
+    <input
+      type="hidden"
+      name="captcha_settings"
+      value='{"keyname":"ESWebsite","fallback":"true","orgId":"00DA0000000aMYj","ts":""}'
+    />
+    <div
+      className="g-recaptcha"
+      data-sitekey="LfDf-gUAAAAADmj72yTU6ANmCy0a4q1Ea7uh4Gn"
+    />
   </>
 )
 
-const Contact = ({ location }) => {
+const Headers = () => {
   return (
-    <>
-      <Helmet>
-        <meta httpEquiv="Content-type" content="text/html" charSet="UTF-8"/>
-        <script src="https://www.google.com/recaptcha/api.js"></script>
-        <script>
-          {`
+    <Helmet>
+      <script src="https://www.google.com/recaptcha/api.js"></script>
+      <script>
+        {`
           if(typeof window !== 'undefined' && window && window.document){
             function timestamp() {
               var response = document.getElementById("g-recpatcha-response");
@@ -185,162 +174,157 @@ const Contact = ({ location }) => {
             }} 
             typeof timestamp !== 'undefined' ? setInterval(timestamp, 500) : null;
             `}
-        </script>
-      </Helmet>
-    <FormContainer location={location}>
-      <EnergySmart before={"Contact"} after={"Today!"} location={location} />
-      <Formik
-        initialValues={initialValues}
-        onSubmit={(values, { setSubmitting }) => {
-          setTimeout(() => {
-            alert('submitting'); 
-            fetch(salesForce.url, {
-              method: "POST",
-              headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
+      </script>
+    </Helmet>
+  )
+}
 
-              },
-              body: (result) => {
-                console.log(result); 
-                JSON.stringify({
-                ...values,
-                oid: salesForce.oid,
-                // unused in current form but necessary for now
-              })
-              },
-            })
-            setSubmitting(false)
-            navigate("/thank-you")
-          }, 500)
-        }}
-        validationSchema={validationSchema}
-      >
-        <Form>
-          <FormGrid>
-            <Grid.Row display={[null, null, null, "flex"]}>
-              <MyInput
-                label="Full Name"
-                name="first_name"
-                type="text"
-                placeholder="Name*"
-                gridProps={{
-                  flexBasis: [null, null, null, "33.33%"],
-                  marginRight: [null, null, null, "1rem"],
-                }}
-              />
-              <MyInput
-                label="Email Address"
-                name="email"
-                type="email"
-                placeholder="Email*"
-                gridProps={{
-                  flexBasis: [null, null, null, "33.33%"],
-                  marginRight: [null, null, null, "1rem"],
-                }}
-              />
-              <MyInput
-                label="Phone Number"
-                name="phone"
-                type="tel"
-                placeholder="Phone"
-                gridProps={{
-                  flexBasis: [null, null, null, "33.33%"],
-                }}
-              />
-            </Grid.Row>
-            <Grid.Row
-              display={["flex"]}
-              flexWrap={["wrap", "wrap", "wrap", "nowrap"]}
-            >
-              <MyInput
-                label="Address"
-                name="address"
-                type="text"
-                placeholder="Address*"
-                gridProps={{
-                  flexBasis: [
-                    "100%",
-                    "100%",
-                    "100%",
-                    "calc(66.66% + 2rem - 4px)",
-                  ],
-                  marginRight: [null, null, null, "1rem"],
-                }}
-              />
-              <MySelect
-                label="City"
-                name="city"
-                gridProps={{
-                  flexBasis: ["75%", "75%", "75%", "calc(22.22% - 1rem + 5px)"],
-                  marginRight: ["1rem"],
-                }}
-                required
+const Contact = ({ location }) => {
+  return (
+    <>
+      <Headers />
+      <FormContainer location={location}>
+        <EnergySmart before={"Contact"} after={"Today!"} location={location} />
+        <Formik
+          initialValues={initialValues}
+          onSubmit={(values, { setSubmitting }) => {
+            setTimeout(() => {
+              console.log("submitting!")
+              setSubmitting(false)
+            }, 500)
+          }}
+          validationSchema={validationSchema}
+        >
+          <Form>
+            <FormGrid>
+              <Grid.Row display={[null, null, null, "flex"]}>
+                <MyInput
+                  label="Full Name"
+                  name="first_name"
+                  type="text"
+                  placeholder="Name*"
+                  gridProps={{
+                    flexBasis: [null, null, null, "33.33%"],
+                    marginRight: [null, null, null, "1rem"],
+                  }}
+                />
+                <MyInput
+                  label="Email Address"
+                  name="email"
+                  type="email"
+                  placeholder="Email*"
+                  gridProps={{
+                    flexBasis: [null, null, null, "33.33%"],
+                    marginRight: [null, null, null, "1rem"],
+                  }}
+                />
+                <MyInput
+                  label="Phone Number"
+                  name="phone"
+                  type="tel"
+                  placeholder="Phone"
+                  gridProps={{
+                    flexBasis: [null, null, null, "33.33%"],
+                  }}
+                />
+              </Grid.Row>
+              <Grid.Row
+                display={["flex"]}
+                flexWrap={["wrap", "wrap", "wrap", "nowrap"]}
               >
-                <option value="" disabled>
-                  City*
-                </option>
-                {cities.map((city, i) => (
-                  <option key={city} value={city}>
-                    {capWord(city)}
+                <MyInput
+                  label="Address"
+                  name="street"
+                  type="text"
+                  placeholder="Address*"
+                  gridProps={{
+                    flexBasis: [
+                      "100%",
+                      "100%",
+                      "100%",
+                      "calc(66.66% + 2rem - 4px)",
+                    ],
+                    marginRight: [null, null, null, "1rem"],
+                  }}
+                />
+                <MySelect
+                  label="City"
+                  name="city"
+                  gridProps={{
+                    flexBasis: [
+                      "75%",
+                      "75%",
+                      "75%",
+                      "calc(22.22% - 1rem + 5px)",
+                    ],
+                    marginRight: ["1rem"],
+                  }}
+                  required
+                >
+                  <option value="" disabled>
+                    City*
                   </option>
-                ))}
-              </MySelect>
-              <Grid.Col
-                flexBasis={[
-                  "calc(25% - 1rem - 2px)",
-                  "calc(25% - 1rem - 2px)",
-                  "calc(25% - 1rem - 2px)",
-                  "11.11%",
-                ]}
-              >
-                <Input as="div">CO</Input>
-              </Grid.Col>
-            </Grid.Row>
-            <Grid.Row display={[null, null, null, "flex"]}>
-              <MyInput
-                label="Home Priority One"
-                name="00NF0000008M7i9"
-                type="text"
-                placeholder="Home Priority 1"
-                gridProps={{
-                  flexBasis: [null, null, null, "33.33%"],
-                  marginRight: [null, null, null, "1rem"],
-                }}
-              />
-              <MyInput
-                label="Home Priority Two"
-                name="00NF0000008M7iE"
-                type="text"
-                placeholder="Home Priority 2"
-                gridProps={{
-                  flexBasis: [null, null, null, "33.33%"],
-                  marginRight: [null, null, null, "1rem"],
-                }}
-              />
-              <MyInput
-                label="Home Priority Three"
-                name="00NF0000008M7iO"
-                type="text"
-                placeholder="Home Priority 3"
-                gridProps={{
-                  flexBasis: [null, null, null, "33.33%"],
-                }}
-              />
-            </Grid.Row>
-          </FormGrid>
-          <Captcha />
-          <FormButton value={"Contact EnergySmart"} />
-        </Form>
-      </Formik>
-      <PrivacyLink
-        href="https://www.bouldercounty.org/privacy-policy/"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Privacy Policy
-      </PrivacyLink>
-    </FormContainer>
+                  {cities.map((city, i) => (
+                    <option key={city} value={city}>
+                      {capWord(city)}
+                    </option>
+                  ))}
+                </MySelect>
+                <Grid.Col
+                  flexBasis={[
+                    "calc(25% - 1rem - 2px)",
+                    "calc(25% - 1rem - 2px)",
+                    "calc(25% - 1rem - 2px)",
+                    "11.11%",
+                  ]}
+                >
+                  <Input as="div">CO</Input>
+                </Grid.Col>
+              </Grid.Row>
+              <Grid.Row display={[null, null, null, "flex"]}>
+                <MyInput
+                  label="Home Priority One"
+                  name="00NF0000008M7i9"
+                  type="text"
+                  placeholder="Home Priority 1"
+                  gridProps={{
+                    flexBasis: [null, null, null, "33.33%"],
+                    marginRight: [null, null, null, "1rem"],
+                  }}
+                />
+                <MyInput
+                  label="Home Priority Two"
+                  name="00NF0000008M7iE"
+                  type="text"
+                  placeholder="Home Priority 2"
+                  gridProps={{
+                    flexBasis: [null, null, null, "33.33%"],
+                    marginRight: [null, null, null, "1rem"],
+                  }}
+                />
+                <MyInput
+                  label="Home Priority Three"
+                  name="00NF0000008M7iO"
+                  type="text"
+                  placeholder="Home Priority 3"
+                  gridProps={{
+                    flexBasis: [null, null, null, "33.33%"],
+                  }}
+                />
+              </Grid.Row>
+            </FormGrid>
+            <Captcha />
+            <FormButton value={"Contact EnergySmart"} />
+          </Form>
+        </Formik>
+        <PrivacyLink
+          href="https://www.bouldercounty.org/privacy-policy/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Privacy Policy
+        </PrivacyLink>
+      </FormContainer>
     </>
   )
 }
