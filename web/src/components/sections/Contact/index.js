@@ -6,6 +6,9 @@ import * as Yup from "yup"
 import EnergySmart from "./EnergySmart"
 import styled from "styled-components"
 import Grid from "../../containers/Grid"
+import {Helmet} from 'react-helmet'
+
+
 import {
   SelectWrapper,
   FormButton,
@@ -90,7 +93,6 @@ const cities = [
 const salesForce = {
   url: "https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8",
   oid: "00DA0000000aMYj",
-  retURL: "http://",
   first_name: "",
   last_name: "",
   name: "",
@@ -116,7 +118,7 @@ const capWord = str => {
 }
 
 const initialValues = {
-  name: "",
+  first_name: "",
   email: "",
   phone: "",
   address: "",
@@ -124,18 +126,18 @@ const initialValues = {
   "00NF0000008M7i9": "",
   "00NF0000008M7iE": "",
   "00NF0000008M7iO": "",
-  language: "", 
+  "00N2U99999Dqoqv": "", 
 }
 
 const phoneRegEx = /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)$/
 
 const validationSchema = Yup.object({
-  name: Yup.string().required("Please Enter Your Name"),
+  first_name: Yup.string().required("Please Enter Your Name"),
   email: Yup.string()
     .email("Please enter a valid email address")
     .required("Please enter your email"),
   phone: Yup.string().matches(phoneRegEx, "What is your phone number?"),
-  address: Yup.string()
+  street: Yup.string()
     .min(3)
     .required("What is your address?"),
   city: Yup.string()
@@ -144,32 +146,73 @@ const validationSchema = Yup.object({
   "00NF0000008M7i9": Yup.string(),
   "00NF0000008M7iE": Yup.string(),
   "00NF0000008M7iO": Yup.string(),
-  language: Yup.string().oneOf(["English", "Espanol"], "Invalid Language").required()
+  "00N2U99999Dqoqv": Yup.string().oneOf(["English", "Espanol"], "Invalid Language").required()
 })
+
+const HiddenInputs = () => {
+  return (
+    <>
+<input type="hidden" name='captcha_settings' value='{"keyname":"ESWebsite","fallback":"true","orgId":"00DA0000000aMYj","ts":""}'/>
+<input type="hidden" name="oid" value="00DA0000000aMYj"/>
+</> 
+          
+  )
+}
+
+const Captcha = () => (
+  <>
+    <input type="hidden" name='captcha_settings' value='{"keyname":"ESWebsite","fallback":"true","orgId":"00DA0000000aMYj","ts":""}'/>
+    <div className="g-recaptcha" data-sitekey="LfDf-gUAAAAADmj72yTU6ANmCy0a4q1Ea7uh4Gn"/>
+  </>
+)
 
 const Contact = ({ location }) => {
   return (
+    <>
+      <Helmet>
+        <meta httpEquiv="Content-type" content="text/html" charSet="UTF-8"/>
+        <script src="https://www.google.com/recaptcha/api.js"></script>
+        <script>
+          {`
+          if(typeof window !== 'undefined' && window && window.document){
+            function timestamp() {
+              var response = document.getElementById("g-recpatcha-response");
+              if(response == null || response.value.trim == ""){
+                var elems = JSON.parse(document.getElementsByName("captcha_settings")[0].value); 
+                elems["ts"] = JSON.stringify(new Date().getTime()); 
+                document.getElementsByName("captcha_settings")[0].value = JSON.stringify(elems); 
+              }
+            }} 
+            typeof timestamp !== 'undefined' ? setInterval(timestamp, 500) : null;
+            `}
+        </script>
+      </Helmet>
     <FormContainer location={location}>
       <EnergySmart before={"Contact"} after={"Today!"} location={location} />
       <Formik
         initialValues={initialValues}
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(() => {
+            alert('submitting'); 
             fetch(salesForce.url, {
               method: "POST",
               headers: {
                 Accept: "application/json",
                 "Content-Type": "application/json",
+
               },
-              body: JSON.stringify({
+              body: (result) => {
+                console.log(result); 
+                JSON.stringify({
                 ...values,
                 oid: salesForce.oid,
                 // unused in current form but necessary for now
-              }),
+              })
+              },
             })
             setSubmitting(false)
             navigate("/thank-you")
-          }, 700)
+          }, 500)
         }}
         validationSchema={validationSchema}
       >
@@ -178,7 +221,7 @@ const Contact = ({ location }) => {
             <Grid.Row display={[null, null, null, "flex"]}>
               <MyInput
                 label="Full Name"
-                name="name"
+                name="first_name"
                 type="text"
                 placeholder="Name*"
                 gridProps={{
@@ -286,6 +329,7 @@ const Contact = ({ location }) => {
               />
             </Grid.Row>
           </FormGrid>
+          <Captcha />
           <FormButton value={"Contact EnergySmart"} />
         </Form>
       </Formik>
@@ -297,6 +341,7 @@ const Contact = ({ location }) => {
         Privacy Policy
       </PrivacyLink>
     </FormContainer>
+    </>
   )
 }
 
