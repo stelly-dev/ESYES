@@ -190,6 +190,7 @@ const Contact = ({ location }) => {
           onSubmit={(values, { setSubmitting }) => {
             fetch(salesForce.url, {
               method: "post",
+              mode: "no-cors",
               headers: {
                 Accept: "application/json",
                 "Content-Type": "application/json",
