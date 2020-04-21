@@ -199,7 +199,7 @@ const Contact = ({ location }) => {
           onSubmit={(values, { setSubmitting }) => {
             async function postDataAsync(values) {
               let response = await fetch(salesForceURL, {
-                method: POST,
+                method: "POST",
                 body: {
                   ...values,
                   last_name: "NONE",
@@ -216,6 +216,7 @@ const Contact = ({ location }) => {
               let data = await response.json()
               console.log(data)
             }
+            postDataAsync(values)
           }}
           validationSchema={validationSchema}
         >
