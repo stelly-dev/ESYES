@@ -197,18 +197,25 @@ const Contact = ({ location }) => {
         <Formik
           initialValues={initialValues}
           onSubmit={(values, { setSubmitting }) => {
-            fetch(salesForceURL, {
-              method: "POST",
-              body: JSON.stringify({
-                ...values,
-                oid: salesForce.oid,
-                "00N2I00000Dqoqv": "English",
-              }),
-            }).then(response => {
-              setSubmitting(false)
-              console.log(response)
-              navigate("/thank-you/")
-            })
+            async function postDataAsync(values) {
+              let response = await fetch(salesForceURL, {
+                method: POST,
+                body: {
+                  ...values,
+                  last_name: "NONE",
+                  "00N2I00000Dqoqv": "English",
+                  zip: "00000",
+                  captcha_settings: {
+                    keyname: "ESWebsite",
+                    fallback: "true",
+                    orgId: salesForce.oid,
+                    ts: Math.random(),
+                  },
+                },
+              })
+              let data = await response.json()
+              console.log(data)
+            }
           }}
           validationSchema={validationSchema}
         >
