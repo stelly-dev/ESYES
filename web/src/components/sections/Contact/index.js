@@ -16,6 +16,7 @@ import {
   FormContainer,
   PrivacyLink,
 } from "./styles"
+
 // Input components and styling
 //
 const MyInput = ({ label, gridProps, ...props }) => {
@@ -60,12 +61,6 @@ const MySelect = ({ children, label, gridProps, ...props }) => {
   )
 }
 
-// TODO:
-//
-// Consider receiving list of cities and form elements from
-// Sanity. Since the design isn't static it may be easier to
-// just have me / future developers update this component in the future
-
 const cities = [
   "boulder",
   "erie",
@@ -87,8 +82,10 @@ const cities = [
   "niwot",
 ]
 
+let salesForceURL =
+  "https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8"
+
 const salesForce = {
-  url: "https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8",
   oid: "00DA0000000aMYj",
   first_name: "",
   last_name: "",
@@ -179,6 +176,18 @@ const Headers = () => {
   )
 }
 
+// TODO:
+
+// 1. set up gatsby google reCAPTCHA
+// 2. Make sure the submission is actually handing off
+//    all of the data
+// 3. Push
+// 4. ???
+// 5. PROFIT.
+
+// 1 is in two steps gatsby-plugin-recaptcha (adds the js script)
+//                   add the recaptcha div
+
 const Contact = ({ location }) => {
   return (
     <>
@@ -188,13 +197,8 @@ const Contact = ({ location }) => {
         <Formik
           initialValues={initialValues}
           onSubmit={(values, { setSubmitting }) => {
-            fetch(salesForce.url, {
-              method: "post",
-              mode: "no-cors",
-              headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-              },
+            fetch(salesForceURL, {
+              method: "POST",
               body: JSON.stringify({
                 ...values,
                 oid: salesForce.oid,
@@ -212,6 +216,7 @@ const Contact = ({ location }) => {
             <FormGrid>
               <Grid.Row display={[null, null, null, "flex"]}>
                 <MyInput
+                  id="first_name"
                   label="Full Name"
                   name="first_name"
                   type="text"
@@ -222,6 +227,7 @@ const Contact = ({ location }) => {
                   }}
                 />
                 <MyInput
+                  id="email"
                   label="Email Address"
                   name="email"
                   type="email"
@@ -232,6 +238,7 @@ const Contact = ({ location }) => {
                   }}
                 />
                 <MyInput
+                  id="phone"
                   label="Phone Number"
                   name="phone"
                   type="tel"
@@ -246,6 +253,7 @@ const Contact = ({ location }) => {
                 flexWrap={["wrap", "wrap", "wrap", "nowrap"]}
               >
                 <MyInput
+                  id="street"
                   label="Address"
                   name="street"
                   type="text"
@@ -262,6 +270,7 @@ const Contact = ({ location }) => {
                 />
                 <MySelect
                   label="City"
+                  id="city"
                   name="city"
                   gridProps={{
                     flexBasis: [
@@ -296,6 +305,7 @@ const Contact = ({ location }) => {
               </Grid.Row>
               <Grid.Row display={[null, null, null, "flex"]}>
                 <MyInput
+                  id="00NF0000008M7i9"
                   label="Home Priority One"
                   name="00NF0000008M7i9"
                   type="text"
@@ -307,6 +317,7 @@ const Contact = ({ location }) => {
                 />
                 <MyInput
                   label="Home Priority Two"
+                  id="00NF0000008M7iE"
                   name="00NF0000008M7iE"
                   type="text"
                   placeholder="Home Priority 2"
@@ -317,6 +328,7 @@ const Contact = ({ location }) => {
                 />
                 <MyInput
                   label="Home Priority Three"
+                  id="00NF0000008M7iO"
                   name="00NF0000008M7iO"
                   type="text"
                   placeholder="Home Priority 3"

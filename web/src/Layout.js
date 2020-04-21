@@ -177,6 +177,14 @@ const Layout = ({ children }) => {
         {/* <Location>
           {({ location }) => <Contact location={location.pathname} />}
         </Location> */}
+        <Location>
+          {({ location }) =>
+            location.pathname === "/contact-testing/" ||
+            location.pathname === "/es/contact-testing/" ? (
+              <Contact location={location.pathname} />
+            ) : null
+          }
+        </Location>
         <Footer />
         {state.toTopVisible ? (
           <ToTopButton onClick={() => scrollToTop()}>
