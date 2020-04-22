@@ -174,9 +174,9 @@ const Layout = ({ children }) => {
         {children}
         {/* <Location>{({ location }) => <SearchResults location={location} />}</Location> */}
         <Location>{({ location }) => <Effi location={location} />}</Location>
-        {/* <Location>
-          {({ location }) => <Contact location={location.pathname} />}
-        </Location> */}
+         <Location>
+           {({ location }) => <Contact location={location.pathname} />}
+         </Location> 
         <Location>
           {({ location }) =>
             location.pathname === "/contact-testing/" ||
