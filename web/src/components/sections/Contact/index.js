@@ -224,7 +224,7 @@ const Contact = ({ location }) => {
           }}
           validationSchema={validationSchema}
         >
-          <Form data-netlify={true}>
+          <Form data-netlify="true" name="contact">
             <FormGrid>
               <Grid.Row display={[null, null, null, "flex"]}>
                 <MyInput
