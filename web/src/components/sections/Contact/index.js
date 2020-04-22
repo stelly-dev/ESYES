@@ -202,26 +202,25 @@ const Contact = ({ location }) => {
         <Formik
           initialValues={initialValues}
           onSubmit={(values, { setSubmitting }) => {
-            console.log("submitting!")
-            async function postDataAsync(values) {
-              let response = await fetch("/", {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/x-www-form-urlencoded",
-                  Accept: "application/json",
-                },
-                body: encode({
-                  ...values,
-                }),
+            fetch("/?no-cache=1", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+              },
+              body: encode({
+                "form-name": "contact",
+                ...values,
+              }),
+            })
+              .then(() => {
+                console.log("Success!")
+                setSubmitting(false)
+                navigate("/thank-you/")
               })
-              console.log(values)
-              console.log(encode({ ...values }))
-              let data = await response.status
-              console.log("data\n", data, "json\n", response.json())
-              setSubmitting(false)
-            }
-            postDataAsync(values)
-            navigate("/thank-you/")
+              .catch(error => {
+                console.log("ERROR", error)
+                setSubmitting(false)
+              })
           }}
           validationSchema={validationSchema}
         >
