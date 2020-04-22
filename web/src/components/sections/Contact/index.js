@@ -197,37 +197,31 @@ const encode = data => {
 const Contact = ({ location }) => {
   return (
     <>
-      <Headers />
       <FormContainer location={location}>
         <EnergySmart before={"Contact"} after={"Today!"} location={location} />
         <Formik
           initialValues={initialValues}
           onSubmit={(values, { setSubmitting }) => {
+            console.log("submitting!")
             async function postDataAsync(values) {
               let response = await fetch("/", {
                 method: "POST",
                 headers: {
                   "Content-Type": "application/x-www-form-urlencoded",
+                  Accept: "application/json",
                 },
                 body: encode({
                   ...values,
-                  last_name: "NONE",
-                  "00N2I00000Dqoqv": "English",
-                  zip: "00000",
-                  captcha_settings: {
-                    keyname: "ESWebsite",
-                    fallback: "true",
-                    orgId: salesForce.oid,
-                    ts: Math.random(),
-                  },
                 }),
               })
-              let data = await response.json()
-              console.log(data)
+              console.log(values)
+              console.log(encode({ ...values }))
+              let data = await response.status
+              console.log("data\n", data, "json\n", response.json())
               setSubmitting(false)
-              navigate("/thank-you/")
             }
             postDataAsync(values)
+            navigate("/thank-you/")
           }}
           validationSchema={validationSchema}
         >
@@ -357,7 +351,6 @@ const Contact = ({ location }) => {
                 />
               </Grid.Row>
             </FormGrid>
-            <Captcha />
             <FormButton value={"Contact EnergySmart"} />
           </Form>
         </Formik>
