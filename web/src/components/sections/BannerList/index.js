@@ -4,10 +4,17 @@ import { getFluidGatsbyImage } from "gatsby-source-sanity"
 import Img from "gatsby-image"
 import Grid from "../../containers/Grid"
 import clientConfig from "../../../../client-config"
+import {flexbox, layout} from 'styled-system'; 
+
+
+const StyledSvg = styled.svg`
+  ${flexbox};
+  ${layout}; 
+`
 
 function Banner({ textArray, ...props }) {
   return (
-    <svg viewBox="0 0 263.16 99.389" {...props}>
+    <StyledSvg viewBox="0 0 263.16 99.389" {...props}>
       <path fill="#f9a33e" d="M0 0h33.819v31.948H0z" />
       <g fill="#0ea6c6">
         <path d="M33.818 0h229.34v31.948H33.818zM33.818 67.441h229.34v31.948H33.818zM33.818 33.72h229.34v31.948H33.818z" />
@@ -98,7 +105,7 @@ function Banner({ textArray, ...props }) {
           </text>
         </g>
       </g>
-    </svg>
+    </StyledSvg>
   )
 }
 
@@ -114,10 +121,10 @@ const StyledImg = styled(Img)`
 const BannerList = ({ image }) => {
   return (
     <Grid.Container>
-      <Grid.Row display={["flex"]} style={{ width: "100%", height: "250px" }}>
-        <Grid.Col style={{ height: "100%" }} flexBasis={["2"]}>
+      <Grid.Row display={["flex"]} flexDirection={["column", "column", "row", "row", "row"]} width={["100%"]}>
+        <Grid.Col  flexBasis={["calc(66.666% - 1rem)"]} order={["2", "2", "1", "1", "1"]}>
           <Banner
-            style={{ height: "100%" }}
+            width={['100%']}
             textArray={[
               <tspan>
                 <tspan style={{ textDecoration: "underline" }}>SIGN UP</tspan>{" "}
@@ -128,7 +135,7 @@ const BannerList = ({ image }) => {
             ]}
           />
         </Grid.Col>
-        <Grid.Col flexBasis={["100%"]}>
+        <Grid.Col flexBasis={["calc(33.333% - 1rem)"]}  order={["1", "1", "2", "2", "2"]} height={['100%']}>
           <StyledImg
             fluid={getFluidGatsbyImage(
               image,
