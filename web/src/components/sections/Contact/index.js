@@ -188,6 +188,10 @@ const Headers = () => {
 // 1 is in two steps gatsby-plugin-recaptcha (adds the js script)
 //                   add the recaptcha div
 
+const encode = data => {
+  return Object.keys(data).map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key])).join("&"); 
+}
+
 const Contact = ({ location }) => {
   return (
     <>
@@ -196,11 +200,14 @@ const Contact = ({ location }) => {
         <EnergySmart before={"Contact"} after={"Today!"} location={location} />
         <Formik
           initialValues={initialValues}
-          onSubmit={(values, { setSubmitting }) => {
+          onSubmit={(values,actions, { setSubmitting }) => {
             async function postDataAsync(values) {
-              let response = await fetch(salesForceURL, {
+              let response = await fetch("/", {
                 method: "POST",
-                body: {
+                headers: { 
+                  "Content-Type": "application/x-www-form-urlencoded"
+                }, 
+                body: encode({
                   ...values,
                   last_name: "NONE",
                   "00N2I00000Dqoqv": "English",
@@ -211,16 +218,19 @@ const Contact = ({ location }) => {
                     orgId: salesForce.oid,
                     ts: Math.random(),
                   },
-                },
+                }),
               })
               let data = await response.json()
               console.log(data)
+              setSubmitting(false)
+              actions.resetForm(); 
+              navigate("/thank-you/")
             }
             postDataAsync(values)
           }}
           validationSchema={validationSchema}
         >
-          <Form>
+          <Form data-netlify={true}>
             <FormGrid>
               <Grid.Row display={[null, null, null, "flex"]}>
                 <MyInput
