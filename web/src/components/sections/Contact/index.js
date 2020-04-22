@@ -202,7 +202,7 @@ const Contact = ({ location }) => {
         <EnergySmart before={"Contact"} after={"Today!"} location={location} />
         <Formik
           initialValues={initialValues}
-          onSubmit={(values, actions, { setSubmitting }) => {
+          onSubmit={(values, { setSubmitting }) => {
             async function postDataAsync(values) {
               let response = await fetch("/", {
                 method: "POST",
@@ -225,7 +225,6 @@ const Contact = ({ location }) => {
               let data = await response.json()
               console.log(data)
               setSubmitting(false)
-              actions.resetForm()
               navigate("/thank-you/")
             }
             postDataAsync(values)
