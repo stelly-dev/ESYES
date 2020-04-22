@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import { navigate } from "@reach/router"
 import { Formik, Form, useField } from "formik"
 import { FiChevronDown } from "react-icons/fi"
@@ -41,6 +41,24 @@ const StyledErrorMessage = styled.div`
   color: red;
   text-align: right;
 `
+
+const Error = ({ error }) => {
+  if (error.length > 0) {
+    return (
+      <div
+        style={{
+          textAlign: "center",
+          margin: "0 auto 2rem auto",
+          width: "100%",
+        }}
+      >
+        <h1 style={{ color: "red" }}>Problem Connecting</h1>
+        <p>Check your internet connection and try again.</p>
+      </div>
+    )
+  }
+  return null
+}
 
 const MySelect = ({ children, label, gridProps, ...props }) => {
   const [field, meta] = useField(props)
@@ -194,7 +212,79 @@ const encode = data => {
     .join("&")
 }
 
+const makeHumanReadable = (obj, newKeys) => {
+  const keyValues = Object.keys(obj).map(key => {
+    const newKey = newKeys[key] || key
+    return { [newKey]: obj[key] }
+  })
+  return Object.assign({}, ...keyValues)
+}
+
+const newKeys = {
+  "00NF0000008M7i9": "Home Priority One",
+  "00NF0000008M7iE": "Home Priority Two",
+  "00NF0000008M7iO": "Home Priority Three",
+  first_name: "Name",
+}
+
+const addLanguageField = (obj, location) => {
+  if (location.match(/\/es\//)) {
+    const newObj = { "00N2I00000Dqoqv": "Spanish", ...obj }
+    return newObj
+  } else {
+    const newObj = { "00N2I00000Dqoqv": "English", ...obj }
+    return newObj
+  }
+}
+
+// test url is /contact-testing/
+const testURL = /\/contact-testing\//
+
+const submitSalesForce = (values, location) => {
+  return fetch(
+    "https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        oid: salesForce.oid,
+      },
+      body: encode({
+        ...addLanguageField(values, location),
+      }),
+    }
+  )
+}
+
+const submitNetlify = (values, location) => {
+  return fetch("/?no-cache=1", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    body: encode({
+      "form-name": "contact",
+      ...addLanguageField(values, location),
+    }),
+  })
+}
+
+const handleFormSuccess = (response, setSubmissionError, setSubmitting) => {
+  console.log("Success!", response)
+  setSubmissionError("")
+  setSubmitting(false)
+  navigate("/thank-you/")
+}
+
+const handleFormError = (error, setSubmissionError, setSubmitting) => {
+  console.error("ERROR", error)
+  setSubmissionError("error")
+  setSubmitting(false)
+}
+
 const Contact = ({ location }) => {
+  const [submissionError, setSubmissionError] = useState("")
+  console.log(location)
   return (
     <>
       <FormContainer location={location}>
@@ -202,25 +292,24 @@ const Contact = ({ location }) => {
         <Formik
           initialValues={initialValues}
           onSubmit={(values, { setSubmitting }) => {
-            fetch("/?no-cache=1", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/x-www-form-urlencoded",
-              },
-              body: encode({
-                "form-name": "contact",
-                ...values,
-              }),
-            })
-              .then(() => {
-                console.log("Success!")
-                setSubmitting(false)
-                navigate("/thank-you/")
-              })
-              .catch(error => {
-                console.log("ERROR", error)
-                setSubmitting(false)
-              })
+            setSubmissionError("")
+            if (location.match(/\/contact-testing/)) {
+              submitSalesForce(values, location)
+                .then(response =>
+                  handleFormSuccess(response, setSubmissionError, setSubmitting)
+                )
+                .catch(error =>
+                  handleFormError(error, setSubmissionError, setSubmitting)
+                )
+            } else {
+              submitNetlify(values, location)
+                .then(response =>
+                  handleFormSuccess(response, setSubmissionError, setSubmitting)
+                )
+                .catch(error =>
+                  handleFormError(error, setSubmissionError, setSubmitting)
+                )
+            }
           }}
           validationSchema={validationSchema}
         >
@@ -350,7 +439,12 @@ const Contact = ({ location }) => {
                 />
               </Grid.Row>
             </FormGrid>
-            <FormButton value={"Contact EnergySmart"} />
+            <Error error={submissionError} />
+            <FormButton
+              value={
+                submissionError.length > 0 ? "Try Again" : "Contact EnergySmart"
+              }
+            />
           </Form>
         </Formik>
         <PrivacyLink
