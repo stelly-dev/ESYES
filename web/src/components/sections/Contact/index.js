@@ -4,6 +4,7 @@ import { Formik, Form } from "formik"
 import * as Yup from "yup"
 import EnergySmart from "./EnergySmart"
 import Grid from "../../containers/Grid"
+
 import {
   FormButton,
   Input,
@@ -107,6 +108,7 @@ const Contact = ({ location }) => {
   const salesforceRef = useRef(null)
   return (
     <>
+      {location.match(/\/contact-testing/) ? <Headers /> : null}
       <FormContainer location={location}>
         <EnergySmart before={"Contact"} after={"Today!"} location={location} />
         <Formik
@@ -127,6 +129,9 @@ const Contact = ({ location }) => {
               retURL: location.match(/\/es\//)
                 ? "https://www.energysmartyes.com/es/thank-you/"
                 : "https://www.energysmart.com/thank-you/",
+              captcha_settings: `{"keyname": "ESWebsite", "fallback":"true", "orgId":"00DA0000000aMYj", "ts": ${JSON.stringify(
+                new Date().getTime()
+              )}}`,
             }
             setSubmissionError("")
             if (location.match(/\/contact-testing/)) {
@@ -143,8 +148,9 @@ const Contact = ({ location }) => {
                   iframeInput.setAttribute("type", "hidden")
                   form.appendChild(iframeInput)
                 }
-                salesforceRef.current.contentDocument.body.appendChild(form)
-                console.log(salesforceRef.current)
+                // script for handing reCAPTCHA
+
+                document.body.appendChild(form)
               }
             } else {
               console.log("submitting to netlify")
@@ -281,6 +287,7 @@ const Contact = ({ location }) => {
               </Grid.Row>
             </FormGrid>
             <Error error={submissionError} />
+            {location.match(/\/contact-testing/) ? <Captcha /> : null}
             <FormButton
               value={
                 submissionError.length > 0 ? "Try Again" : "Contact EnergySmart"

@@ -51,6 +51,7 @@
     "react-icons": "^3.8.0",
     "react-iframe-resizer-super": "^0.2.2",
     "react-player": "^1.15.2",
+    "react-recaptcha": "^2.3.10",
     "react-styled-flexboxgrid": "^3.2.1",
     "react-use-flexsearch": "^0.1.1",
     "react-visibility-sensor": "^5.1.1",

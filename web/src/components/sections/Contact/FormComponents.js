@@ -1,9 +1,9 @@
-import React from 'react'; 
-import {useField} from 'formik'; 
-import Grid from '../../containers/Grid'; 
-import {Input, SelectWrapper, Select, StyledErrorMessage} from './styles'; 
+import React from "react"
+import { useField } from "formik"
+import Grid from "../../containers/Grid"
+import { Input, SelectWrapper, Select, StyledErrorMessage } from "./styles"
 import { FiChevronDown } from "react-icons/fi"
-import {Helmet} from 'react-helmet'; 
+import { Helmet } from "react-helmet"
 
 export const MyInput = ({ label, gridProps, ...props }) => {
   const [field, meta] = useField(props)
@@ -81,7 +81,7 @@ export const Headers = () => {
         {`
           if(typeof window !== 'undefined' && window && window.document){
             function timestamp() {
-              var response = document.getElementById("g-recpatcha-response");
+              var response = document.getElementById("g-recaptcha-response");
               if(response == null || response.value.trim == ""){
                 var elems = JSON.parse(document.getElementsByName("captcha_settings")[0].value); 
                 elems["ts"] = JSON.stringify(new Date().getTime()); 
@@ -94,4 +94,3 @@ export const Headers = () => {
     </Helmet>
   )
 }
-
