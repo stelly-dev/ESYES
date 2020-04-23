@@ -180,6 +180,7 @@ const Contact = ({ location }) => {
                 console.log(salesforceRef.current)
               }
             } else {
+              console.log(values)
               submitNetlify(values, location)
                 .then(response =>
                   handleFormSuccess(response, setSubmissionError, setSubmitting)
