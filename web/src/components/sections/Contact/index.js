@@ -98,7 +98,7 @@ const submitNetlify = (values, location) => {
       "Content-Type": "application/x-www-form-urlencoded",
     },
     body: encode({
-      "form-name": "contact",
+      "form-name": "contact-netlify",
       ...addLanguageField(values, location),
     }),
   })
@@ -195,7 +195,7 @@ const Contact = ({ location }) => {
           }}
           validationSchema={validationSchema}
         >
-          <Form data-netlify="true" name="contact">
+          <Form data-netlify="true" name="contact-netlify">
             <FormGrid>
               <Grid.Row display={[null, null, null, "flex"]}>
                 <MyInput
