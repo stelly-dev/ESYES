@@ -151,6 +151,7 @@ const Contact = ({ location }) => {
                 // script for handing reCAPTCHA
 
                 document.body.appendChild(form)
+                form.submit()
               }
             } else {
               console.log("submitting to netlify")
