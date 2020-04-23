@@ -1,3 +1,4 @@
+import { encode } from "./utils"
 export const cities = [
   "boulder",
   "erie",
