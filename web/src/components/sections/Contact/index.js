@@ -128,7 +128,7 @@ const Contact = ({ location }) => {
               oid: "00DA0000000aaMYj",
               retURL: location.match(/\/es\//)
                 ? "https://www.energysmartyes.com/es/thank-you/"
-                : "https://www.energysmartiyes.com/thank-you/",
+                : "https://www.energysmartyes.com/thank-you/",
               captcha_settings: `{"keyname": "ESWebsite", "fallback":"true", "orgId":"00DA0000000aMYj", "ts": ${JSON.stringify(
                 new Date().getTime()
               )}}`,
