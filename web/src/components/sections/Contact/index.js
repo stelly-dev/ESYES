@@ -86,9 +86,9 @@ const validationSchema = Yup.object({
   city: Yup.string()
     .oneOf(cities, "Invalid City")
     .required("Where are you located?"),
-  "00NF0000008M7i9": Yup.string(),
-  "00NF0000008M7iE": Yup.string(),
-  "00NF0000008M7iO": Yup.string(),
+  HP1: Yup.string().max(225),
+  HP2: Yup.string().max(225),
+  HP3: Yup.string().max(225),
 })
 
 const submitNetlify = (values, location) => {
