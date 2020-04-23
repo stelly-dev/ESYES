@@ -182,8 +182,8 @@ const Contact = ({ location }) => {
             } else {
               console.log("submitting to netlify")
               console.log("these are the values:", values)
-              console.log("this is the location: location")
-              console.log("and these are the initialValues")
+              console.log("this is the location:", location)
+              console.log("and these are the initialValues:", initialValues)
               submitNetlify(values, location)
                 .then(response =>
                   handleFormSuccess(response, setSubmissionError, setSubmitting)
