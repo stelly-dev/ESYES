@@ -38,22 +38,15 @@ export const salesForceFields = {
 }
 
 // encodes the form data as uri strings www.site.com/someKey=someValue&key2=wow%20great
-export const encode = data => {
-  return Object.keys(data)
-    .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
-    .join("&")
-}
 
-
-// replaces keys in obj with their value in another obj, 
+// replaces keys in obj with their value in another obj,
 // e.g. : f: (
-//           {abcd123: "Joe", efgh456: "Smith" }, 
+//           {abcd123: "Joe", efgh456: "Smith" },
 //           {abcd123: "first_name", efgh456: "last_name"}
-//           ) -> 
+//           ) ->
 //                 {first_name: "Joe", last_name: "Smith"}
 //
 // Used to pretty-print Netlify form based off of SalesForce keys.
-
 
 // make sure these match the embed from salesforce web-to-lead
 export const newKeys = {
@@ -76,21 +69,20 @@ export const addLanguageField = (obj, location) => {
 // **********THIS FUNCTION IS LEFT AS A WARNING*************
 //
 // salesforce does not provide any headers on their web-to-lead(w2l)
-// backend and while they do allow setting CORS headers on their 
-// newer products, they do not provide any mechanism to alter w2l.  
+// backend and while they do allow setting CORS headers on their
+// newer products, they do not provide any mechanism to alter w2l.
 //
-// POSTS will, at most, return a 200 ok response. This is not 
-// dependent on the success of the submission. 
+// POSTS will, at most, return a 200 ok response. This is not
+// dependent on the success of the submission.
 //
 // However, any AJAX / fetch POST in the browser will result
-// in a CORS error. 
+// in a CORS error.
 //
-// Solutions: 
-//           1. POST to a server you control. 
+// Solutions:
+//           1. POST to a server you control.
 //           2. generate a transparent iframe containing the form
-//              and populate it's values, then submit. 
+//              and populate it's values, then submit.
 //
-
 
 export const submitSalesForce = (values, location) => {
   const authorizedValues = { oid: "00DA0000000aMYj", ...values }
@@ -107,4 +99,3 @@ export const submitSalesForce = (values, location) => {
     }
   )
 }
- 
