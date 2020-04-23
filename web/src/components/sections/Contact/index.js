@@ -27,20 +27,6 @@ import {
   changeKeys,
 } from "./utils"
 
-const salesForceInitialValues = {
-  first_name: "",
-  last_name: "",
-  email: "",
-  phone: "",
-  street: "",
-  city: "",
-  zip: "",
-  "00NF0000008M7i9": "",
-  "00NF0000008M7iE": "",
-  "00NF0000008M7iO": "",
-  "00N2I00000Dqoqv": "",
-}
-
 const initialValues = {
   name: "",
   email: "",
@@ -50,7 +36,6 @@ const initialValues = {
   HP1: "",
   HP2: "",
   HP3: "",
-  language: "",
 }
 // TODO: Transform name field to first_name last_name
 
@@ -115,24 +100,6 @@ const handleFormError = (error, setSubmissionError, setSubmitting) => {
   console.error("ERROR", error)
   setSubmissionError("error")
   setSubmitting(false)
-}
-
-const useInterval = (callback, delay) => {
-  const savedCallback = useRef()
-
-  useEffect(() => {
-    savedCallback.current = callback
-  }, [callback])
-
-  useEffect(() => {
-    function tick() {
-      savedCallback.current()
-    }
-    if (delay !== null) {
-      let id = setInterval(tick, delay)
-      return () => clearInterval(id)
-    }
-  }, [delay])
 }
 
 const Contact = ({ location }) => {
