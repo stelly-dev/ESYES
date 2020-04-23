@@ -1,110 +1,33 @@
-import React, { useState } from "react"
+import React, { useState, useRef, useEffect } from "react"
 import { navigate } from "@reach/router"
-import { Formik, Form, useField } from "formik"
-import { FiChevronDown } from "react-icons/fi"
+import { Formik, Form } from "formik"
 import * as Yup from "yup"
 import EnergySmart from "./EnergySmart"
-import styled from "styled-components"
 import Grid from "../../containers/Grid"
-import { Helmet } from "react-helmet"
 import {
-  SelectWrapper,
   FormButton,
   Input,
-  Select,
   FormGrid,
   FormContainer,
   PrivacyLink,
 } from "./styles"
 
-// Input components and styling
-//
-const MyInput = ({ label, gridProps, ...props }) => {
-  const [field, meta] = useField(props)
-  return (
-    <Grid.Col {...gridProps}>
-      <Input
-        {...field}
-        {...props}
-        aria-label={label}
-        error={meta.touched && meta.error}
-      />
-      {meta.touched && meta.error ? (
-        <StyledErrorMessage>{meta.error}</StyledErrorMessage>
-      ) : null}
-    </Grid.Col>
-  )
-}
+import { MyInput, MySelect, Error, Captcha, Headers } from "./FormComponents"
+import {
+  cities,
+  salesForceURL,
+  salesForceFields,
+  addLanguageField,
+} from "./formData"
+import {
+  capWord,
+  phoneRegEx,
+  encode,
+  firstAndLastFromName,
+  changeKeys,
+} from "./utils"
 
-const StyledErrorMessage = styled.div`
-  display: none;
-  color: red;
-  text-align: right;
-`
-
-const Error = ({ error }) => {
-  if (error.length > 0) {
-    return (
-      <div
-        style={{
-          textAlign: "center",
-          margin: "0 auto 2rem auto",
-          width: "100%",
-        }}
-      >
-        <h1 style={{ color: "red" }}>Problem Connecting</h1>
-        <p>Check your internet connection and try again.</p>
-      </div>
-    )
-  }
-  return null
-}
-
-const MySelect = ({ children, label, gridProps, ...props }) => {
-  const [field, meta] = useField(props)
-  return (
-    <Grid.Col {...gridProps}>
-      <SelectWrapper>
-        <Select {...field} {...props} error={meta.touched && meta.error}>
-          {children}
-        </Select>
-        {meta.touched && meta.error ? (
-          <StyledErrorMessage>{meta.error}</StyledErrorMessage>
-        ) : null}
-        <i className="select-icon">
-          <FiChevronDown />
-        </i>
-      </SelectWrapper>
-    </Grid.Col>
-  )
-}
-
-const cities = [
-  "boulder",
-  "erie",
-  "jamestown",
-  "lafayette",
-  "longmont",
-  "louisville",
-  "lyons",
-  "nederland",
-  "superior",
-  "ward",
-  "allenspark",
-  "coal creek canyon",
-  "eldora",
-  "eldorado springs",
-  "gold hill",
-  "gunbarrel",
-  "hygiene",
-  "niwot",
-]
-
-let salesForceURL =
-  "https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8"
-
-const salesForce = {
-  oid: "00DA0000000aMYj",
+const salesForceInitialValues = {
   first_name: "",
   last_name: "",
   email: "",
@@ -118,36 +41,46 @@ const salesForce = {
   "00N2I00000Dqoqv": "",
 }
 
-// capWord: str -> str : capWord foo bar -> Foo Bar
-const capWord = str => {
-  str = str.split(" ")
-  for (let i = 0, x = str.length; i < x; i++) {
-    str[i] = str[i][0].toUpperCase() + str[i].substr(1)
-  }
-  return str.join(" ")
-}
-
 const initialValues = {
-  first_name: "",
+  name: "",
   email: "",
   phone: "",
   address: "",
   city: "",
-  "00NF0000008M7i9": "",
-  "00NF0000008M7iE": "",
-  "00NF0000008M7iO": "",
-  "00N2I00000Dqoqv": "",
+  HP1: "",
+  HP2: "",
+  HP3: "",
+  language: "",
 }
-
-const phoneRegEx = /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)$/
+// TODO: Transform name field to first_name last_name
 
 const validationSchema = Yup.object({
-  first_name: Yup.string().required("Please Enter Your Name"),
+  name: Yup.string()
+    .min(3)
+    .max(120)
+    .test(
+      "first_name_len",
+      "First name must be less than 40 characters",
+      value => value.split(" ")[0].length <= 40
+    )
+    .test(
+      "last_name_length",
+      "Characters after your first name must not exceed 80 letters",
+      value =>
+        value
+          .split(" ")
+          .slice(1)
+          .join(" ").length <= 80
+    )
+    .required("Please Enter Your Name"),
   email: Yup.string()
+    .max(80)
     .email("Please enter a valid email address")
     .required("Please enter your email"),
-  phone: Yup.string().matches(phoneRegEx, "What is your phone number?"),
-  street: Yup.string()
+  phone: Yup.string()
+    .max(40)
+    .matches(phoneRegEx, "What is your phone number?"),
+  address: Yup.string()
     .min(3)
     .required("What is your address?"),
   city: Yup.string()
@@ -157,104 +90,6 @@ const validationSchema = Yup.object({
   "00NF0000008M7iE": Yup.string(),
   "00NF0000008M7iO": Yup.string(),
 })
-
-const Captcha = () => (
-  <>
-    <input
-      type="hidden"
-      name="captcha_settings"
-      value='{"keyname":"ESWebsite","fallback":"true","orgId":"00DA0000000aMYj","ts":""}'
-    />
-    <div
-      className="g-recaptcha"
-      data-sitekey="LfDf-gUAAAAADmj72yTU6ANmCy0a4q1Ea7uh4Gn"
-    />
-  </>
-)
-
-const Headers = () => {
-  return (
-    <Helmet>
-      <script src="https://www.google.com/recaptcha/api.js"></script>
-      <script>
-        {`
-          if(typeof window !== 'undefined' && window && window.document){
-            function timestamp() {
-              var response = document.getElementById("g-recpatcha-response");
-              if(response == null || response.value.trim == ""){
-                var elems = JSON.parse(document.getElementsByName("captcha_settings")[0].value); 
-                elems["ts"] = JSON.stringify(new Date().getTime()); 
-                document.getElementsByName("captcha_settings")[0].value = JSON.stringify(elems); 
-              }
-            }} 
-            typeof timestamp !== 'undefined' ? setInterval(timestamp, 500) : null;
-            `}
-      </script>
-    </Helmet>
-  )
-}
-
-// TODO:
-
-// 1. set up gatsby google reCAPTCHA
-// 2. Make sure the submission is actually handing off
-//    all of the data
-// 3. Push
-// 4. ???
-// 5. PROFIT.
-
-// 1 is in two steps gatsby-plugin-recaptcha (adds the js script)
-//                   add the recaptcha div
-
-const encode = data => {
-  return Object.keys(data)
-    .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
-    .join("&")
-}
-
-const makeHumanReadable = (obj, newKeys) => {
-  const keyValues = Object.keys(obj).map(key => {
-    const newKey = newKeys[key] || key
-    return { [newKey]: obj[key] }
-  })
-  return Object.assign({}, ...keyValues)
-}
-
-const newKeys = {
-  "00NF0000008M7i9": "Home Priority One",
-  "00NF0000008M7iE": "Home Priority Two",
-  "00NF0000008M7iO": "Home Priority Three",
-  first_name: "Name",
-}
-
-const addLanguageField = (obj, location) => {
-  if (location.match(/\/es\//)) {
-    const newObj = { "00N2I00000Dqoqv": "Spanish", ...obj }
-    return newObj
-  } else {
-    const newObj = { "00N2I00000Dqoqv": "English", ...obj }
-    return newObj
-  }
-}
-
-// test url is /contact-testing/
-const testURL = /\/contact-testing\//
-
-const submitSalesForce = (values, location) => {
-  return fetch(
-    "https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-        oid: salesForce.oid,
-      },
-      body: encode({
-        ...addLanguageField(values, location),
-      }),
-    }
-  )
-}
 
 const submitNetlify = (values, location) => {
   return fetch("/?no-cache=1", {
@@ -282,9 +117,27 @@ const handleFormError = (error, setSubmissionError, setSubmitting) => {
   setSubmitting(false)
 }
 
+const useInterval = (callback, delay) => {
+  const savedCallback = useRef()
+
+  useEffect(() => {
+    savedCallback.current = callback
+  }, [callback])
+
+  useEffect(() => {
+    function tick() {
+      savedCallback.current()
+    }
+    if (delay !== null) {
+      let id = setInterval(tick, delay)
+      return () => clearInterval(id)
+    }
+  }, [delay])
+}
+
 const Contact = ({ location }) => {
   const [submissionError, setSubmissionError] = useState("")
-  console.log(location)
+  const salesforceRef = useRef(null)
   return (
     <>
       <FormContainer location={location}>
@@ -292,15 +145,40 @@ const Contact = ({ location }) => {
         <Formik
           initialValues={initialValues}
           onSubmit={(values, { setSubmitting }) => {
+            const { name, HP1, HP2, HP3, address, language, ...rest } = values
+            const salesForceValues = {
+              "00NF0000008M7i9": HP1,
+              "00NF0000008M7iE": HP2,
+              "00NF0000008M7iO": HP3,
+              "00N2I00000Dqoqv": location.match(/\/es\//)
+                ? "Spanish"
+                : "English",
+              street: address,
+              ...firstAndLastFromName(name),
+              ...rest,
+              oid: "00DA0000000aaMYj",
+              retURL: location.match(/\/es\//)
+                ? "https://www.energysmartyes.com/es/thank-you/"
+                : "https://www.energysmart.com/thank-you/",
+            }
             setSubmissionError("")
             if (location.match(/\/contact-testing/)) {
-              submitSalesForce(values, location)
-                .then(response =>
-                  handleFormSuccess(response, setSubmissionError, setSubmitting)
-                )
-                .catch(error =>
-                  handleFormError(error, setSubmissionError, setSubmitting)
-                )
+              if (typeof window !== "undefined" && window && window.document) {
+                const form = document.createElement("form")
+                form.method = "POST"
+                form.action =
+                  "https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8"
+                form.setAttribute("target", salesforceRef.current)
+                for (var fieldName in salesForceValues) {
+                  let iframeInput = document.createElement("input")
+                  iframeInput.name = fieldName
+                  iframeInput.value = salesForceValues[fieldName]
+                  iframeInput.setAttribute("type", "hidden")
+                  form.appendChild(iframeInput)
+                }
+                salesforceRef.current.contentDocument.body.appendChild(form)
+                console.log(salesforceRef.current)
+              }
             } else {
               submitNetlify(values, location)
                 .then(response =>
@@ -317,9 +195,8 @@ const Contact = ({ location }) => {
             <FormGrid>
               <Grid.Row display={[null, null, null, "flex"]}>
                 <MyInput
-                  id="first_name"
                   label="Full Name"
-                  name="first_name"
+                  name="name"
                   type="text"
                   placeholder="Name*"
                   gridProps={{
@@ -328,7 +205,6 @@ const Contact = ({ location }) => {
                   }}
                 />
                 <MyInput
-                  id="email"
                   label="Email Address"
                   name="email"
                   type="email"
@@ -339,7 +215,6 @@ const Contact = ({ location }) => {
                   }}
                 />
                 <MyInput
-                  id="phone"
                   label="Phone Number"
                   name="phone"
                   type="tel"
@@ -354,9 +229,8 @@ const Contact = ({ location }) => {
                 flexWrap={["wrap", "wrap", "wrap", "nowrap"]}
               >
                 <MyInput
-                  id="street"
                   label="Address"
-                  name="street"
+                  name="address"
                   type="text"
                   placeholder="Address*"
                   gridProps={{
@@ -371,7 +245,6 @@ const Contact = ({ location }) => {
                 />
                 <MySelect
                   label="City"
-                  id="city"
                   name="city"
                   gridProps={{
                     flexBasis: [
@@ -406,9 +279,8 @@ const Contact = ({ location }) => {
               </Grid.Row>
               <Grid.Row display={[null, null, null, "flex"]}>
                 <MyInput
-                  id="00NF0000008M7i9"
                   label="Home Priority One"
-                  name="00NF0000008M7i9"
+                  name="HP1"
                   type="text"
                   placeholder="Home Priority 1"
                   gridProps={{
@@ -418,8 +290,7 @@ const Contact = ({ location }) => {
                 />
                 <MyInput
                   label="Home Priority Two"
-                  id="00NF0000008M7iE"
-                  name="00NF0000008M7iE"
+                  name="HP2"
                   type="text"
                   placeholder="Home Priority 2"
                   gridProps={{
@@ -429,8 +300,7 @@ const Contact = ({ location }) => {
                 />
                 <MyInput
                   label="Home Priority Three"
-                  id="00NF0000008M7iO"
-                  name="00NF0000008M7iO"
+                  name="HP3"
                   type="text"
                   placeholder="Home Priority 3"
                   gridProps={{
@@ -455,6 +325,12 @@ const Contact = ({ location }) => {
           Privacy Policy
         </PrivacyLink>
       </FormContainer>
+      <iframe
+        title="formHandler"
+        src="about:blank"
+        ref={salesforceRef}
+        style={{ display: "none" }}
+      ></iframe>
     </>
   )
 }

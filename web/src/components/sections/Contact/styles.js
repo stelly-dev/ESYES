@@ -1,6 +1,12 @@
 import styled, { css, keyframes } from "styled-components"
 import Grid from "../../containers/Grid"
 
+export const StyledErrorMessage = styled.div`
+  display: none;
+  color: red;
+  text-align: right;
+`
+
 export const SelectWrapper = styled.div`
   position: relative;
   select {
