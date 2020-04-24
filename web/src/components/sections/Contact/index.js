@@ -175,7 +175,17 @@ const Contact = ({ location }) => {
   const sfFormRef = useRef(null)
   const [sfValues, setSfValues] = useState(sfInitialValues)
   const [isSubmitting, setIsSubmitting] = useState(false)
-  setTimeout(console.log(sfFormRef.current.elements["captcha_settings"]), 2000)
+  if (
+    typeof window !== "undefined" &&
+    sfFormRef &&
+    sfFormRef.current &&
+    sfFormRef.current.elements
+  ) {
+    setTimeout(
+      console.log(sfFormRef.current.elements["captcha_settings"]),
+      2000
+    )
+  }
   return (
     <>
       {location.match(/\/contact-testing/) ? <Headers /> : null}
