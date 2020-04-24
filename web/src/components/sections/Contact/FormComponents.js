@@ -60,24 +60,17 @@ export const MySelect = ({ children, label, gridProps, ...props }) => {
 }
 
 export const Captcha = () => (
-  <>
-    <input
-      type="hidden"
-      name="captcha_settings"
-      value='{"keyname":"ESWebsite","fallback":"true","orgId":"00DA0000000aMYj","ts":""}'
-    />
-    <div
-      className="g-recaptcha"
-      data-sitekey="LfDf-gUAAAAADmj72yTU6ANmCy0a4q1Ea7uh4Gn"
-    />
-  </>
+  <div
+    className="g-recaptcha"
+    data-sitekey="LfDf-gUAAAAADmj72yTU6ANmCy0a4q1Ea7uh4Gn"
+  />
 )
 
 export const Headers = () => {
   return (
     <Helmet>
       <script src="https://www.google.com/recaptcha/api.js"></script>
-      <script>
+      {/* <script>
         {`
           if(typeof window !== 'undefined' && window && window.document){
             function timestamp() {
@@ -89,8 +82,8 @@ export const Headers = () => {
               }
             }} 
             typeof timestamp !== 'undefined' ? setInterval(timestamp, 500) : null;
-            `}
-      </script>
+            `} */}
+      {/* </script> */}
     </Helmet>
   )
 }
