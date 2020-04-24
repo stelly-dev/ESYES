@@ -95,14 +95,17 @@ const handleFormError = (error, setSubmissionError, setSubmitting) => {
   setSubmissionError("error")
   setSubmitting(false)
 }
-
-const checkRecaptcha = (captchaSettings, setCaptchaSettings) => {
+const checkRecaptcha = () => {
   if (typeof window !== "undefined" && window && window.document) {
     let response = document.getElementById("g-recaptcha-response")
     if (response == null || response.value.trim() == "") {
-      const timestamp = JSON.stringify(new Date().getTime())
-      setCaptchaSettings({ ...captchaSettings, ts: timestamp })
-      console.log(captchaSettings)
+      const elems = JSON.parse(
+        document.getElementsByName("captcha_settings")[0].value
+      )
+      elems["ts"] = JSON.stringify(new Date().getTime())
+      document.getElementsByName("captcha_settings")[0].value = JSON.stringify(
+        elems
+      )
     }
   }
 }
@@ -117,12 +120,12 @@ const W2LForm = React.forwardRef((props, ref) => {
     keyname: "ESWebsite",
     fallback: true,
     orgId: "00DA0000000aMYj",
-    ts: "",
+    ts: Math.random(),
   })
   useInterval(() => {
     checkRecaptcha(captchaSettings, setCaptchaSettings)
   }, 500)
-  // console.log(props.sfValues)
+  console.log(props.sfValues)
   return (
     <form
       ref={ref}
@@ -133,8 +136,8 @@ const W2LForm = React.forwardRef((props, ref) => {
         return name === "captcha-settings" ? (
           <input
             type="hidden"
-            name={name}
-            value={JSON.stringify(captchaSettings)}
+            name={"captcha_settings"}
+            value={() => JSON.stringify(captchaSettings)}
             key={name}
           />
         ) : (
@@ -218,9 +221,6 @@ const Contact = ({ location }) => {
                 let response = document.getElementById("g-recaptcha-response")
                 if (response == null || response.value.trim() == "") {
                 }
-                sfFormRef.current.elements.captcha_settings[0].value[
-                  "ts"
-                ] = JSON.stringify(new Date().getTime())
                 console.log("Submitting", sfFormRef.current)
                 sfFormRef.current.submit()
               }
