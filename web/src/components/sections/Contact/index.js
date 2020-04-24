@@ -337,7 +337,7 @@ const Contact = ({ location }) => {
       <W2LForm
         sfValues={sfValues}
         isSubmitting={isSubmitting}
-        style={{ display: none }}
+        style={{ display: "none" }}
       />
       {/* <iframe
         title="formHandler"
