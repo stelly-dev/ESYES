@@ -218,7 +218,7 @@ const Contact = ({ location }) => {
                 let response = document.getElementById("g-recaptcha-response")
                 if (response == null || response.value.trim() == "") {
                 }
-                sfFormRef.current.elements["captcha_settings"][0].value[
+                sfFormRef.current.elements.captcha_settings[0].value[
                   "ts"
                 ] = JSON.stringify(new Date().getTime())
                 console.log("Submitting", sfFormRef.current)
