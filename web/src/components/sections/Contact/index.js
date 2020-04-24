@@ -112,7 +112,7 @@ const W2LForm = ({ sfValues, isSubmitting }) => {
 const sfInitialValues = {
   //debugEmail: "matt.wilmoth@clearesult.com",
   captcha_settings: `{"keyname": "ESWebsite", "fallback":"true", "orgId":"00DA0000000aMYj", "ts": ""}`,
-  oid: "00DA0000000aaMYj",
+  oid: "00DA0000000aMYj",
   first_name: "",
   last_name: "",
   email: "",
@@ -334,7 +334,11 @@ const Contact = ({ location }) => {
           Privacy Policy
         </PrivacyLink>
       </FormContainer>
-      <W2LForm sfValues={sfValues} isSubmitting={isSubmitting} />
+      <W2LForm
+        sfValues={sfValues}
+        isSubmitting={isSubmitting}
+        style={{ display: none }}
+      />
       {/* <iframe
         title="formHandler"
         src="about:blank"
