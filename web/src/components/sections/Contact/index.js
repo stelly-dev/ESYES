@@ -198,8 +198,11 @@ const Contact = ({ location }) => {
               retURL: location.match(/\/es\//)
                 ? "https://www.energysmartyes.com/es/thank-you"
                 : "https://www.energysmartyes.com/thank-you",
-            }),
-              setSubmissionError("")
+              captcha_settings: sfFormRef.current.getElementsByName(
+                "captcha_settings"
+              )[0].value,
+            })
+            setSubmissionError("")
             if (location.match(/\/contact-testing/)) {
               console.log(sfFormRef.current)
               setIsSubmitting(true)
