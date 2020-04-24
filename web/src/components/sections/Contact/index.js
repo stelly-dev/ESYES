@@ -90,7 +90,6 @@ const W2LForm = ({ sfValues, isSubmitting }) => {
         ref={formRef}
         action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8"
         method="POST"
-        target="sfIframe"
       >
         {Object.keys(sfValues).map((name, i) => {
           return (
@@ -112,7 +111,6 @@ const sfInitialValues = {
   //debugEmail: "matt.wilmoth@clearesult.com",
   captcha_settings: `{"keyname": "ESWebsite", "fallback":"true", "orgId":"00DA0000000aMYj", "ts": ""}`,
   oid: "00DA0000000aaMYj",
-  retURL: "http://127.0.0.1", // prevents default reload.
   first_name: "",
   last_name: "",
   email: "",
@@ -120,6 +118,7 @@ const sfInitialValues = {
   street: "",
   city: "",
   zip: "",
+  retURL: "",
   "00NF0000008M7i9": "",
   "00NF0000008M7iE": "",
   "00NF0000008M7iO": "",
