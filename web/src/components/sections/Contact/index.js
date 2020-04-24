@@ -135,6 +135,7 @@ const Contact = ({ location }) => {
   const [submissionError, setSubmissionError] = useState("")
   const salesforceRef = useRef(null)
   const [sfValues, setSfValues] = useState(sfInitialValues)
+  const [isSubmitting, setIsSubmitting] = useState(false)
   return (
     <>
       {location.match(/\/contact-testing/) ? <Headers /> : null}
@@ -158,7 +159,7 @@ const Contact = ({ location }) => {
             })
             setSubmissionError("")
             if (location.match(/\/contact-testing/)) {
-              setSubmitting(true)
+              setIsSubmitting(true)
               // if (typeof window !== "undefined" && window && window.document) {
               //   const form = document.createElement("form")
               //   form.method = "POST"
