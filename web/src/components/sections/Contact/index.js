@@ -15,6 +15,36 @@ import { MyInput, MySelect, Error, Captcha, Headers } from "./FormComponents"
 import { cities, addLanguageField } from "./formData"
 import { capWord, phoneRegEx, encode, firstAndLastFromName } from "./utils"
 
+// our setInterval header is firing too early / it's hard
+// to get a handle on the captcha settings.
+
+function useInterval(callback, delay) {
+  const savedCallback = useRef()
+
+  //Memoize the latest callback.
+  useEffect(() => {
+    savedCallback.current = callback
+  }, [callback])
+
+  // Set up the interval
+  useEffect(() => {
+    function tick() {
+      savedCallback.current()
+    }
+    if (delay !== null) {
+      let id = setInterval(tick, delay)
+      return () => clearInterval(id)
+    }
+  }, [delay])
+}
+
+// const captchaSettings = {
+//   keyname: "ESWebsite",
+//   fallback: true,
+//   orgId: "00DA0000000aMYj",
+//   ts: ""
+// }
+
 // These are the values we will actually be receiving.
 // Mostly meant to make transformation between netlify and
 // salesForce more distinct when read.
@@ -66,48 +96,58 @@ const handleFormError = (error, setSubmissionError, setSubmitting) => {
   setSubmitting(false)
 }
 
+const checkRecaptcha = (captchaSettings, setCaptchaSettings) => {
+  if (typeof window !== "undefined" && window && window.document) {
+    let response = document.getElementById("g-recaptcha-response")
+    if (response == null || response.value.trim() == "") {
+      const timestamp = JSON.stringify(new Date().getTime())
+      setCaptchaSettings({ ...captchaSettings, ts: timestamp })
+    }
+  }
+}
+
 // the form is never touched by a user,
 // instead - when formik successfully validates
 // we populate a new sfValue in the parent component's state
 // and
-const W2LForm = ({ sfValues, isSubmitting }) => {
-  const iframeRef = useRef(null)
-  const formRef = useRef(null)
-  const [hasSubmitted, setHasSubmitted] = useState(false)
-  useEffect(() => {
-    if (isSubmitting && !hasSubmitted) {
-      console.log("sfValues", sfValues)
-      console.log("isSubmitting", isSubmitting)
-      console.log("iframeRef", iframeRef.current)
-      console.log("formRef", formRef.current)
-      console.log("firing submit!")
-      formRef.current.submit()
-      setHasSubmitted(true)
-    }
-  }, [hasSubmitted, formRef, sfValues, isSubmitting])
-
+const W2LForm = React.forwardRef((props, ref) => {
+  const [timestamp, setTimeStamp] = useState(null)
+  const [captchaSettings, setCaptchaSettings] = useState({
+    keyname: "ESWebsite",
+    fallback: true,
+    orgId: "00DA0000000aMYj",
+    ts: "",
+  })
+  useInterval(() => {
+    checkRecaptcha(captchaSettings, setCaptchaSettings)
+  }, 500)
+  console.log(props.sfValues)
   return (
-    <>
-      <form
-        ref={formRef}
-        action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8"
-        method="POST"
-      >
-        {Object.keys(sfValues).map((name, i) => {
-          return (
-            <input
-              type="hidden"
-              name={name}
-              value={sfValues[name]}
-              key={name}
-            />
-          )
-        })}
-      </form>
-      <iframe title="sfIframe" ref={iframeRef} name="sfIframe" />
-    </>
+    <form
+      ref={ref}
+      action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8"
+      method="POST"
+    >
+      {Object.keys(props.sfValues).map((name, i) => {
+        return name === "captcha-settings" ? (
+          <input
+            type="hidden"
+            name={name}
+            value={JSON.stringify(captchaSettings)}
+            key={name}
+          />
+        ) : (
+          <input
+            type="hidden"
+            name={name}
+            value={props.sfValues[name]}
+            key={name}
+          />
+        )
+      })}
+    </form>
   )
-}
+})
 
 const sfInitialValues = {
   //debugEmail: "matt.wilmoth@clearesult.com",
@@ -132,7 +172,7 @@ const sfInitialValues = {
 
 const Contact = ({ location }) => {
   const [submissionError, setSubmissionError] = useState("")
-  const salesforceRef = useRef(null)
+  const sfFormRef = useRef(null)
   const [sfValues, setSfValues] = useState(sfInitialValues)
   const [isSubmitting, setIsSubmitting] = useState(false)
   return (
@@ -144,50 +184,51 @@ const Contact = ({ location }) => {
           initialValues={initialValues}
           onSubmit={(values, { setSubmitting }) => {
             const { name, HP1, HP2, HP3, address, language, ...rest } = values
-            setSfValues({
-              ...sfInitialValues,
-              ...firstAndLastFromName(name),
-              "00NF0000008M7i9": HP1,
-              "00NF0000008M7iE": HP2,
-              "00NF0000008M7iO": HP3,
-              "00N2I00000Dqoqv": location.match(/\/es\//)
-                ? "Spanish"
-                : "English",
-              street: address,
-              ...rest,
-              retURL: location.match(/\/es\//)
-                ? "https://www.energysmartyes.com/es/thank-you"
-                : "https://www.energysmartyes.com/thank-you",
-            })
+            setTimeout(
+              () =>
+                setSfValues({
+                  ...sfInitialValues,
+                  ...firstAndLastFromName(name),
+                  "00NF0000008M7i9": HP1,
+                  "00NF0000008M7iE": HP2,
+                  "00NF0000008M7iO": HP3,
+                  "00N2I00000Dqoqv": location.match(/\/es\//)
+                    ? "Spanish"
+                    : "English",
+                  street: address,
+                  ...rest,
+                  retURL: location.match(/\/es\//)
+                    ? "https://www.energysmartyes.com/es/thank-you"
+                    : "https://www.energysmartyes.com/thank-you",
+                }),
+              500
+            )
+
             setSubmissionError("")
             if (location.match(/\/contact-testing/)) {
-              console.log("submitting!")
-              if (sfInitialValues !== sfValues) {
-                console.log(
-                  "if this is true, oh no",
-                  sfInitialValues === sfValues
-                )
-                setIsSubmitting(true)
-              }
-              // if (typeof window !== "undefined" && window && window.document) {
-              //   const form = document.createElement("form")
-              //   form.method = "POST"
-              //   form.action =
-              //     "https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8"
-              //   form.setAttribute("target", salesforceRef.current)
-              //   for (var fieldName in salesForceValues) {
-              //     let iframeInput = document.createElement("input")
-              //     iframeInput.name = fieldName
-              //     iframeInput.value = salesForceValues[fieldName]
-              //     iframeInput.setAttribute("type", "hidden")
-              //     form.appendChild(iframeInput)
-              //   }
-              //   // script for handing reCAPTCHA
+              console.log(sfFormRef.current)
+              setIsSubmitting(true)
+              sfFormRef.current.submit()
+            }
+            // if (typeof window !== "undefined" && window && window.document) {
+            //   const form = document.createElement("form")
+            //   form.method = "POST"
+            //   form.action =
+            //     "https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8"
+            //   form.setAttribute("target", salesforceRef.current)
+            //   for (var fieldName in salesForceValues) {
+            //     let iframeInput = document.createElement("input")
+            //     iframeInput.name = fieldName
+            //     iframeInput.value = salesForceValues[fieldName]
+            //     iframeInput.setAttribute("type", "hidden")
+            //     form.appendChild(iframeInput)
+            //   }
+            //   // script for handing reCAPTCHA
 
-              //   document.body.appendChild(form)
-              //   form.submit()
-              // }
-            } else {
+            //   document.body.appendChild(form)
+            //   form.submit()
+            // }
+            else {
               submitNetlify(values, location)
                 .then(response =>
                   handleFormSuccess(response, setSubmissionError, setSubmitting)
@@ -335,6 +376,7 @@ const Contact = ({ location }) => {
         </PrivacyLink>
       </FormContainer>
       <W2LForm
+        ref={sfFormRef}
         sfValues={sfValues}
         isSubmitting={isSubmitting}
         style={{ display: "none" }}
