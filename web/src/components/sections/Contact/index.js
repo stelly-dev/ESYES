@@ -184,27 +184,22 @@ const Contact = ({ location }) => {
           initialValues={initialValues}
           onSubmit={(values, { setSubmitting }) => {
             const { name, HP1, HP2, HP3, address, language, ...rest } = values
-            setTimeout(
-              () =>
-                setSfValues({
-                  ...sfInitialValues,
-                  ...firstAndLastFromName(name),
-                  "00NF0000008M7i9": HP1,
-                  "00NF0000008M7iE": HP2,
-                  "00NF0000008M7iO": HP3,
-                  "00N2I00000Dqoqv": location.match(/\/es\//)
-                    ? "Spanish"
-                    : "English",
-                  street: address,
-                  ...rest,
-                  retURL: location.match(/\/es\//)
-                    ? "https://www.energysmartyes.com/es/thank-you"
-                    : "https://www.energysmartyes.com/thank-you",
-                }),
-              500
-            )
-
-            setSubmissionError("")
+            setSfValues({
+              ...sfInitialValues,
+              ...firstAndLastFromName(name),
+              "00NF0000008M7i9": HP1,
+              "00NF0000008M7iE": HP2,
+              "00NF0000008M7iO": HP3,
+              "00N2I00000Dqoqv": location.match(/\/es\//)
+                ? "Spanish"
+                : "English",
+              street: address,
+              ...rest,
+              retURL: location.match(/\/es\//)
+                ? "https://www.energysmartyes.com/es/thank-you"
+                : "https://www.energysmartyes.com/thank-you",
+            }),
+              setSubmissionError("")
             if (location.match(/\/contact-testing/)) {
               console.log(sfFormRef.current)
               setIsSubmitting(true)
