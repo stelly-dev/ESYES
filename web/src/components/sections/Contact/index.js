@@ -219,9 +219,10 @@ const Contact = ({ location }) => {
               setIsSubmitting(true)
               if (typeof window !== "undefined" && window && window.document) {
                 let response = document.getElementById("g-recaptcha-response")
+                console.log("response", JSON.stringify(response)); 
                 if (response == null || response.value.trim() == "") {
                 }
-                console.log("Submitting", sfFormRef.current)
+                console.log("Submitting", JSON.stringify(sfFormRef.current))
                 sfFormRef.current.submit()
               }
             }
