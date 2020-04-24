@@ -4,7 +4,6 @@ import { Formik, Form } from "formik"
 import * as Yup from "yup"
 import EnergySmart from "./EnergySmart"
 import Grid from "../../containers/Grid"
-
 import {
   FormButton,
   Input,
@@ -12,22 +11,13 @@ import {
   FormContainer,
   PrivacyLink,
 } from "./styles"
-
 import { MyInput, MySelect, Error, Captcha, Headers } from "./FormComponents"
-import {
-  cities,
-  salesForceURL,
-  salesForceFields,
-  addLanguageField,
-} from "./formData"
-import {
-  capWord,
-  phoneRegEx,
-  encode,
-  firstAndLastFromName,
-  changeKeys,
-} from "./utils"
+import { cities, addLanguageField } from "./formData"
+import { capWord, phoneRegEx, encode, firstAndLastFromName } from "./utils"
 
+// These are the values we will actually be receiving.
+// Mostly meant to make transformation between netlify and
+// salesForce more distinct when read.
 const initialValues = {
   name: "",
   email: "",
@@ -38,45 +28,18 @@ const initialValues = {
   HP2: "",
   HP3: "",
 }
-// TODO: Transform name field to first_name last_name
-
+// prettier-ignore
 const validationSchema = Yup.object({
-  name: Yup.string()
-    .min(3)
-    .max(120)
-    .test(
-      "first_name_len",
-      "First name must be less than 40 characters",
-      value => value.split(" ")[0].length <= 40
-    )
-    .test(
-      "last_name_length",
-      "Characters after your first name must not exceed 80 letters",
-      value =>
-        value
-          .split(" ")
-          .slice(1)
-          .join(" ").length <= 80
-    )
-    .required("Please Enter Your Name"),
-  email: Yup.string()
-    .max(80)
-    .email("Please enter a valid email address")
-    .required("Please enter your email"),
-  phone: Yup.string()
-    .max(40)
-    .matches(phoneRegEx, "What is your phone number?"),
-  address: Yup.string()
-    .min(3)
-    .required("What is your address?"),
-  city: Yup.string()
-    .oneOf(cities, "Invalid City")
-    .required("Where are you located?"),
+  name: Yup.string().min(3).max(120).test( "first_name_len", "First name must be less than 40 characters", value => value.split(" ")[0].length <= 40).test( "last_name_length", "Please submit a shorter name", value => value.split(" ").slice(1).join(" ").length <= 80).required("Please Enter Your Name"),
+  email: Yup.string().max(80).email("Please enter a valid email address").required("Please enter your email"),
+  phone: Yup.string().max(40).matches(phoneRegEx, "What is your phone number?"),
+  address: Yup.string().min(3).required("What is your address?"),
+  city: Yup.string().oneOf(cities, "Invalid City").required("Where are you located?"),
   HP1: Yup.string().max(225),
   HP2: Yup.string().max(225),
   HP3: Yup.string().max(225),
 })
-
+//
 const submitNetlify = (values, location) => {
   return fetch("/?no-cache=1", {
     method: "POST",
@@ -103,9 +66,75 @@ const handleFormError = (error, setSubmissionError, setSubmitting) => {
   setSubmitting(false)
 }
 
+// the form is never touched by a user,
+// instead - when formik successfully validates
+// we populate a new sfValue in the parent component's state
+// and
+const W2LForm = ({ sfValues, isSubmitting }) => {
+  const iframeRef = useRef(null)
+  const formRef = useRef(null)
+  const [hasSubmitted, setHasSubmitted] = useState(false)
+
+  if (isSubmitting && !hasSubmitted) {
+    console.log("sfValues", sfValues)
+    console.log("isSubmitting", isSubmitting)
+    console.log("iframeRef", iframeRef.current)
+    console.log("formRef", formRef.current)
+    formRef.current.submit()
+    setHasSubmitted(true)
+  }
+
+  return (
+    <>
+      <form
+        ref={formRef}
+        action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8"
+        method="POST"
+        target="sfIframe"
+      >
+        {Object.keys(sfValues).map((name, i) => {
+          return (
+            <input
+              type="hidden"
+              name={name}
+              value={sfValues[name]}
+              key={name}
+            />
+          )
+        })}
+      </form>
+      <iframe title="sfIframe" ref={iframeRef} name="sfIframe" />
+    </>
+  )
+}
+
+const sfInitialValues = {
+  debug: 1,
+  debugEmail: "stelly.dev@gmail.com",
+  //debugEmail: "matt.wilmoth@clearesult.com",
+  captcha_settings: `{"keyname": "ESWebsite", "fallback":"true", "orgId":"00DA0000000aMYj", "ts": ""}`,
+  oid: "00DA0000000aaMYj",
+  retURL: "http://127.0.0.1", // prevents default reload.
+  first_name: "",
+  last_name: "",
+  email: "",
+  phone: "",
+  street: "",
+  city: "",
+  zip: "",
+  "00NF0000008M7i9": "",
+  "00NF0000008M7iE": "",
+  "00NF0000008M7iO": "",
+  "00N2I00000Dqoqv": "",
+  // retURL: location.match(/\/es\//)
+  //   ? "https://www.energysmartyes.com/es/thank-you/"
+  //   : "https://www.energysmartyes.com/thank-you/",
+}
+
 const Contact = ({ location }) => {
   const [submissionError, setSubmissionError] = useState("")
   const salesforceRef = useRef(null)
+  const [sfValues, setSfValues] = useState(sfInitialValues)
   return (
     <>
       {location.match(/\/contact-testing/) ? <Headers /> : null}
@@ -115,7 +144,9 @@ const Contact = ({ location }) => {
           initialValues={initialValues}
           onSubmit={(values, { setSubmitting }) => {
             const { name, HP1, HP2, HP3, address, language, ...rest } = values
-            const salesForceValues = {
+            setSfValues({
+              ...sfInitialValues,
+              ...firstAndLastFromName(name),
               "00NF0000008M7i9": HP1,
               "00NF0000008M7iE": HP2,
               "00NF0000008M7iO": HP3,
@@ -123,41 +154,30 @@ const Contact = ({ location }) => {
                 ? "Spanish"
                 : "English",
               street: address,
-              ...firstAndLastFromName(name),
               ...rest,
-              oid: "00DA0000000aaMYj",
-              retURL: location.match(/\/es\//)
-                ? "https://www.energysmartyes.com/es/thank-you/"
-                : "https://www.energysmartyes.com/thank-you/",
-              captcha_settings: `{"keyname": "ESWebsite", "fallback":"true", "orgId":"00DA0000000aMYj", "ts": ${JSON.stringify(
-                new Date().getTime()
-              )}}`,
-            }
+            })
             setSubmissionError("")
             if (location.match(/\/contact-testing/)) {
-              if (typeof window !== "undefined" && window && window.document) {
-                const form = document.createElement("form")
-                form.method = "POST"
-                form.action =
-                  "https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8"
-                form.setAttribute("target", salesforceRef.current)
-                for (var fieldName in salesForceValues) {
-                  let iframeInput = document.createElement("input")
-                  iframeInput.name = fieldName
-                  iframeInput.value = salesForceValues[fieldName]
-                  iframeInput.setAttribute("type", "hidden")
-                  form.appendChild(iframeInput)
-                }
-                // script for handing reCAPTCHA
+              setSubmitting(true)
+              // if (typeof window !== "undefined" && window && window.document) {
+              //   const form = document.createElement("form")
+              //   form.method = "POST"
+              //   form.action =
+              //     "https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8"
+              //   form.setAttribute("target", salesforceRef.current)
+              //   for (var fieldName in salesForceValues) {
+              //     let iframeInput = document.createElement("input")
+              //     iframeInput.name = fieldName
+              //     iframeInput.value = salesForceValues[fieldName]
+              //     iframeInput.setAttribute("type", "hidden")
+              //     form.appendChild(iframeInput)
+              //   }
+              //   // script for handing reCAPTCHA
 
-                document.body.appendChild(form)
-                form.submit()
-              }
+              //   document.body.appendChild(form)
+              //   form.submit()
+              // }
             } else {
-              console.log("submitting to netlify")
-              console.log("these are the values:", values)
-              console.log("this is the location:", location)
-              console.log("and these are the initialValues:", initialValues)
               submitNetlify(values, location)
                 .then(response =>
                   handleFormSuccess(response, setSubmissionError, setSubmitting)
@@ -304,12 +324,13 @@ const Contact = ({ location }) => {
           Privacy Policy
         </PrivacyLink>
       </FormContainer>
-      <iframe
+      <W2LForm sfValues={sfValues} setSubmitting={false} />
+      {/* <iframe
         title="formHandler"
         src="about:blank"
         ref={salesforceRef}
         style={{ display: "none" }}
-      ></iframe>
+      ></iframe> */}
     </>
   )
 }
