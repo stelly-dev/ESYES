@@ -102,6 +102,7 @@ const checkRecaptcha = (captchaSettings, setCaptchaSettings) => {
     if (response == null || response.value.trim() == "") {
       const timestamp = JSON.stringify(new Date().getTime())
       setCaptchaSettings({ ...captchaSettings, ts: timestamp })
+      console.log(captchaSettings)
     }
   }
 }
@@ -181,10 +182,7 @@ const Contact = ({ location }) => {
     sfFormRef.current &&
     sfFormRef.current.elements
   ) {
-    setTimeout(
-      console.log(sfFormRef.current.elements["captcha_settings"]),
-      2000
-    )
+    setTimeout(2000)
   }
   return (
     <>
@@ -214,9 +212,18 @@ const Contact = ({ location }) => {
             })
             setSubmissionError("")
             if (location.match(/\/contact-testing/)) {
-              // console.log(sfFormRef.current)
+              console.log(sfFormRef.current)
               setIsSubmitting(true)
-              sfFormRef.current.submit()
+              if (typeof window !== "undefined" && window && window.document) {
+                let response = document.getElementById("g-recaptcha-response")
+                if (response == null || response.value.trim() == "") {
+                }
+                sfFormRef.current.elements["captcha_settings"][0].value[
+                  "ts"
+                ] = JSON.stringify(new Date().getTime())
+                console.log("Submitting", sfFormRef.current)
+                sfFormRef.current.submit()
+              }
             }
             // if (typeof window !== "undefined" && window && window.document) {
             //   const form = document.createElement("form")
