@@ -121,7 +121,7 @@ const W2LForm = React.forwardRef((props, ref) => {
   useInterval(() => {
     checkRecaptcha(captchaSettings, setCaptchaSettings)
   }, 500)
-  console.log(props.sfValues)
+  // console.log(props.sfValues)
   return (
     <form
       ref={ref}
@@ -175,6 +175,7 @@ const Contact = ({ location }) => {
   const sfFormRef = useRef(null)
   const [sfValues, setSfValues] = useState(sfInitialValues)
   const [isSubmitting, setIsSubmitting] = useState(false)
+  setTimeout(console.log(sfFormRef.current.elements["captcha_settings"]), 2000)
   return (
     <>
       {location.match(/\/contact-testing/) ? <Headers /> : null}
@@ -198,13 +199,12 @@ const Contact = ({ location }) => {
               retURL: location.match(/\/es\//)
                 ? "https://www.energysmartyes.com/es/thank-you"
                 : "https://www.energysmartyes.com/thank-you",
-              captcha_settings: sfFormRef.current.getElementsByName(
-                "captcha_settings"
-              )[0].value,
+              captcha_settings:
+                sfFormRef.current.elements.captcha_settings.value,
             })
             setSubmissionError("")
             if (location.match(/\/contact-testing/)) {
-              console.log(sfFormRef.current)
+              // console.log(sfFormRef.current)
               setIsSubmitting(true)
               sfFormRef.current.submit()
             }
