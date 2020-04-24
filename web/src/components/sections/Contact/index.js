@@ -74,15 +74,17 @@ const W2LForm = ({ sfValues, isSubmitting }) => {
   const iframeRef = useRef(null)
   const formRef = useRef(null)
   const [hasSubmitted, setHasSubmitted] = useState(false)
-
-  if (isSubmitting && !hasSubmitted) {
-    console.log("sfValues", sfValues)
-    console.log("isSubmitting", isSubmitting)
-    console.log("iframeRef", iframeRef.current)
-    console.log("formRef", formRef.current)
-    formRef.current.submit()
-    setHasSubmitted(true)
-  }
+  useEffect(() => {
+    if (isSubmitting && !hasSubmitted) {
+      console.log("sfValues", sfValues)
+      console.log("isSubmitting", isSubmitting)
+      console.log("iframeRef", iframeRef.current)
+      console.log("formRef", formRef.current)
+      console.log("firing submit!")
+      formRef.current.submit()
+      setHasSubmitted(true)
+    }
+  }, [hasSubmitted, formRef, sfValues, isSubmitting])
 
   return (
     <>
@@ -161,9 +163,12 @@ const Contact = ({ location }) => {
             if (location.match(/\/contact-testing/)) {
               console.log("submitting!")
               if (sfInitialValues !== sfValues) {
+                console.log(
+                  "if this is true, oh no",
+                  sfInitialValues === sfValues
+                )
                 setIsSubmitting(true)
               }
-              setSubmitting(false)
               // if (typeof window !== "undefined" && window && window.document) {
               //   const form = document.createElement("form")
               //   form.method = "POST"
