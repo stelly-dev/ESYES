@@ -222,7 +222,6 @@ const Contact = ({ location }) => {
                 console.log("response", JSON.stringify(response)); 
                 if (response == null || response.value.trim() == "") {
                 }
-                console.log("Submitting", JSON.stringify(sfFormRef.current.elements))
                 sfFormRef.current.submit()
               }
             }
