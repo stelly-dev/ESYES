@@ -153,10 +153,17 @@ const Contact = ({ location }) => {
                 : "English",
               street: address,
               ...rest,
+              retURL: location.match(/\/es\//)
+                ? "https://www.energysmartyes.com/es/thank-you"
+                : "https://www.energysmartyes.com/thank-you",
             })
             setSubmissionError("")
             if (location.match(/\/contact-testing/)) {
-              setIsSubmitting(true)
+              console.log("submitting!")
+              if (sfInitialValues !== sfValues) {
+                setIsSubmitting(true)
+              }
+              setSubmitting(false)
               // if (typeof window !== "undefined" && window && window.document) {
               //   const form = document.createElement("form")
               //   form.method = "POST"
