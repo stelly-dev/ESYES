@@ -34,7 +34,7 @@ const TwoColGrid = props => {
           <StyledImage
             fluid={getFluidGatsbyImage(
               props.image,
-              { maxWidth: 1200 },
+              { maxWidth: 568 },
               clientConfig.sanity
             )}
             alt={props.altText}
