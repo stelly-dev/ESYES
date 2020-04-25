@@ -24,38 +24,38 @@ import { FaChevronUp } from "react-icons/fa"
 //   z-index: 1000;
 // `
 
-const RhythmOverlayWrapper = styled.div`
-  position: absolute;
-  top: 9px;
-  left: 0;
-  right: 0;
-  /* bottom: -1000vh; */
-  z-index: 100000;
-  display: flex;
-  height: calc(25.6px * 1000);
-  flex-direction: column;
-  display: none;
-`
+// const RhythmOverlayWrapper = styled.div`
+//   position: absolute;
+//   top: 9px;
+//   left: 0;
+//   right: 0;
+//   /* bottom: -1000vh; */
+//   z-index: 100000;
+//   display: flex;
+//   height: calc(25.6px * 1000);
+//   flex-direction: column;
+//   display: none;
+// `
 
-const LineMarker = styled.div`
-  max-height: calc(1em * 1.6);
-  height: 100%;
-  box-sizing: border-box;
-  border-bottom: 1px solid #2f227f8a;
-  /* background-color: ${props =>
-    props.index % 2 === 0 ? "#a020a05a" : "#d050a08a"}; */
-  width: 100%;
-`
+// const LineMarker = styled.div`
+//   max-height: calc(1em * 1.6);
+//   height: 100%;
+//   box-sizing: border-box;
+//   border-bottom: 1px solid #2f227f8a;
+//   /* background-color: ${props =>
+//     props.index % 2 === 0 ? "#a020a05a" : "#d050a08a"}; */
+//   width: 100%;
+// `
 
-const RhythmOverlay = () => {
-  return (
-    <RhythmOverlayWrapper>
-      {Array.from({ length: 1000 }).map((_, i) => (
-        <LineMarker key={i} index={i} />
-      ))}
-    </RhythmOverlayWrapper>
-  )
-}
+// const RhythmOverlay = () => {
+//   return (
+//     <RhythmOverlayWrapper>
+//       {Array.from({ length: 1000 }).map((_, i) => (
+//         <LineMarker key={i} index={i} />
+//       ))}
+//     </RhythmOverlayWrapper>
+//   )
+// }
 
 const ToTopButton = styled.button`
   position: fixed;
@@ -158,7 +158,6 @@ const Layout = ({ children }) => {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
-      <RhythmOverlay />
       <Location>
         {({ location }) => (
           <Header
