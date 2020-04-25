@@ -163,7 +163,7 @@ const ReviewSection = props => (
           alt={props.altText}
           fluid={getFluidGatsbyImage(
             props.image,
-            { maxWidth: 822 },
+            { maxWidth: 562 },
             clientConfig.sanity
           )}
         />
