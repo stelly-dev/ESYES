@@ -11,9 +11,9 @@ import {
   FormContainer,
   PrivacyLink,
 } from "./styles"
-import { MyInput, MySelect, Error, Captcha, Headers } from "./FormComponents"
-import { cities, addLanguageField } from "./formData"
-import { capWord, phoneRegEx, encode, firstAndLastFromName } from "./utils"
+import { MyInput, MySelect, Error,  Headers } from "./FormComponents"
+import { cities, } from "./formData"
+import { capWord, phoneRegEx,  firstAndLastFromName } from "./utils"
 
 function useInterval(callback, delay) {
   const savedCallback = useRef()
@@ -69,14 +69,14 @@ const validationSchema = Yup.object({
 //
 
 const checkRecaptcha = (captchaSettings, setCaptchaSettings) => {
-  if (typeof window !== "undefined" && window && window.document) {
-    let response = document.getElementById("g-recaptcha-response")
-    if (response === null || response.value.trim() === "") {
-      const elems = JSON.parse(captchaSettings)
-      elems["ts"] = JSON.stringify(new Date().getTime())
-      setCaptchaSettings(JSON.stringify(elems))
+    if (typeof window !== "undefined" && window && window.document) {
+      let response = document.getElementById("g-recaptcha-response")
+      if (response === null || response.value.trim() === "") {
+        const elems = JSON.parse(captchaSettings)
+        elems["ts"] = JSON.stringify(new Date().getTime())
+        setCaptchaSettings(JSON.stringify(elems))
+      }
     }
-  }
 }
 
 // const initialCaptchaSettings = JSON.stringify({
@@ -87,13 +87,11 @@ const checkRecaptcha = (captchaSettings, setCaptchaSettings) => {
 // })
 
 const initialCaptchaSettings = JSON.stringify({
-  keyname: "reCAPTCHA",
+  keyname: "key",
   fallback: true,
   orgId: "00D5w000002v4Lg",
   ts: "",
 })
-
-console.log(initialCaptchaSettings)
 
 // the form is never touched by a user,
 // instead - when formik successfully validates
@@ -104,6 +102,7 @@ const W2LForm = React.forwardRef((props, ref) => {
   useInterval(() => {
     checkRecaptcha(captchaSettings, setCaptchaSettings)
   }, 500)
+  console.log(captchaSettings)
   return (
     <form
       ref={ref}
@@ -340,7 +339,7 @@ const Contact = ({ location }) => {
             <Error error={submissionError} />
             <div
               className="g-recaptcha"
-              data-sitekey="6Lfbcu4UAAAAACKWd58-nKlk5v6S39zx5zJIHWxt"
+              data-sitekey="6Lexd-4UAAAAAHAymxYMWb1Z-lzqE-xzLsAm0qKR"
             />
             {/* <div className="g-recaptcha" data-sitekey="6LfDf-gUAAAAADmj72yTU6ANmCyOa4q1Ea7uh4Gn"/> */}
             <FormButton
