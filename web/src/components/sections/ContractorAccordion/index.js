@@ -58,7 +58,7 @@ const TitleContainer = styled.div`
   color: ${props => (props.open ? "white" : props.theme.colors.secondary)};
   :hover {
     background-color: ${props => props.theme.colors.secondary};
-    color: ${props => (props.open ? "white" : "white")};
+    color: white; 
     margin-left: ${props => (props.open ? 0 : "-5px")};
     margin-right: ${props => (props.open ? 0 : "-5px")};
     box-shadow: ${props =>
@@ -78,7 +78,9 @@ const ContactInfo = styled.div`
 const Contractor = ({ contractor }) => {
   const [open, setOpen] = useState(false)
   return (
+
     <>
+      
       <TitleBox>
         <TitleContainer open={open} onClick={() => setOpen(!open)}>
           <IconWrapper>{open ? <FiMinus /> : <FiPlus />}</IconWrapper>{" "}
@@ -98,9 +100,9 @@ const Contractor = ({ contractor }) => {
             </div>
           </ContactInfo>
           <div>
-            {contractor && contractor.description && (
-              <Block blocks={contractor.description} />
-            )}
+            {
+              typeof contractor.description !== 'undefined' ? <Block blocks={contractor.description} /> : null
+            }
           </div>
         </InfoBox>
       </TitleBox>
