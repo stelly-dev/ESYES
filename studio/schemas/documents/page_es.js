@@ -1,10 +1,6 @@
 import React from "react";
 import slugify from "slugify";
-import {
-  AiOutlineAlignCenter,
-  AiOutlineAlignLeft,
-  AiOutlineAlignRight
-} from "react-icons/ai";
+import { AiOutlineAlignCenter, AiOutlineAlignRight } from "react-icons/ai";
 
 import {
   FiExternalLink,

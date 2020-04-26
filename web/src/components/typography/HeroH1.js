@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components"
+import styled from "styled-components"
 import { interpolateSizes } from "../../utils/index.bak2."
 
 const HeroH1 = styled.h1`

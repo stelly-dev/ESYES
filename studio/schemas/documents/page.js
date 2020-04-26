@@ -1,7 +1,5 @@
 import React from "react";
 
-import { MdAttachFile } from "react-icons/md";
-
 export default {
   name: "page",
   title: "Page",
