@@ -199,7 +199,7 @@ const Contact = ({ location }) => {
           onSubmit={(values, { setSubmitting }) => {
             setSfValues(mapValuesToSF(values, location, sfFormRef))
             setIsSubmitting(true)
-            setTimeout(() => sefFormRef.current.submit(), 1000); 
+            setTimeout(() => sfFormRef.current.submit(), 1000); 
           }}
           // if (typeof window !== "undefined" && window && window.document) {
           //   const form = document.createElement("form")
