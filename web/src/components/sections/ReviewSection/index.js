@@ -169,7 +169,7 @@ const ReviewSection = ({
               ))}
           </BubbleLayout>
         </Grid.Col>
-        <Grid.Col flexBasis={("100%", "100%", "50%")}>
+        <Grid.Col flexBasis={["100%", "100%", "50%"]}>
           <Img
             alt={altText}
             fluid={getFluidGatsbyImage(
