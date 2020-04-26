@@ -38,11 +38,11 @@ class PDFPreview extends React.Component {
   }
 
   onPressPagePrev() {
-    const { numPages, pageNumber } = this.state;
+    const { pageNumber } = this.state;
     if (pageNumber == 1) {
-      this.setState({
-        pageNumber: numPages
-      });
+      this.setState(prevState => ({
+        pageNumber: prevState.numPages
+      }));
     } else {
       this.setState(prevState => ({
         pageNumber: prevState.pageNumber - 1
