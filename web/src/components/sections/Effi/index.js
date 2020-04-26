@@ -21,7 +21,7 @@ const Effi = ({ location }) => {
 
   if (location && location.pathname !== "/effi-app/") {
     return null
-  } else if (location.pathname === "/effi-app/") {
+  } else if (location && location.pathname === "/effi-app/") {
     return (
       <Container>
         <IframeResizer
