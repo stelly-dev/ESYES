@@ -31,9 +31,9 @@ class PDFPreview extends React.Component {
         pageNumber: 1
       });
     } else {
-      this.setState({
-        pageNumber: pageNumber + 1
-      });
+      this.setState(prevState => ({
+        pageNumber: prevState.pageNumber + 1
+      }));
     }
   }
 
@@ -44,9 +44,9 @@ class PDFPreview extends React.Component {
         pageNumber: numPages
       });
     } else {
-      this.setState({
-        pageNumber: pageNumber - 1
-      });
+      this.setState(prevState => ({
+        pageNumber: prevState.pageNumber - 1
+      }));
     }
   }
 
