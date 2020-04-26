@@ -15,9 +15,6 @@ import { MyInput, MySelect, Error, Captcha, Headers } from "./FormComponents"
 import { cities, addLanguageField } from "./formData"
 import { capWord, phoneRegEx, encode, firstAndLastFromName } from "./utils"
 
-// our setInterval header is firing too early / it's hard
-// to get a handle on the captcha settings.
-
 function useInterval(callback, delay) {
   const savedCallback = useRef()
 
@@ -70,45 +67,33 @@ const validationSchema = Yup.object({
   HP3: Yup.string().max(225),
 })
 //
-const submitNetlify = (values, location) => {
-  return fetch("/?no-cache=1", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
-    },
-    body: encode({
-      "form-name": "contact-netlify",
-      ...addLanguageField(values, location),
-    }),
-  })
-}
 
-const handleFormSuccess = (response, setSubmissionError, setSubmitting) => {
-  console.log("Success!", response)
-  setSubmissionError("")
-  setSubmitting(false)
-  navigate("/thank-you/")
-}
-
-const handleFormError = (error, setSubmissionError, setSubmitting) => {
-  console.error("ERROR", error)
-  setSubmissionError("error")
-  setSubmitting(false)
-}
-const checkRecaptcha = () => {
+const checkRecaptcha = (captchaSettings, setCaptchaSettings) => {
   if (typeof window !== "undefined" && window && window.document) {
     let response = document.getElementById("g-recaptcha-response")
-    if (response == null || response.value.trim() == "") {
-      const elems = JSON.parse(
-        document.getElementsByName("captcha_settings")[0].value
-      )
+    if (response === null || response.value.trim() === "") {
+      const elems = JSON.parse(captchaSettings)
       elems["ts"] = JSON.stringify(new Date().getTime())
-      document.getElementsByName("captcha_settings")[0].value = JSON.stringify(
-        elems
-      )
+      setCaptchaSettings(JSON.stringify(elems))
     }
   }
 }
+
+// const initialCaptchaSettings = JSON.stringify({
+//   keyname: "ESWebsite",
+//   fallback: true,
+//   orgId: "00DA0000000aMYj",
+//   ts: ""
+// })
+
+const initialCaptchaSettings = JSON.stringify({
+  keyname: "reCAPTCHA",
+  fallback: true,
+  orgId: "00D5w000002v4Lg",
+  ts: "",
+})
+
+console.log(initialCaptchaSettings)
 
 // the form is never touched by a user,
 // instead - when formik successfully validates
@@ -116,12 +101,7 @@ const checkRecaptcha = () => {
 // and
 const W2LForm = React.forwardRef((props, ref) => {
   const [timestamp, setTimeStamp] = useState(null)
-  const [captchaSettings, setCaptchaSettings] = useState({
-    keyname: "ESWebsite",
-    fallback: true,
-    orgId: "00DA0000000aMYj",
-    ts: Math.random(),
-  })
+  const [captchaSettings, setCaptchaSettings] = useState(initialCaptchaSettings)
   useInterval(() => {
     checkRecaptcha(captchaSettings, setCaptchaSettings)
   }, 500)
@@ -155,7 +135,7 @@ const W2LForm = React.forwardRef((props, ref) => {
 const sfInitialValues = {
   //debugEmail: "matt.wilmoth@clearesult.com",
   captcha_settings: `{"keyname": "ESWebsite", "fallback":"true", "orgId":"00DA0000000aMYj", "ts": ""}`,
-  oid: "00DA0000000aMYj",
+  oid: "00D5w000002v4Lg", //"00DA0000000aMYj",
   first_name: "",
   last_name: "",
   email: "",
@@ -164,95 +144,80 @@ const sfInitialValues = {
   city: "",
   zip: "",
   retURL: "",
-  "00NF0000008M7i9": "",
-  "00NF0000008M7iE": "",
-  "00NF0000008M7iO": "",
-  "00N2I00000Dqoqv": "",
+  "00N5w00000HSOsp": "",
+  "00N5w00000HSOsu": "",
+  "00N5w00000HSOsz": "",
+  "00N5w00000HSOt4": "",
+
+  // "00NF0000008M7i9": "",
+  // "00NF0000008M7iE": "",
+  // "00NF0000008M7iO": "",
+  // "00N2I00000Dqoqv": "",
   // retURL: location.match(/\/es\//)
   //   ? "https://www.energysmartyes.com/es/thank-you/"
   //   : "https://www.energysmartyes.com/thank-you/",
 }
-
+const mapValuesToSF = (values, location, ref) => {
+  const { name, address, HP1, HP2, HP3, language, ...rest } = values
+  return {
+    ...sfInitialValues,
+    ...firstAndLastFromName(name),
+    "00N5w00000HSOsp": HP1,
+    "00N5w00000HSOsu": HP2,
+    "00N5w00000HSOsz": HP3,
+    "00N5w00000HSOt4": location.match(/\.es\//)
+      ? // "00NF0000008M7i9": HP1,
+        // "00NF0000008M7iE": HP2,
+        // "00NF0000008M7iO": HP3,
+        // "00N2I00000Dqoqv": location.match(/\/es\//)
+        "Spanish"
+      : "English",
+    street: address,
+    ...rest,
+    retURL: location.match(/\/es\//)
+      ? "https://www.energysmartyes.com/es/thank-you"
+      : "https://www.energysmartyes.com/thank-you",
+    captcha_settings: ref.current.elements.captcha_settings.value,
+  }
+}
 const Contact = ({ location }) => {
   const [submissionError, setSubmissionError] = useState("")
   const sfFormRef = useRef(null)
   const [sfValues, setSfValues] = useState(sfInitialValues)
   const [isSubmitting, setIsSubmitting] = useState(false)
-  if (
-    typeof window !== "undefined" &&
-    sfFormRef &&
-    sfFormRef.current &&
-    sfFormRef.current.elements
-  ) {
-    setTimeout(2000)
-  }
   return (
     <>
-      {location.match(/\/contact-testing/) ? <Headers /> : null}
+      <Headers />
       <FormContainer location={location}>
         <EnergySmart before={"Contact"} after={"Today!"} location={location} />
         <Formik
           initialValues={initialValues}
           onSubmit={(values, { setSubmitting }) => {
-            const { name, HP1, HP2, HP3, address, language, ...rest } = values
-            setSfValues({
-              ...sfInitialValues,
-              ...firstAndLastFromName(name),
-              "00NF0000008M7i9": HP1,
-              "00NF0000008M7iE": HP2,
-              "00NF0000008M7iO": HP3,
-              "00N2I00000Dqoqv": location.match(/\/es\//)
-                ? "Spanish"
-                : "English",
-              street: address,
-              ...rest,
-              retURL: location.match(/\/es\//)
-                ? "https://www.energysmartyes.com/es/thank-you"
-                : "https://www.energysmartyes.com/thank-you",
-              captcha_settings:
-                sfFormRef.current.elements.captcha_settings.value,
-            })
-            setSubmissionError("")
-            if (location.match(/\/contact-testing/)) {
-              setIsSubmitting(true)
-              if (typeof window !== "undefined" && window && window.document) {
-                let response = document.getElementById("g-recaptcha-response")
-                if (response == null || response.value.trim() == "") {
-                }
-                sfFormRef.current.submit()
-              }
-            }
-            // if (typeof window !== "undefined" && window && window.document) {
-            //   const form = document.createElement("form")
-            //   form.method = "POST"
-            //   form.action =
-            //     "https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8"
-            //   form.setAttribute("target", salesforceRef.current)
-            //   for (var fieldName in salesForceValues) {
-            //     let iframeInput = document.createElement("input")
-            //     iframeInput.name = fieldName
-            //     iframeInput.value = salesForceValues[fieldName]
-            //     iframeInput.setAttribute("type", "hidden")
-            //     form.appendChild(iframeInput)
-            //   }
-            //   // script for handing reCAPTCHA
-
-            //   document.body.appendChild(form)
-            //   form.submit()
-            // }
-            else {
-              submitNetlify(values, location)
-                .then(response =>
-                  handleFormSuccess(response, setSubmissionError, setSubmitting)
-                )
-                .catch(error =>
-                  handleFormError(error, setSubmissionError, setSubmitting)
-                )
-            }
+            setSfValues(mapValuesToSF(values, location, sfFormRef))
+            setIsSubmitting(true)
+            sfFormRef.current.submit()
           }}
+          // if (typeof window !== "undefined" && window && window.document) {
+          //   const form = document.createElement("form")
+          //   form.method = "POST"
+          //   form.action =
+          //     "https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8"
+          //   form.setAttribute("target", salesforceRef.current)
+          //   for (var fieldName in salesForceValues) {
+          //     let iframeInput = document.createElement("input")
+          //     iframeInput.name = fieldName
+          //     iframeInput.value = salesForceValues[fieldName]
+          //     iframeInput.setAttribute("type", "hidden")
+          //     form.appendChild(iframeInput)
+          //   }
+          //   // script for handing reCAPTCHA
+
+          //   document.body.appendChild(form)
+          //   form.submit()
+          // }
           validationSchema={validationSchema}
         >
-          <Form data-netlify="true" name="contact-netlify">
+          <Form>
             <FormGrid>
               <Grid.Row display={[null, null, null, "flex"]}>
                 <MyInput
@@ -280,9 +245,7 @@ const Contact = ({ location }) => {
                   name="phone"
                   type="tel"
                   placeholder="Phone"
-                  gridProps={{
-                    flexBasis: [null, null, null, "33.33%"],
-                  }}
+                  gridProps={{ flexBasis: [null, null, null, "33.33%"] }}
                 />
               </Grid.Row>
               <Grid.Row
@@ -319,7 +282,8 @@ const Contact = ({ location }) => {
                   required
                 >
                   <option value="" disabled>
-                    City*
+                    {" "}
+                    City*{" "}
                   </option>
                   {cities.map((city, i) => (
                     <option key={city} value={city}>
@@ -364,14 +328,16 @@ const Contact = ({ location }) => {
                   name="HP3"
                   type="text"
                   placeholder="Home Priority 3"
-                  gridProps={{
-                    flexBasis: [null, null, null, "33.33%"],
-                  }}
+                  gridProps={{ flexBasis: [null, null, null, "33.33%"] }}
                 />
               </Grid.Row>
             </FormGrid>
             <Error error={submissionError} />
-            {location.match(/\/contact-testing/) ? <Captcha /> : null}
+            <div
+              className="g-recaptcha"
+              data-sitekey="6Lfbcu4UAAAAACKWd58-nKlk5v6S39zx5zJIHWxt"
+            />
+            {/* <div className="g-recaptcha" data-sitekey="6LfDf-gUAAAAADmj72yTU6ANmCyOa4q1Ea7uh4Gn"/> */}
             <FormButton
               value={
                 submissionError.length > 0 ? "Try Again" : "Contact EnergySmart"
