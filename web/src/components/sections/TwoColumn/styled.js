@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import { Link } from "gatsby"
-import { StyledImage } from "../Block/"
+import { StyledImage } from "../Block/styled"
 
 export const TextLink = styled(Link)``
 
