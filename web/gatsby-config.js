@@ -1,7 +1,7 @@
 require("dotenv").config()
 
 const path = require("path")
-const blocksToText = require("./utils/blocksToText.js")
+// const blocksToText = require("./utils/blocksToText.js")
 
 module.exports = {
   siteMetadata: {
