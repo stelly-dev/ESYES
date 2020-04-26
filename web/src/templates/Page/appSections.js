@@ -1,58 +1,64 @@
-export const appSections = {
-  fileLink: { sectionFileName: "FileLink", mapFuncName: "mapFileLinkToProps" },
+import mapToProps from "../../utils/mapToProps"
+const appSections = {
+  fileLink: {
+    sectionFileName: "FileLink",
+    mapFunc: mapToProps.mapFileLinkToProps,
+  },
   listBanner: {
     sectionFileName: "BannerList",
-    mapFuncName: "mapBannerListToProps",
+    mapFunc: mapToProps.mapBannerListToProps,
   },
   blockImage: {
     sectionFileName: "BlockImage",
-    mapFuncName: "mapBlockImageToProps",
+    mapFunc: mapToProps.mapBlockImageToProps,
   },
   contractorAccordion: {
     sectionFileName: "ContractorAccordion",
-    mapFuncName: "mapContractorAccordionToProps",
+    mapFunc: mapToProps.mapContractorAccordionToProps,
   },
-  banner: { sectionFileName: "Banner", mapFuncName: "mapBannerToProps" },
-  block: { sectionFileName: "Block" },
+  banner: { sectionFileName: "Banner", mapFunc: mapToProps.mapBannerToProps },
+  block: { sectionFileName: "Block", mapFunc: mapToProps.mapBlockToProps },
   blockButton: {
     sectionFileName: "BlockButton",
-    mapFuncName: "mapBlockButtonToProps",
+    mapFunc: mapToProps.mapBlockButtonToProps,
   },
   circleCTAList: {
     sectionFileName: "CircleCTASection",
-    mapFuncName: "mapCircleCTASectionToProps",
+    mapFunc: mapToProps.mapCircleCTASectionToProps,
   },
   imageLeftSection: {
     sectionFileName: "TwoColGrid",
-    mapFuncName: "mapTwoColGridToProps",
+    mapFunc: mapToProps.mapTwoColGridToProps,
   },
-  pageHero: { sectionFileName: "Hero", mapFuncName: "mapHeroToProps" },
+  pageHero: { sectionFileName: "Hero", mapFunc: mapToProps.mapHeroToProps },
   reviewSection: {
     sectionFileName: "ReviewSection",
-    mapFuncName: "mapReviewSectionToProps",
+    mapFunc: mapToProps.mapReviewSectionToProps,
   },
   simpleCTA: {
     sectionFileName: "SimpleCTA",
-    mapFuncName: "mapSimpleCTAToProps",
+    mapFunc: mapToProps.mapSimpleCTAToProps,
   },
   staffList: {
     sectionFileName: "StaffList",
-    mapFuncName: "mapStaffListToProps",
+    mapFunc: mapToProps.mapStaffListToProps,
   },
   twoColumn: {
     sectionFileName: "TwoColumn",
-    mapFuncName: "mapTwoColumnToProps",
+    mapFunc: mapToProps.mapTwoColumnToProps,
   },
   vimeo: {
     sectionFileName: "VimeoSection",
-    mapFuncName: "mapVimeoSectionToProps",
+    mapFunc: mapToProps.mapVimeoSectionToProps,
   },
   youtube: {
     sectionFileName: "YoutubeSection",
-    mapFuncName: "mapYoutubeSectionToProps",
+    mapFunc: mapToProps.mapYoutubeSectionToProps,
   },
   homePageText: {
     sectionFileName: "HomePageTextSection",
-    mapFuncName: "mapHomePageTextSectionToProps",
+    mapFunc: mapToProps.mapHomePageTextSectionToProps,
   },
 }
+
+export default appSections

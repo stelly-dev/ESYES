@@ -1,6 +1,6 @@
 import slugify from "slugify"
 
-export function mapBlockButtonToProps({
+function mapBlockButtonToProps({
   _key,
   btnColor,
   btnText,
@@ -16,11 +16,7 @@ export function mapBlockButtonToProps({
   }
 }
 
-export function mapContractorAccordionToProps({
-  _key,
-  listOfContractors,
-  title,
-}) {
+function mapContractorAccordionToProps({ _key, listOfContractors, title }) {
   return {
     key: _key,
     contractors: listOfContractors,
@@ -28,14 +24,14 @@ export function mapContractorAccordionToProps({
   }
 }
 
-export function mapCircleCTASectionToProps({ _key, ctaList }) {
+function mapCircleCTASectionToProps({ _key, ctaList }) {
   return {
     ctaList: ctaList,
     key: _key,
   }
 }
 
-export function mapHeroToProps({
+function mapHeroToProps({
   backgroundImage,
   // ctaBtnOne,
   // ctaBtnTwo,
@@ -57,7 +53,7 @@ export function mapHeroToProps({
   }
 }
 
-export function mapHomePageTextSectionToProps({
+function mapHomePageTextSectionToProps({
   bodyText,
   _key,
   boldHeading,
@@ -73,7 +69,7 @@ export function mapHomePageTextSectionToProps({
   }
 }
 
-export function mapTwoColGridToProps({ image, features, altText, _key }) {
+function mapTwoColGridToProps({ image, features, altText, _key }) {
   return {
     image: image.asset["_id"],
     features: features,
@@ -82,12 +78,13 @@ export function mapTwoColGridToProps({ image, features, altText, _key }) {
   }
 }
 
-export function mapReviewSectionToProps({
+function mapReviewSectionToProps({
   altText,
   button,
   image,
   quote,
   reviewCounters,
+  _key,
 }) {
   return {
     altText: altText,
@@ -97,28 +94,29 @@ export function mapReviewSectionToProps({
     quoteAuthor: quote.name,
     quote: quote.quote,
     reviewCounters: reviewCounters,
+    key: _key,
   }
 }
 
-export function mapBlockContentToProps(props) {
+function mapBlockContentToProps(props) {
   return props
 }
 
-export function mapStaffListToProps({ _key, members }) {
+function mapStaffListToProps({ _key, members }) {
   return {
     key: _key,
     members: members,
   }
 }
 
-export function mapBannerToProps({ _key, asset }) {
+function mapBannerToProps({ _key, asset }) {
   return {
     key: _key,
     image: asset["_id"],
   }
 }
 
-export function mapSimpleCTAToProps({ _key, content, ctaButtons }) {
+function mapSimpleCTAToProps({ _key, content, ctaButtons }) {
   return {
     key: _key,
     content: content,
@@ -126,7 +124,7 @@ export function mapSimpleCTAToProps({ _key, content, ctaButtons }) {
   }
 }
 
-export function mapTwoColumnToProps({ _key, col1, col2 }) {
+function mapTwoColumnToProps({ _key, col1, col2 }) {
   return {
     key: _key,
     leftCol: col1,
@@ -134,7 +132,7 @@ export function mapTwoColumnToProps({ _key, col1, col2 }) {
   }
 }
 
-export function mapBlockImageToProps({ alt, image }) {
+function mapBlockImageToProps({ alt, image }) {
   return {
     alt: alt,
     img: image.asset["_id"],
@@ -142,11 +140,62 @@ export function mapBlockImageToProps({ alt, image }) {
   }
 }
 
-export function mapFileLinkToProps({ linkName, newTab,  linkedFile, _key }) {
+function mapFileLinkToProps({ linkName, newTab, linkedFile, _key }) {
   return {
     linkName: linkName,
     url: linkedFile.file.asset.url,
     key: _key,
-    newTab: newTab, 
+    newTab: newTab,
   }
+}
+
+function mapBannerListToProps({ image, _key }) {
+  return {
+    image: image.asset._id,
+    key: _key,
+  }
+}
+
+function mapBlockToProps({ _key, ...rest }) {
+  return {
+    key: _key,
+    blocks: rest,
+  }
+}
+
+function mapVimeoSectionToProps({ url, image, _key }) {
+  return {
+    url: url,
+    image: image.asset.url,
+    key: _key,
+  }
+}
+
+function mapYoutubeSectionToProps({ url, image = {}, _key }) {
+  return {
+    url: url,
+    image: image.asset ? image.asset.url : null,
+    key: _key,
+  }
+}
+
+export default {
+  mapBlockButtonToProps,
+  mapContractorAccordionToProps,
+  mapCircleCTASectionToProps,
+  mapHeroToProps,
+  mapHomePageTextSectionToProps,
+  mapTwoColGridToProps,
+  mapReviewSectionToProps,
+  mapBlockContentToProps,
+  mapStaffListToProps,
+  mapBannerToProps,
+  mapSimpleCTAToProps,
+  mapTwoColumnToProps,
+  mapBlockImageToProps,
+  mapFileLinkToProps,
+  mapBannerListToProps,
+  mapBlockToProps,
+  mapVimeoSectionToProps,
+  mapYoutubeSectionToProps,
 }
