@@ -89,9 +89,7 @@ const Contractor = ({ contractor }) => {
             <div style={{ margin: "0.6em 0 1.6em 0" }}>
               <strong>Website:</strong>
               <a href={contractor.website}>
-                {/* {contractor.website.replace(/^(https?:|)\/\//)} */}
                 {getShortWebsiteFromURL(contractor.website)}
-                {/* {contractor.website} */}
               </a>
             </div>
             <div>

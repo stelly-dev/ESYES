@@ -12,6 +12,14 @@ module.exports = {
   plugins: [
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-recaptcha`,
+    `gatsby-plugin-bundle-stats`,
+    {
+      resolve: `gatsby-plugin-webpack-bundle-analyzer`,
+      options: {
+        analyzerPort: 3000,
+        production: true,
+      },
+    },
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
@@ -48,81 +56,68 @@ module.exports = {
         defaultDataLayer: { platform: `gatsby` },
       },
     },
-
     // {
-    //   resolve: `@gatsby-contrib/gatsby-plugin-elasticlunr-search`,
+    //   resolve: `gatsby-plugin-local-search`,
     //   options: {
-    //     // Fields to index
-    //     fields: [`title`, `content`],
-    //     // How to resolve each fields value for a supported node type
-    //     resolvers: {
-
+    //     name: `pages`,
+    //     engine: `flexsearch`,
+    //     engineOptions: `speed`,
+    //     query: `
+    //     {
+    //       allSanityPage {
+    //           nodes {
+    //             id
+    //             pageName
+    //             _rawLocalePage(resolveReferences: {maxDepth: 20})
+    //           }
+    //         }
     //     }
-    //   }
-    // }
+    //     `,
+    //     ref: `id`,
+    //     index: [`title`, `es`, `en`],
+    //     store: [`id`, `title`],
+    //     normalizer: ({ data }) => {
+    //       const defaults = { es: [], en: [] }
+    //       return data.allSanityPage.nodes.map(sanityPage => {
+    //         const translations = {}
+    //         if (sanityPage._rawLocalePage && sanityPage._rawLocalePage.en) {
+    //           translations.en = blocksToText(
+    //             sanityPage._rawLocalePage.en.content
+    //           )
+    //         }
+    //         if (sanityPage._rawLocalePage && sanityPage._rawLocalePage.es) {
+    //           translations.es = blocksToText(
+    //             sanityPage._rawLocalePage.es.content
+    //           )
+    //         }
+    //         return {
+    //           id: sanityPage.id,
+    //           title: sanityPage.pageName,
+    //           es: translations.es || defaults.es,
+    //           en: translations.en || defaults.en,
+    //         }
+    //       })
+    //     },
+    //   },
+    // },
     {
-      resolve: `gatsby-plugin-local-search`,
-      options: {
-        name: `pages`,
-        engine: `flexsearch`,
-        engineOptions: `speed`,
-        query: `
-        {
-          allSanityPage {
-              nodes {
-                id 
-                pageName
-                _rawLocalePage(resolveReferences: {maxDepth: 20})
-              }
-            }
-        }
-        `,
-        ref: `id`,
-        index: [`title`, `es`, `en`],
-        store: [`id`, `title`],
-        normalizer: ({ data }) => {
-          const defaults = { es: [], en: [] }
-          return data.allSanityPage.nodes.map(sanityPage => {
-            const translations = {}
-            if (sanityPage._rawLocalePage && sanityPage._rawLocalePage.en) {
-              translations.en = blocksToText(
-                sanityPage._rawLocalePage.en.content
-              )
-            }
-            if (sanityPage._rawLocalePage && sanityPage._rawLocalePage.es) {
-              translations.es = blocksToText(
-                sanityPage._rawLocalePage.es.content
-              )
-            }
-            return {
-              id: sanityPage.id,
-              title: sanityPage.pageName,
-              es: translations.es || defaults.es,
-              en: translations.en || defaults.en,
-            }
-          })
-        },
-      },
-    },
-    {
-      resolve: `gatsby-plugin-netlify`, 
+      resolve: `gatsby-plugin-netlify`,
       options: {
         headers: {
           "/*": [
-            "X-Frame-Options: 'DENY'", 
-            "X-XSS-Protection: '1; mode=block'", 
-            "Access-Control-Allow-Origin: '*'", 
-            "cache-control: ```max-age: 0 no-cache no-store must-revalidate```"
-          ]
-        }, 
-        allPageHeaders: [], 
-        mergeSecurityHeaders: true, 
-        mergeLinkHeaders: true, 
-        mergeCachingHeaders: true, 
-        transformHeaders: (headers, path) => headers, 
-        generateMatchPathRewrites: true
-      }
-
-    }
+            "X-Frame-Options: 'DENY'",
+            "X-XSS-Protection: '1; mode=block'",
+            "Access-Control-Allow-Origin: '*'",
+            "cache-control: ```max-age: 0 no-cache no-store must-revalidate```",
+          ],
+        },
+        allPageHeaders: [],
+        mergeSecurityHeaders: true,
+        mergeLinkHeaders: true,
+        mergeCachingHeaders: true,
+        transformHeaders: (headers, path) => headers,
+        generateMatchPathRewrites: true,
+      },
+    },
   ],
 }

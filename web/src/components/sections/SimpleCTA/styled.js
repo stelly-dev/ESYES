@@ -68,9 +68,6 @@ export const SimpleCTAContainer = styled.div`
 `
 // prettier-ignore
 export const ButtonWrapper = styled.div`
-  /* ${StyledButton}:not(:only-child):first-of-type {
-    margin-bottom: 1.5vw;
-  } */
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -91,7 +88,7 @@ export const SimpleCTASection = styled.section`
   font-size: 4.3vw;
   line-height: 1.5;
   font-weight: bold;
-  text-align: center; 
+  text-align: center;
   @media only screen and (min-width: 768px) {
     font-size: 2.08vw;
     line-height: 1.29;

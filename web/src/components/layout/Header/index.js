@@ -4,7 +4,6 @@ import { graphql, StaticQuery } from "gatsby"
 import { StyledHeader, LogoContainer, LogoLink } from "./styled"
 import Nav from "../Nav"
 import Img from "gatsby-image"
-import "./styles.css"
 
 const query = graphql`
   query HeaderQuery {

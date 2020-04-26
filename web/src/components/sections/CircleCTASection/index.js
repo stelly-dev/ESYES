@@ -74,7 +74,7 @@ const FlexContainer = styled(Grid.Row)`
 `
 
 const CircleCTASection = props => (
-  <Grid.Container marginTop="2.7rem" marginBottom="2.7rem">
+  <Grid.Container marginTop={["2.7rem"]} marginBottom={["2.7rem"]}>
     <FlexContainer>
       {props.ctaList.map((cta, i) => (
         <FlexItem key={cta.backgroundImage.asset["_id"]}>

@@ -41,7 +41,6 @@ export const StyledHeader = styled.header`
 export const LogoLink = styled(Link)``
 
 export const LogoContainer = styled.div`
-  /* transition: all 400ms ease-in-out; */
   opacity: ${props => (props.scrolled ? 0.5 : 1)};
   min-width: ${props => (props.scrolled ? 0 : "343px")};
   @media only screen and (min-width: 768px) {

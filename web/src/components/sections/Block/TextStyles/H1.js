@@ -10,10 +10,4 @@ export const H1 = styled.h1`
   span {
     display: block;
   }
-  @media only screen and (min-width: 768px) {
-  }
-  @media only screen and (min-width: 1024px) {
-  }
-  @media only screen and (min-width: 2000px) {
-  }
 `

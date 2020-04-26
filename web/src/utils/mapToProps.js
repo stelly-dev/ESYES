@@ -1,41 +1,33 @@
 import slugify from "slugify"
 
-function mapBlockButtonToProps({
-  _key,
-  btnColor,
-  btnText,
-  btnTo,
-  orientation,
-}) {
+function mapBlockButtonToProps({ btnColor, btnText, btnTo, orientation }) {
   return {
     color: btnColor,
     orientation: orientation,
     text: btnText,
     to: `/${slugify(btnTo.pageName).toLowerCase()}/`,
-    key: _key,
   }
 }
 
-function mapContractorAccordionToProps({ _key, listOfContractors, title }) {
+function mapContractorAccordionToProps({ listOfContractors, title }) {
   return {
-    key: _key,
     contractors: listOfContractors,
     title: title,
   }
 }
 
-function mapCircleCTASectionToProps({ _key, ctaList }) {
+function mapCircleCTASectionToProps({ ctaList }) {
   return {
     ctaList: ctaList,
-    key: _key,
   }
 }
 
+// Uncomment the lines below to get buttons back
 function mapHeroToProps({
   backgroundImage,
   // ctaBtnOne,
   // ctaBtnTwo,
-  _key,
+
   heroText,
 }) {
   return {
@@ -49,13 +41,12 @@ function mapHeroToProps({
     //   text: ctaBtnTwo.buttonText,
     //   to: `/${slugify(ctaBtnTwo.buttonDestination.pageName).toLowerCase()}/`,
     // },
-    key: _key,
   }
 }
 
 function mapHomePageTextSectionToProps({
   bodyText,
-  _key,
+
   boldHeading,
   slimHeading,
   subtitle,
@@ -65,15 +56,13 @@ function mapHomePageTextSectionToProps({
     boldTitle: boldHeading,
     slimTitle: slimHeading,
     subTitle: subtitle,
-    key: _key,
   }
 }
 
-function mapTwoColGridToProps({ image, features, altText, _key }) {
+function mapTwoColGridToProps({ image, features, altText }) {
   return {
     image: image.asset["_id"],
     features: features,
-    key: _key,
     altText: altText,
   }
 }
@@ -84,7 +73,6 @@ function mapReviewSectionToProps({
   image,
   quote,
   reviewCounters,
-  _key,
 }) {
   return {
     altText: altText,
@@ -94,7 +82,6 @@ function mapReviewSectionToProps({
     quoteAuthor: quote.name,
     quote: quote.quote,
     reviewCounters: reviewCounters,
-    key: _key,
   }
 }
 
@@ -102,31 +89,27 @@ function mapBlockContentToProps(props) {
   return props
 }
 
-function mapStaffListToProps({ _key, members }) {
+function mapStaffListToProps({ members }) {
   return {
-    key: _key,
     members: members,
   }
 }
 
-function mapBannerToProps({ _key, asset }) {
+function mapBannerToProps({ asset }) {
   return {
-    key: _key,
     image: asset["_id"],
   }
 }
 
-function mapSimpleCTAToProps({ _key, content, ctaButtons }) {
+function mapSimpleCTAToProps({ content, ctaButtons }) {
   return {
-    key: _key,
     content: content,
     buttons: ctaButtons,
   }
 }
 
-function mapTwoColumnToProps({ _key, col1, col2 }) {
+function mapTwoColumnToProps({ col1, col2 }) {
   return {
-    key: _key,
     leftCol: col1,
     rightCol: col2,
   }
@@ -140,42 +123,37 @@ function mapBlockImageToProps({ alt, image }) {
   }
 }
 
-function mapFileLinkToProps({ linkName, newTab, linkedFile, _key }) {
+function mapFileLinkToProps({ linkName, newTab, linkedFile }) {
   return {
     linkName: linkName,
     url: linkedFile.file.asset.url,
-    key: _key,
     newTab: newTab,
   }
 }
 
-function mapBannerListToProps({ image, _key }) {
+function mapBannerListToProps({ image }) {
   return {
     image: image.asset._id,
-    key: _key,
   }
 }
 
-function mapBlockToProps({ _key, ...rest }) {
+function mapBlockToProps({ ...rest }) {
   return {
-    key: _key,
     blocks: rest,
   }
 }
 
-function mapVimeoSectionToProps({ url, image, _key }) {
+function mapVimeoSectionToProps({ url, image }) {
   return {
     url: url,
     image: image.asset.url,
-    key: _key,
   }
 }
 
-function mapYoutubeSectionToProps({ url, image = {}, _key }) {
+function mapYoutubeSectionToProps({ url, image = {} }) {
   return {
     url: url,
     image: image.asset ? image.asset.url : null,
-    key: _key,
   }
 }
 

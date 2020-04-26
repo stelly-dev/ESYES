@@ -27,7 +27,6 @@ const HomePageTextSection = props => {
           {...clientConfig.sanity}
         />
       </Container>
-      {/* <pre>{JSON.stringify(props, null, 2)}</pre> */}
     </HPTextSection>
   )
 }

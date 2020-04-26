@@ -3,9 +3,7 @@ import styled from "styled-components"
 import ReactPlayer from "react-player"
 import Grid from "../../containers/Grid"
 
-
 const VideoWrapper = styled.div`
-  /* margin: 0 auto; */
   padding-top: 56.25%;
   position: relative;
   .react-player {
@@ -16,7 +14,7 @@ const VideoWrapper = styled.div`
 `
 
 const VimeoSection = ({ url, image }) => {
-  const [playing, setPlaying] = React.useState(false); 
+  const [playing, setPlaying] = React.useState(false)
   return (
     <Grid.Container marginTop={["3.7rem"]} marginBottom={["3.7rem"]}>
       <VideoWrapper>
