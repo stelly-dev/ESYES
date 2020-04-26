@@ -100,7 +100,6 @@ console.log(initialCaptchaSettings)
 // we populate a new sfValue in the parent component's state
 // and
 const W2LForm = React.forwardRef((props, ref) => {
-  const [timestamp, setTimeStamp] = useState(null)
   const [captchaSettings, setCaptchaSettings] = useState(initialCaptchaSettings)
   useInterval(() => {
     checkRecaptcha(captchaSettings, setCaptchaSettings)
@@ -116,7 +115,7 @@ const W2LForm = React.forwardRef((props, ref) => {
           <input
             type="hidden"
             name={"captcha_settings"}
-            value={() => JSON.stringify(captchaSettings)}
+            value={captchaSettings}
             key={name}
           />
         ) : (
@@ -134,7 +133,13 @@ const W2LForm = React.forwardRef((props, ref) => {
 
 const sfInitialValues = {
   //debugEmail: "matt.wilmoth@clearesult.com",
-  captcha_settings: `{"keyname": "ESWebsite", "fallback":"true", "orgId":"00DA0000000aMYj", "ts": ""}`,
+  captcha_settings: JSON.stringify({
+    keyname: "reCAPTCHA",
+    fallback: true,
+    orgId: "00D5w000002v4Lg",
+    ts: "",
+  }),
+  // captcha_settings: `{"keyname": "ESWebsite", "fallback":"true", "orgId":"00DA0000000aMYj", "ts": ""}`,
   oid: "00D5w000002v4Lg", //"00DA0000000aMYj",
   first_name: "",
   last_name: "",
