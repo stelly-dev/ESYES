@@ -6691,12 +6691,12 @@ gatsby-plugin-google-analytics@^2.2.2:
     "@babel/runtime" "^7.8.7"
     minimatch "3.0.4"
 
-gatsby-plugin-google-tagmanager@^2.2.1:
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-google-tagmanager/-/gatsby-plugin-google-tagmanager-2.2.1.tgz#aed6037ff1d7ad714ec23fa5af9cef2b9cf9fc93"
-  integrity sha512-Kn0hUw6MJfDIbRNaL4G5JbH8/uYCexjEjzClq1S0TRrOhNSPNeSNEX2PaspH5AXqVUdmla/0wWji2v+nzBBcMw==
+gatsby-plugin-google-tagmanager-delayed@^2.1.25:
+  version "2.1.25"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-google-tagmanager-delayed/-/gatsby-plugin-google-tagmanager-delayed-2.1.25.tgz#5945030a398253d5d25ca6b58c15eaa68199e86d"
+  integrity sha512-NfbSijR31Kv/vlFU9SgpoF568U2Pewme4Mpq9D6KROw7ERGHuvOUzr/t1Jq26K+3MuiOrtx4mmYFA2PFTb++RQ==
   dependencies:
-    "@babel/runtime" "^7.8.7"
+    "@babel/runtime" "^7.7.6"
 
 gatsby-plugin-local-search@^1.1.1:
   version "1.1.1"

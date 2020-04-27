@@ -34,7 +34,10 @@ module.exports = {
     "gatsby-source-sanity-transform-images",
     {
       resolve: `gatsby-plugin-styled-components`,
-      options: {},
+      options: {
+        displayName: false,
+        pure: true,
+      },
     },
     {
       resolve: `gatsby-source-filesystem`,
@@ -47,7 +50,7 @@ module.exports = {
     `gatsby-transformer-sharp`,
     `gatsby-plugin-advanced-sitemap`,
     {
-      resolve: `gatsby-plugin-google-tagmanager`,
+      resolve: `gatsby-plugin-google-tagmanager-delayed`,
       options: {
         id: `GTM-KBWWQ75`,
         defaultDataLayer: { platform: `gatsby` },

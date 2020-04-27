@@ -158,7 +158,7 @@ const formConfig = {
   method: "POST",
   action:
     "https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8",
-  show: true,
+  show: false,
 }
 
 const Contact = ({ location }) => {
