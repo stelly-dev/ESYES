@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect } from "react"
-import { navigate } from "@reach/router"
 import { Formik, Form } from "formik"
 import * as Yup from "yup"
 import EnergySmart from "./EnergySmart"
@@ -11,36 +10,10 @@ import {
   FormContainer,
   PrivacyLink,
 } from "./styles"
-import { MyInput, MySelect, Error,  Headers } from "./FormComponents"
-import { cities, } from "./formData"
-import { capWord, phoneRegEx,  firstAndLastFromName } from "./utils"
-
-function useInterval(callback, delay) {
-  const savedCallback = useRef()
-
-  //Memoize the latest callback.
-  useEffect(() => {
-    savedCallback.current = callback
-  }, [callback])
-
-  // Set up the interval
-  useEffect(() => {
-    function tick() {
-      savedCallback.current()
-    }
-    if (delay !== null) {
-      let id = setInterval(tick, delay)
-      return () => clearInterval(id)
-    }
-  }, [delay])
-}
-
-// const captchaSettings = {
-//   keyname: "ESWebsite",
-//   fallback: true,
-//   orgId: "00DA0000000aMYj",
-//   ts: ""
-// }
+import { MyInput, MySelect, Error } from "./FormComponents"
+import { cities } from "./formData"
+import { capWord, phoneRegEx, firstAndLastFromName, isServer } from "./utils"
+import ReCAPTCHA from "react-google-recaptcha"
 
 // These are the values we will actually be receiving.
 // Mostly meant to make transformation between netlify and
@@ -68,72 +41,9 @@ const validationSchema = Yup.object({
 })
 //
 
-const checkRecaptcha = (captchaSettings, setCaptchaSettings) => {
-    if (typeof window !== "undefined" && window && window.document) {
-      let response = document.getElementById("g-recaptcha-response")
-      if (response === null || response.value.trim() === "") {
-        const elems = JSON.parse(captchaSettings)
-        elems["ts"] = JSON.stringify(new Date().getTime())
-        setCaptchaSettings(JSON.stringify(elems))
-      }
-    }
-}
-
-// const initialCaptchaSettings = JSON.stringify({
-//   keyname: "ESWebsite",
-//   fallback: true,
-//   orgId: "00DA0000000aMYj",
-//   ts: ""
-// })
-
-const initialCaptchaSettings = JSON.stringify({
-  keyname: "key",
-  fallback: true,
-  orgId: "00D5w000002v4Lg",
-  ts: "",
-})
-
-// the form is never touched by a user,
-// instead - when formik successfully validates
-// we populate a new sfValue in the parent component's state
-// and
-const W2LForm = React.forwardRef((props, ref) => {
-  const [captchaSettings, setCaptchaSettings] = useState(initialCaptchaSettings)
-  useInterval(() => {
-    checkRecaptcha(captchaSettings, setCaptchaSettings)
-  }, 500)
-  console.log(captchaSettings)
-  return (
-    <form
-      ref={ref}
-      action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8"
-      method="POST"
-    >
-      {Object.keys(props.sfValues).map((name, i) => {
-        return name === "captcha-settings" ? (
-          <input
-            type="hidden"
-            name={"captcha_settings"}
-            value={captchaSettings}
-            key={name}
-          />
-        ) : (
-          <input
-            type="hidden"
-            name={name}
-            value={props.sfValues[name]}
-            key={name}
-          />
-        )
-      })}
-    </form>
-  )
-})
-
 const sfInitialValues = {
-  //debugEmail: "matt.wilmoth@clearesult.com",
   captcha_settings: JSON.stringify({
-    keyname: "reCAPTCHA",
+    keyname: "key",
     fallback: true,
     orgId: "00D5w000002v4Lg",
     ts: "",
@@ -161,7 +71,7 @@ const sfInitialValues = {
   //   ? "https://www.energysmartyes.com/es/thank-you/"
   //   : "https://www.energysmartyes.com/thank-you/",
 }
-const mapValuesToSF = (values, location, ref) => {
+const mapValuesToSF = (values, location, form, recaptcha) => {
   const { name, address, HP1, HP2, HP3, language, ...rest } = values
   return {
     ...sfInitialValues,
@@ -181,44 +91,135 @@ const mapValuesToSF = (values, location, ref) => {
     retURL: location.match(/\/es\//)
       ? "https://www.energysmartyes.com/es/thank-you"
       : "https://www.energysmartyes.com/thank-you",
-    captcha_settings: ref.current.elements.captcha_settings.value,
+    captcha_settings: JSON.stringify({
+      keyname: "key",
+      fallback: true,
+      orgId: "00D5w000002v4Lg",
+      ts: new Date().getTime(),
+      "g-rcaptcha-response": recaptcha,
+    }),
   }
 }
+
+function createHiddenForm(init, config) {
+  if (isServer()) {
+    return null
+  }
+  const form = document.createElement("form")
+  form.method = config.method
+  form.action = config.action
+  config.target
+    ? form.setAttribute("target", config.target)
+    : form.setAttribute("target", null)
+  Object.keys(init).forEach(fieldName => {
+    const hiddenInput = document.createElement("input")
+    hiddenInput.setAttribute("aria-label", "hidden")
+    hiddenInput.name = fieldName
+    hiddenInput.value = init[fieldName]
+    config.show
+      ? hiddenInput.setAttribute("type", "text")
+      : hiddenInput.setAttribute("type", "hidden")
+    form.appendChild(hiddenInput)
+  })
+  document.body.appendChild(form)
+  return form
+}
+
+function updateHiddenForm(form, newVals) {
+  if (isServer()) {
+    return null
+  }
+  Object.keys(newVals).forEach(fieldName => {
+    form = updateSingleFormValue(form, fieldName, newVals[fieldName])
+  })
+  return form
+}
+
+function updateSingleFormValue(form, name, value) {
+  if (form.elements[name]) {
+    form.elements[name].value = value
+  } else {
+    if (isServer()) {
+      return null
+    }
+    const newEl = document.createElement("input")
+    newEl.setAttribute("aria-label", "hidden")
+    newEl.name = name
+    newEl.value = value
+    newEl.setAttribute("type", "hidden")
+    form.appendChild(newEl)
+  }
+  return form
+}
+
+const initForm = sfInitialValues
+
+const formConfig = {
+  method: "POST",
+  action:
+    "https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8",
+  show: true,
+}
+
 const Contact = ({ location }) => {
-  const [submissionError, setSubmissionError] = useState("")
-  const sfFormRef = useRef(null)
-  const [sfValues, setSfValues] = useState(sfInitialValues)
+  const [hiddenForm, setHiddenForm] = useState(null)
+  const [submissionError, setSubmissionError] = useState([])
+  const recaptchaRef = useRef()
   const [isSubmitting, setIsSubmitting] = useState(false)
+  useEffect(() => {
+    const newForm = createHiddenForm(initForm, {
+      ...formConfig,
+    })
+    setHiddenForm(newForm)
+    return () => document.body.removeChild(newForm)
+  }, [])
+
+  useEffect(() => {
+    if (isSubmitting) {
+      console.log(hiddenForm.elements)
+      hiddenForm.submit()
+    }
+    return () => setIsSubmitting(false)
+  }, [hiddenForm, isSubmitting])
+
+  function onRecaptchaChange(value) {
+    if (isServer()) {
+      return null
+    }
+    const newForm = updateSingleFormValue(
+      hiddenForm,
+      "g-recaptcha-response",
+      value
+    )
+    setHiddenForm(newForm)
+  }
+
+  // TODO: Formbutton disable if reCaptcha fails
+
+  // CURRENT TASK -- figure out why the reCAPTCHA value isnt' propigating.
+
+  /*
+    Steps: 
+      1. The page loads. We use useEffect to create a hiddenForm, and 
+         place it on the page. 
+            a. The from is incomplete at this stage, only having the initialValues
+               we pass to it. We cannot add 'g-recaptcha-response' .... yes we can
+
+   */
+
   return (
     <>
-      <Headers />
       <FormContainer location={location}>
         <EnergySmart before={"Contact"} after={"Today!"} location={location} />
         <Formik
           initialValues={initialValues}
           onSubmit={(values, { setSubmitting }) => {
-            setSfValues(mapValuesToSF(values, location, sfFormRef))
+            const newVals = mapValuesToSF(values, location, recaptchaRef)
+            const newForm = updateHiddenForm(hiddenForm, newVals)
+            setHiddenForm(newForm)
             setIsSubmitting(true)
-            setTimeout(() => sfFormRef.current.submit(), 1000); 
+            setSubmitting(false)
           }}
-          // if (typeof window !== "undefined" && window && window.document) {
-          //   const form = document.createElement("form")
-          //   form.method = "POST"
-          //   form.action =
-          //     "https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8"
-          //   form.setAttribute("target", salesforceRef.current)
-          //   for (var fieldName in salesForceValues) {
-          //     let iframeInput = document.createElement("input")
-          //     iframeInput.name = fieldName
-          //     iframeInput.value = salesForceValues[fieldName]
-          //     iframeInput.setAttribute("type", "hidden")
-          //     form.appendChild(iframeInput)
-          //   }
-          //   // script for handing reCAPTCHA
-
-          //   document.body.appendChild(form)
-          //   form.submit()
-          // }
           validationSchema={validationSchema}
         >
           <Form>
@@ -337,9 +338,10 @@ const Contact = ({ location }) => {
               </Grid.Row>
             </FormGrid>
             <Error error={submissionError} />
-            <div
-              className="g-recaptcha"
-              data-sitekey="6Lexd-4UAAAAAHAymxYMWb1Z-lzqE-xzLsAm0qKR"
+            <ReCAPTCHA
+              sitekey="6Lexd-4UAAAAAHAymxYMWb1Z-lzqE-xzLsAm0qKR"
+              onChange={onRecaptchaChange}
+              ref={recaptchaRef}
             />
             {/* <div className="g-recaptcha" data-sitekey="6LfDf-gUAAAAADmj72yTU6ANmCyOa4q1Ea7uh4Gn"/> */}
             <FormButton
@@ -357,18 +359,6 @@ const Contact = ({ location }) => {
           Privacy Policy
         </PrivacyLink>
       </FormContainer>
-      <W2LForm
-        ref={sfFormRef}
-        sfValues={sfValues}
-        isSubmitting={isSubmitting}
-        style={{ display: "none" }}
-      />
-      {/* <iframe
-        title="formHandler"
-        src="about:blank"
-        ref={salesforceRef}
-        style={{ display: "none" }}
-      ></iframe> */}
     </>
   )
 }

@@ -10,16 +10,8 @@ module.exports = {
     siteUrl: `https://energysmartyes.com`,
   },
   plugins: [
+    `gatsby-plugin-preact`,
     `gatsby-plugin-react-helmet`,
-    `gatsby-plugin-recaptcha`,
-    `gatsby-plugin-bundle-stats`,
-    {
-      resolve: `gatsby-plugin-webpack-bundle-analyzer`,
-      options: {
-        analyzerPort: 3000,
-        production: true,
-      },
-    },
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
@@ -27,11 +19,16 @@ module.exports = {
       },
     },
     {
+      resolve: `gatsby-plugin-offline`,
+      options: {},
+    },
+    {
       resolve: `gatsby-source-sanity`,
       options: {
         projectId: process.env.SANITY_PROJECT_ID,
         dataset: process.env.SANITY_DATASET,
         token: process.env.SANITY_TOKEN,
+        saveImages: true,
       },
     },
     "gatsby-source-sanity-transform-images",

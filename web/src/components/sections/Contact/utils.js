@@ -9,6 +9,13 @@ export const capWord = str => {
 
 export const phoneRegEx = /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)$/
 
+export function isServer(){
+  if(typeof window !== "undefined" && window && window.document){
+    return false;
+  } 
+  return true; 
+}
+
 export const firstAndLastFromName = name => {
   name = name.split(" ")
   const firstName = name[0]

@@ -1,8 +1,7 @@
 import React from "react"
-import Layout from "../../Layout"
 import loadable from "@loadable/component"
 import appSections from "./appSections"
-
+import Layout from "../../Layout"
 const findSectionName = sectionType => {
   return appSections[sectionType].sectionFileName
 }

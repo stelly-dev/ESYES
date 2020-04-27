@@ -110,7 +110,7 @@ export const TextLink = styled(Link)`
 `
 
 export const BlockSection = styled.div`
-  color: ${props => props.theme.colors.black};
+  color: #333333;
   ul {
     list-style: none;
   }
