@@ -980,7 +980,7 @@
   dependencies:
     regenerator-runtime "^0.13.2"
 
-"@babel/runtime@^7.8.4", "@babel/runtime@^7.8.7":
+"@babel/runtime@^7.8.4", "@babel/runtime@^7.8.7", "@babel/runtime@^7.9.2":
   version "7.9.2"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.9.2.tgz#d90df0583a3a252f09aaa619665367bae518db06"
   integrity sha512-NE2DtOdufG7R5vnfQUTehdTfNycfUANEtCa9PssN9O/xmTzP4E08UI797ixaei6hBEVL9BI/PsdJS5x7mWoB9Q==
@@ -6477,12 +6477,12 @@ gatsby-plugin-google-analytics@^2.2.2:
     "@babel/runtime" "^7.8.7"
     minimatch "3.0.4"
 
-gatsby-plugin-google-tagmanager@^2.2.1:
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-google-tagmanager/-/gatsby-plugin-google-tagmanager-2.2.1.tgz#aed6037ff1d7ad714ec23fa5af9cef2b9cf9fc93"
-  integrity sha512-Kn0hUw6MJfDIbRNaL4G5JbH8/uYCexjEjzClq1S0TRrOhNSPNeSNEX2PaspH5AXqVUdmla/0wWji2v+nzBBcMw==
+gatsby-plugin-google-tagmanager@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-google-tagmanager/-/gatsby-plugin-google-tagmanager-2.3.0.tgz#d7e1d8df0724fa94f500f41dbd7a977334b97d46"
+  integrity sha512-PA8AzqBQVn/99LoZZWQL98aV6MXiOuitsBLptfzxX90IeIVC8wjXx8rUGxxX9eM6420gfxIU1Ija4RfwZ9vXYQ==
   dependencies:
-    "@babel/runtime" "^7.8.7"
+    "@babel/runtime" "^7.9.2"
 
 gatsby-plugin-local-search@^1.1.1:
   version "1.1.1"
@@ -11862,6 +11862,11 @@ react-player@^1.15.2:
     deepmerge "^4.0.0"
     load-script "^1.0.0"
     prop-types "^15.7.2"
+
+react-recaptcha@^2.3.10:
+  version "2.3.10"
+  resolved "https://registry.yarnpkg.com/react-recaptcha/-/react-recaptcha-2.3.10.tgz#1f7a001f24ab7e1a323fcf1fd8644afecb56f7da"
+  integrity sha512-IyanbozsYCuHvTYDuskZTIEcRAMG/sdvAu5b29iQWoC8Kd3Zk9WGCv2oNxh6RfGHvSvgHAyaLjmC6ei/yMsJ7g==
 
 react-reconciler@^0.24.0:
   version "0.24.0"
