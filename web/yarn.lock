@@ -966,7 +966,7 @@
   dependencies:
     regenerator-runtime "^0.13.2"
 
-"@babel/runtime@^7.3.4", "@babel/runtime@^7.7.7", "@babel/runtime@^7.8.4", "@babel/runtime@^7.8.7":
+"@babel/runtime@^7.3.4", "@babel/runtime@^7.7.7", "@babel/runtime@^7.8.4", "@babel/runtime@^7.8.7", "@babel/runtime@^7.9.2":
   version "7.9.2"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.9.2.tgz#d90df0583a3a252f09aaa619665367bae518db06"
   integrity sha512-NE2DtOdufG7R5vnfQUTehdTfNycfUANEtCa9PssN9O/xmTzP4E08UI797ixaei6hBEVL9BI/PsdJS5x7mWoB9Q==
@@ -6756,12 +6756,12 @@ gatsby-plugin-page-creator@^2.2.1:
     lodash "^4.17.15"
     micromatch "^3.1.10"
 
-gatsby-plugin-preact@^3.2.4:
-  version "3.2.4"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-preact/-/gatsby-plugin-preact-3.2.4.tgz#625851e45834c64c9d0c371f8a3bde2ede91ffff"
-  integrity sha512-7+CVhqj4vfh56P/jZlovaReEbJ13gz7DeKeB5LyZKAzQNCbicAJqnB1C6jxvCt8r0AlYM0Sl+d085YUtK+UCvA==
+gatsby-plugin-preact@^3.3.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-preact/-/gatsby-plugin-preact-3.3.0.tgz#012ad3b7ea1cf042baac2bb1be012ea5e21dc5d3"
+  integrity sha512-12LBa1jRnZbDpONPDYC82eEIgYIEIMWZjyAgnFyp7ObHu8RLz4RuTZaaGB4yStGs1kGyn6MyfBt6U2BfCF6P8g==
   dependencies:
-    "@babel/runtime" "^7.8.7"
+    "@babel/runtime" "^7.9.2"
 
 gatsby-plugin-react-helmet@^3.1.18:
   version "3.1.18"

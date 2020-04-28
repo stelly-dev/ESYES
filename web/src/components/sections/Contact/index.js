@@ -43,48 +43,34 @@ const validationSchema = Yup.object({
 
 const sfInitialValues = {
   captcha_settings: JSON.stringify({
-    keyname: "key",
+    keyname: "ESWebsite2",
     fallback: true,
-    orgId: "00D5w000002v4Lg",
+    orgId: "00DA0000000aMYj",
     ts: "",
   }),
-  // captcha_settings: `{"keyname": "ESWebsite", "fallback":"true", "orgId":"00DA0000000aMYj", "ts": ""}`,
-  oid: "00D5w000002v4Lg", //"00DA0000000aMYj",
-  first_name: "",
+  oid: "00DA0000000aMYj",   first_name: "",
   last_name: "",
+  zip: "", 
   email: "",
   phone: "",
   street: "",
   city: "",
-  zip: "",
   retURL: "",
-  "00N5w00000HSOsp": "",
-  "00N5w00000HSOsu": "",
-  "00N5w00000HSOsz": "",
-  "00N5w00000HSOt4": "",
-
-  // "00NF0000008M7i9": "",
-  // "00NF0000008M7iE": "",
-  // "00NF0000008M7iO": "",
-  // "00N2I00000Dqoqv": "",
-  // retURL: location.match(/\/es\//)
-  //   ? "https://www.energysmartyes.com/es/thank-you/"
-  //   : "https://www.energysmartyes.com/thank-you/",
+  "00NF0000008M7i9": "",
+  "00NF0000008M7iE": "",
+  "00NF0000008M7iO": "",
+  "00N2I00000Dqoqv": "",
 }
 const mapValuesToSF = (values, location, form, recaptcha) => {
   const { name, address, HP1, HP2, HP3, language, ...rest } = values
   return {
     ...sfInitialValues,
     ...firstAndLastFromName(name),
-    "00N5w00000HSOsp": HP1,
-    "00N5w00000HSOsu": HP2,
-    "00N5w00000HSOsz": HP3,
-    "00N5w00000HSOt4": location.match(/\.es\//)
-      ? // "00NF0000008M7i9": HP1,
-        // "00NF0000008M7iE": HP2,
-        // "00NF0000008M7iO": HP3,
-        // "00N2I00000Dqoqv": location.match(/\/es\//)
-        "Spanish"
+    "00NF0000008M7i9": HP1,
+    "00NF0000008M7iE": HP2,
+    "00NF0000008M7iO": HP3,
+    "00N2I00000Dqoqv": location.match(/\.es\//)
+      ? "Spanish"
       : "English",
     street: address,
     ...rest,
@@ -92,11 +78,11 @@ const mapValuesToSF = (values, location, form, recaptcha) => {
       ? "https://www.energysmartyes.com/es/thank-you"
       : "https://www.energysmartyes.com/thank-you",
     captcha_settings: JSON.stringify({
-      keyname: "key",
+      keyname: "ESWebsite2",
       fallback: true,
-      orgId: "00D5w000002v4Lg",
+      orgId: "00DA0000000aMYj",
       ts: new Date().getTime(),
-      "g-rcaptcha-response": recaptcha,
+      "g-recaptcha-response": recaptcha,
     }),
   }
 }
@@ -176,7 +162,6 @@ const Contact = ({ location }) => {
 
   useEffect(() => {
     if (isSubmitting) {
-      console.log(hiddenForm.elements)
       hiddenForm.submit()
     }
     return () => setIsSubmitting(false)
@@ -193,19 +178,6 @@ const Contact = ({ location }) => {
     )
     setHiddenForm(newForm)
   }
-
-  // TODO: Formbutton disable if reCaptcha fails
-
-  // CURRENT TASK -- figure out why the reCAPTCHA value isnt' propigating.
-
-  /*
-    Steps: 
-      1. The page loads. We use useEffect to create a hiddenForm, and 
-         place it on the page. 
-            a. The from is incomplete at this stage, only having the initialValues
-               we pass to it. We cannot add 'g-recaptcha-response' .... yes we can
-
-   */
 
   return (
     <>
@@ -339,11 +311,10 @@ const Contact = ({ location }) => {
             </FormGrid>
             <Error error={submissionError} />
             <ReCAPTCHA
-              sitekey="6Lexd-4UAAAAAHAymxYMWb1Z-lzqE-xzLsAm0qKR"
+              sitekey="6LffI-8UAAAAADwgcs8Tkw5RMXmBNEuz86etgZwl"
               onChange={onRecaptchaChange}
               ref={recaptchaRef}
             />
-            {/* <div className="g-recaptcha" data-sitekey="6LfDf-gUAAAAADmj72yTU6ANmCyOa4q1Ea7uh4Gn"/> */}
             <FormButton
               value={
                 submissionError.length > 0 ? "Try Again" : "Contact EnergySmart"
