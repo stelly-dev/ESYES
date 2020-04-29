@@ -121,55 +121,67 @@ const BubbleLayout = styled(Grid.Row)`
   }
 `
 
-const ReviewSection = props => (
-  <Grid.Container>
-    <Grid.Row
-      display="flex"
-      flexDirection={["column-reverse", "column-reverse", "row"]}
-    >
-      <Grid.Col
-        marginRight={[0, 0, "2rem"]}
-        flexBasis={["100%", "100%", "50%"]}
-        display={[null, null, null, "flex"]}
-        flexDirection={[null, null, null, "column"]}
+const ReviewSection = ({
+  altText,
+  buttonText,
+  buttonTo,
+  image,
+  quoteAuthor,
+  quote,
+  reviewCounters,
+  key,
+}) => {
+  return (
+    <Grid.Container key={key}>
+      <Grid.Row
+        display="flex"
+        flexDirection={["column-reverse", "column-reverse", "row"]}
       >
-        <Grid.Row flexBasis={[null, null, null, "50%"]} position={"relative"}>
-          <Quote quote={props.quote} author={props.quoteAuthor}>
-            <QuoteButton to={props.buttonTo}>{props.buttonText}</QuoteButton>
-          </Quote>
-        </Grid.Row>
-        <BubbleLayout
+        <Grid.Col
+          marginRight={[0, 0, "2rem"]}
+          flexBasis={["100%", "100%", "50%"]}
           display={[null, null, null, "flex"]}
-          flexBasis={[null, null, null, "50%"]}
+          flexDirection={[null, null, null, "column"]}
         >
-          {props.reviewCounters.map(counter => (
-            <Grid.Col
-              key={counter["_key"]}
-              flexBasis={[null, null, null, "100%"]}
-            >
-              <BubbleText>
-                <Counter
-                  prefix={counter.prefix}
-                  value={counter.counter}
-                  title={counter.title}
-                />
-              </BubbleText>
-            </Grid.Col>
-          ))}
-        </BubbleLayout>
-      </Grid.Col>
-      <Grid.Col flexBasis={("100%", "100%", "50%")}>
-        <Img
-          alt={props.altText}
-          fluid={getFluidGatsbyImage(
-            props.image,
-            { maxWidth: 562 },
-            clientConfig.sanity
-          )}
-        />
-      </Grid.Col>
-    </Grid.Row>
-  </Grid.Container>
-)
+          <Grid.Row flexBasis={[null, null, null, "50%"]} position={"relative"}>
+            <Quote quote={quote} author={quoteAuthor}>
+              <QuoteButton to={buttonTo || ""}>{buttonText}</QuoteButton>
+            </Quote>
+          </Grid.Row>
+          <BubbleLayout
+            display={[null, null, null, "flex"]}
+            flexBasis={[null, null, null, "50%"]}
+          >
+            {reviewCounters &&
+              reviewCounters.map(counter => (
+                <Grid.Col
+                  key={counter["_key"]}
+                  flexBasis={[null, null, null, "100%"]}
+                >
+                  <BubbleText>
+                    <Counter
+                      prefix={counter.prefix}
+                      value={counter.counter}
+                      title={counter.title}
+                    />
+                  </BubbleText>
+                </Grid.Col>
+              ))}
+          </BubbleLayout>
+        </Grid.Col>
+        <Grid.Col flexBasis={["100%", "100%", "50%"]}>
+          <Img
+            alt={altText}
+            fluid={getFluidGatsbyImage(
+              image,
+              { maxWidth: 562 },
+              clientConfig.sanity
+            )}
+          />
+        </Grid.Col>
+      </Grid.Row>
+    </Grid.Container>
+  )
+}
 
 export default ReviewSection

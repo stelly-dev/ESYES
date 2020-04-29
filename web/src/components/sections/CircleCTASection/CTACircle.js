@@ -6,11 +6,6 @@ import BackgroundImage from "gatsby-background-image"
 import { getFluidGatsbyImage } from "gatsby-source-sanity"
 import clientConfig from "../../../../client-config"
 
-// TODO:
-//      Make Text Sizing Consistent
-//      Make Sure Overlay is colored properly
-//      Add appropriate text shadow
-
 const CircleHoverOverlay = styled.div`
   width: 100%;
   height: 100%;

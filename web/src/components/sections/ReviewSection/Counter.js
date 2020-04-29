@@ -2,7 +2,6 @@ import React, { Component } from "react"
 import PropTypes from "prop-types"
 import CountUp from "react-countup"
 import VizSensor from "react-visibility-sensor"
-// import { CounterBackground } from "./styled.js"
 
 class Counter extends Component {
   constructor(props) {

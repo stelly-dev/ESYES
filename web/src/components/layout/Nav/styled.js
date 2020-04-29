@@ -1,10 +1,8 @@
 import React from "react"
 import styled from "styled-components"
 import { Link } from "gatsby"
-// Hover Menu Styles
 export const Box = styled.div`
   display: none;
-  /* transition: all 0.3s ease-in-out; */
 `
 export const BoxTriangle = styled.div`
   width: 60px;
@@ -152,12 +150,10 @@ export const NavListItem = styled.li`
       width: 100%;
     }
     ${Box} {
-      /* display: flex; */
       display: block;
       ${BoxTriangle} {
         position: absolute;
         left: 50%;
-        /* transform: translateX(-50%); */
       }
       position: relative;
       padding: 1rem;
@@ -166,9 +162,6 @@ export const NavListItem = styled.li`
       background-color: white;
       color: ${props => props.theme.colors.black};
       min-width: 15rem;
-      /* min-width: 13.75vw;
-      width: 13.75vw; */
-      /* padding-top: 48px; */
       top: 3px;
       z-index: 100;
       left: 50%;
@@ -212,11 +205,6 @@ export const NavListItem = styled.li`
   @media only screen and (min-width: 1024px) {
     font-size: 1rem;
   }
-  /* @media only screen and (min-width: 1600px) {
-    a {
-      font-size: 20px;
-    }
-  } */
 `
 export const TagLine = styled.div`
   display: none;

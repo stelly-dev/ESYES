@@ -1,10 +1,6 @@
 import React from "react";
 import slugify from "slugify";
-import {
-  AiOutlineAlignCenter,
-  AiOutlineAlignLeft,
-  AiOutlineAlignRight
-} from "react-icons/ai";
+import { AiOutlineAlignCenter, AiOutlineAlignRight } from "react-icons/ai";
 
 import {
   FiExternalLink,
@@ -172,12 +168,7 @@ export default {
       title: "SEO",
       type: "seo-tools", // use seo-tools type
       options: {
-        baseUrl: "https://energy-smart.netlify.com", // (REQUIRED) This is the baseUrl for your site
-        baseUrl(doc) {
-          console.log(doc);
-          console.log("coming from baseUrl");
-          return "https://energy-smart.netlify.com/";
-        },
+        baseUrl: "https://energysmartyes.com", // (REQUIRED) This is the baseUrl for your site
         slug(doc) {
           console.log(doc);
           return slugify(doc.pageName).toLowerCase();

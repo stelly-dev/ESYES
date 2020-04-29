@@ -1,199 +1,23 @@
 import React from "react"
-import { Link } from "gatsby"
 import BlockContent from "@sanity/block-content-to-react"
 import Grid from "../../containers/Grid"
-import { BlockSection, TextLink } from "./styled"
-import styled from "styled-components"
-import { typography } from "styled-system"
-import slugify from "slugify"
-import { FaQuoteLeft, FaChevronRight } from "react-icons/fa"
 import clientConfig from "../../../../client-config"
 import { getFluidGatsbyImage } from "gatsby-source-sanity"
 import YouTube from "react-youtube"
 import Vimeo from "@u-wave/react-vimeo"
 import getYoutubeId from "get-youtube-id"
-import Img from "gatsby-image"
 import { H1, H2, H3, H4, H5, H6, P } from "./TextStyles"
-import { Location } from "@reach/router"
-
-export const StyledImage = styled(Img)`
-  max-width: 300px;
-`
-export const VideoWrapper = styled.div`
-  position: relative;
-  padding-bottom: 56.25%;
-  height: 0;
-  margin-bottom: 20px;
-  iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
-`
-
-const LeftQuote = styled(FaQuoteLeft)`
-  font-size: 61px;
-  line-height: 73px;
-  position: absolute;
-  color: ${props => props.theme.colors.secondary};
-  opacity: 0.15;
-  @media only screen and (min-width: 1024px) {
-    font-size: 5.8vw;
-  }
-  @media only screen and (min-width: 2000px) {
-    font-size: 124px;
-  }
-`
-
-const internalLink = ({ mark, children }) => {
-  const { reference = {} } = mark
-  const to = `/${slugify(reference.pageName).toLowerCase()}/`
-  return (
-    <Location>
-      {({ location }) => (
-        <LocaleTextLink
-          location={location}
-          to={to === "/home-page/" ? "/" : to}
-        >
-          {children}
-        </LocaleTextLink>
-      )}
-    </Location>
-  )
-}
-
-const LocaleTextLink = ({ to, children, location }) => {
-  if (location.pathname.match(/\/es\//)) {
-    console.log("MATCH", to)
-    return <TextLink to={`/es/${to}`}>{children}</TextLink>
-  } else {
-    return <TextLink to={to}>{children}</TextLink>
-  }
-}
-
-const link = ({ mark, children }) => {
-  const { href = "" } = mark
-  const tabProps = mark.newTab ? { target: "_blank" } : null
-  return (
-    <TextLink as="a" href={href} {...tabProps}>
-      {children}
-    </TextLink>
-  )
-}
-
-const telephone = ({ mark, children }) => {
-  const { number = "" } = mark
-  return (
-    <TextLink as="a" href={`tel:${number}`}>
-      {children}
-    </TextLink>
-  )
-}
-
-const fileLink = ({ mark, children }) => {
-  const tabProps = mark.newTab ? { target: "_blank" } : null
-  return (
-    <TextLink as="a" href={mark.reference.file.asset.url} {...tabProps}>
-      {children}
-    </TextLink>
-  )
-}
-
-const Slim = styled.span`
-  font-weight: 300;
-`
-
-const slim = props => {
-  return <Slim>{props.children}</Slim>
-}
-
-export const ArticleLink = styled(Link)`
-  ${typography}
-  text-decoration: none;
-  color: ${props => props.theme.colors.secondary};
-  font-weight: bold;
-  transition: color 250ms ease-in;
-  display: inline-block;
-  :visited {
-    color: ${props => props.theme.colors.secondary};
-  }
-  :hover {
-    color: ${props => props.theme.colors.primary};
-  }
-`
-
-export const StyledChevron = styled(FaChevronRight)`
-  vertical-align: center;
-  padding-top: 4px;
-`
-const chevronLink = ({ mark, children }) => {
-  const { reference = {} } = mark
-  const to = `/${slugify(reference.pageName).toLowerCase()}/`
-  return (
-    <>
-      <br />
-      <ArticleLink to={to}>
-        {children}
-        <StyledChevron />
-      </ArticleLink>
-    </>
-  )
-}
-
-const QuoteSection = styled.section``
-
-const QuoteText = styled.blockquote`
-  padding-left: 40px;
-  padding-top: 32px;
-  font-weight: bold;
-  font-style: italic;
-  line-height: 25.6px;
-  a {
-    color: ${props => props.theme.colors.secondary};
-    text-decoration: underline;
-  }
-  a:hover {
-    color: ${props => props.theme.colors.primary};
-  }
-  @media only screen and (min-width: 1024px) {
-    font-size: 20.4px;
-    padding-left: 3.6vw;
-    padding-top: 3.1vw;
-    margin-bottom: 1.7vw;
-    margin-top: 0.25vw;
-  }
-  @media only screen and (min-width: 1200px) {
-    line-height: 1.4857;
-    font-size: 1.7vw;
-  }
-
-  @media only screen and (min-width: 2000px) {
-    margin-top: 5px;
-    margin-bottom: 34px;
-    max-width: 1316px;
-    font-size: 34px;
-    padding-top: 62px;
-    padding-left: 72px;
-  }
-`
-
-const Quote = props => {
-  return (
-    <QuoteSection>
-      <LeftQuote />
-      <QuoteText>{props.children}</QuoteText>
-    </QuoteSection>
-  )
-}
-const Centered = styled.div`
-  text-align: center;
-`
-
-const center = props => {
-  return <Centered>{props.children}</Centered>
-}
+import { BlockSection, StyledImage, VideoWrapper } from "./styled"
+import {
+  internalLink,
+  link,
+  telephone,
+  fileLink,
+  slim,
+  chevronLink,
+  Quote,
+  center,
+} from "./Marks"
 
 const BlockRenderer = props => {
   const { style = "normal" } = props.node

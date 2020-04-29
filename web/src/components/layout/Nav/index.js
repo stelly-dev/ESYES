@@ -1,6 +1,5 @@
 import React from "react"
-import { Link  } from "gatsby"
-
+import { Link } from "gatsby"
 import HoverLink from "./HoverLink"
 import {
   NavContainer,
@@ -88,8 +87,8 @@ const Nav = ({
             <MenuButton isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
           </NavListItem>
           <NavListItem>
-            <div style={{display: 'none'}}>
-            <Search scrolled={scrolled ? 1 : 0} />
+            <div style={{ display: "none" }}>
+              <Search scrolled={scrolled ? 1 : 0} />
             </div>
           </NavListItem>
         </NavList>

@@ -18,11 +18,9 @@ const Container = styled.section`
 
 const Effi = ({ location }) => {
   const iframeRef = useRef(null)
-
-  if (location && location.pathname !== "/effi-app/") {
-    return null
-  } else if (location.pathname === "/effi-app/") {
+   
     return (
+      location && location.pathname.match(/\/effi-app\//) ? 
       <Container>
         <IframeResizer
           forwardRef={iframeRef}
@@ -37,8 +35,9 @@ const Effi = ({ location }) => {
           src="https://zingtree.com/deploy/tree.php?z=embed&tree_id=796651432000&style=buttons&notitle=1&embed_breadcrumbs=1&persist_names=Restart+App|Submit+Question+or+Feedback&persist_node_ids=1|214"
         />
       </Container>
+      : null
     )
-  }
+  
 }
 
 export default Effi

@@ -13,12 +13,7 @@ const Main = styled.main`
     left: ${props => (props.isMenuOpen ? "450px" : 0)};
   }
 
-  div ul {
-    /* margin: -1.6rem 0; */
-  }
   div ul li {
-    /* margin-top: 1.6em
-    margin-bottom: 1.6em; */
     line-height: 1.6;
     list-style-position: inside !important;
     font-size: 1em;
@@ -32,9 +27,6 @@ const Main = styled.main`
   @media only screen and (min-width: 768px) {
     padding-top: 152px;
     div ul li {
-      /* margin-top: 4.56vw;
-      margin-bottom: 4.56vw;
-      font-size: 2.08vw; */
     }
     > ${SimpleCTAContainer} {
       margin-top: 5.08vw !important;
@@ -47,26 +39,6 @@ const Main = styled.main`
     > ${SimpleCTAContainer} {
       margin-top: 1.6vw !important;
       margin-bottom: 2.5vw !important;
-    }
-    div ul li {
-      /* font-size: 12px;
-      margin-top: 14px;
-      margin-bottom: 14px; */
-    }
-  }
-  @media only screen and (min-width: 1200px) {
-    div ul li {
-      /* font-size: 1vw;
-      margin-top: 2.2vw;
-      margin-bottom: 2.2vw; */
-    }
-  }
-
-  @media only screen and (min-width: 2000px) {
-    div ul li {
-      /* font-size: 20px;
-      margin-top: 44px;
-      margin-bottom: 44px; */
     }
   }
 `

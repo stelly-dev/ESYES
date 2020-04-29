@@ -38,9 +38,8 @@ export const autofillMixin = css`
 `
 export const Form = styled.form``
 
-export const FormButton = styled("input").attrs({
-  type: "submit",
-})`
+
+export const formButtonStyles = css`
   background-color: ${props => props.theme.colors.secondary};
   color: white;
   border: 1px solid ${props => props.theme.colors.secondary};
@@ -57,6 +56,17 @@ export const FormButton = styled("input").attrs({
     background-color: white;
     color: ${props => props.theme.colors.secondary};
   }
+
+`
+
+export const Button = styled.button`
+  ${formButtonStyles}; 
+`
+
+export const FormButton = styled("input").attrs({
+  type: "submit",
+})`
+  ${formButtonStyles}
 `
 
 export const formElementStyles = css`

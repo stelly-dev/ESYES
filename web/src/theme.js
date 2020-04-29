@@ -34,6 +34,10 @@ const flexboxgrid = {
 export default {
   ...baseTheme,
   ...flexboxgrid,
+  colors: {
+    black: "#333333",
+    ...baseTheme.colors,
+  },
   shadows: {
     small: "0px 3px 6px 0px rgba(0,0,0,1)",
     large: "0px 3px 6px #00000029",

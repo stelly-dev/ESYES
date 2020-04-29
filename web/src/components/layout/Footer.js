@@ -25,8 +25,6 @@ const StyledFooter = styled.footer`
     color: white;
   }
   .light {
-    /* margin-top: 1.6rem; */
-    /* margin-bottom: -1.6rem; */
     color: ${props => props.theme.colors.black};
     background-color: #f7f7f7;
   }

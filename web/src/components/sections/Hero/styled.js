@@ -44,7 +44,6 @@ export const HeroButton = styled(Button)`
   position: relative;
   z-index: 10000;
   display: inline-flex;
-  /* max-width: calc(156px - 2rem); */
   margin: 0 0.2rem;
   font-size: 13px;
   cursor: pointer;
@@ -86,8 +85,6 @@ export const HeroButton = styled(Button)`
     height: 70px;
     font-size: 27px;
     border-radius: 4px;
-    /* height: 70px; */
-    /* width: 322px; */
   }
 `
 

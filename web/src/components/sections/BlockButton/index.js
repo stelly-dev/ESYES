@@ -11,7 +11,6 @@ const StyledContainer = styled(Container)`
 
   @media only screen and (min-width: 1024px) {
     max-width: 1200px;
-    /* border: 2px solid red; */
   }
 `
 
@@ -34,16 +33,18 @@ const mapOrientationToFlex = orientation => {
       return "center"
     case "right":
       return "flex-end"
-    default: 
+    default:
       return "center"
   }
 }
 
 const BlockButton = props => {
-
   return (
     <StyledContainer orientation={mapOrientationToFlex(props.orientation)}>
-      <StyledButton color={props.color} to={props.to === '/home-page/' ? '/' : props.to}>
+      <StyledButton
+        color={props.color}
+        to={props.to === "/home-page/" ? "/" : props.to}
+      >
         {props.text}
       </StyledButton>
     </StyledContainer>

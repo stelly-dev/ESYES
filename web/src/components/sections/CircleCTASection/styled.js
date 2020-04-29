@@ -6,9 +6,6 @@ import BackgroundImage from "gatsby-background-image"
 export const CircleLink = styled(Link)`
   color: white;
   text-decoration: none;
-  /* display: flex;
-  justify-content: center;
-  align-items: center; */
   border: 1px solid red;
   :visited {
     color: white;

@@ -12,13 +12,4 @@ export const H4 = styled.h4`
   a:hover {
     color: ${props => props.theme.colors.secondary};
   }
-
-  @media only screen and (min-width: 768px) {
-  }
-
-  @media only screen and (min-width: 1024px) {
-  }
-
-  @media only screen and (min-width: 2000px) {
-  }
 `

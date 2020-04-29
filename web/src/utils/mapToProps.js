@@ -1,50 +1,40 @@
 import slugify from "slugify"
 
-export function mapBlockButtonToProps({
-  _key,
-  btnColor,
-  btnText,
-  btnTo,
-  orientation,
-}) {
+function mapBlockButtonToProps({ btnColor, btnText, btnTo, orientation }) {
   return {
     color: btnColor,
-    orientation: orientation,
+    orientation, 
     text: btnText,
     to: `/${slugify(btnTo.pageName).toLowerCase()}/`,
-    key: _key,
   }
 }
 
-export function mapContractorAccordionToProps({
-  _key,
-  listOfContractors,
-  title,
-}) {
+function mapContractorAccordionToProps({ listOfContractors, title }) {
   return {
-    key: _key,
     contractors: listOfContractors,
-    title: title,
+    title, 
   }
 }
 
-export function mapCircleCTASectionToProps({ _key, ctaList }) {
+function mapCircleCTASectionToProps({ ctaList }) {
   return {
-    ctaList: ctaList,
-    key: _key,
+    ctaList,
   }
 }
 
-export function mapHeroToProps({
+// Uncomment the lines below to get buttons back
+function mapHeroToProps({
   backgroundImage,
   // ctaBtnOne,
   // ctaBtnTwo,
-  _key,
+
   heroText,
 }) {
   return {
     headline: heroText,
-    image: backgroundImage.asset["_id"],
+    image: backgroundImage.asset._id,
+
+    
     // buttonOne: {
     //   text: ctaBtnOne.buttonText,
     //   to: `/${slugify(ctaBtnOne.buttonDestination.pageName).toLowerCase()}/`,
@@ -53,13 +43,12 @@ export function mapHeroToProps({
     //   text: ctaBtnTwo.buttonText,
     //   to: `/${slugify(ctaBtnTwo.buttonDestination.pageName).toLowerCase()}/`,
     // },
-    key: _key,
   }
 }
 
-export function mapHomePageTextSectionToProps({
+function mapHomePageTextSectionToProps({
   bodyText,
-  _key,
+
   boldHeading,
   slimHeading,
   subtitle,
@@ -69,20 +58,18 @@ export function mapHomePageTextSectionToProps({
     boldTitle: boldHeading,
     slimTitle: slimHeading,
     subTitle: subtitle,
-    key: _key,
   }
 }
 
-export function mapTwoColGridToProps({ image, features, altText, _key }) {
+function mapTwoColGridToProps({ image, features, altText }) {
   return {
     image: image.asset["_id"],
-    features: features,
-    key: _key,
-    altText: altText,
+    features,
+    altText,
   }
 }
 
-export function mapReviewSectionToProps({
+function mapReviewSectionToProps({
   altText,
   button,
   image,
@@ -90,63 +77,105 @@ export function mapReviewSectionToProps({
   reviewCounters,
 }) {
   return {
-    altText: altText,
+    altText,
     buttonText: button.buttonText,
     buttonTo: `/${slugify(button.buttonDestination.pageName).toLowerCase()}/`,
     image: image.asset["_id"],
     quoteAuthor: quote.name,
     quote: quote.quote,
-    reviewCounters: reviewCounters,
+    reviewCounters,
   }
 }
 
-export function mapBlockContentToProps(props) {
+function mapBlockContentToProps(props) {
   return props
 }
 
-export function mapStaffListToProps({ _key, members }) {
+function mapStaffListToProps({ members }) {
   return {
-    key: _key,
-    members: members,
+    members,
   }
 }
 
-export function mapBannerToProps({ _key, asset }) {
+function mapBannerToProps({ asset }) {
   return {
-    key: _key,
     image: asset["_id"],
   }
 }
 
-export function mapSimpleCTAToProps({ _key, content, ctaButtons }) {
+function mapSimpleCTAToProps({ content, ctaButtons }) {
   return {
-    key: _key,
-    content: content,
+    content,
     buttons: ctaButtons,
   }
 }
 
-export function mapTwoColumnToProps({ _key, col1, col2 }) {
+function mapTwoColumnToProps({ col1, col2 }) {
   return {
-    key: _key,
     leftCol: col1,
     rightCol: col2,
   }
 }
 
-export function mapBlockImageToProps({ alt, image }) {
+function mapBlockImageToProps({ alt, image }) {
   return {
-    alt: alt,
+    alt,
     img: image.asset["_id"],
     url: image.asset.url,
   }
 }
 
-export function mapFileLinkToProps({ linkName, newTab,  linkedFile, _key }) {
+function mapFileLinkToProps({ linkName, newTab, linkedFile }) {
   return {
-    linkName: linkName,
+    linkName ,
     url: linkedFile.file.asset.url,
-    key: _key,
-    newTab: newTab, 
+    newTab,
   }
+}
+
+function mapBannerListToProps({ image }) {
+  return {
+    image: image.asset._id,
+  }
+}
+
+function mapBlockToProps({ ...rest }) {
+  return {
+    blocks: rest,
+  }
+}
+
+function mapVimeoSectionToProps({ url, image }) {
+  return {
+    url,
+    image: image.asset.url,
+  }
+}
+
+function mapYoutubeSectionToProps({ url, image = {} }) {
+  return {
+    url,
+    image: image.asset ? image.asset.url : null,
+  }
+}
+
+export default {
+  mapBlockButtonToProps,
+  mapContractorAccordionToProps,
+  mapCircleCTASectionToProps,
+  mapHeroToProps,
+  mapHomePageTextSectionToProps,
+  mapTwoColGridToProps,
+  mapReviewSectionToProps,
+  mapBlockContentToProps,
+  mapStaffListToProps,
+  mapBannerToProps,
+  mapSimpleCTAToProps,
+  mapTwoColumnToProps,
+  mapBlockImageToProps,
+  mapFileLinkToProps,
+  mapBannerListToProps,
+  mapBlockToProps,
+  mapVimeoSectionToProps,
+  mapYoutubeSectionToProps,
 }
