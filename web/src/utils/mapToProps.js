@@ -3,7 +3,7 @@ import slugify from "slugify"
 function mapBlockButtonToProps({ btnColor, btnText, btnTo, orientation }) {
   return {
     color: btnColor,
-    orientation: orientation,
+    orientation, 
     text: btnText,
     to: `/${slugify(btnTo.pageName).toLowerCase()}/`,
   }
@@ -12,13 +12,13 @@ function mapBlockButtonToProps({ btnColor, btnText, btnTo, orientation }) {
 function mapContractorAccordionToProps({ listOfContractors, title }) {
   return {
     contractors: listOfContractors,
-    title: title,
+    title, 
   }
 }
 
 function mapCircleCTASectionToProps({ ctaList }) {
   return {
-    ctaList: ctaList,
+    ctaList,
   }
 }
 
@@ -32,7 +32,9 @@ function mapHeroToProps({
 }) {
   return {
     headline: heroText,
-    image: backgroundImage.asset["_id"],
+    image: backgroundImage.asset._id,
+
+    
     // buttonOne: {
     //   text: ctaBtnOne.buttonText,
     //   to: `/${slugify(ctaBtnOne.buttonDestination.pageName).toLowerCase()}/`,
@@ -62,8 +64,8 @@ function mapHomePageTextSectionToProps({
 function mapTwoColGridToProps({ image, features, altText }) {
   return {
     image: image.asset["_id"],
-    features: features,
-    altText: altText,
+    features,
+    altText,
   }
 }
 
@@ -75,13 +77,13 @@ function mapReviewSectionToProps({
   reviewCounters,
 }) {
   return {
-    altText: altText,
+    altText,
     buttonText: button.buttonText,
     buttonTo: `/${slugify(button.buttonDestination.pageName).toLowerCase()}/`,
     image: image.asset["_id"],
     quoteAuthor: quote.name,
     quote: quote.quote,
-    reviewCounters: reviewCounters,
+    reviewCounters,
   }
 }
 
@@ -91,7 +93,7 @@ function mapBlockContentToProps(props) {
 
 function mapStaffListToProps({ members }) {
   return {
-    members: members,
+    members,
   }
 }
 
@@ -103,7 +105,7 @@ function mapBannerToProps({ asset }) {
 
 function mapSimpleCTAToProps({ content, ctaButtons }) {
   return {
-    content: content,
+    content,
     buttons: ctaButtons,
   }
 }
@@ -117,7 +119,7 @@ function mapTwoColumnToProps({ col1, col2 }) {
 
 function mapBlockImageToProps({ alt, image }) {
   return {
-    alt: alt,
+    alt,
     img: image.asset["_id"],
     url: image.asset.url,
   }
@@ -125,9 +127,9 @@ function mapBlockImageToProps({ alt, image }) {
 
 function mapFileLinkToProps({ linkName, newTab, linkedFile }) {
   return {
-    linkName: linkName,
+    linkName ,
     url: linkedFile.file.asset.url,
-    newTab: newTab,
+    newTab,
   }
 }
 
@@ -145,14 +147,14 @@ function mapBlockToProps({ ...rest }) {
 
 function mapVimeoSectionToProps({ url, image }) {
   return {
-    url: url,
+    url,
     image: image.asset.url,
   }
 }
 
 function mapYoutubeSectionToProps({ url, image = {} }) {
   return {
-    url: url,
+    url,
     image: image.asset ? image.asset.url : null,
   }
 }
