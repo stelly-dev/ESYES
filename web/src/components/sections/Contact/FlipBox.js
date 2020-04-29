@@ -1,16 +1,18 @@
 import React from 'react'; 
-import {styled, css} from 'styled-componenets'; 
+import styled, { css} from 'styled-components'; 
 
 
 const shared = css`
   position: absolute; 
   width: 100%; 
   height: 100%; 
-  -webkit-backface-visivility: hidden; 
+  -webkit-backface-visibility: hidden; 
   backface-visibility: hidden; 
 `
 
 const FlipOuter = styled.div`
+  border: 1px solid black; 
+  height: 78px; 
   perspective: 1000px; 
 `
 

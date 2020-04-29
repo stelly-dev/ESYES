@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react"
+import React, { useState,useCallback,  useRef, useEffect } from "react"
 import { Formik, Form } from "formik"
 import * as Yup from "yup"
 import EnergySmart from "./EnergySmart"
@@ -9,11 +9,18 @@ import {
   FormGrid,
   FormContainer,
   PrivacyLink,
+  Button, 
 } from "./styles"
 import { MyInput, MySelect, Error } from "./FormComponents"
 import { cities } from "./formData"
 import { capWord, phoneRegEx, firstAndLastFromName, isServer } from "./utils"
 import ReCAPTCHA from "react-google-recaptcha"
+import {useTransition, animated} from 'react-spring'
+
+
+
+
+
 
 // These are the values we will actually be receiving.
 // Mostly meant to make transformation between netlify and
@@ -30,7 +37,7 @@ const initialValues = {
 }
 // prettier-ignore
 const validationSchema = Yup.object({
-  name: Yup.string().min(3).max(120).test( "first_name_len", "First name must be less than 40 characters", value => value.split(" ")[0].length <= 40).test( "last_name_length", "Please submit a shorter name", value => value.split(" ").slice(1).join(" ").length <= 80).required("Please Enter Your Name"),
+  name: Yup.string().min(3).max(120).test( "first_name_len", "First name must be less than 40 characters", value => value.length >= 3 && value.split(" ")[0].length <= 40).test( "last_name_length", "Please submit a shorter name", value => value.split(" ").slice(1).join(" ").length <= 80).required("Please Enter Your Name"),
   email: Yup.string().max(80).email("Please enter a valid email address").required("Please enter your email"),
   phone: Yup.string().max(40).matches(phoneRegEx, "What is your phone number?"),
   address: Yup.string().min(3).required("What is your address?"),
@@ -42,6 +49,8 @@ const validationSchema = Yup.object({
 //
 
 const sfInitialValues = {
+  debug: 1, 
+  debugEmail: "stelly.dev@gmail.com", 
   captcha_settings: JSON.stringify({
     keyname: "ESWebsite2",
     fallback: true,
@@ -153,6 +162,23 @@ const Contact = ({ location }) => {
   const [submissionError, setSubmissionError] = useState([])
   const recaptchaRef = useRef()
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [buttonIndex, setButtonIndex] = useState(0); 
+  const transitions = useTransition(buttonIndex, b => b, {
+    from: {opacity: 1, tranform: 'translate3d(100%, 0, 0)'}, 
+    enter:{opacity: 1, transform: 'translate3d(0%, 0,0)' }, 
+    leave:{opacity: 0, transform: 'translate3d(-50%, 0, 0)'}
+  })
+
+const buttons = [
+  ({style}) => <animated.div style={{...style, }}><FormButton value="Contact EnergySmart"/></animated.div>, 
+  ({style}) => <animated.div style={{...style, }}> 
+            <ReCAPTCHA
+              style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}
+              sitekey="6LffI-8UAAAAADwgcs8Tkw5RMXmBNEuz86etgZwl"
+              onChange={onRecaptchaChange}
+              ref={recaptchaRef}
+            /></animated.div>
+]
   useEffect(() => {
     const newForm = createHiddenForm(initForm, {
       ...formConfig,
@@ -164,6 +190,7 @@ const Contact = ({ location }) => {
   useEffect(() => {
     if (isSubmitting) {
       hiddenForm.submit()
+      console.log("Submitting hidden form!"); 
     }
     return () => setIsSubmitting(false)
   }, [hiddenForm, isSubmitting])
@@ -178,6 +205,8 @@ const Contact = ({ location }) => {
       value
     )
     setHiddenForm(newForm)
+    setIsSubmitting(true)
+    
   }
 
   return (
@@ -190,7 +219,7 @@ const Contact = ({ location }) => {
             const newVals = mapValuesToSF(values, location, recaptchaRef)
             const newForm = updateHiddenForm(hiddenForm, newVals)
             setHiddenForm(newForm)
-            setIsSubmitting(true)
+            setButtonIndex(1)
             setSubmitting(false)
           }}
           validationSchema={validationSchema}
@@ -203,6 +232,7 @@ const Contact = ({ location }) => {
                   name="name"
                   type="text"
                   placeholder="Name*"
+                  required
                   gridProps={{
                     flexBasis: [null, null, null, "33.33%"],
                     marginRight: [null, null, null, "1rem"],
@@ -213,6 +243,7 @@ const Contact = ({ location }) => {
                   name="email"
                   type="email"
                   placeholder="Email*"
+                  required
                   gridProps={{
                     flexBasis: [null, null, null, "33.33%"],
                     marginRight: [null, null, null, "1rem"],
@@ -311,16 +342,20 @@ const Contact = ({ location }) => {
               </Grid.Row>
             </FormGrid>
             <Error error={submissionError} />
-            <ReCAPTCHA
-              sitekey="6LffI-8UAAAAADwgcs8Tkw5RMXmBNEuz86etgZwl"
-              onChange={onRecaptchaChange}
-              ref={recaptchaRef}
-            />
-            <FormButton
-              value={
-                submissionError.length > 0 ? "Try Again" : "Contact EnergySmart"
-              }
-            />
+            {transitions.map(({item, props, key}) => {
+              const Button = buttons[item]
+              return <Button key={key} style={props}/>
+            })}
+            {/* <ReCAPTCHA */}
+            {/*   sitekey="6LffI-8UAAAAADwgcs8Tkw5RMXmBNEuz86etgZwl" */}
+            {/*   onChange={onRecaptchaChange} */}
+            {/*   ref={recaptchaRef} */}
+            {/* /> */}
+            {/* <FormButton */}
+            {/*   value={ */}
+            {/*     submissionError.length > 0 ? "Try Again" : "Contact EnergySmart" */}
+            {/*   } */}
+            {/* /> */}
           </Form>
         </Formik>
         <PrivacyLink
