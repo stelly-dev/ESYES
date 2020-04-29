@@ -11,10 +11,14 @@
   "devDependencies": {
     "eslint": "^6.8.0",
     "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react-hooks": "^3.0.0",
     "husky": "^3.1.0",
     "lerna": "^3.19.0"
   },
   "repository": "https://github.com/stelly-dev/ESYES.git",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "global": "^4.4.0",
+    "prettier": "^2.0.5"
+  }
 }

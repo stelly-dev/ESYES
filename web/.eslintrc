@@ -1,8 +1,16 @@
 {
+  plugins: [
+    "react-hooks", 
+  ], 
   "extends": ["airbnb", "prettier", "prettier/react"],
   "rules": {
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }], 
     "no-underscore-dangle": ["error", {"allow": ["_id"]}],
     "dot-notation": [2, {"allowPattern": "_id" }] 
-  }
+    "react-hooks/rules-of-hooks": "error", 
+    "react-hooks/exhaustive-deps": "warn"
+  },
+  "globals": {
+    "window": true
+    }
 }
