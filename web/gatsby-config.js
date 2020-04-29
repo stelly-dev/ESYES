@@ -10,6 +10,7 @@ module.exports = {
     siteUrl: `https://energysmartyes.com`,
   },
   plugins: [
+    // `gatsby-plugin-eslint`, 
     `gatsby-plugin-preact`,
     `gatsby-plugin-react-helmet`,
     {
