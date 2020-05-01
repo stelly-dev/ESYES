@@ -6,11 +6,10 @@ const path = require("path")
 module.exports = {
   siteMetadata: {
     title: `Energy Smart`,
-    author: `@stelly.dev`,
     siteUrl: `https://energysmartyes.com`,
   },
   plugins: [
-    // `gatsby-plugin-eslint`, 
+    // `gatsby-plugin-eslint`,
     `gatsby-plugin-preact`,
     `gatsby-plugin-react-helmet`,
     {

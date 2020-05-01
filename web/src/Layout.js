@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from "react"
-import { ThemeProvider } from "styled-components"
+import styled, { ThemeProvider } from "styled-components"
 import { Location } from "@reach/router"
+import { FaChevronUp } from "react-icons/fa"
 import GlobalStyle from "./GlobalStyle"
 import theme from "./theme"
 import Footer from "./components/layout/Footer"
 import Main from "./components/layout/Main"
-import Header from "./components/layout/Header/"
-import MobileNav from "./components/layout/MobileNav/"
+import Header from "./components/layout/Header"
+import MobileNav from "./components/layout/MobileNav"
 import Contact from "./components/sections/Contact"
-import Effi from "./components/sections/Effi/"
+import Effi from "./components/sections/Effi"
 // import SearchResults from './components/sections/SearchResults'
-import styled from "styled-components"
-import { FaChevronUp } from "react-icons/fa"
 
 const ToTopButton = styled.button`
   position: fixed;
@@ -30,11 +29,11 @@ const ToTopButton = styled.button`
 const getHeaderHeightFromScreenWidth = width => {
   if (width < 768) {
     return 60
-  } else if (width < 1024) {
-    return 120
-  } else {
-    return 130
   }
+  if (width < 1024) {
+    return 120
+  }
+  return 130
 }
 
 const Layout = ({ children }) => {

@@ -2,6 +2,7 @@ import React from "react"
 import loadable from "@loadable/component"
 import appSections from "./appSections"
 import Layout from "../../Layout"
+import SEO from "../../components/SEO"
 const findSectionName = sectionType => {
   return appSections[sectionType].sectionFileName
 }

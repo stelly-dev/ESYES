@@ -1,26 +1,20 @@
-import React, { useState,useCallback,  useRef, useEffect } from "react"
+import React, { useState, useRef, useEffect } from "react"
 import { Formik, Form } from "formik"
 import * as Yup from "yup"
 import EnergySmart from "./EnergySmart"
 import Grid from "../../containers/Grid"
 import {
   FormButton,
+  ButtonWrapper,
   Input,
   FormGrid,
   FormContainer,
   PrivacyLink,
-  Button, 
 } from "./styles"
-import { MyInput, MySelect, Error } from "./FormComponents"
+import { MyInput, MySelect } from "./FormComponents"
 import { cities } from "./formData"
 import { capWord, phoneRegEx, firstAndLastFromName, isServer } from "./utils"
 import ReCAPTCHA from "react-google-recaptcha"
-import {useTransition, animated} from 'react-spring'
-
-
-
-
-
 
 // These are the values we will actually be receiving.
 // Mostly meant to make transformation between netlify and
@@ -49,8 +43,8 @@ const validationSchema = Yup.object({
 //
 
 const sfInitialValues = {
-  debug: 1, 
-  debugEmail: "stelly.dev@gmail.com", 
+  // debug: 1,
+  // debugEmail: "stelly.dev@gmail.com",
   captcha_settings: JSON.stringify({
     keyname: "ESWebsite2",
     fallback: true,
@@ -60,7 +54,7 @@ const sfInitialValues = {
   oid: "00DA0000000aMYj",
   first_name: "",
   last_name: "",
-  zip: "", 
+  zip: "",
   email: "",
   phone: "",
   street: "",
@@ -71,7 +65,7 @@ const sfInitialValues = {
   "00NF0000008M7iO": "",
   "00N2I00000Dqoqv": "",
 }
-const mapValuesToSF = (values, location, form, recaptcha) => {
+const mapValuesToSF = (values, location, recaptcha) => {
   const { name, address, HP1, HP2, HP3, language, ...rest } = values
   return {
     ...sfInitialValues,
@@ -79,9 +73,7 @@ const mapValuesToSF = (values, location, form, recaptcha) => {
     "00NF0000008M7i9": HP1,
     "00NF0000008M7iE": HP2,
     "00NF0000008M7iO": HP3,
-    "00N2I00000Dqoqv": location.match(/\.es\//)
-      ? "Spanish"
-      : "English",
+    "00N2I00000Dqoqv": location.match(/\.es\//) ? "Spanish" : "English",
     street: address,
     ...rest,
     retURL: location.match(/\/es\//)
@@ -92,7 +84,6 @@ const mapValuesToSF = (values, location, form, recaptcha) => {
       fallback: true,
       orgId: "00DA0000000aMYj",
       ts: new Date().getTime(),
-      "g-recaptcha-response": recaptcha,
     }),
   }
 }
@@ -158,27 +149,15 @@ const formConfig = {
 }
 
 const Contact = ({ location }) => {
+  //
+  const [error, setError] = useState(null)
+  const [loadRecaptcha, setLoadRecaptcha] = useState(false) // Async Script onLoad
   const [hiddenForm, setHiddenForm] = useState(null)
-  const [submissionError, setSubmissionError] = useState([])
+  const [disabled, setDisabled] = useState(false)
   const recaptchaRef = useRef()
+  const [isCaptchaLoading, setisCaptchaLoading] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [buttonIndex, setButtonIndex] = useState(0); 
-  const transitions = useTransition(buttonIndex, b => b, {
-    from: {opacity: 1, tranform: 'translate3d(100%, 0, 0)'}, 
-    enter:{opacity: 1, transform: 'translate3d(0%, 0,0)' }, 
-    leave:{opacity: 0, transform: 'translate3d(-50%, 0, 0)'}
-  })
 
-const buttons = [
-  ({style}) => <animated.div style={{...style, }}><FormButton value="Contact EnergySmart"/></animated.div>, 
-  ({style}) => <animated.div style={{...style, }}> 
-            <ReCAPTCHA
-              style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}
-              sitekey="6LffI-8UAAAAADwgcs8Tkw5RMXmBNEuz86etgZwl"
-              onChange={onRecaptchaChange}
-              ref={recaptchaRef}
-            /></animated.div>
-]
   useEffect(() => {
     const newForm = createHiddenForm(initForm, {
       ...formConfig,
@@ -190,7 +169,7 @@ const buttons = [
   useEffect(() => {
     if (isSubmitting) {
       hiddenForm.submit()
-      console.log("Submitting hidden form!"); 
+      console.log("Submitting hidden form!")
     }
     return () => setIsSubmitting(false)
   }, [hiddenForm, isSubmitting])
@@ -199,15 +178,24 @@ const buttons = [
     if (isServer()) {
       return null
     }
+    if (value === null) {
+      setRecaptchaExpired(true)
+    }
     const newForm = updateSingleFormValue(
       hiddenForm,
       "g-recaptcha-response",
       value
     )
+    console.log("onchange called", value)
     setHiddenForm(newForm)
     setIsSubmitting(true)
-    
   }
+
+  function onRecaptchaError() {
+    setError("recaptcha")
+  }
+
+  function onRecpatchaExpired() {}
 
   return (
     <>
@@ -219,143 +207,158 @@ const buttons = [
             const newVals = mapValuesToSF(values, location, recaptchaRef)
             const newForm = updateHiddenForm(hiddenForm, newVals)
             setHiddenForm(newForm)
-            setButtonIndex(1)
+            setisCaptchaLoading(true)
+            setTimeout(() => {
+              setLoadRecaptcha(true)
+            }, 800)
             setSubmitting(false)
+            setDisabled(true)
           }}
           validationSchema={validationSchema}
         >
           <Form>
             <FormGrid>
-              <Grid.Row display={[null, null, null, "flex"]}>
-                <MyInput
-                  label="Full Name"
-                  name="name"
-                  type="text"
-                  placeholder="Name*"
-                  required
-                  gridProps={{
-                    flexBasis: [null, null, null, "33.33%"],
-                    marginRight: [null, null, null, "1rem"],
-                  }}
-                />
-                <MyInput
-                  label="Email Address"
-                  name="email"
-                  type="email"
-                  placeholder="Email*"
-                  required
-                  gridProps={{
-                    flexBasis: [null, null, null, "33.33%"],
-                    marginRight: [null, null, null, "1rem"],
-                  }}
-                />
-                <MyInput
-                  label="Phone Number"
-                  name="phone"
-                  type="tel"
-                  placeholder="Phone"
-                  gridProps={{ flexBasis: [null, null, null, "33.33%"] }}
-                />
-              </Grid.Row>
-              <Grid.Row
-                display={["flex"]}
-                flexWrap={["wrap", "wrap", "wrap", "nowrap"]}
-              >
-                <MyInput
-                  label="Address"
-                  name="address"
-                  type="text"
-                  placeholder="Address*"
-                  gridProps={{
-                    flexBasis: [
-                      "100%",
-                      "100%",
-                      "100%",
-                      "calc(66.66% + 2rem - 4px)",
-                    ],
-                    marginRight: [null, null, null, "1rem"],
-                  }}
-                />
-                <MySelect
-                  label="City"
-                  name="city"
-                  gridProps={{
-                    flexBasis: [
-                      "75%",
-                      "75%",
-                      "75%",
-                      "calc(22.22% - 1rem + 5px)",
-                    ],
-                    marginRight: ["1rem"],
-                  }}
-                  required
+              <fieldset disabled={disabled}>
+                <Grid.Row display={[null, null, null, "flex"]}>
+                  <MyInput
+                    label="Full Name"
+                    name="name"
+                    type="text"
+                    placeholder="Name*"
+                    required
+                    gridProps={{
+                      flexBasis: [null, null, null, "33.33%"],
+                      marginRight: [null, null, null, "1rem"],
+                    }}
+                  />
+                  <MyInput
+                    label="Email Address"
+                    name="email"
+                    type="email"
+                    placeholder="Email*"
+                    required
+                    gridProps={{
+                      flexBasis: [null, null, null, "33.33%"],
+                      marginRight: [null, null, null, "1rem"],
+                    }}
+                  />
+                  <MyInput
+                    label="Phone Number"
+                    name="phone"
+                    type="tel"
+                    placeholder="Phone"
+                    gridProps={{ flexBasis: [null, null, null, "33.33%"] }}
+                  />
+                </Grid.Row>
+                <Grid.Row
+                  display={["flex"]}
+                  flexWrap={["wrap", "wrap", "wrap", "nowrap"]}
                 >
-                  <option value="" disabled>
-                    {" "}
-                    City*{" "}
-                  </option>
-                  {cities.map((city, i) => (
-                    <option key={city} value={city}>
-                      {capWord(city)}
+                  <MyInput
+                    label="Address"
+                    name="address"
+                    type="text"
+                    placeholder="Address*"
+                    gridProps={{
+                      flexBasis: [
+                        "100%",
+                        "100%",
+                        "100%",
+                        "calc(66.66% + 2rem - 4px)",
+                      ],
+                      marginRight: [null, null, null, "1rem"],
+                    }}
+                  />
+                  <MySelect
+                    label="City"
+                    name="city"
+                    gridProps={{
+                      flexBasis: [
+                        "75%",
+                        "75%",
+                        "75%",
+                        "calc(22.22% - 1rem + 5px)",
+                      ],
+                      marginRight: ["1rem"],
+                    }}
+                    required
+                  >
+                    <option value="" disabled>
+                      {" "}
+                      City*{" "}
                     </option>
-                  ))}
-                </MySelect>
-                <Grid.Col
-                  flexBasis={[
-                    "calc(25% - 1rem - 2px)",
-                    "calc(25% - 1rem - 2px)",
-                    "calc(25% - 1rem - 2px)",
-                    "11.11%",
-                  ]}
-                >
-                  <Input as="div">CO</Input>
-                </Grid.Col>
-              </Grid.Row>
-              <Grid.Row display={[null, null, null, "flex"]}>
-                <MyInput
-                  label="Home Priority One"
-                  name="HP1"
-                  type="text"
-                  placeholder="Home Priority 1"
-                  gridProps={{
-                    flexBasis: [null, null, null, "33.33%"],
-                    marginRight: [null, null, null, "1rem"],
-                  }}
-                />
-                <MyInput
-                  label="Home Priority Two"
-                  name="HP2"
-                  type="text"
-                  placeholder="Home Priority 2"
-                  gridProps={{
-                    flexBasis: [null, null, null, "33.33%"],
-                    marginRight: [null, null, null, "1rem"],
-                  }}
-                />
-                <MyInput
-                  label="Home Priority Three"
-                  name="HP3"
-                  type="text"
-                  placeholder="Home Priority 3"
-                  gridProps={{ flexBasis: [null, null, null, "33.33%"] }}
-                />
-              </Grid.Row>
+                    {cities.map(city => (
+                      <option key={city} value={city}>
+                        {capWord(city)}
+                      </option>
+                    ))}
+                  </MySelect>
+                  <Grid.Col
+                    flexBasis={[
+                      "calc(25% - 1rem - 2px)",
+                      "calc(25% - 1rem - 2px)",
+                      "calc(25% - 1rem - 2px)",
+                      "11.11%",
+                    ]}
+                  >
+                    <Input as="div">CO</Input>
+                  </Grid.Col>
+                </Grid.Row>
+                <Grid.Row display={[null, null, null, "flex"]}>
+                  <MyInput
+                    label="Home Priority One"
+                    name="HP1"
+                    type="text"
+                    placeholder="Home Priority 1"
+                    gridProps={{
+                      flexBasis: [null, null, null, "33.33%"],
+                      marginRight: [null, null, null, "1rem"],
+                    }}
+                  />
+                  <MyInput
+                    label="Home Priority Two"
+                    name="HP2"
+                    type="text"
+                    placeholder="Home Priority 2"
+                    gridProps={{
+                      flexBasis: [null, null, null, "33.33%"],
+                      marginRight: [null, null, null, "1rem"],
+                    }}
+                  />
+                  <MyInput
+                    label="Home Priority Three"
+                    name="HP3"
+                    type="text"
+                    placeholder="Home Priority 3"
+                    gridProps={{ flexBasis: [null, null, null, "33.33%"] }}
+                  />
+                </Grid.Row>
+              </fieldset>
             </FormGrid>
-            <Error error={submissionError} />
-            {transitions.map(({item, props, key}) => {
-              const Button = buttons[item]
-              return <Button key={key} style={props}/>
-            })}
-            {/* <ReCAPTCHA */}
-            {/*   sitekey="6LffI-8UAAAAADwgcs8Tkw5RMXmBNEuz86etgZwl" */}
-            {/*   onChange={onRecaptchaChange} */}
-            {/*   ref={recaptchaRef} */}
-            {/* /> */}
-            {/* <FormButton */}
-            {/*   value={ */}
-            {/*     submissionError.length > 0 ? "Try Again" : "Contact EnergySmart" */}
-            {/*   } */}
-            {/* /> */}
+            <ButtonWrapper>
+              {!loadRecaptcha && (
+                <FormButton
+                  value="Contact EnergySmart"
+                  loading={isCaptchaLoading}
+                />
+              )}
+              {loadRecaptcha && (
+                <ReCAPTCHA
+                  size="compact"
+                  sitekey="6LffI-8UAAAAADwgcs8Tkw5RMXmBNEuz86etgZwl"
+                  onChange={onRecaptchaChange}
+                  style={{
+                    display: "inline",
+                    alignText: "center",
+                    margin: "0 auto",
+                  }}
+                  ref={recaptchaRef}
+                  onErrored={error => onRecaptchaError(error)}
+                  onExpired={() => onRecpatchaExpired()}
+                  asyncScriptOnLoad={() => setisCaptchaLoading(false)}
+                />
+              )}
+            </ButtonWrapper>
           </Form>
         </Formik>
         <PrivacyLink

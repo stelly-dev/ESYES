@@ -1,5 +1,45 @@
+import React from "react"
 import styled, { css, keyframes } from "styled-components"
 import Grid from "../../containers/Grid"
+import Loader from "react-loader-spinner"
+
+export const formButtonStyles = css`
+  background-color: ${props => props.theme.colors.secondary};
+  color: white;
+  border: 1px solid ${props => props.theme.colors.secondary};
+  padding: 1rem 3rem;
+  font-size: 1.2rem;
+  outline: none;
+  transition: background-color 300ms ease-in-out;
+  text-align: center;
+  margin: 0 auto;
+  display: block;
+  border-radius: 4px;
+  cursor: pointer;
+  :hover {
+    background-color: white;
+    color: ${props => props.theme.colors.secondary};
+  }
+`
+export const StyledFormButton = styled("input").attrs({
+  type: "submit",
+})`
+  ${formButtonStyles}
+`
+export const FormButton = ({ loading, value }) => {
+  if (loading) {
+    return (
+      <Loader
+        type="Puff"
+        color="#00BFFF"
+        height={100}
+        width={100}
+        timeout={4000}
+      />
+    )
+  }
+  return <StyledFormButton value={value} />
+}
 
 export const StyledErrorMessage = styled.div`
   display: none;
@@ -36,37 +76,18 @@ export const autofillMixin = css`
     background-color: transparent;
   }
 `
+
+export const autofillDisabledMixin = css`
+  :-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px #ddd inset;
+    background-color: transparent;
+  }
+`
+
 export const Form = styled.form``
 
-
-export const formButtonStyles = css`
-  background-color: ${props => props.theme.colors.secondary};
-  color: white;
-  border: 1px solid ${props => props.theme.colors.secondary};
-  padding: 1rem 3rem;
-  font-size: 1.2rem;
-  outline: none;
-  transition: background-color 300ms ease-in-out;
-  text-align: center;
-  margin: 0 auto;
-  display: block;
-  border-radius: 4px;
-  cursor: pointer;
-  :hover {
-    background-color: white;
-    color: ${props => props.theme.colors.secondary};
-  }
-
-`
-
 export const Button = styled.button`
-  ${formButtonStyles}; 
-`
-
-export const FormButton = styled("input").attrs({
-  type: "submit",
-})`
-  ${formButtonStyles}
+  ${formButtonStyles};
 `
 
 export const formElementStyles = css`
@@ -98,7 +119,13 @@ const shake = keyframes`
 const animation = css`
   ${shake} 300ms ease-in-out 0s 2; 
 `
-
+export const ButtonWrapper = styled.div`
+  min-height: 90px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
 export const Input = styled.input`
   ${formElementStyles};
   color: ${props => props.theme.colors.black};
@@ -112,20 +139,22 @@ export const Input = styled.input`
       : `1px solid ${props => props.theme.colors.gray}`};
   animation: ${props => (props.error ? animation : "none")};
   background-color: ${props => (props.error ? "#ff222220" : "white")};
+  transition: background-color 400ms ease-in;
 `
 
 export const Select = styled.select`
   ${formElementStyles}
+  transition: background-color 400ms ease-in;
   background-color: ${props => props.theme.colors.white};
-  
+
   :required:invalid {
-    color: ${props => props.theme.colors.gray}; 
+    color: ${props => props.theme.colors.gray};
   }
-  option[disabled]{
-    color: ${props => props.theme.colors.gray}; 
+  option[disabled] {
+    color: ${props => props.theme.colors.gray};
   }
 
-  ${autofillMixin}; 
+  ${autofillMixin};
   border: ${props =>
     props.error
       ? "3px solid red"
@@ -148,6 +177,28 @@ export const FormGrid = styled(Grid.Container)`
       margin: 1.2rem 0;
     }
   }
+  fieldset {
+    border: none;
+    padding: 1rem 0; 
+  }
+  fieldset:disabled {
+      input {
+        background-color: #ddd; 
+        ${autofillDisabledMixin}
+        transition: background-color 400ms ease-in; 
+      }
+      select {
+        background-color: #ddd; 
+        transition: background-color 400ms ease-in; 
+      }
+      div div {
+        background-color: #ddd; 
+        transition: background-color: 400ms ease-in; 
+      }
+      
+
+   }
+  }
 `
 
 export const FormContainer = styled.section`
@@ -164,8 +215,8 @@ export const FormContainer = styled.section`
         : "auto"};
   }
 
-  @media only screen and (max-width: 768px){
-    padding: 3rem 0rem;  
+  @media only screen and (max-width: 768px) {
+    padding: 3rem 0rem;
   }
 `
 
