@@ -84,14 +84,12 @@ const submitNetlify = (values, location) => {
 }
 
 const handleFormSuccess = (response, setSubmissionError, setSubmitting) => {
-  console.log("Success!", response)
   setSubmissionError("")
   setSubmitting(false)
   navigate("/thank-you/")
 }
 
 const handleFormError = (error, setSubmissionError, setSubmitting) => {
-  console.error("ERROR", error)
   setSubmissionError("error")
   setSubmitting(false)
 }
@@ -125,7 +123,6 @@ const W2LForm = React.forwardRef((props, ref) => {
   useInterval(() => {
     checkRecaptcha(captchaSettings, setCaptchaSettings)
   }, 500)
-  console.log(props.sfValues)
   return (
     <form
       ref={ref}
@@ -215,11 +212,9 @@ const Contact = ({ location }) => {
             })
             setSubmissionError("")
             if (location.match(/\/contact-testing/)) {
-              console.log(sfFormRef.current)
               setIsSubmitting(true)
               if (typeof window !== "undefined" && window && window.document) {
                 let response = document.getElementById("g-recaptcha-response")
-                console.log("response", JSON.stringify(response)); 
                 if (response == null || response.value.trim() == "") {
                 }
                 sfFormRef.current.submit()
