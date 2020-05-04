@@ -25,8 +25,7 @@ export default {
     },
     {
       name: "link",
-      type: "reference",
-      to: [{ type: "page" }]
+      type: "linkArr"
     }
   ]
 };

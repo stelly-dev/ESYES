@@ -97,24 +97,25 @@ const Description = styled.h2`
 `
 
 const CTACircle = ({ cta }) => (
-  <CircleLink to={`/${slugify(cta.link.pageName).toLowerCase()}`}>
-    <CircleBorder>
-      <CircleImage
-        fluid={getFluidGatsbyImage(
-          cta.backgroundImage.asset["_id"],
-          { maxWidth: 500 },
-          clientConfig.sanity
-        )}
-      >
-        <CircleHoverOverlay>
-          <TextContainer>
-            <Header>{cta.title}</Header>
-            <Description>{cta.subTitle}</Description>
-          </TextContainer>
-        </CircleHoverOverlay>
-      </CircleImage>
-    </CircleBorder>
-  </CircleLink>
+  <pre>{JSON.stringify(cta, null, 2)}</pre>
+  // <CircleLink to={`/${slugify(cta.link.pageName).toLowerCase()}`}>
+  //   <CircleBorder>
+  //     <CircleImage
+  //       fluid={getFluidGatsbyImage(
+  //         cta.backgroundImage.asset["_id"],
+  //         { maxWidth: 500 },
+  //         clientConfig.sanity
+  //       )}
+  //     >
+  //       <CircleHoverOverlay>
+  //         <TextContainer>
+  //           <Header>{cta.title}</Header>
+  //           <Description>{cta.subTitle}</Description>
+  //         </TextContainer>
+  //       </CircleHoverOverlay>
+  //     </CircleImage>
+  //   </CircleBorder>
+  // </CircleLink>
 )
 
 export default CTACircle

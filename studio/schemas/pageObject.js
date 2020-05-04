@@ -1,21 +1,37 @@
 export default {
   name: "pageObject",
   type: "object",
+  fieldsets: [
+    {
+      title: "SEO Settings",
+      name: "seo",
+      options: {
+        collapsible: true,
+        collapsed: true
+      }
+    }
+  ],
   fields: [
     {
-      name: "pageName",
-      title: "Page Title",
-      type: "string"
+      name: "route",
+      title: "route",
+      type: "route"
     },
     {
-      title: "Content",
       name: "content",
       type: "content"
     },
     {
       name: "seo",
       title: "SEO",
-      type: "siteSEO"
+      type: "siteSEO",
+      fieldset: "seo"
+    },
+    {
+      name: "openGraph",
+      title: "openGraph Data",
+      type: "openGraph",
+      fieldset: "seo"
     }
-  ]
+  ], 
 };

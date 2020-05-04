@@ -4,6 +4,7 @@ export { default as chevronInternalLink } from "./chevronInternalLink";
 export { default as childLink } from "./childLink";
 export { default as childLinks } from "./childLinks";
 export { default as circularCTA } from "./circularCTA";
+export { default as externalLink } from "./externalLink";
 export { default as fileLink } from "./fileLink";
 export { default as headerLink } from "./headerLink";
 export { default as headerLinks } from "./headerLinks";

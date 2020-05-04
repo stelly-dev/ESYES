@@ -6,9 +6,7 @@ export default {
     {
       name: "title",
       type: "string",
-      title: "Section Title",
-      description:
-        "used internally (this section is required, but will not appear on the site)"
+      title: "Field Title"
     },
     {
       name: "ctaList",

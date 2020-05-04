@@ -22,6 +22,7 @@
     "@sanity/default-layout": "^1.149.10",
     "@sanity/default-login": "^1.149.11",
     "@sanity/desk-tool": "^1.149.10",
+    "@sanity/form-builder": "^1.149.7",
     "@sanity/image-url": "^0.140.18",
     "@sanity/vision": "^1.149.0",
     "prop-types": "^15.6",
@@ -34,7 +35,7 @@
     "sanity-plugin-dashboard-widget-netlify": "^1.0.1",
     "sanity-plugin-intl-input": "^2.1.0",
     "sanity-plugin-seo-tools": "^1.0.6",
-    "sanity-plugin-tabs": "^1.1.7",
+    "sanity-plugin-tabs": "^1.1.8",
     "slugify": "^1.4.0"
   },
   "devDependencies": {}

@@ -12,6 +12,9 @@ export default {
     { title: "English", name: "en" },
     { title: "Spanish", name: "es" }
   ],
+  options: {
+    layout: "object"
+  },
   fields: supportedLanguages.map(lang => ({
     title: lang.title,
     name: lang.id,

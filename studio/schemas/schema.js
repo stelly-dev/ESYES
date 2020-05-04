@@ -10,11 +10,20 @@ import localeContent from "./localeContent";
 import localeString from "./localeString";
 import pageObject from "./pageObject";
 import localePage from "./localePage";
+import route from "./route";
+import openGraph from "./openGraph";
+import link from "./link";
+import linkArr from "./linkArr";
 export default createSchema({
   name: "default",
   types: schemaTypes.concat([
+    route,
+    openGraph,
     siteSEO,
     content,
+    externalLink, 
+    linkArr,
+    link,
     ...Object.values(components),
     ...Object.values(sections),
     pageObject,
@@ -22,6 +31,7 @@ export default createSchema({
     localeContent,
     localeString,
     localePage,
+
     ...Object.values(documents)
   ])
 });
