@@ -32,7 +32,6 @@ function renderSection(
       {...sectionProps}
       key={section._key}
       fallback={fallback}
-      lazyload={index > 1}
     />
   )
 }
