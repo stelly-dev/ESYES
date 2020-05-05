@@ -145,7 +145,6 @@ function CircleLink({ cta, children, location }) {
 }
 
 const CTACircle = ({ cta }) => {
-  console.dir(cta)
   return (
     <Location>
       {({ location }) => (
