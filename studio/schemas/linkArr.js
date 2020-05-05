@@ -1,29 +1,33 @@
-export default {
+const linkArr = {
   name: "linkArr",
   type: "array",
   of: [
     {
-      name: "internalLink",
-      title: "Internal Link",
-      type: "reference",
-      to: [{ type: "page" }]
+      name: "internalLinkNoTitle",
+      type: "internalLinkNoTitle"
     },
     {
-      name: "externalLink",
-      type: "externalLink",
+      name: "externalLinkNoTitle",
+      type: "externalLinkNoTitle",
       title: "External Link"
     },
     {
-      name: "fileLink",
-      type: "reference",
-      title: "File Link",
-      to: [{ type: "file" }]
+      name: "fileLinkNoTitle",
+      type: "fileLinkNoTitle"
     }
-  ],
-  validation: Rule =>
-    Rule.required()
-      .max(1)
-      .warning("You can only link to one resource at a time")
-      .min(0)
-      .warning("Links must point to an internal or external resource")
+  ]
 };
+
+const linkArrRequired = {
+  ...linkArr,
+  name: "linkArrRequired",
+  validation: Rule => [
+    Rule.required().warning(
+      "CTA's must link to an internal or external resource"
+    ),
+    Rule.max(1).error("You can only link to one resource at once!"),
+    Rule.min(1).error("CTA's must link to an internal or external resource")
+  ]
+};
+
+export { linkArr, linkArrRequired };

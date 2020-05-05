@@ -13,7 +13,7 @@ import localePage from "./localePage";
 import route from "./route";
 import openGraph from "./openGraph";
 import link from "./link";
-import linkArr from "./linkArr";
+import { linkArr, linkArrRequired } from "./linkArr";
 export default createSchema({
   name: "default",
   types: schemaTypes.concat([
@@ -21,17 +21,16 @@ export default createSchema({
     openGraph,
     siteSEO,
     content,
-    externalLink, 
-    linkArr,
-    link,
     ...Object.values(components),
-    ...Object.values(sections),
     pageObject,
     blockContent,
     localeContent,
     localeString,
     localePage,
-
-    ...Object.values(documents)
+    ...Object.values(documents),
+    linkArr,
+    linkArrRequired,
+    ...Object.values(sections),
+    link
   ])
 });

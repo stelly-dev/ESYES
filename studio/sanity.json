@@ -20,14 +20,11 @@
     "@sanity/dashboard",
     "seo-tools",
     "tabs",
-    "intl-input",
-    "@sanity/form-builder"
+    "intl-input"
   ],
   "env": {
     "development": {
-      "plugins": [
-        "@sanity/vision"
-      ]
+      "plugins": ["@sanity/vision"]
     }
   },
   "parts": [

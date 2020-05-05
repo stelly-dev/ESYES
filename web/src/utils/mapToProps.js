@@ -3,7 +3,7 @@ import slugify from "slugify"
 function mapBlockButtonToProps({ btnColor, btnText, btnTo, orientation }) {
   return {
     color: btnColor,
-    orientation, 
+    orientation,
     text: btnText,
     to: `/${slugify(btnTo.pageName).toLowerCase()}/`,
   }
@@ -12,7 +12,7 @@ function mapBlockButtonToProps({ btnColor, btnText, btnTo, orientation }) {
 function mapContractorAccordionToProps({ listOfContractors, title }) {
   return {
     contractors: listOfContractors,
-    title, 
+    title,
   }
 }
 
@@ -34,7 +34,6 @@ function mapHeroToProps({
     headline: heroText,
     image: backgroundImage.asset._id,
 
-    
     // buttonOne: {
     //   text: ctaBtnOne.buttonText,
     //   to: `/${slugify(ctaBtnOne.buttonDestination.pageName).toLowerCase()}/`,
@@ -127,7 +126,7 @@ function mapBlockImageToProps({ alt, image }) {
 
 function mapFileLinkToProps({ linkName, newTab, linkedFile }) {
   return {
-    linkName ,
+    linkName,
     url: linkedFile.file.asset.url,
     newTab,
   }

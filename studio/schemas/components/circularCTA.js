@@ -11,7 +11,8 @@ export default {
     {
       name: "altText",
       title: "ADA Alt Text",
-      type: "string"
+      type: "string",
+      validation: Rule => Rule.required().warning("Alt text is required")
     },
     {
       name: "title",
@@ -25,7 +26,7 @@ export default {
     },
     {
       name: "link",
-      type: "linkArr"
+      type: "linkArrRequired"
     }
   ]
 };

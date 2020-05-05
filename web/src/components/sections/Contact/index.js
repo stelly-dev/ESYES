@@ -157,6 +157,7 @@ const Contact = ({ location }) => {
   const recaptchaRef = useRef()
   const [isCaptchaLoading, setisCaptchaLoading] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [reCaptchaExpired, setRecaptchaExpired] = useState(false)
 
   useEffect(() => {
     const newForm = createHiddenForm(initForm, {
