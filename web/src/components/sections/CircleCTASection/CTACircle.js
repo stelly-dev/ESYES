@@ -111,37 +111,53 @@ const StyledCircleATag = styled.a`
   ${circleLinkStyle}
 `
 
-function CircleLink({ cta, children, location }) {
+function InternalLink({ cta, location, children }) {
+  const locale = location.pathname.match(/\/es\//) ? "es" : "en"
+  let slug = cta.link[0].linkDestination.localePage[locale].route.current
+  return (
+    <StyledCircleLink to={slug === "/" ? "/" : `/${slug}`}>
+      {children}
+    </StyledCircleLink>
+  )
+}
+
+function FileLink({ cta, children }) {
   const { newTab } = cta.link[0]
-  switch (cta && cta.link[0]["_type"]) {
-    case "internalLinkNoTitle":
-      const locale = location.pathname.match(/\/es\//) ? "es" : "en"
-      const slug =
-        cta && cta.link[0].linkDestination.localePage[locale].route.current
-      return <StyledCircleLink to={`/${slug}`}>{children}</StyledCircleLink>
-    case "externalLinkNoTitle":
-      const url = cta.link[0].externalLink
-      return (
-        <StyledCircleATag href={url} target={newTab ? "_blank" : "_self"}>
-          {children}
-        </StyledCircleATag>
-      )
-    case "fileLinkNoTitle":
-      const linkUrl = cta.link[0].linkedFile.file.asset.url
-      const originalName = cta.link[0].linkedFile.file.asset.originalFilename
-      return (
-        <StyledCircleATag
-          as="a"
-          href={linkUrl}
-          target={newTab ? "_blank" : "_self"}
-          download={originalName}
-        >
-          {children}
-        </StyledCircleATag>
-      )
-    default:
-      return <p style={{ color: "red" }}>ERROR</p>
-  }
+  const linkUrl = cta.link[0].linkedFile.file.asset.url
+  const originalName = cta.link[0].linkedFile.file.asset.originalFilename
+  return (
+    <StyledCircleATag
+      href={linkUrl}
+      target={newTab ? "_blank" : "_self"}
+      download={originalName}
+    >
+      {children}
+    </StyledCircleATag>
+  )
+}
+
+function ExternalLink({ cta, children }) {
+  const { newTab } = cta.link[0]
+  const url = cta.link[0].externalLink
+  return (
+    <StyledCircleATag href={url} target={newTab ? "_blank" : "_self"}>
+      {children}
+    </StyledCircleATag>
+  )
+}
+
+const getCircleLink = (cta, children, location) => ({
+  internalLinkNoTitle: (
+    <InternalLink location={location} cta={cta}>
+      {children}
+    </InternalLink>
+  ),
+  fileLinkNoTitle: <FileLink cta={cta}>{children}</FileLink>,
+  externalLinkNoTitle: <ExternalLink cta={cta}>{children}</ExternalLink>,
+})
+
+function CircleLink({ cta, children, location }) {
+  return getCircleLink(cta, children, location)[cta.link[0]["_type"]]
 }
 
 const CTACircle = ({ cta }) => {
