@@ -29,6 +29,7 @@ module.exports = {
         dataset: process.env.SANITY_DATASET,
         token: process.env.SANITY_TOKEN,
         saveImages: true,
+        watchMode: true,
       },
     },
     "gatsby-source-sanity-transform-images",
@@ -125,7 +126,7 @@ module.exports = {
           "/*": [
             "X-Frame-Options: 'DENY'",
             "X-XSS-Protection: '1; mode=block'",
-            "Access-Control-Allow-Origin: '*'",
+            "Access-Control-Allow-Origin: *",
             "cache-control: ```max-age: 0 no-cache no-store must-revalidate```",
           ],
         },
