@@ -129,7 +129,11 @@ const Layout = ({ children }) => {
         {/* <Location>{({ location }) => <SearchResults location={location} />}</Location> */}
         <Location>{({ location }) => <Effi location={location} />}</Location>
         <Location>
-          {({ location }) => <Contact location={location.pathname} />}
+          {({ location }) =>
+            location.pathname === "/thank-you/" ? null : (
+              <Contact location={location.pathname} />
+            )
+          }
         </Location>
         <Footer />
         {state.toTopVisible ? (
