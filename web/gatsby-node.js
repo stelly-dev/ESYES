@@ -92,6 +92,10 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createRedirect } = actions
   await createRootPages(graphql, actions, reporter)
   createRedirect({
+    fromPath: "https://energy-smart.netlify.com/wp-login.php",
+    toPath: "https://energy-smart.netlify.com/wp-login.php",
+  })
+  createRedirect({
     fromPath: "https://energy-smart.netlify.com/es/*",
     toPath: "https://energy-smart.netlify.com/es/404/",
   })
