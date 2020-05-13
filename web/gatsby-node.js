@@ -99,11 +99,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     fromPath: "https://energy-smart.netlify.com/*",
     toPath: "https://energy-smart.netlify.com/404/",
   })
-  createRedirect({
-    fromPath: "https://energy-smart.netlify.com/wp-login.php",
-    toPath: "https://energysmartyes.com/wp-login.php",
-    force: true,
-  })
 }
 
 // exports.onCreatePage = async ({page, actions, reporter}) => {
