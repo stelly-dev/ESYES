@@ -90,14 +90,6 @@ async function createRootPages(graphql, actions, reporter) {
 
 exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createRedirect } = actions
-  createRedirect({
-    fromPath: "https://energy-smart.netlify.com/es/*",
-    toPath: "https://energy-smart.netlify.com/es/404/",
-  })
-  createRedirect({
-    fromPath: "https://energy-smart.netlify.com/*",
-    toPath: "https://energy-smart.netlify.com/404/",
-  })
   // 301 Redirects provided by Matt
   createRedirect({
     fromPath: "https://www.energysmartyes.com/",
@@ -248,6 +240,15 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     toPath: "https://energysmartyes.com/effi/",
     isPermanent: true,
     force: true,
+  })
+  // 404 redirects.
+  createRedirect({
+    fromPath: "https://energy-smart.netlify.com/es/*",
+    toPath: "https://energy-smart.netlify.com/es/404/",
+  })
+  createRedirect({
+    fromPath: "https://energy-smart.netlify.com/*",
+    toPath: "https://energy-smart.netlify.com/404/",
   })
   await createRootPages(graphql, actions, reporter)
 }
