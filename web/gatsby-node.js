@@ -99,6 +99,157 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     fromPath: "https://energy-smart.netlify.com/*",
     toPath: "https://energy-smart.netlify.com/404/",
   })
+  // 301 Redirects provided by Matt
+  createRedirect({
+    fromPath: "https://www.energysmartyes.com/",
+    toPath: "https://energysmartyes.com/",
+    isPermanent: true,
+    force: true,
+  })
+  createRedirect({
+    fromPath: "https://www.energysmartyes.com/comfort365/",
+    toPath: "https://energysmartyes.com/comfort365/",
+    isPermanent: true,
+    force: true,
+  })
+  createRedirect({
+    fromPath: "https://www.energysmartyes.com/go-solar/",
+    toPath: "https://energysmartyes.com/go-solar/",
+    isPermanent: true,
+    force: true,
+  })
+  createRedirect({
+    fromPath: "https://www.energysmartyes.com/about-us/",
+    toPath: "https://energysmartyes.com/about-us/",
+    isPermanent: true,
+    force: true,
+  })
+  createRedirect({
+    fromPath: "https://www.energysmartyes.com/services/",
+    toPath: "https://energysmartyes.com/services/",
+    isPermanent: true,
+    force: true,
+  })
+  createRedirect({
+    fromPath: "https://www.energysmartyes.com/espanol/",
+    toPath: "https://energysmartyes.com/espanol/",
+    isPermanent: true,
+    force: true,
+  })
+  createRedirect({
+    fromPath: "https://www.energysmartyes.com/contact-us/",
+    toPath: "https://energysmartyes.com/contact/",
+    isPermanent: true,
+    force: true,
+  })
+  createRedirect({
+    fromPath: "https://www.energysmartyes.com/rebates-financing/",
+    toPath: "https://energysmartyes.com/rebates-and-financing/",
+    isPermanent: true,
+    force: true,
+  })
+  createRedirect({
+    fromPath: "https://www.energysmartyes.com/services/virtualadvisor/",
+    toPath: "https://energysmartyes.com/effi/",
+    isPermanent: true,
+    force: true,
+  })
+  createRedirect({
+    fromPath: "https://www.energysmartyes.com/services/virtualadvisor/app/",
+    toPath: "https://energysmartyes.com/effi-app/",
+    isPermanent: true,
+    force: true,
+  })
+  createRedirect({
+    fromPath:
+      "https://www.energysmartyes.com/contractors/residential-contractor-resources/",
+    toPath: "https://energysmartyes.com/find-a-contractor/",
+    isPermanent: true,
+    force: true,
+  })
+  createRedirect({
+    fromPath: "https://www.energysmartyes.com/services/success-stories/",
+    toPath: "https://energysmartyes.com/success-stories/",
+    isPermanent: true,
+    force: true,
+  })
+  createRedirect({
+    fromPath: "https://www.energysmartyes.com/services/for-landlords-tenants/",
+    toPath: "https://energysmartyes.com/",
+    isPermanent: true,
+    force: true,
+  })
+  createRedirect({
+    fromPath: "https://www.energysmartyes.com/services/businesses/",
+    toPath: "https://energysmartyes.com/",
+    isPermanent: true,
+    force: true,
+  })
+  createRedirect({
+    fromPath: "https://www.energysmartyes.com/sign-up/",
+    toPath: "https://energysmartyes.com/contact/",
+    isPermanent: true,
+    force: true,
+  })
+  createRedirect({
+    fromPath: "https://www.energysmartyes.com/services/ev-advising/",
+    toPath: "https://energysmartyes.com/electric-vehicles/",
+    isPermanent: true,
+    force: true,
+  })
+  createRedirect({
+    fromPath:
+      "https://www.energysmartyes.com/contractors/become-residential-contractor/",
+    toPath: "https://energysmartyes.com/",
+    isPermanent: true,
+    force: true,
+  })
+  createRedirect({
+    fromPath: "https://www.energysmartyes.com/services/find-a-contractor/",
+    toPath: "https://energysmartyes.com/find-a-contractor/",
+    isPermanent: true,
+    force: true,
+  })
+  createRedirect({
+    fromPath: "https://www.energysmartyes.com/services/home-energy/",
+    toPath: "https://energysmartyes.com/effi/",
+    isPermanent: true,
+    force: true,
+  })
+  createRedirect({
+    fromPath:
+      "https://www.energysmartyes.com/services/virtualadvisor/electric-vehicles/",
+    toPath: "https://energysmartyes.com/electric-vehicles/",
+    isPermanent: true,
+    force: true,
+  })
+  createRedirect({
+    fromPath: "https://www.energysmartyes.com/about-us/meet-the-advisors/",
+    toPath: "https://energysmartyes.com/about-us/",
+    isPermanent: true,
+    force: true,
+  })
+  createRedirect({
+    fromPath:
+      "https://www.energysmartyes.com/services/virtualadvisor/health-and-safety/",
+    toPath: "https://energysmartyes.com/effi/",
+    isPermanent: true,
+    force: true,
+  })
+  createRedirect({
+    fromPath:
+      "https://www.energysmartyes.com/services/virtualadvisor/renewable-energy/",
+    toPath: "https://energysmartyes.com/effi/",
+    isPermanent: true,
+    force: true,
+  })
+  createRedirect({
+    fromPath:
+      "https://www.energysmartyes.com/services/virtualadvisor/energy-efficiency/",
+    toPath: "https://energysmartyes.com/effi/",
+    isPermanent: true,
+    force: true,
+  })
 }
 
 // exports.onCreatePage = async ({page, actions, reporter}) => {
