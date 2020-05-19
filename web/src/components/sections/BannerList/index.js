@@ -1,15 +1,15 @@
 import React from "react"
 import styled from "styled-components"
+import { Link } from "gatsby"
 import { getFluidGatsbyImage } from "gatsby-source-sanity"
 import Img from "gatsby-image"
 import Grid from "../../containers/Grid"
 import clientConfig from "../../../../client-config"
-import {flexbox, layout} from 'styled-system'; 
-
+import { flexbox, layout } from "styled-system"
 
 const StyledSvg = styled.svg`
   ${flexbox};
-  ${layout}; 
+  ${layout};
 `
 
 function Banner({ textArray, ...props }) {
@@ -121,13 +121,24 @@ const StyledImg = styled(Img)`
 const BannerList = ({ image }) => {
   return (
     <Grid.Container>
-      <Grid.Row display={["flex"]} flexDirection={["column", "column", "row", "row", "row"]} width={["100%"]}>
-        <Grid.Col  flexBasis={["calc(66.666% - 1rem)"]} order={["2", "2", "1", "1", "1"]}>
+      <Grid.Row
+        display={["flex"]}
+        flexDirection={["column", "column", "row", "row", "row"]}
+        width={["100%"]}
+      >
+        <Grid.Col
+          flexBasis={["calc(66.666% - 1rem)"]}
+          order={["2", "2", "1", "1", "1"]}
+        >
           <Banner
-            width={['100%']}
+            width={["100%"]}
             textArray={[
-              <tspan>
-                <tspan style={{ textDecoration: "underline" }}>SIGN UP</tspan>{" "}
+              <tspan style={{ color: "white" }}>
+                <Link to="/contact">
+                  <tspan style={{ textDecoration: "underline", fill: "#fff" }}>
+                    SIGN UP
+                  </tspan>
+                </Link>{" "}
                 or call 303.544.1000
               </tspan>,
               <tspan>Get expert home energy help</tspan>,
@@ -135,7 +146,11 @@ const BannerList = ({ image }) => {
             ]}
           />
         </Grid.Col>
-        <Grid.Col flexBasis={["calc(33.333% - 1rem)"]}  order={["1", "1", "2", "2", "2"]} height={['100%']}>
+        <Grid.Col
+          flexBasis={["calc(33.333% - 1rem)"]}
+          order={["1", "1", "2", "2", "2"]}
+          height={["100%"]}
+        >
           <StyledImg
             fluid={getFluidGatsbyImage(
               image,
