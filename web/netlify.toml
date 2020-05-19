@@ -1,4 +1,6 @@
 [[plugins]]
   package = netlify-plugin-search-index
-  [plugins.inputs] = 
-    exclude = ["/404", "/es/404"]
+  [plugins.inputs] 
+    generatedFunctionName = energySmartSearch
+    publishDirJSONFileName = null
+    exclude = ["/404", "/es/404", "/test"]
