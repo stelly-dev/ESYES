@@ -1,23 +1,23 @@
 import { encode } from "./utils"
 export const cities = [
+  "allenspark",
   "boulder",
+  "coal creek canyon",
+  "eldora",
+  "eldorado springs",
   "erie",
+  "gold hill",
+  "gunbarrel",
+  "hygiene",
   "jamestown",
   "lafayette",
   "longmont",
   "louisville",
   "lyons",
   "nederland",
+  "niwot",
   "superior",
   "ward",
-  "allenspark",
-  "coal creek canyon",
-  "eldora",
-  "eldorado springs",
-  "gold hill",
-  "gunbarrel",
-  "hygiene",
-  "niwot",
 ]
 
 export const salesForceURL =
