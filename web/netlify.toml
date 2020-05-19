@@ -1,0 +1,4 @@
+[[plugins]]
+  package = netlify-plugin-search-index
+  [plugins.inputs] = 
+    exclude = ['/404', '/es/404']
