@@ -20,7 +20,8 @@ import ReCAPTCHA from "react-google-recaptcha"
 // Mostly meant to make transformation between netlify and
 // salesForce more distinct when read.
 const initialValues = {
-  name: "",
+  firstName: "",
+  lastName: "",
   email: "",
   phone: "",
   address: "",
@@ -31,7 +32,9 @@ const initialValues = {
 }
 // prettier-ignore
 const validationSchema = Yup.object({
-  name: Yup.string().min(3).max(120).test( "first_name_len", "First name must be less than 40 characters", value => value.length >= 3 && value.split(" ")[0].length <= 40).test( "last_name_length", "Please submit a shorter name", value => value.split(" ").slice(1).join(" ").length <= 80).required("Please Enter Your Name"),
+  // name: Yup.string().min(3).max(120).test( "first_name_len", "First name must be less than 40 characters", value => value.length >= 3 && value.split(" ")[0].length <= 40).test( "last_name_length", "Please submit a shorter name", value => value.split(" ").slice(1).join(" ").length <= 80).required("Please Enter Your Name"),
+  firstName: Yup.string().max(40).required("Please enter a name less than 40 letters long"), 
+  lastName: Yup.string().max(80).required("Last name must be less than 80 letters long"), 
   email: Yup.string().max(80).email("Please enter a valid email address").required("Please enter your email"),
   phone: Yup.string().max(40).matches(phoneRegEx, "What is your phone number?"),
   address: Yup.string().min(3).required("What is your address?"),
@@ -66,10 +69,20 @@ const sfInitialValues = {
   "00N2I00000Dqoqv": "",
 }
 const mapValuesToSF = (values, location, recaptcha) => {
-  const { name, address, HP1, HP2, HP3, language, ...rest } = values
+  const {
+    firstName,
+    lastName,
+    address,
+    HP1,
+    HP2,
+    HP3,
+    language,
+    ...rest
+  } = values
   return {
     ...sfInitialValues,
-    ...firstAndLastFromName(name),
+    first_name: firstName,
+    last_name: lastName,
     "00NF0000008M7i9": HP1,
     "00NF0000008M7iE": HP2,
     "00NF0000008M7iO": HP3,
@@ -222,10 +235,21 @@ const Contact = ({ location }) => {
               <fieldset disabled={disabled}>
                 <Grid.Row display={[null, null, null, "flex"]}>
                   <MyInput
-                    label="Full Name"
-                    name="name"
+                    label="First Name"
+                    name="firstName"
                     type="text"
-                    placeholder="Name*"
+                    placeholder="First Name"
+                    required
+                    gridProps={{
+                      flexBasis: [null, null, null, "33.33%"],
+                      marginRight: [null, null, null, "1rem"],
+                    }}
+                  />
+                  <MyInput
+                    label="Last Name"
+                    name="lastName"
+                    type="text"
+                    placeholder="Last Name*"
                     required
                     gridProps={{
                       flexBasis: [null, null, null, "33.33%"],
@@ -240,15 +264,7 @@ const Contact = ({ location }) => {
                     required
                     gridProps={{
                       flexBasis: [null, null, null, "33.33%"],
-                      marginRight: [null, null, null, "1rem"],
                     }}
-                  />
-                  <MyInput
-                    label="Phone Number"
-                    name="phone"
-                    type="tel"
-                    placeholder="Phone"
-                    gridProps={{ flexBasis: [null, null, null, "33.33%"] }}
                   />
                 </Grid.Row>
                 <Grid.Row
@@ -256,17 +272,22 @@ const Contact = ({ location }) => {
                   flexWrap={["wrap", "wrap", "wrap", "nowrap"]}
                 >
                   <MyInput
+                    label="Phone Number"
+                    name="phone"
+                    type="tel"
+                    placeholder="Phone"
+                    gridProps={{
+                      flexBasis: ["100%", "100%", "100%", "calc(33.33% + 3px)"],
+                      marginRight: [null, null, null, "1rem"],
+                    }}
+                  />
+                  <MyInput
                     label="Address"
                     name="address"
                     type="text"
                     placeholder="Address*"
                     gridProps={{
-                      flexBasis: [
-                        "100%",
-                        "100%",
-                        "100%",
-                        "calc(66.66% + 2rem - 4px)",
-                      ],
+                      flexBasis: ["100%", "100%", "100%", "calc(33.33% + 5px)"],
                       marginRight: [null, null, null, "1rem"],
                     }}
                   />
@@ -278,7 +299,7 @@ const Contact = ({ location }) => {
                         "75%",
                         "75%",
                         "75%",
-                        "calc(22.22% - 1rem + 5px)",
+                        "calc(22.22% - 1rem + 4px)",
                       ],
                       marginRight: ["1rem"],
                     }}
@@ -296,9 +317,9 @@ const Contact = ({ location }) => {
                   </MySelect>
                   <Grid.Col
                     flexBasis={[
-                      "calc(25% - 1rem - 2px)",
-                      "calc(25% - 1rem - 2px)",
-                      "calc(25% - 1rem - 2px)",
+                      "calc(25% - 1rem  )",
+                      "calc(25% - 1rem )",
+                      "calc(25% - 1rem )",
                       "11.11%",
                     ]}
                   >

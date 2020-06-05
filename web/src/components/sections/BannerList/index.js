@@ -139,7 +139,13 @@ const BannerList = ({ image }) => {
                     SIGN UP
                   </tspan>
                 </Link>{" "}
-                or call 303.544.1000
+                or call{" "}
+                <a
+                  style={{ textDecoration: "underline" }}
+                  href="tel:3035441000"
+                >
+                  303.544.1000
+                </a>
               </tspan>,
               <tspan>Get expert home energy help</tspan>,
               <tspan>Save money on energy upgrades</tspan>,
