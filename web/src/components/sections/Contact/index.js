@@ -238,7 +238,7 @@ const Contact = ({ location }) => {
                     label="First Name"
                     name="firstName"
                     type="text"
-                    placeholder="First Name"
+                    placeholder="First Name*"
                     required
                     gridProps={{
                       flexBasis: [null, null, null, "33.33%"],
