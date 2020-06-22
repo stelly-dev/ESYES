@@ -1,5 +1,9 @@
 import mapToProps from "../../utils/mapToProps"
 const appSections = {
+  calloutBox: {
+    sectionFileName: "CalloutBox",
+    mapFunc: mapToProps.mapCalloutBoxToProps,
+  },
   fileLink: {
     sectionFileName: "FileLink",
     mapFunc: mapToProps.mapFileLinkToProps,

@@ -154,6 +154,7 @@ export default {
     { type: "linebreak" },
     { type: "contractorAccordion" },
     { type: "blockImage" },
-    { type: "listBanner" }
+    { type: "listBanner" },
+    { type: "calloutBox" }
   ]
 };

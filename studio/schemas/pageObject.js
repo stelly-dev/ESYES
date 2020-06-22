@@ -33,5 +33,5 @@ export default {
       type: "openGraph",
       fieldset: "seo"
     }
-  ], 
+  ]
 };

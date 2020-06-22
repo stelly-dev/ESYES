@@ -1,5 +1,13 @@
 import slugify from "slugify"
 
+function mapCalloutBoxToProps({ title, titleColor, content }) {
+  return {
+    color: titleColor,
+    title: title,
+    content: content,
+  }
+}
+
 function mapBlockButtonToProps({ btnColor, btnText, btnTo, orientation }) {
   return {
     color: btnColor,
@@ -159,6 +167,7 @@ function mapYoutubeSectionToProps({ url, image = {} }) {
 }
 
 export default {
+  mapCalloutBoxToProps,
   mapBlockButtonToProps,
   mapContractorAccordionToProps,
   mapCircleCTASectionToProps,
