@@ -1,5 +1,9 @@
 import mapToProps from "../../utils/mapToProps"
 const appSections = {
+  customTitle: {
+    sectionFileName: "CustomTitle",
+    mapFunc: mapToProps.mapCustomTitleToProps,
+  },
   calloutBox: {
     sectionFileName: "CalloutBox",
     mapFunc: mapToProps.mapCalloutBoxToProps,

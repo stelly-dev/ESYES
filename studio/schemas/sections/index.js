@@ -16,3 +16,4 @@ export { default as contractorRef } from "./contractorRef";
 export { default as blockImage } from "./blockImage";
 export { default as listBanner } from "./listBanner";
 export { default as calloutBox } from "./calloutBox";
+export { default as customTitle } from "./customTitle";

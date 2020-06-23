@@ -1,5 +1,23 @@
 import slugify from "slugify"
 
+function mapCustomTitleToProps({
+  alignment,
+  bold,
+  italic,
+  tag,
+  title,
+  titleColor,
+}) {
+  return {
+    alignment,
+    bold,
+    color: titleColor,
+    italic,
+    tag,
+    title,
+  }
+}
+
 function mapCalloutBoxToProps({ title, titleColor, content }) {
   return {
     color: titleColor,
@@ -186,4 +204,5 @@ export default {
   mapBlockToProps,
   mapVimeoSectionToProps,
   mapYoutubeSectionToProps,
+  mapCustomTitleToProps,
 }

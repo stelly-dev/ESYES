@@ -155,6 +155,7 @@ export default {
     { type: "contractorAccordion" },
     { type: "blockImage" },
     { type: "listBanner" },
-    { type: "calloutBox" }
+    { type: "calloutBox" },
+    { type: "customTitle" }
   ]
 };
