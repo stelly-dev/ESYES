@@ -23,7 +23,7 @@ const CalloutWrapper = styled.section`
       padding: 0 10px;
       text-align: center;
     }
-    margin: 0 1rem;
+    margin: 0 1rem 1.2rem 1rem;
   }
 
   @media only screen and (min-width: 768px) {
@@ -32,7 +32,7 @@ const CalloutWrapper = styled.section`
       top: 1rem;
       left: 1rem;
     }
-    margin: 0 auto;
+    margin: 0 auto 1.2rem auto;
     max-width: 80vw;
   }
 
@@ -47,8 +47,8 @@ const CalloutWrapper = styled.section`
 
   @media only screen and (min-width: 1200px) {
     max-width: 1000px;
-    margin: 0 auto;
   }
+  margin: 0 auto 1.2rem auto;
 
   .content_outer {
     padding: 20px;
