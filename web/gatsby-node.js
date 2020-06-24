@@ -33,22 +33,6 @@ async function createRootPages(graphql, actions, reporter) {
   if (result.errors) throw result.errors
 
   const pageEdges = (result.data.allSanityPage || {}).edges || []
-  createPage({
-    path: "/contact-testing/",
-    component: require.resolve("./src/templates/Page"),
-  })
-  createPage({
-    path: "/es/contact-testing/",
-    component: require.resolve("./src/templates/Page"),
-  })
-  createPage({
-    path: "/effi-app/",
-    component: require.resolve(`./src/templates/Page`),
-  })
-  createPage({
-    path: "/es/effi-app/",
-    component: require.resolve(`./src/templates/Page`),
-  })
   pageEdges.forEach((edge, index) => {
     const { id, _rawLocalePage, pageName } = edge.node
 
