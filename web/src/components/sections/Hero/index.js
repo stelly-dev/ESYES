@@ -2,7 +2,7 @@ import React from "react"
 import { getFluidGatsbyImage } from "gatsby-source-sanity"
 import Container from "../../containers/Container"
 import clientConfig from "../../../../client-config"
-import {  StyledBackgroundImage } from "./styled"
+import { StyledBackgroundImage } from "./styled"
 
 const Hero = props => {
   return (

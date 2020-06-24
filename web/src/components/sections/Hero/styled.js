@@ -17,20 +17,26 @@ export const StyledBackgroundImage = styled(BackgroundImage)`
     align-items: center;
     height: auto;
     position: absolute;
-    bottom: 13.71vw;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -25%);
     min-width: 100%;
   }
 
   h1 {
     color: white;
     text-align: center;
-    font-size: 2.8125rem;
-    line-height: 3.25rem;
+    font-size: 1.9rem;
+    line-height: 3rem;
     text-shadow: 0px 3px 6px #00000033;
     max-width: 23ch;
   }
   @media only screen and (min-width: 768px) {
     height: 54.69vw;
+    h1 {
+      font-size: 2.8125rem;
+      line-height: 3.25rem;
+    }
   }
   @media only screen and (min-width: 1024px) {
     height: 42.5vw;
