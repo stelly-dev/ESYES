@@ -45,7 +45,12 @@ export const MySelect = ({ children, label, gridProps, ...props }) => {
   return (
     <Grid.Col {...gridProps}>
       <SelectWrapper>
-        <Select {...field} {...props} error={meta.touched && meta.error}>
+        <Select
+          {...field}
+          {...props}
+          error={meta.touched && meta.error}
+          aria-label={label}
+        >
           {children}
         </Select>
         {meta.touched && meta.error ? (
