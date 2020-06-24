@@ -3,137 +3,126 @@ import PropTypes from "prop-types"
 import Helmet from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
 
-function SEO() {
-  return <div />
+const SEO = ({
+  focus_keyword,
+  focus_synonyms,
+  meta_description,
+  seo_title,
+  description,
+  image,
+  imageAlt,
+  title,
+  lang,
+  path,
+}) => {
+  const { site } = useStaticQuery(
+    graphql`
+      query SiteQuery {
+        site {
+          siteMetadata {
+            siteUrl
+          }
+        }
+      }
+    `
+  )
+  const canonical = path ? `${site.siteMetadata.siteUrl}${path}` : null
+  return (
+    <Helmet
+      htmlAttributes={{
+        lang,
+      }}
+      title={seo_title}
+      link={
+        canonical
+          ? [
+              {
+                rel: "canonical",
+                ref: canonical,
+              },
+            ]
+          : []
+      }
+      meta={[
+        {
+          name: "description",
+          content: meta_description,
+        },
+        {
+          name: "keywords",
+          content: [focus_keyword].concat(focus_synonyms),
+        },
+        {
+          property: "og:title",
+          content: title,
+        },
+        {
+          property: "og:description",
+          content: description,
+        },
+        {
+          proprety: "og:type",
+          content: "website",
+        },
+      ].concat(
+        image
+          ? [
+              {
+                property: "og:image",
+                content: image.asset.url,
+              },
+              {
+                property: "og:imageAlt",
+                content: imageAlt,
+              },
+              {
+                property: "og:imageWidth",
+                content: image.asset.metadata.dimensions.width,
+              },
+              {
+                property: "og:imageHeight",
+                content: image.asset.metadata.dimensions.height,
+              },
+              {
+                name: "twitter:card",
+                content: "summary_large_image",
+              },
+            ]
+          : [
+              {
+                name: "twitter:card",
+                content: "summary",
+              },
+            ]
+      )}
+    />
+  )
+}
+
+SEO.defaultProps = {
+  description: "",
+  focus_keyword: "",
+  focus_synonyms: [],
+  image: null,
+  imageAlt: "",
+  lang: "en",
+  meta_description: "",
+  path: "/",
+  seo_title: "",
+  title: "",
+}
+
+SEO.propTypes = {
+  description: PropTypes.string,
+  focus_keyword: PropTypes.string,
+  focus_synonyms: PropTypes.array,
+  image: PropTypes.object,
+  imageAlt: PropTypes.string,
+  lang: PropTypes.string,
+  meta_description: PropTypes.string,
+  path: PropTypes.string,
+  seo_title: PropTypes.string,
+  title: PropTypes.string,
 }
 
 export default SEO
-
-// function SEO({ description, lang, meta, image: metaImage, title, pathname }) {
-//   const { site } = useStaticQuery(
-//     graphql`
-//       query {
-//         site {
-//           siteMetadata {
-//             title
-//             description
-//             author
-//             keywords
-//             siteUrl
-//           }
-//         }
-//       }
-//     `
-//   )
-//   const metaDescription = description || site.siteMetadata.description
-//   const image =
-//     metaImage && metaImage.src
-//       ? `${site.siteMetadata.siteUrl}${metaImage.src}`
-//       : null
-//   const canonical = pathname ? `${site.siteMetadata.siteUrl}${pathname}` : null
-
-//   return (
-//     <Helmet
-//       htmlAttributes={{
-//         lang,
-//       }}
-//       title={title}
-//       titleTemplate={`%s | ${site.siteMetadata.title}`}
-//       link={
-//         canonical
-//           ? [
-//               {
-//                 rel: "canonical",
-//                 href: canonical,
-//               },
-//             ]
-//           : []
-//       }
-//       meta={[
-//         {
-//           name: "description",
-//           content: metaDescription,
-//         },
-//         {
-//           name: "keywords",
-//           content: site.siteMetadata.keywords.join(","),
-//         },
-//         {
-//           property: "og:title",
-//           content: title,
-//         },
-//         {
-//           property: "og:description",
-//           content: metaDescription,
-//         },
-//         {
-//           property: "og:type",
-//           content: "website",
-//         },
-//         {
-//           name: "twitter:creator",
-//           content: site.siteMetadata.author,
-//         },
-//         {
-//           name: "twitter.title",
-//           content: title,
-//         },
-//         {
-//           name: "twitter:description",
-//           content: metaDescription,
-//         },
-//       ]
-//         .concat(
-//           metaImage
-//             ? [
-//                 {
-//                   property: "og:image",
-//                   content: image,
-//                 },
-//                 {
-//                   property: "og:image:width",
-//                   content: metaImage.width,
-//                 },
-//                 {
-//                   property: "og:image:height",
-//                   content: metaImage.height,
-//                 },
-//                 {
-//                   name: "twitter:card",
-//                   content: "summary_large_image",
-//                 },
-//               ]
-//             : [
-//                 {
-//                   name: "twitter:card",
-//                   content: "summary",
-//                 },
-//               ]
-//         )
-//         .concat(meta)}
-//     />
-//   )
-// }
-
-// SEO.defaultProps = {
-//   lang: "en",
-//   meta: [],
-//   description: "",
-//   image: null,
-//   pathname: "",
-// }
-
-// SEO.propTypes = {
-//   description: PropTypes.string,
-//   lang: PropTypes.string,
-//   meta: PropTypes.arrayOf(PropTypes.object),
-//   title: PropTypes.string.isRequired,
-//   image: PropTypes.shape({
-//     src: PropTypes.string.isRequired,
-//     height: PropTypes.number.isRequired,
-//     width: PropTypes.number.isRequired,
-//   }),
-//   pathname: PropTypes.string,
-// }
-
-// export default SEO
