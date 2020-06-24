@@ -18,10 +18,7 @@ module.exports = {
         icon: `src/images/favicon.png`,
       },
     },
-    {
-      resolve: `gatsby-plugin-offline`,
-      options: {},
-    },
+    `gatsby-plugin-remove-serviceworker`,
     {
       resolve: `gatsby-source-sanity`,
       options: {
