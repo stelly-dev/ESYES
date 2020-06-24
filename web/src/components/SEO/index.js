@@ -26,7 +26,7 @@ const SEO = ({
       }
     `
   )
-  const canonical = path ? `${site.siteMetadata.siteUrl}${path}` : null
+  const canonical = path ? `${site.siteMetadata.siteUrl}/${path}` : null
   return (
     <Helmet
       htmlAttributes={{
