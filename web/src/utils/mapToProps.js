@@ -18,11 +18,19 @@ function mapCustomTitleToProps({
   }
 }
 
-function mapCalloutBoxToProps({ title, titleColor, content }) {
+function mapCalloutBoxToProps({
+  title,
+  titleColor,
+  content,
+  alignment,
+  borderColor,
+}) {
   return {
     color: titleColor,
-    title: title,
-    content: content,
+    title,
+    content,
+    alignment,
+    borderColor,
   }
 }
 

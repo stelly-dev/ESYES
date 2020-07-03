@@ -9,6 +9,34 @@ export default {
       type: "string"
     },
     {
+      name: "alignment",
+      title: "Alignment",
+      type: "string",
+      options: {
+        list: [
+          { title: "Left Align", value: "left" },
+          { title: "Center Align", value: "center" },
+          { title: "Right Align", value: "right" }
+        ]
+      }
+    },
+    {
+      name: "borderColor",
+      title: "Border Color",
+      type: "colors",
+      options: {
+        borderradius: {
+          outer: "20%",
+          inner: "100%"
+        },
+        list: [
+          { title: "orange", value: "#F9a33e" },
+          { title: "blue", value: "#0ea6c6" },
+          { title: "black", value: "#333333" }
+        ]
+      }
+    },
+    {
       name: "titleColor",
       title: "Title Color",
       type: "colors",
