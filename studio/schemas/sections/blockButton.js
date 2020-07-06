@@ -1,3 +1,6 @@
+import React from "react";
+import blockButtonIcon from "../icons/button_section_image.png";
+
 export default {
   name: "blockButton",
   title: "Button",
@@ -42,5 +45,26 @@ export default {
         layout: "dropdown"
       }
     }
-  ]
+  ],
+  preview: {
+    select: {
+      title: "btnText",
+      subTitle: "btnTo.pageName",
+      orientation: "orientation",
+      color: "btnColor"
+    },
+    prepare(selection) {
+      const { title, subTitle, orientation, color } = selection;
+      const colorMap = {
+        "#F9a33e": "orange",
+        "#0ea6c6": "blue",
+        "#777777": "grey"
+      };
+      return {
+        title: title,
+        subtitle: `to:${subTitle}, alignment:${orientation}, color:${colorMap[color]}`,
+        media: <img src={blockButtonIcon} style={{ objectFit: "contain" }} />
+      };
+    }
+  }
 };

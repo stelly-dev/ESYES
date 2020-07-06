@@ -1,3 +1,5 @@
+import React from "react";
+import youtubeIcon from "../icons/youtube_section_image.png";
 export default {
   name: "youtube",
   type: "object",
@@ -13,5 +15,18 @@ export default {
       type: "image",
       title: "Image for thumbnail"
     }
-  ]
+  ],
+  preview: {
+    select: {
+      title: "url"
+    },
+    prepare(selection) {
+      const { title } = selection;
+
+      return {
+        title: title,
+        media: <img src={youtubeIcon} style={{ objectFit: "contain" }} />
+      };
+    }
+  }
 };

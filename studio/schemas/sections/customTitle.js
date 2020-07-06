@@ -1,3 +1,5 @@
+import React from "react";
+import customTitleIcon from "../icons/custom-title_section_image.png";
 export default {
   name: "customTitle",
   type: "object",
@@ -61,5 +63,18 @@ export default {
         layout: "radio"
       }
     }
-  ]
+  ],
+  preview: {
+    select: {
+      title: "title"
+    },
+    prepare(selection) {
+      const { title } = selection;
+
+      return {
+        title: title,
+        media: <img src={customTitleIcon} style={{ objectFit: "contain" }} />
+      };
+    }
+  }
 };

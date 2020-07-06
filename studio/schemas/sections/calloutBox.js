@@ -1,3 +1,5 @@
+import React from "react";
+import calloutBoxIcon from "../icons/callout-box_section_image.png";
 export default {
   name: "calloutBox",
   type: "object",
@@ -56,5 +58,17 @@ export default {
       name: "content",
       type: "blockContent"
     }
-  ]
+  ],
+  preview: {
+    select: {
+      title: "title"
+    },
+    prepare(selection) {
+      const { title } = selection;
+      return {
+        title: title,
+        media: <img src={calloutBoxIcon} style={{ objectFit: "contain" }} />
+      };
+    }
+  }
 };

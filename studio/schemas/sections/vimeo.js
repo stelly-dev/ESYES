@@ -13,5 +13,16 @@ export default {
       type: "image",
       title: "Image for thumbnail"
     }
-  ]
+  ],
+  preview: {
+    select: {
+      title: "url"
+    },
+    prepare(selection) {
+      const { title } = selection;
+      return {
+        title: title
+      };
+    }
+  }
 };
