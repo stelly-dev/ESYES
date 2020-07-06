@@ -130,10 +130,8 @@ function mapStaffListToProps({ members }) {
   }
 }
 
-function mapBannerToProps({ asset }) {
-  return {
-    image: asset["_id"],
-  }
+function mapBannerToProps(props) {
+  return props
 }
 
 function mapSimpleCTAToProps({ content, ctaButtons }) {
