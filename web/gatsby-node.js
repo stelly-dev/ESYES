@@ -155,10 +155,16 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     force: true,
   })
   createRedirect({
-    fromPath: "http://www.energysmartyes.com/component/content/article/9-", 
-    toPath: "https://energysmartyes.com/", 
-    isPermanent: true, 
-    force: true, 
+    fromPath: "http://www.energysmartyes.com/component/content/article/9-/",
+    toPath: "https://energysmartyes.com/",
+    isPermanent: true,
+    force: true,
+  })
+  createRedirect({
+    fromPath: "https://www.energysmartyes.com/component/content/article/9-/",
+    toPath: "https://energysmartyes.com/",
+    isPermanent: true,
+    force: true,
   })
   createRedirect({
     fromPath: "https://www.energysmartyes.com/services/businesses/",
@@ -173,7 +179,13 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     force: true,
   })
   createRedirect({
-    fromPath: "http://www.energysmartyes.com/sign-up/for-business",
+    fromPath: "http://www.energysmartyes.com/sign-up/for-business/",
+    toPath: "https://energysmartyes.com/contact/",
+    isPermanent: true,
+    force: true,
+  })
+  createRedirect({
+    fromPath: "https://www.energysmartyes.com/sign-up/for-business/",
     toPath: "https://energysmartyes.com/contact/",
     isPermanent: true,
     force: true,
