@@ -10,6 +10,7 @@ import Header from "./components/layout/Header"
 import MobileNav from "./components/layout/MobileNav"
 import Contact from "./components/sections/Contact"
 import Effi from "./components/sections/Effi"
+import Buildsmart from "./components/sections/BuildSmart"
 // import SearchResults from './components/sections/SearchResults'
 
 const ToTopButton = styled.button`
@@ -26,7 +27,7 @@ const ToTopButton = styled.button`
   z-index: 10000;
 `
 
-const getHeaderHeightFromScreenWidth = width => {
+const getHeaderHeightFromScreenWidth = (width) => {
   if (width < 768) {
     return 60
   }
@@ -88,7 +89,7 @@ const Layout = ({ children }) => {
     }
   }, [state])
 
-  const toggleMenu = e => {
+  const toggleMenu = (e) => {
     e.preventDefault()
     setState({
       ...state,
@@ -128,6 +129,9 @@ const Layout = ({ children }) => {
         {children}
         {/* <Location>{({ location }) => <SearchResults location={location} />}</Location> */}
         <Location>{({ location }) => <Effi location={location} />}</Location>
+        <Location>
+          {({ location }) => <Buildsmart location={location} />}
+        </Location>
         <Location>
           {({ location }) =>
             location.pathname === "/thank-you/" ? null : (
