@@ -30,7 +30,9 @@ const Container = styled.section`
 const Buildsmart = ({ location }) => {
   const iframeRef = useRef(null)
 
-  return location && location.pathname.match(/\/buildsmart\//) ? (
+  return location &&
+    (location.pathname.match(/\/buildsmart\//) ||
+      location.pathname.match(/es\/buildsmart\//)) ? (
     <Container>
       <img src={logo} />
       <IframeResizer

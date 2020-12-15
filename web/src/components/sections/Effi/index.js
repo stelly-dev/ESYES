@@ -15,29 +15,27 @@ const Container = styled.section`
   }
 `
 
-
 const Effi = ({ location }) => {
   const iframeRef = useRef(null)
-   
-    return (
-      location && location.pathname.match(/\/effi-app\//) ? 
-      <Container>
-        <IframeResizer
-          forwardRef={iframeRef}
-          id="effi"
-          inPageLinks
-          heightCalculationMethod="lowestElement"
-          style={{
-            width: "1px",
-            minWidth: "100%",
-            minHeight: "960px",
-          }}
-          src="https://zingtree.com/deploy/tree.php?z=embed&tree_id=796651432000&style=buttons&notitle=1&embed_breadcrumbs=1&persist_names=Restart+App|Submit+Question+or+Feedback&persist_node_ids=1|214"
-        />
-      </Container>
-      : null
-    )
-  
+
+  return location &&
+    (location.pathname.match(/\/effi-app\//) ||
+      location.pathname.match(/\/es\/effi-app\//)) ? (
+    <Container>
+      <IframeResizer
+        forwardRef={iframeRef}
+        id="effi"
+        inPageLinks
+        heightCalculationMethod="lowestElement"
+        style={{
+          width: "1px",
+          minWidth: "100%",
+          minHeight: "960px",
+        }}
+        src="https://zingtree.com/deploy/tree.php?z=embed&tree_id=796651432000&style=buttons&notitle=1&embed_breadcrumbs=1&persist_names=Restart+App|Submit+Question+or+Feedback&persist_node_ids=1|214"
+      />
+    </Container>
+  ) : null
 }
 
 export default Effi
