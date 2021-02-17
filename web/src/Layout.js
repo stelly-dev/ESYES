@@ -11,7 +11,8 @@ import MobileNav from "./components/layout/MobileNav"
 import Contact from "./components/sections/Contact"
 import Effi from "./components/sections/Effi"
 import Buildsmart from "./components/sections/BuildSmart"
-// import SearchResults from './components/sections/SearchResults'
+import { Link } from "gatsby"
+import { FiGlobe } from "react-icons/fi"
 
 const ToTopButton = styled.button`
   position: fixed;
@@ -27,7 +28,47 @@ const ToTopButton = styled.button`
   z-index: 10000;
 `
 
-const getHeaderHeightFromScreenWidth = (width) => {
+const FloatingButton = styled(Link)`
+  position: fixed;
+  right: 96px;
+  bottom: 3rem;
+  height: 48px !important;
+  background-color: #f9a33e;
+  color: white;
+  display: ${props => (props.hidden ? "hidden" : "flex")};
+  justify-content: center;
+  align-items: center;
+  padding: 0 1rem;
+  border-radius: 500px;
+  cursor: pointer;
+  font-weight: 600;
+  box-shadow: 1px 1px 4px #00000050;
+  text-decoration: none;
+  line-height: 1rem;
+`
+
+const LanguageButton = ({ location }) => {
+  const isSpanish = location.pathname.match(/es\//)
+  if (isSpanish) {
+    const englishRoute = location.pathname.split("/")[2]
+
+    return (
+      <FloatingButton to={`/${englishRoute}`}>
+        <FiGlobe color="white" style={{ marginRight: "10px" }} />
+        English
+      </FloatingButton>
+    )
+  }
+
+  return (
+    <FloatingButton to={`/es${location.pathname}`}>
+      <FiGlobe color="white" style={{ marginRight: "10px" }} />
+      Español
+    </FloatingButton>
+  )
+}
+
+const getHeaderHeightFromScreenWidth = width => {
   if (width < 768) {
     return 60
   }
@@ -89,7 +130,7 @@ const Layout = ({ children }) => {
     }
   }, [state])
 
-  const toggleMenu = (e) => {
+  const toggleMenu = e => {
     e.preventDefault()
     setState({
       ...state,
@@ -140,6 +181,11 @@ const Layout = ({ children }) => {
           }
         </Location>
         <Footer />
+        <Location>
+          {({ location }) => (
+            <LanguageButton hidden={state.toTopVisible} location={location} />
+          )}
+        </Location>
         {state.toTopVisible ? (
           <ToTopButton onClick={() => scrollToTop()}>
             <FaChevronUp />
