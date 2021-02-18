@@ -48,10 +48,9 @@ const FloatingButton = styled(Link)`
 `
 
 const LanguageButton = ({ location }) => {
-  const isSpanish = location.pathname.match(/es\//)
+  const isSpanish = location.pathname.match(/\/es\//)
   if (isSpanish) {
     const englishRoute = location.pathname.split("/")[2]
-
     return (
       <FloatingButton to={`/${englishRoute}`}>
         <FiGlobe color="white" style={{ marginRight: "10px" }} />
@@ -59,7 +58,6 @@ const LanguageButton = ({ location }) => {
       </FloatingButton>
     )
   }
-
   return (
     <FloatingButton to={`/es${location.pathname}`}>
       <FiGlobe color="white" style={{ marginRight: "10px" }} />
