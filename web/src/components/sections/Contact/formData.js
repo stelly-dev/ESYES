@@ -24,7 +24,7 @@ export const salesForceURL =
   "https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8"
 
 export const salesForceFields = {
-  oid: "00DA0000000aMYj",
+  oid: "00D30000000pZGD",
   first_name: "",
   last_name: "",
   email: "",
@@ -32,9 +32,9 @@ export const salesForceFields = {
   street: "",
   city: "",
   zip: "",
-  "00NF0000008M7i9": "",
-  "00NF0000008M7iE": "",
-  "00NF0000008M7iO": "",
+  "00N5Y00000UB3YS": "",
+  "00N5Y00000UB3YX": "",
+  "00N5Y00000UB3Yc": "",
   "00N2I00000Dqoqv": "",
 }
 
@@ -51,9 +51,9 @@ export const salesForceFields = {
 
 // make sure these match the embed from salesforce web-to-lead
 export const newKeys = {
-  "00NF0000008M7i9": "Home Priority One",
-  "00NF0000008M7iE": "Home Priority Two",
-  "00NF0000008M7iO": "Home Priority Three",
+  "00N5Y00000UB3YS": "Home Priority One",
+  "00N5Y00000UB3YX": "Home Priority Two",
+  "00N5Y00000UB3Yc": "Home Priority Three",
   first_name: "Name",
 }
 
@@ -86,7 +86,7 @@ export const addLanguageField = (obj, location) => {
 //
 
 export const submitSalesForce = (values, location) => {
-  const authorizedValues = { oid: "00DA0000000aMYj", ...values }
+  const authorizedValues = { oid: "00D30000000pZGD", ...values }
   return fetch(
     "https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8",
     {
