@@ -96,7 +96,8 @@ export const submitSalesForce = (values, location) => {
         "Content-Type": "application/x-www-form-urlencoded",
       },
       body: encode({
-        ...addLanguageField(authorizedValues, location),
+        authorizedValues,
+        // ...addLanguageField(authorizedValues, location),
       }),
     }
   )
