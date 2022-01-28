@@ -60,14 +60,13 @@ const sfInitialValues = {
   zip: "",
   email: "",
   phone: "",
-  street: "",
   city: "",
   retURL: "",
-
+  "00N30000006rptY": "",
   "00N5Y00000UB3YS": "",
   "00N5Y00000UB3YX": "",
   "00N5Y00000UB3Yc": "",
-  "00N2I00000Dqoqv": "",
+  // "00N2I00000Dqoqv": "",
 }
 const mapValuesToSF = (values, location, recaptcha) => {
   const {
@@ -84,12 +83,12 @@ const mapValuesToSF = (values, location, recaptcha) => {
     ...sfInitialValues,
     first_name: firstName,
     last_name: lastName,
-    "01N5Y00000UB3YS": HP1,
+    "00N5Y00000UB3YS": HP1,
     "00N5Y00000UB3YX": HP2,
     "00N5Y00000UB3Yc": HP3,
+    "00N30000006rptY": address,
 
-    "00N2I00000Dqoqv": location.match(/\.es\//) ? "Spanish" : "English",
-    street: address,
+    // "00N2I00000Dqoqv": location.match(/\.es\//) ? "Spanish" : "English",
     ...rest,
     retURL: location.match(/\/es\//)
       ? "https://www.energysmartyes.com/es/thank-you"
@@ -97,7 +96,7 @@ const mapValuesToSF = (values, location, recaptcha) => {
     captcha_settings: JSON.stringify({
       keyname: "ESWebsite2",
       fallback: true,
-      orgId: "00DA0000000aMYj",
+      orgId: "00D30000000pZGD",
       ts: new Date().getTime(),
     }),
   }
