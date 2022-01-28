@@ -51,10 +51,10 @@ const sfInitialValues = {
   captcha_settings: JSON.stringify({
     keyname: "ESWebsite2",
     fallback: true,
-    orgId: "00DA0000000aMYj",
+    orgId: "00D30000000pZGD",
     ts: "",
   }),
-  oid: "00DA0000000aMYj",
+  oid: "00D30000000pZGD",
   first_name: "",
   last_name: "",
   zip: "",
@@ -63,9 +63,10 @@ const sfInitialValues = {
   street: "",
   city: "",
   retURL: "",
-  "00NF0000008M7i9": "",
-  "00NF0000008M7iE": "",
-  "00NF0000008M7iO": "",
+
+  "00N5Y00000UB3YS": "",
+  "00N5Y00000UB3YX": "",
+  "00N5Y00000UB3Yc": "",
   "00N2I00000Dqoqv": "",
 }
 const mapValuesToSF = (values, location, recaptcha) => {
@@ -83,9 +84,10 @@ const mapValuesToSF = (values, location, recaptcha) => {
     ...sfInitialValues,
     first_name: firstName,
     last_name: lastName,
-    "00NF0000008M7i9": HP1,
-    "00NF0000008M7iE": HP2,
-    "00NF0000008M7iO": HP3,
+    "01N5Y00000UB3YS": HP1,
+    "00N5Y00000UB3YX": HP2,
+    "00N5Y00000UB3Yc": HP3,
+
     "00N2I00000Dqoqv": location.match(/\.es\//) ? "Spanish" : "English",
     street: address,
     ...rest,
