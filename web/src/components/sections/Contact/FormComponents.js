@@ -67,7 +67,7 @@ export const MySelect = ({ children, label, gridProps, ...props }) => {
 export const Captcha = () => (
   <div
     className="g-recaptcha"
-    data-sitekey="LfDf-gUAAAAADmj72yTU6ANmCy0a4q1Ea7uh4Gn"
+    data-sitekey="6LdsfscUAAAAAEss5fyjT4PqQUf-EDJbWMb6Za4W"
   />
 )
 

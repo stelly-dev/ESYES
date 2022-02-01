@@ -85,9 +85,14 @@ export const addLanguageField = (obj, location) => {
 //           2. generate a transparent iframe containing the form
 //              and populate it's values, then submit.
 //
-
 export const submitSalesForce = (values, location) => {
-  const authorizedValues = { oid: "00D30000000pZGD", ...values }
+  const authorizedValues = {
+    oid: "00D30000000pZGD",
+    recordType: "01230000000jfZv",
+    company: "Company",
+    lead_source: "EnergySmart Website",
+    ...values,
+  }
   return fetch(
     "https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8",
     {
@@ -96,7 +101,7 @@ export const submitSalesForce = (values, location) => {
         "Content-Type": "application/x-www-form-urlencoded",
       },
       body: encode({
-        authorizedValues,
+        ...authorizedValues,
         // ...addLanguageField(authorizedValues, location),
       }),
     }
