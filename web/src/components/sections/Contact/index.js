@@ -94,7 +94,7 @@ const mapValuesToSF = (values, location, recaptcha) => {
       ? "https://www.energysmartyes.com/es/thank-you"
       : "https://www.energysmartyes.com/thank-you",
     captcha_settings: JSON.stringify({
-      keyname: "ESWebsite2",
+      keyname: "Recapcha",
       fallback: true,
       orgId: "00D30000000pZGD",
       ts: new Date().getTime(),
