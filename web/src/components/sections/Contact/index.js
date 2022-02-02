@@ -99,6 +99,9 @@ const mapValuesToSF = (values, location, recaptcha) => {
       orgId: "00D30000000pZGD",
       ts: new Date().getTime(),
     }),
+    recordType: "01230000000jfZv",
+    lead_source: "EnergySmart Website",
+    submit: "Submit",
   }
 }
 
