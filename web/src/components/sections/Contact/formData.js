@@ -103,6 +103,7 @@ export const submitSalesForce = (values, location) => {
       },
       body: encode({
         ...authorizedValues,
+        recordType: "01230000000jfZv",
         // ...addLanguageField(authorizedValues, location),
       }),
     }
