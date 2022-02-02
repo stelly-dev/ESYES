@@ -32,6 +32,7 @@ export const salesForceFields = {
   street: "",
   city: "",
   zip: "",
+  recordType: "0123000000jfZv",
   "00N5Y00000UB3YS": "",
   "00N5Y00000UB3YX": "",
   "00N5Y00000UB3Yc": "",
