@@ -61,6 +61,7 @@ const sfInitialValues = {
   phone: "",
   city: "",
   retURL: "",
+  state: "CO",
   "00N30000006rptY": "",
   "00N5Y00000UB3YS": "",
   "00N5Y00000UB3YX": "",
@@ -68,7 +69,7 @@ const sfInitialValues = {
   recordType: "01230000000jfZv",
   lead_source: "EnergySmart Website",
   company: "Company",
-  // "00N2I00000Dqoqv": "",
+  "00N5Y00000UB4rC": "",
 }
 const mapValuesToSF = (values, location, recaptcha) => {
   const {
@@ -89,8 +90,7 @@ const mapValuesToSF = (values, location, recaptcha) => {
     "00N5Y00000UB3YX": HP2,
     "00N5Y00000UB3Yc": HP3,
     "00N30000006rptY": address,
-
-    // "00N2I00000Dqoqv": location.match(/\.es\//) ? "Spanish" : "English",
+    "00N5Y00000UB4rC": location.match(/\.es\//) ? "Spanish" : "English",
     ...rest,
     retURL: location.match(/\/es\//)
       ? "https://www.energysmartyes.com/es/thank-you"
@@ -371,7 +371,7 @@ const Contact = ({ location }) => {
               {loadRecaptcha && (
                 <ReCAPTCHA
                   size="compact"
-                  sitekey="6LffI-8UAAAAADwgcs8Tkw5RMXmBNEuz86etgZwl"
+                  sitekey="6LdsfscUAAAAAEss5fyjT4PqQUf-EDJbWMb6Za4W"
                   onChange={onRecaptchaChange}
                   style={{
                     display: "inline",
