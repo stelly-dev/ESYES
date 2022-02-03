@@ -57,7 +57,6 @@ const sfInitialValues = {
   oid: "00D30000000pZGD",
   first_name: "",
   last_name: "",
-  zip: "",
   email: "",
   phone: "",
   city: "",
@@ -66,6 +65,9 @@ const sfInitialValues = {
   "00N5Y00000UB3YS": "",
   "00N5Y00000UB3YX": "",
   "00N5Y00000UB3Yc": "",
+  recordType: "01230000000jfZv",
+  lead_source: "EnergySmart Website",
+  company: "Company",
   // "00N2I00000Dqoqv": "",
 }
 const mapValuesToSF = (values, location, recaptcha) => {
@@ -99,9 +101,6 @@ const mapValuesToSF = (values, location, recaptcha) => {
       orgId: "00D30000000pZGD",
       ts: new Date().getTime(),
     }),
-    recordType: "01230000000jfZv",
-    lead_source: "EnergySmart Website",
-    submit: "Submit",
   }
 }
 
